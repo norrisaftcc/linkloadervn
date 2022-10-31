@@ -64,8 +64,10 @@ Then write a sentence or two about how  Advancement works. Remember, generally t
     Positioning ("This new spell/skill I bought will let me handle this fight differently")
 
 Part Two
+
 Now that you've got a clearer idea about your game concept, it's time to write User Stories
 Refresher on User Stories:  https://youtu.be/apOvF9NVguA 
+
 Write three to five user stories about the game, keeping in mind that the user is the player.
 - As a [player], I want to be able to [blank] so that I can [blank]
 Example:
