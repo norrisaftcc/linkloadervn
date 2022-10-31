@@ -7,10 +7,13 @@ demo of renpy scripting using generated assets.
 ----
 [The Premise and Game mechanics]
 You're a space cowboy, fixing broken link loaders. 
+beware of cdr rustlers!
 
-what is this?
+(cons car cdr) -> (car cdr)
+
 (while next_cargo ( load ( cargo next) ) )
 
+[You are a:]
 Cosmonaut Cowboy Coder Person (CCCP)
 aka (((P)))
 *cue patriotic theme*
