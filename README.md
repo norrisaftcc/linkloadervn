@@ -39,3 +39,30 @@ ST = Cos + Cow, DX = Cos + Cow, INT/WIS = Cos + Cod, CHA = Cod
 HP = add up all 3 stats, then add 1 for Person.)
 
 
+----
+Notes on User Stories
+
+Here are some pointers as to how you might write user stories for a game.
+First, phrase the  Premise of your game as a question. This is often a yes/no question , but doesn't have to be.
+Examples:
+
+    "You're Mario. Can you get to the top of the construction site to rescue Pauline from Donkey Kong?"
+    "Can you find the Holy Grail at the bottom of the dungeon before the monsters defeat you?"
+
+Next, make a note of what  Challenge types you want to include (such as combat or puzzles). 
+Then write a sentence or two about how  Advancement works. Remember, generally this includes:
+
+    Effectiveness ("I got +1 damage with this new gun")
+    Resources ("I brought 99 health potions this time, that boss is NOT going to kill me again")
+    Positioning ("This new spell/skill I bought will let me handle this fight differently")
+
+Part Two
+Now that you've got a clearer idea about your game concept, it's time to write User Stories
+Refresher on User Stories:  https://youtu.be/apOvF9NVguA 
+Write three to five user stories about the game, keeping in mind that the user is the player.
+As a [player], I want to be able to [blank] so that I can [blank]
+Example:
+"As a space marine, I want to be able to pick up ammunition for my shotgun, so I can keep killing zombies."
+"As a 1940s private eye, I want to be able to find clues, so that I can solve the mystery."
+(You can just write these as "As a player" if you want, or you can use the character instead.)
+Try to come up with at least three user stories, such as one per Effectiveness, Resources, and Positioning. It's likely that once you have an idea, you'll be able to come up with two each. This should be sufficient for the small scope of this project.
