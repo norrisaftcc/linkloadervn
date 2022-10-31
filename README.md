@@ -1,8 +1,9 @@
 linkloader
 
-https://unlicense.org/
+License: https://unlicense.org/
 
 demo of renpy scripting using generated assets. 
+Sample playthrough (v1.2, 10/31/22) - https://youtu.be/DO8mH-KPFnE
 
 ----
 [The Premise and Game mechanics]
