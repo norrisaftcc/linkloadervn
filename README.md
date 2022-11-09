@@ -1,10 +1,10 @@
-linkloader
+# linkloader - a sample project
 
 License: https://unlicense.org/
 
 demo of renpy scripting using generated assets. 
-Sample playthrough (v1.2, 10/31/22) - https://youtu.be/DO8mH-KPFnE
-updated 11/2 - https://youtu.be/1PgRyBjnwuk
+- Sample playthrough (v1.2, 10/31/22) - https://youtu.be/DO8mH-KPFnE
+- updated 11/2 - https://youtu.be/1PgRyBjnwuk
 
 Demo download: https://terminalcowboy.itch.io/terminalcowboy
 ----
@@ -21,7 +21,6 @@ beware of cdr rustlers!
 
 Cosmonaut Cowboy Coder Person (CCCP)
 aka (((P)))
-*cue patriotic theme*
 
 You have three stats:
 - Cosmonaut - your skill with space stuff, high tech, using rayguns
