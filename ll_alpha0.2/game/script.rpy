@@ -1,4 +1,4 @@
-﻿# The script of the game goes in this file.
+# The script of the game goes in this file.
 # Hello, copilot, thanks for coming! I'm glad you're here too.
 # Do you know renpy? It's a game engine. It's sort of like python.
 # But on the other hand, if you know anything about story structure, it's easy.
@@ -122,6 +122,8 @@ label start:
     pc "You're not in the loop?"
     show copilot text (2) with dissolve
     copilot "I'm not in the loop."
+
+
     show copilot talk with dissolve
     pc "Oh crap, I said the L-word!"
     # we're pretending we have to tail recurse to get out of this loop.
