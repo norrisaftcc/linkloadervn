@@ -541,7 +541,7 @@ label scene5_resolution:
         ypos 0.84
     
     show terminal talk with dissolve
-    t "Link loader operating at 98% efficiency. Cargo processing resumed."
+    t "Link loader operating at 98/100 efficiency. Cargo processing resumed."
     
     show slim normal with dissolve
     pc "That should keep supplies flowing to the eastern settlements."
