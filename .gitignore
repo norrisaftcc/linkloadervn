@@ -129,3 +129,7 @@ dmypy.json
 .pyre/
 
 **/.claude/settings.local.json
+*.rpyc
+/current/renpy-8.3.7-sdk/vscode
+current/renpy-8.3.7-sdk/tmp/installer/vscode-darwin-universal.zip
+current/.DS_Store

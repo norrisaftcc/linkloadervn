@@ -1,0 +1,130 @@
+﻿I'm sorry, but errors were detected in your script. Please correct the
+errors listed below, and try again.
+
+
+File "game/script1.rpy", line 53: Line with id start_aa818b4e appears twice. The other line is game/script.rpy_bak.rpy:53
+
+File "game/script1.rpy", line 72: Line with id start_cfb0465c appears twice. The other line is game/script.rpy_bak.rpy:72
+
+File "game/script1.rpy", line 76: Line with id start_26d084c0 appears twice. The other line is game/script.rpy_bak.rpy:76
+
+File "game/script1.rpy", line 77: Line with id start_a2b28a71 appears twice. The other line is game/script.rpy_bak.rpy:77
+
+File "game/script1.rpy", line 79: Line with id start_c9e3f84c appears twice. The other line is game/script.rpy_bak.rpy:79
+
+File "game/script1.rpy", line 83: Line with id start_959f1e3f appears twice. The other line is game/script.rpy_bak.rpy:83
+
+File "game/script1.rpy", line 106: Line with id start_200d0d1f appears twice. The other line is game/script.rpy_bak.rpy:106
+
+File "game/script1.rpy", line 164: Line with id start_807b226f appears twice. The other line is game/script.rpy_bak.rpy:164
+
+File "game/script1.rpy", line 165: Line with id start_7615df83 appears twice. The other line is game/script.rpy_bak.rpy:165
+
+File "game/script1.rpy", line 166: Line with id start_a6b0fcae appears twice. The other line is game/script.rpy_bak.rpy:166
+
+File "game/script1.rpy", line 167: Line with id start_87745943 appears twice. The other line is game/script.rpy_bak.rpy:167
+
+File "game/script1.rpy", line 168: Line with id start_57b6d5b0 appears twice. The other line is game/script.rpy_bak.rpy:168
+
+File "game/script1.rpy", line 170: Line with id start_5f4ca73d appears twice. The other line is game/script.rpy_bak.rpy:170
+
+File "game/script1.rpy", line 175: Line with id start_ece8ca4b appears twice. The other line is game/script.rpy_bak.rpy:175
+
+File "game/script1.rpy", line 177: Line with id start_0ba2c0e2 appears twice. The other line is game/script.rpy_bak.rpy:177
+
+File "game/script1.rpy", line 179: Line with id start_e9037c8c appears twice. The other line is game/script.rpy_bak.rpy:179
+
+File "game/script1.rpy", line 181: Line with id start_a62f28c3 appears twice. The other line is game/script.rpy_bak.rpy:181
+
+File "game/script1.rpy", line 183: Line with id start_7b371870 appears twice. The other line is game/script.rpy_bak.rpy:183
+
+File "game/script1.rpy", line 185: Line with id start_6acddf38 appears twice. The other line is game/script.rpy_bak.rpy:185
+
+File "game/script1.rpy", line 187: Line with id start_c943986e appears twice. The other line is game/script.rpy_bak.rpy:187
+
+File "game/script1.rpy", line 190: Line with id start_fcf5d43f appears twice. The other line is game/script.rpy_bak.rpy:190
+
+File "game/script1.rpy", line 195: Line with id start_e73d0893 appears twice. The other line is game/script.rpy_bak.rpy:195
+
+File "game/script1.rpy", line 197: Line with id start_c4c72ec9 appears twice. The other line is game/script.rpy_bak.rpy:197
+
+File "game/script1.rpy", line 200: Line with id start_6bac2818 appears twice. The other line is game/script.rpy_bak.rpy:200
+
+File "game/script1.rpy", line 202: Line with id start_4c4bb728 appears twice. The other line is game/script.rpy_bak.rpy:202
+
+File "game/script1.rpy", line 206: Line with id start_7e245745 appears twice. The other line is game/script.rpy_bak.rpy:206
+
+File "game/script1.rpy", line 210: Line with id start_9e8d9337 appears twice. The other line is game/script.rpy_bak.rpy:210
+
+File "game/script1.rpy", line 211: Line with id start_3f111329 appears twice. The other line is game/script.rpy_bak.rpy:211
+
+File "game/script1.rpy", line 213: Line with id start_ca840d18 appears twice. The other line is game/script.rpy_bak.rpy:213
+
+File "game/script1.rpy", line 214: Line with id start_85a3f69b appears twice. The other line is game/script.rpy_bak.rpy:214
+
+File "game/script1.rpy", line 221: Line with id start_85a3f69b_1 appears twice. The other line is game/script.rpy_bak.rpy:221
+
+File "game/script1.rpy", line 228: Line with id start_09b0429b appears twice. The other line is game/script.rpy_bak.rpy:228
+
+File "game/script1.rpy", line 229: Line with id start_76919ee6 appears twice. The other line is game/script.rpy_bak.rpy:229
+
+File "game/script1.rpy", line 233: Line with id start_c8f53271 appears twice. The other line is game/script.rpy_bak.rpy:233
+
+File "game/script1.rpy", line 236: Line with id start_b03405e9 appears twice. The other line is game/script.rpy_bak.rpy:236
+
+File "game/script1.rpy", line 240: Line with id start_42869665 appears twice. The other line is game/script.rpy_bak.rpy:240
+
+File "game/script1.rpy", line 243: Line with id start_4d95322e appears twice. The other line is game/script.rpy_bak.rpy:243
+
+File "game/script1.rpy", line 245: Line with id start_47e7fd77 appears twice. The other line is game/script.rpy_bak.rpy:245
+
+File "game/script1.rpy", line 248: Line with id start_abbefdd2 appears twice. The other line is game/script.rpy_bak.rpy:248
+
+File "game/script1.rpy", line 250: Line with id start_c0098264 appears twice. The other line is game/script.rpy_bak.rpy:250
+
+File "game/script1.rpy", line 252: Line with id start_f33f762b appears twice. The other line is game/script.rpy_bak.rpy:252
+
+File "game/script1.rpy", line 254: Line with id start_1abc6458 appears twice. The other line is game/script.rpy_bak.rpy:254
+
+File "game/script1.rpy", line 256: Line with id start_4513df72 appears twice. The other line is game/script.rpy_bak.rpy:256
+
+File "game/script1.rpy", line 259: Line with id start_c7208409 appears twice. The other line is game/script.rpy_bak.rpy:259
+
+File "game/script1.rpy", line 261: Line with id start_1abc6458_1 appears twice. The other line is game/script.rpy_bak.rpy:261
+
+File "game/script1.rpy", line 263: Line with id start_c7208409_1 appears twice. The other line is game/script.rpy_bak.rpy:263
+
+File "game/script1.rpy", line 266: Line with id start_c7208409_2 appears twice. The other line is game/script.rpy_bak.rpy:266
+
+File "game/script1.rpy", line 269: Line with id start_203ced14 appears twice. The other line is game/script.rpy_bak.rpy:269
+
+File "game/script1.rpy", line 323: Line with id scene2_cfb0465c appears twice. The other line is game/script.rpy_bak.rpy:323
+
+File "game/script1.rpy", line 328: Line with id scene2_bfbb8fa1 appears twice. The other line is game/script.rpy_bak.rpy:328
+
+File "game/script1.rpy", line 330: Line with id scene2_d8ae853d appears twice. The other line is game/script.rpy_bak.rpy:330
+
+File "game/script1.rpy", line 341: Line with id scene2_85a3f69b appears twice. The other line is game/script.rpy_bak.rpy:341
+
+File "game/script1.rpy", line 347: Line with id scene2_85a3f69b_1 appears twice. The other line is game/script.rpy_bak.rpy:347
+
+File "game/script1.rpy", line 354: Line with id scene2_09b0429b appears twice. The other line is game/script.rpy_bak.rpy:354
+
+File "game/script1.rpy", line 355: Line with id scene2_732b576e appears twice. The other line is game/script.rpy_bak.rpy:355
+
+File "game/script1.rpy", line 359: Line with id scene2_be0f0b85 appears twice. The other line is game/script.rpy_bak.rpy:359
+
+File "game/script1.rpy", line 362: Line with id scene2_9fb970db appears twice. The other line is game/script.rpy_bak.rpy:362
+
+File "game/script1.rpy", line 365: Line with id scene2_fd585e9c appears twice. The other line is game/script.rpy_bak.rpy:365
+
+File "game/script1.rpy", line 366: Line with id scene2_4d95322e appears twice. The other line is game/script.rpy_bak.rpy:366
+
+File "game/script1.rpy", line 368: Line with id scene2_47e7fd77 appears twice. The other line is game/script.rpy_bak.rpy:368
+
+File "game/script1.rpy", line 371: Line with id scene2_1ffb50ab appears twice. The other line is game/script.rpy_bak.rpy:371
+
+File "game/script1.rpy", line 373: Line with id scene2_ab284e09 appears twice. The other line is game/script.rpy_bak.rpy:373
+
+Ren'Py Version: Ren'Py 8.3.7.25031702
+Fri May  9 21:13:18 2025
