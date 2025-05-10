@@ -24,3 +24,4 @@ tmp/
 /current/renpy-8.3.7-sdk/renpy/__pycache__
 *.pyc
 /current/renpy-8.3.7-sdk/vscode
+current/renpy-8.3.7-sdk/launcher/game/saves/persistent
