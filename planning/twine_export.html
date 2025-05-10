@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Link Loader - Twine Story</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+        .passage {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #2a2a2a;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        .passage-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+        }
+        .backdrop {
+            font-style: italic;
+            color: #aaaaaa;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #222;
+            border-radius: 3px;
+        }
+        .character-slim {
+            color: #c8ffc8;
+        }
+        .character-terminal {
+            color: #c8c8ff;
+        }
+        .character-clipi {
+            color: #00ff00;
+        }
+        .character-cargo-bot {
+            color: #aaaaaa;
+        }
+        .character-rustler {
+            color: #ff5555;
+        }
+        .direction {
+            color: #888888;
+            font-style: italic;
+            margin: 10px 0;
+        }
+        .choice-list {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px dashed #444;
+        }
+        .choice {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 3px;
+            transition: background-color 0.2s;
+        }
+        .choice:hover {
+            background-color: #444;
+        }
+        .stats {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #333;
+            border-radius: 3px;
+        }
+        .approach {
+            color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+
+<!-- This file is a static HTML representation of how the Twine story would look -->
+<!-- To make a real Twine story, you would need to import this into Twine -->
+<!-- This is a demonstration of the content structure and styling -->
+
+<div class="passage">
+    <h1>Link Loader - Interactive Story</h1>
+    <p>This is a static HTML preview of how the Link Loader story would appear in Twine format.</p>
+    <p>The complete story has the following structure:</p>
+    
+    <ol>
+        <li>Character Creation (3 choices affecting stats)</li>
+        <li>Scene 1: Introduction (meeting Clipi and getting the mission)</li>
+        <li>Scene 2: At the Link Loader (examining the problem)</li>
+        <li>Scene 3: The Repair (with 3 different approaches based on stats)</li>
+        <li>Scene 4: Confrontation with the CDR rustlers</li>
+        <li>Scene 5: Resolution and decision for future adventures</li>
+        <li>Epilogue and ending based on player choices</li>
+    </ol>
+    
+    <p>Below is a sample passage to show the formatting:</p>
+    
+    <div class="passage-title">Scene 1: Introduction</div>
+    
+    <div class="backdrop">Desert at night. Stars shine overhead. Three moons illuminate the landscape.</div>
+    
+    <div class="direction">*Slim stands looking out at the desert*</div>
+    
+    <div class="character-slim">Slim: Sure is getting cold out here on Syntax-4. The triple moons are all up - gonna be a bright night.</div>
+    
+    <div class="direction">*Slim turns to look up at the sky*</div>
+    
+    <div class="character-slim">Slim: The Company satellite should be directly above us now. Time to check in and see what today's malfunction is.</div>
+    
+    <div class="direction">*Slim calls out*</div>
+    
+    <div class="character-slim">Slim: Clipi! You online?</div>
+    
+    <div class="stats">
+        <strong>Current Stats:</strong>
+        <br>Cosmonaut (COS): 2
+        <br>Cowboy (COW): -1
+        <br>Coder (COD): 2
+        <br><span class="approach">Approach: None yet</span>
+    </div>
+    
+    <div class="choice-list">
+        <a href="#" class="choice">Continue to the link loader</a>
+    </div>
+</div>
+
+<!-- Instructions to export to actual Twine format -->
+<div class="passage" style="margin-top: 20px;">
+    <h2>To Create a Twine Version:</h2>
+    <ol>
+        <li>Open Twine 2</li>
+        <li>Create a new story called "Link Loader"</li>
+        <li>Create passages for each scene and choice point from the script.md file</li>
+        <li>Use variables to track stats (cos, cow, cod) and decisions</li>
+        <li>Link passages together using the [[Passage Name]] syntax</li>
+        <li>Use conditional logic (if:) for stat-based choices</li>
+        <li>Test by playing through different character paths</li>
+    </ol>
+    
+    <p>The script_streamlit.py file contains all the scene content organized in a way that would be easy to copy into Twine passages.</p>
+</div>
+
+</body>
+</html>
