@@ -19,3 +19,6 @@ traceback.txt
 
 # Temporary folders
 tmp/
+/current/renpy-8.3.7-sdk/lib
+/current/renpy-8.3.7-sdk/module
+/current/renpy-8.3.7-sdk/renpy/__pycache__
