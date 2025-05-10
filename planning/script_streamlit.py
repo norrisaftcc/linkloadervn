@@ -17,16 +17,16 @@ if 'history' not in st.session_state:
 def play_scene(title, background_description, content, choices=None):
     """Display a scene with content and optional choices"""
     st.markdown(f"## {title}")
-    
+
     # Display background description
     st.markdown(f"*{background_description}*")
     st.markdown("---")
-    
+
     # Add content to history and display it
     for line in content:
         if line not in st.session_state.history:
             st.session_state.history.append(line)
-        
+
         # Display dialogue with character colors
         if line.startswith("Slim:"):
             st.markdown(f"<span style='color:#c8ffc8'>{line}</span>", unsafe_allow_html=True)
@@ -43,14 +43,14 @@ def play_scene(title, background_description, content, choices=None):
             st.markdown(f"<span style='color:#999999; font-style:italic'>{line}</span>", unsafe_allow_html=True)
         else:
             st.markdown(line)
-    
+
     # Display choices if provided
     if choices:
         choice = st.radio("Choose your next action:", choices.keys())
         if st.button("Continue"):
             next_scene = choices[choice]
             st.session_state.scene = next_scene
-            st.experimental_rerun()
+            st.rerun()
 
 def set_stats(cos, cow, cod):
     """Set character stats"""
@@ -87,7 +87,7 @@ def main():
             st.session_state.approach = 'none'
             st.session_state.mission = 'none'
             st.session_state.history = []
-            st.experimental_rerun()
+            st.rerun()
     
     # Scene routing
     if st.session_state.scene == 'start':
@@ -134,17 +134,17 @@ def start_scene():
 def scene1_intro_comrade():
     set_stats(2, -1, 2)
     st.session_state.scene = 'scene1_intro'
-    st.experimental_rerun()
+    st.rerun()
 
 def scene1_intro_pardner():
     set_stats(-1, 2, 2)
     st.session_state.scene = 'scene1_intro'
-    st.experimental_rerun()
+    st.rerun()
 
 def scene1_intro_tom():
     set_stats(2, 2, -1)
     st.session_state.scene = 'scene1_intro'
-    st.experimental_rerun()
+    st.rerun()
 
 def scene1_intro():
     """Opening scene introducing the setting and characters"""
@@ -740,17 +740,17 @@ def get_response_to_bot():
 def epilogue_accept():
     set_mission('accept')
     st.session_state.scene = 'epilogue'
-    st.experimental_rerun()
+    st.rerun()
 
 def epilogue_decline():
     set_mission('decline')
     st.session_state.scene = 'epilogue'
-    st.experimental_rerun()
+    st.rerun()
 
 def epilogue_report():
     set_mission('report')
     st.session_state.scene = 'epilogue'
-    st.experimental_rerun()
+    st.rerun()
 
 def epilogue():
     """Epilogue scene"""
@@ -818,7 +818,7 @@ def end_scene():
         st.session_state.approach = 'none'
         st.session_state.mission = 'none'
         st.session_state.history = []
-        st.experimental_rerun()
+        st.rerun()
 
 def get_character_type():
     """Get character type description based on stats"""
