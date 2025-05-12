@@ -276,8 +276,8 @@ class DialoguePlayer:
         
         input(f"{COLORS['dim']}Press Enter to begin...{COLORS['reset']}")
         
-        # Play until we reach a null node
-        while self.current_node_id:
+        # Play until we reach a None node
+        while self.current_node_id is not None:
             self.play_node()
             
         # Print end of dialogue
@@ -286,7 +286,9 @@ class DialoguePlayer:
     
     def reset(self) -> None:
         """Reset the dialogue to the beginning"""
-        self.variables = self.dialogue_data.get("variables", {}).copy()
+        self.variables = {}
+        for key, value in self.dialogue_data.get("variables", {}).items():
+            self.variables[key] = value
         self.current_node_id = self.dialogue_data.get("start", "")
         self.history = []
 
