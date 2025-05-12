@@ -160,7 +160,7 @@ def advance_to_node(node_id: str) -> None:
     st.session_state.current_node_id = node_id
     
     # If the node is None, we've reached the end
-    if not node_id:
+    if node_id is None:
         return
         
     # Process the new node
