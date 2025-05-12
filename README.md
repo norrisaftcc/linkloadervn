@@ -78,3 +78,20 @@ Example:
 (You can just write these as "As a player" if you want, or you can use the character instead.)
 
 Try to come up with at least three user stories, such as one per Effectiveness, Resources, and Positioning. It's likely that once you have an idea, you'll be able to come up with two each. This should be sufficient for the small scope of this project.
+
+## what's next!
+
+ For your next steps, I recommend:
+
+  1. Create actual game content using the new tools - This validates the
+  tools while making progress on the game
+  2. Add a visual dialogue editor - A node-graph visualization would make
+  creating branching conversations much easier
+  3. Implement character sprites in the Streamlit player - Seeing
+  characters with proper expressions would enhance dialogue testing
+  4. Improve JSON-to-Ren'Py synchronization - Make it faster to move
+  finished dialogue into the game
+
+  The highest priority should be creating real content with the tools we've
+   built. This will both advance your project and reveal any practical
+  limitations in the tooling that need to be addressed.
