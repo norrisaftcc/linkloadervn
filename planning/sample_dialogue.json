@@ -1,0 +1,273 @@
+{
+  "title": "Link Loader: Cargo Bot Conversation",
+  "author": "Sample Author",
+  "version": "1.0",
+  "default_speaker": "Slim",
+  "variables": {
+    "cod": 2,
+    "terminal_fixed": false,
+    "parts_collected": 0,
+    "knows_about_rustlers": false
+  },
+  "tags": ["tutorial", "sample"],
+  "start": "intro",
+  "nodes": {
+    "intro": {
+      "title": "Introduction",
+      "tags": ["start"],
+      "content": "I see you're having some trouble with your terminal connection. Can I help?",
+      "next": "cargo_bot_response"
+    },
+    "cargo_bot_response": {
+      "title": "Cargo Bot Response",
+      "speaker": "Cargo Bot",
+      "emotion": "neutral",
+      "position": "right",
+      "content": "(Sh-query maintenance status sh-current sh-terminal)",
+      "choices": [
+        {
+          "text": "I can fix your terminal for you.",
+          "next": "offer_help"
+        },
+        {
+          "text": "(Sh-maintenance underway sh-fixing terminal sh-connection error)",
+          "condition": "cod >= 2",
+          "next": "robot_language",
+          "effects": [
+            {
+              "type": "inc",
+              "variable": "robot_trust",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "text": "I don't understand your robot language.",
+          "condition": "cod < 1",
+          "next": "confusion"
+        }
+      ]
+    },
+    "offer_help": {
+      "title": "Offer Help",
+      "content": "I can fix your terminal for you. Just give me a minute to check the connections.",
+      "next": "cargo_bot_confusion"
+    },
+    "cargo_bot_confusion": {
+      "title": "Cargo Bot Confusion",
+      "speaker": "Cargo Bot",
+      "content": "(Sh-confusion sh-human language incomplete)",
+      "next": "clipi_translation"
+    },
+    "clipi_translation": {
+      "title": "Clipi Translates",
+      "speaker": "Clipi",
+      "emotion": "helpful",
+      "position": "center",
+      "content": "Let me translate. The cargo bot is asking about the status of the terminal maintenance.",
+      "next": "repair_terminal"
+    },
+    "robot_language": {
+      "title": "Speaking Robot Language",
+      "speaker": "Cargo Bot",
+      "content": "(Sh-gratitude sh-proceed)",
+      "onentry": [
+        {
+          "type": "set",
+          "variable": "spoken_robot_language",
+          "value": true
+        }
+      ],
+      "next": "repair_terminal"
+    },
+    "confusion": {
+      "title": "Confusion",
+      "content": "Sorry, I don't understand what you're saying. Let me call my assistant.",
+      "next": "clipi_appears"
+    },
+    "clipi_appears": {
+      "title": "Clipi Appears",
+      "speaker": "Clipi",
+      "emotion": "helpful",
+      "position": "center",
+      "content": "I can help translate. The cargo bot is asking about the terminal maintenance status.",
+      "next": "repair_terminal"
+    },
+    "repair_terminal": {
+      "title": "Repair Terminal",
+      "content": "Let me take a look at the terminal. It seems the connection is loose.",
+      "choices": [
+        {
+          "text": "Use technical approach (rewire the circuit)",
+          "condition": "cod > 0",
+          "next": "technical_repair",
+          "effects": [
+            {
+              "type": "set",
+              "variable": "repair_method",
+              "value": "technical"
+            }
+          ]
+        },
+        {
+          "text": "Use practical approach (turn it off and on again)",
+          "next": "practical_repair",
+          "effects": [
+            {
+              "type": "set",
+              "variable": "repair_method",
+              "value": "practical"
+            }
+          ]
+        },
+        {
+          "text": "Ask Clipi for help",
+          "next": "clipi_helps"
+        }
+      ]
+    },
+    "technical_repair": {
+      "title": "Technical Repair",
+      "content": "I'll rewire the circuit and recalibrate the connection points. This should optimize the data flow.",
+      "onentry": [
+        {
+          "type": "set",
+          "variable": "terminal_fixed",
+          "value": true
+        }
+      ],
+      "next": "repair_complete"
+    },
+    "practical_repair": {
+      "title": "Practical Repair",
+      "content": "Let's try the universal fix - turning it off and on again.",
+      "onentry": [
+        {
+          "type": "set",
+          "variable": "terminal_fixed",
+          "value": true
+        }
+      ],
+      "next": "repair_complete"
+    },
+    "clipi_helps": {
+      "title": "Clipi Helps",
+      "speaker": "Clipi",
+      "content": "I can handle this. Running diagnostic software... fixing connection... done!",
+      "onentry": [
+        {
+          "type": "set",
+          "variable": "terminal_fixed",
+          "value": true
+        },
+        {
+          "type": "set",
+          "variable": "clipi_helped",
+          "value": true
+        }
+      ],
+      "next": "repair_complete"
+    },
+    "repair_complete": {
+      "title": "Repair Complete",
+      "content": "There we go! The terminal is fixed now.",
+      "next": "cargo_bot_thanks"
+    },
+    "cargo_bot_thanks": {
+      "title": "Cargo Bot Thanks",
+      "speaker": "Cargo Bot",
+      "content": "(Sh-gratitude sh-function restored sh-efficiency optimal)",
+      "choices": [
+        {
+          "text": "(Sh-acknowledgment sh-pleasure to assist)",
+          "condition": "cod >= 1",
+          "next": "good_ending",
+          "effects": [
+            {
+              "type": "inc",
+              "variable": "robot_trust",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "text": "You're welcome. Just doing my job.",
+          "next": "neutral_ending"
+        },
+        {
+          "text": "Now, what can you tell me about the CDR rustlers?",
+          "condition": "knows_about_rustlers",
+          "next": "rustler_info"
+        }
+      ]
+    },
+    "good_ending": {
+      "title": "Good Ending",
+      "speaker": "Cargo Bot",
+      "content": "(Sh-offering sh-useful information sh-nearby cache sh-replacement parts)",
+      "next": "parts_location"
+    },
+    "neutral_ending": {
+      "title": "Neutral Ending",
+      "speaker": "Cargo Bot",
+      "content": "(Sh-confusion sh-human language incomplete sh-nonetheless sh-gratitude)",
+      "next": "end_conversation"
+    },
+    "parts_location": {
+      "title": "Parts Location",
+      "speaker": "Clipi",
+      "content": "The cargo bot is telling you about a cache of replacement parts nearby. This could be very useful!",
+      "choices": [
+        {
+          "text": "Ask for directions",
+          "next": "get_directions",
+          "effects": [
+            {
+              "type": "inc",
+              "variable": "parts_collected",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "text": "Thank the bot and leave",
+          "next": "end_conversation"
+        }
+      ]
+    },
+    "get_directions": {
+      "title": "Get Directions",
+      "content": "Can you show me where these parts are located?",
+      "next": "bot_gives_directions"
+    },
+    "bot_gives_directions": {
+      "title": "Bot Gives Directions",
+      "speaker": "Cargo Bot",
+      "content": "(Sh-coordinates sh-uploaded sh-to your terminal)",
+      "next": "clipi_confirms"
+    },
+    "clipi_confirms": {
+      "title": "Clipi Confirms",
+      "speaker": "Clipi",
+      "content": "Coordinates received. I've marked the location on your map. The parts cache is 500 meters northeast of our position.",
+      "next": "end_conversation"
+    },
+    "rustler_info": {
+      "title": "Rustler Information",
+      "speaker": "Cargo Bot",
+      "content": "(Sh-caution sh-cdr collective sh-dangerous sh-hijacking cargo sh-eastern badlands)",
+      "next": "clipi_translates_rustler"
+    },
+    "clipi_translates_rustler": {
+      "title": "Clipi Translates About Rustlers",
+      "speaker": "Clipi",
+      "content": "The cargo bot is warning us about the CDR rustlers. They've been hijacking cargo in the eastern badlands. It seems they have a base there.",
+      "next": "end_conversation"
+    },
+    "end_conversation": {
+      "title": "End Conversation",
+      "content": "Thanks for your help. I need to get back to my repairs now.",
+      "next": null
+    }
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Dialogue Tree Schema",
+  "description": "Schema for dialogue tree format inspired by Twine's TWEE format",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The title of the dialogue tree"
+    },
+    "author": {
+      "type": "string",
+      "description": "The author of the dialogue tree"
+    },
+    "version": {
+      "type": "string",
+      "description": "The version of the dialogue tree"
+    },
+    "default_speaker": {
+      "type": "string",
+      "description": "The default speaker for nodes that don't specify one"
+    },
+    "variables": {
+      "type": "object",
+      "description": "Initial state variables for the dialogue",
+      "additionalProperties": true
+    },
+    "tags": {
+      "type": "array",
+      "description": "Tags for the dialogue tree",
+      "items": {
+        "type": "string"
+      }
+    },
+    "nodes": {
+      "type": "object",
+      "description": "The nodes in the dialogue tree",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["content"],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The title of this node"
+          },
+          "tags": {
+            "type": "array",
+            "description": "Tags for this node",
+            "items": {
+              "type": "string"
+            }
+          },
+          "speaker": {
+            "type": "string",
+            "description": "The character speaking this dialogue"
+          },
+          "content": {
+            "type": "string",
+            "description": "The text content of this node"
+          },
+          "audio": {
+            "type": "string",
+            "description": "Audio file to play during this node"
+          },
+          "image": {
+            "type": "string",
+            "description": "Image file to display during this node"
+          },
+          "emotion": {
+            "type": "string",
+            "description": "Emotion/expression to display during this node"
+          },
+          "position": {
+            "type": "string",
+            "description": "Position on screen (left, right, center)"
+          },
+          "next": {
+            "type": ["string", "null"],
+            "description": "The ID of the next node if there are no choices"
+          },
+          "choices": {
+            "type": "array",
+            "description": "The choices available at this node",
+            "items": {
+              "type": "object",
+              "required": ["text", "next"],
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "description": "The text for this choice"
+                },
+                "next": {
+                  "type": "string",
+                  "description": "The ID of the node this choice leads to"
+                },
+                "condition": {
+                  "type": "string",
+                  "description": "A condition that must be true for this choice to be available"
+                },
+                "effects": {
+                  "type": "array",
+                  "description": "Effects that happen when this choice is selected",
+                  "items": {
+                    "type": "object",
+                    "required": ["type"],
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": ["set", "inc", "dec", "toggle", "push", "pop", "script"],
+                        "description": "The type of effect"
+                      },
+                      "variable": {
+                        "type": "string",
+                        "description": "The variable to modify"
+                      },
+                      "value": {
+                        "description": "The value to set/add/etc."
+                      },
+                      "script": {
+                        "type": "string",
+                        "description": "Python script to execute (for script type effects)"
+                      }
+                    }
+                  }
+                },
+                "tags": {
+                  "type": "array",
+                  "description": "Tags for this choice",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "onentry": {
+            "type": "array",
+            "description": "Effects that happen when entering this node",
+            "items": {
+              "type": "object",
+              "required": ["type"],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": ["set", "inc", "dec", "toggle", "push", "pop", "script"],
+                  "description": "The type of effect"
+                },
+                "variable": {
+                  "type": "string",
+                  "description": "The variable to modify"
+                },
+                "value": {
+                  "description": "The value to set/add/etc."
+                },
+                "script": {
+                  "type": "string",
+                  "description": "Python script to execute (for script type effects)"
+                }
+              }
+            }
+          },
+          "onexit": {
+            "type": "array",
+            "description": "Effects that happen when exiting this node",
+            "items": {
+              "type": "object",
+              "required": ["type"],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": ["set", "inc", "dec", "toggle", "push", "pop", "script"],
+                  "description": "The type of effect"
+                },
+                "variable": {
+                  "type": "string",
+                  "description": "The variable to modify"
+                },
+                "value": {
+                  "description": "The value to set/add/etc."
+                },
+                "script": {
+                  "type": "string",
+                  "description": "Python script to execute (for script type effects)"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "start": {
+      "type": "string",
+      "description": "The ID of the starting node"
+    }
+  },
+  "required": ["title", "nodes", "start"]
+}

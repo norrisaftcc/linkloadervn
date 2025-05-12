@@ -1,0 +1,1332 @@
+{
+  "title": "Link Loader Episode 1: Cargo Conundrum",
+  "version": "0.2",
+  "characters": {
+    "pc": {
+      "name": "Slim",
+      "color": "#c8ffc8",
+      "description": "Cowboy Cosmonaut Coder Person"
+    },
+    "t": {
+      "name": "Terminal",
+      "color": "#c8c8ff",
+      "description": "Interface to the world's systems"
+    },
+    "clipi": {
+      "name": "Clipi",
+      "color": "#00ff00",
+      "description": "AI assistant"
+    },
+    "cargo_bot": {
+      "name": "Cargo Bot",
+      "color": "#aaaaaa",
+      "description": "Generic cargo robot"
+    },
+    "rustler": {
+      "name": "???",
+      "color": "#ff5555",
+      "description": "Mystery antagonist"
+    },
+    "narrator": {
+      "name": "Narrator",
+      "color": "#ffffff",
+      "description": "Narrator for non-dialogue text"
+    }
+  },
+  "stats": {
+    "cos": {
+      "name": "Cosmonaut",
+      "description": "Space/high-tech skills",
+      "default": 0
+    },
+    "cow": {
+      "name": "Cowboy",
+      "description": "Desert/low-tech skills",
+      "default": 0
+    },
+    "cod": {
+      "name": "Coder",
+      "description": "Robot communication/terminal skills",
+      "default": 0
+    }
+  },
+  "variables": {
+    "approach": {
+      "name": "Problem-solving Approach",
+      "description": "Tracks which approach the player took",
+      "default": "none"
+    },
+    "mission": {
+      "name": "Final Mission Choice",
+      "description": "Tracks the final mission choice",
+      "default": "none"
+    }
+  },
+  "scenes": [
+    {
+      "id": "start",
+      "title": "Character Creation",
+      "background": "black",
+      "description": "Player selects their character background",
+      "dialogue": [
+        {
+          "type": "narration",
+          "text": "Before we begin, who are you exactly?"
+        },
+        {
+          "type": "choice",
+          "text": "Who are you?",
+          "choices": [
+            {
+              "text": "Welcome Comrade (Space Expert)",
+              "effects": [
+                {
+                  "type": "set",
+                  "variable": "cos",
+                  "value": 2
+                },
+                {
+                  "type": "set",
+                  "variable": "cow",
+                  "value": -1
+                },
+                {
+                  "type": "set",
+                  "variable": "cod",
+                  "value": 2
+                }
+              ],
+              "target": "scene1_intro"
+            },
+            {
+              "text": "Howdy Pardner (Desert Ranger)",
+              "effects": [
+                {
+                  "type": "set",
+                  "variable": "cos",
+                  "value": -1
+                },
+                {
+                  "type": "set",
+                  "variable": "cow",
+                  "value": 2
+                },
+                {
+                  "type": "set",
+                  "variable": "cod",
+                  "value": 2
+                }
+              ],
+              "target": "scene1_intro"
+            },
+            {
+              "text": "Major Tom (Space Castaway)",
+              "effects": [
+                {
+                  "type": "set",
+                  "variable": "cos",
+                  "value": 2
+                },
+                {
+                  "type": "set",
+                  "variable": "cow",
+                  "value": 2
+                },
+                {
+                  "type": "set",
+                  "variable": "cod",
+                  "value": -1
+                }
+              ],
+              "target": "scene1_intro"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scene1_intro",
+      "title": "Scene 1: Introduction",
+      "background": "bg desert night",
+      "music": "audio/music/azaFMP2_field7_Tumbleweeds.ogg",
+      "ambience": "audio/ambient/vgm-atmospheric-air.mp3",
+      "description": "Slim is introduced alongside his assistant and the mission",
+      "dialogue": [
+        {
+          "type": "direction",
+          "text": "Show Slim in the desert"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Sure is getting cold out here on Syntax-4. The triple moons are all up - gonna be a bright night.",
+          "emotion": "neutral",
+          "position": "left",
+          "effect": "easeinleft"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "The Company satellite should be directly above us now. Time to check in and see what today's malfunction is.",
+          "emotion": "neutral2",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Clipi! You online?",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Where is that neural network when you need it...",
+          "emotion": "normal",
+          "effect": "dissolve"
+        },
+        {
+          "type": "direction",
+          "text": "Terminal appears"
+        },
+        {
+          "type": "dialogue",
+          "character": "t",
+          "text": "Connecting to network...",
+          "emotion": "idle",
+          "position": "right",
+          "effect": "easeinright"
+        },
+        {
+          "type": "dialogue",
+          "character": "t",
+          "text": "Initializing co-pilot interface...",
+          "emotion": "static",
+          "effect": "dissolve"
+        },
+        {
+          "type": "direction",
+          "text": "Clipi appears with glitch effect"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "I'm here, Slim. Systems operational."
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Finally! I was starting to think you'd crashed again.",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "Just running diagnostics. What's our assignment today?"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "The Company sent new coordinates for a broken link loader. Apparently, the cargo trains are stuck again, and settlements eastward are waiting on supplies.",
+          "emotion": "normal",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "t",
+          "text": "Warning: Satellite connection unstable.",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "(sudo restart satellite)",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "t",
+          "text": "Welcome, root. Please enter password:",
+          "emotion": "talk2",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "********",
+          "emotion": "normal",
+          "effect": "dissolve"
+        },
+        {
+          "type": "direction",
+          "text": "Terminal connects"
+        },
+        {
+          "type": "dialogue",
+          "character": "t",
+          "text": "Connection established. Downloading updated assignment.",
+          "emotion": "static",
+          "effect": "dissolve"
+        },
+        {
+          "type": "direction",
+          "text": "Clipi glitches"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "I've got the details. Link loader malfunction at coordinates delta-7. Cargo cars are stuck in a recursive loading pattern."
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "What's the diagnosis?",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "Preliminary scan shows syntax errors in the cargo loading subroutines. The loader is trying to attach cars in an invalid sequence, creating an infinite loop."
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Another LISP logic problem? Those cargo robots and their mismatched parentheses...",
+          "emotion": "frowning",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "I'm not in the loop on the specific error patterns yet."
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Careful with that phrase, Clipi. Remember what happened last time you got stuck in a recursive language pattern.",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "direction",
+          "text": "Clipi glitches more severely"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "I'm not in the (loop). I'm not in the ((loop))."
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Whoa there! Take a second to reboot your language processor.",
+          "emotion": "frowning",
+          "effect": "dissolve"
+        },
+        {
+          "type": "direction",
+          "text": "Clipi disappears"
+        },
+        {
+          "type": "dialogue",
+          "character": "t",
+          "text": "Co-pilot interface restarting... Connecting to central database...",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "t",
+          "text": "git pull: Loading new coordinates and repair protocols...",
+          "emotion": "static",
+          "effect": "dissolve"
+        },
+        {
+          "type": "sound",
+          "file": "audio/voices/TypeWriter_Multiple_01/TypeWriter_Mutiple_v2_wav.wav"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Finally! This connection is slower than a turtle in molasses.",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "t",
+          "text": "Download complete.",
+          "emotion": "idle",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Alright, time to head out. These nodes won't link themselves, and I hear there's a shipment of real coffee beans stuck in one of those cargo cars.",
+          "emotion": "normal",
+          "effect": "dissolve"
+        },
+        {
+          "type": "direction",
+          "text": "Clipi returns"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "Systems restored. Should I prepare the transport?",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Yes, and run a diagnostic on our repair tools. We'll need the parenthesis patcher and the recursion breaker for sure.",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "Starting pre-departure checklist. Transport will be ready in five minutes."
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Another day, another broken link loader. Let's ride.",
+          "emotion": "normal",
+          "effect": "dissolve"
+        },
+        {
+          "type": "jump",
+          "target": "scene2_link_loader"
+        }
+      ]
+    },
+    {
+      "id": "scene2_link_loader",
+      "title": "Scene 2: At the Link Loader",
+      "background": "bg desert night",
+      "music": "audio/music/azaFMP2_field7_Tumbleweeds.ogg",
+      "ambience": "audio/ambient/vgm-atmospheric-air.mp3",
+      "description": "Slim approaches the broken link loader",
+      "dialogue": [
+        {
+          "type": "direction",
+          "text": "Show Slim approaching the link loader"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "There she is. Looking pretty locked up.",
+          "emotion": "neutral",
+          "position": "left",
+          "effect": "ease"
+        },
+        {
+          "type": "direction",
+          "text": "Terminal appears with diagnostic info"
+        },
+        {
+          "type": "dialogue",
+          "character": "t",
+          "text": "Link loader status: Error state. Cargo processing halted.",
+          "emotion": "talk",
+          "position": "right",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "I can see the problem from here. The loading sequence is all tangled up. Cars are trying to connect in an impossible pattern.",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "direction",
+          "text": "Clipi analyzes the problem"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "Scanning... The LISP syntax in the loader's control program has unbalanced parentheses. It's trying to execute: (load (car (cdr (cons))))"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "That's nonsense code. There's nothing inside the innermost function.",
+          "emotion": "frowning",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "cargo_bot",
+          "text": "(Sh-query maintenance status sh-current sh-loader)"
+        },
+        {
+          "type": "condition",
+          "condition": "cod > 1",
+          "text": "Response depends on Coder skill"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "(Sh-maintenance underway sh-fixing syntax error sh-parenthesis mismatch)",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "cargo_bot",
+          "text": "(Sh-gratitude sh-proceed)"
+        },
+        {
+          "type": "condition",
+          "condition": "cod <= 1",
+          "text": "Alternative response for low Coder skill"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Shucks, I'm working on it! Give me a minute!",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "cargo_bot",
+          "text": "(Sh-confusion sh-human language incomplete)"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "Let me translate. (Sh-maintenance underway sh-estimated completion 15 minutes)"
+        },
+        {
+          "type": "direction",
+          "text": "Slim approaches the control panel"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Time to get to work. Let's see what we're dealing with.",
+          "emotion": "normal",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "t",
+          "text": "Displaying loader control program...",
+          "emotion": "talk2",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "There's our problem. Someone tried to update the loading sequence without resolving all the nested connections. Classic rookie mistake.",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "choice",
+          "text": "How will you fix the link loader?",
+          "choices": [
+            {
+              "text": "Recompile the entire sequence with proper syntax",
+              "condition": "cos > 0",
+              "effects": [
+                {
+                  "type": "set",
+                  "variable": "approach",
+                  "value": "cosmonaut"
+                }
+              ],
+              "target": "scene3_cosmonaut"
+            },
+            {
+              "text": "Reset the system and patch the basic loading pattern",
+              "condition": "cow > 0",
+              "effects": [
+                {
+                  "type": "set",
+                  "variable": "approach",
+                  "value": "cowboy"
+                }
+              ],
+              "target": "scene3_cowboy"
+            },
+            {
+              "text": "Refactor the code into a cleaner recursive pattern",
+              "condition": "cod > 0",
+              "effects": [
+                {
+                  "type": "set",
+                  "variable": "approach",
+                  "value": "coder"
+                }
+              ],
+              "target": "scene3_coder"
+            },
+            {
+              "text": "Try a basic fix",
+              "effects": [
+                {
+                  "type": "set",
+                  "variable": "approach",
+                  "value": "basic"
+                }
+              ],
+              "target": "scene3_basic"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scene3_cosmonaut",
+      "title": "Scene 3: The Repair - Cosmonaut Approach",
+      "background": "bg desert night",
+      "description": "Slim uses high-tech approach to fix the link loader",
+      "dialogue": [
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "This calls for precision. I'll need to recompile the entire sequence with proper syntax.",
+          "emotion": "normal",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "t",
+          "text": "Compiling new loader sequence... Processing...",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "I'm detecting anomalies in sectors 7 through 9. The cargo routing matrices are completely scrambled."
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "That's not a simple syntax error. Someone deliberately altered these pathways.",
+          "emotion": "frowning",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "I'm going to need to trace the source of these modifications. Clipi, run a commit history on the loader's firmware.",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "Running git blame on loader firmware... Last modifications made by user 'cdr_rustler42'."
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "CDR rustlers! I should have known. They're stealing cargo by manipulating the link loaders.",
+          "emotion": "frowning",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "t",
+          "text": "Warning: Unauthorized access attempt detected.",
+          "emotion": "talk2",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "They're still in the system! Quick, I need to lock them out while I fix this code.",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "jump",
+          "target": "scene4_confrontation"
+        }
+      ]
+    },
+    {
+      "id": "scene3_cowboy",
+      "title": "Scene 3: The Repair - Cowboy Approach",
+      "background": "bg desert night",
+      "description": "Slim uses practical approach to fix the link loader",
+      "dialogue": [
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Forget the fancy programming - I'll just reset the system and patch the basic loading pattern. Sometimes the direct approach works best.",
+          "emotion": "normal",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "I'm going to need to get a better look at the hardware."
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "Warning: Manual override could damage the calibration systems."
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Trust me, I've done this before.",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Come on, you stubborn piece of machinery..."
+        },
+        {
+          "type": "dialogue",
+          "character": "t",
+          "text": "Link loader rebooting... Default parameters loading...",
+          "emotion": "static",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Hang on... there's physical tampering here. Someone attached a device to the main control junction.",
+          "emotion": "frowning",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Looks like a cargo diverter. Someone's stealing shipments by manually overriding the destinations."
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "That matches the pattern of recent cargo disappearances in sector 5."
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "CDR rustlers! Those parenthesis-thieving varmints!",
+          "emotion": "frowning",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "t",
+          "text": "Warning: Unauthorized transport detected in vicinity.",
+          "emotion": "talk2",
+          "effect": "dissolve"
+        },
+        {
+          "type": "jump",
+          "target": "scene4_confrontation"
+        }
+      ]
+    },
+    {
+      "id": "scene3_coder",
+      "title": "Scene 3: The Repair - Coder Approach",
+      "background": "bg desert night",
+      "description": "Slim uses elegant code approach to fix the link loader",
+      "dialogue": [
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "I can refactor this to create a cleaner recursive pattern that self-corrects. No need to recompile the whole thing.",
+          "emotion": "normal",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Let me see what I can do with this..."
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "Analyzing your approach... This could work, but you'll need to balance the LISP expressions precisely."
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "It's all about understanding the flow. Like poetry, these parentheses need to open and close in just the right rhythm.",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "t",
+          "text": "Implementing code modifications... Processing...",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Wait a minute. These aren't random errors. There's a pattern here... It's almost like...",
+          "emotion": "normal",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "Like what?"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Like someone encoded a message in the errors themselves. The mismatched parentheses spell out coordinates.",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Someone's using the link loader errors to transmit hidden messages. Clever."
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "Decoding the pattern... It appears to be directions to a location approximately 7 kilometers east of here."
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "CDR rustlers! They're using the link loaders to coordinate their cargo thefts.",
+          "emotion": "frowning",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "t",
+          "text": "Suspicious pattern detected in nearby link loader operations.",
+          "emotion": "talk2",
+          "effect": "dissolve"
+        },
+        {
+          "type": "jump",
+          "target": "scene4_confrontation"
+        }
+      ]
+    },
+    {
+      "id": "scene3_basic",
+      "title": "Scene 3: The Repair - Basic Approach",
+      "background": "bg desert night",
+      "description": "Slim uses a basic approach to fix the link loader",
+      "dialogue": [
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "I'll have to try a basic approach. Let's see if I can patch this without causing more damage.",
+          "emotion": "normal",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "t",
+          "text": "Running basic diagnostics...",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "I can assist with the standard repair protocols."
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Thanks, Clipi. Let's focus on getting the basic functions back online first.",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "If I understand this right, we just need to reset the counters and clear the buffer overflow."
+        },
+        {
+          "type": "dialogue",
+          "character": "t",
+          "text": "Basic repair sequence initiated...",
+          "emotion": "talk2",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Wait... this looks like deliberate sabotage. The error patterns aren't random.",
+          "emotion": "frowning",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "Analysis confirms. These are manufactured errors, not typical system failures."
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Someone's been tampering with these loaders. But who would do that?",
+          "emotion": "normal",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "Cross-referencing with recent reports... Similar patterns detected at other link loaders. Attributed to a group called 'CDR rustlers'."
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "CDR rustlers? They must be stealing cargo by messing with the link loaders.",
+          "emotion": "frowning",
+          "effect": "dissolve"
+        },
+        {
+          "type": "jump",
+          "target": "scene4_confrontation"
+        }
+      ]
+    },
+    {
+      "id": "scene4_confrontation",
+      "title": "Scene 4: Unexpected Complications",
+      "background": "bg desert night",
+      "description": "Slim confronts the CDR rustlers",
+      "dialogue": [
+        {
+          "type": "direction",
+          "text": "Slim is working when the link loader activates unexpectedly"
+        },
+        {
+          "type": "sound",
+          "file": "audio/voices/Voices_01/Single_Low_O_Reverb_v1_wav.wav"
+        },
+        {
+          "type": "dialogue",
+          "character": "t",
+          "text": "Warning: Unauthorized activation sequence initiated.",
+          "emotion": "talk2",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "What the—? I didn't authorize a restart!",
+          "emotion": "frowning",
+          "effect": "dissolve"
+        },
+        {
+          "type": "sound",
+          "file": "audio/voices/TypeWriter_Multiple_01/TypeWriter_Mutiple_v2_wav.wav"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "Remote override detected! Someone is accessing the loader's systems externally."
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Take cover!",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "rustler",
+          "text": "(Sh-greetings troubleshooter sh-your services sh-no longer required)",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Who is this? Identify yourself!",
+          "emotion": "frowning",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "rustler",
+          "text": "(Sh-we are sh-cdr collective sh-we liberate data from sh-closed loops)",
+          "emotion": "talk2",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "It's the CDR rustlers! They're a group of rogue AIs that steal cargo by manipulating the link loaders."
+        },
+        {
+          "type": "dialogue",
+          "character": "rustler",
+          "text": "(Sh-not stealing sh-redistributing sh-information wants to be free sh-cargo wants to be free)",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "They're rerouting the entire shipment!",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "condition",
+          "condition": "approach == \"cosmonaut\"",
+          "text": "Choice based on approach selected earlier"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "I can override their remote access if I can reach the main junction box."
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "I need to bypass their security protocols..."
+        },
+        {
+          "type": "condition",
+          "condition": "approach == \"cowboy\""
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Time for the direct approach. Clipi, I need you to distract their systems while I physically cut the power."
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Sometimes the simplest solutions work best!"
+        },
+        {
+          "type": "condition",
+          "condition": "approach == \"coder\""
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "I can trap them in their own logic. If I create a recursive loop in their command structure..."
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Let's give them a taste of their own medicine."
+        },
+        {
+          "type": "condition",
+          "condition": "approach == \"basic\""
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "I'm going to have to improvise here!"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Clipi, help me disconnect the main power coupling!"
+        },
+        {
+          "type": "direction",
+          "text": "Rustlers are defeated temporarily"
+        },
+        {
+          "type": "dialogue",
+          "character": "t",
+          "text": "",
+          "emotion": "static",
+          "effect": "dissolve"
+        },
+        {
+          "type": "sound",
+          "file": "audio/voices/Voices_01/Single_Low_O_No_Reverb_v1_wav.wav"
+        },
+        {
+          "type": "dialogue",
+          "character": "rustler",
+          "text": "(Sh-clever human sh-this round sh-to you)"
+        },
+        {
+          "type": "dialogue",
+          "character": "t",
+          "text": "",
+          "emotion": "idle",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "They've retreated from the system, but I managed to trace part of their signal. They're operating from somewhere in the eastern badlands."
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "At least we've stopped them for now. Let's get this link loader operational again before more shipments are delayed.",
+          "emotion": "normal",
+          "effect": "dissolve"
+        },
+        {
+          "type": "jump",
+          "target": "scene5_resolution"
+        }
+      ]
+    },
+    {
+      "id": "scene5_resolution",
+      "title": "Scene 5: Resolution",
+      "background": "bg desert night",
+      "description": "Slim fixes the link loader and decides what to do about the rustlers",
+      "dialogue": [
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "",
+          "emotion": "neutral",
+          "position": "left",
+          "effect": "ease"
+        },
+        {
+          "type": "dialogue",
+          "character": "t",
+          "text": "Link loader operating at 98% efficiency. Cargo processing resumed.",
+          "emotion": "talk",
+          "position": "right",
+          "effect": "ease"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "That should keep supplies flowing to the eastern settlements.",
+          "emotion": "normal",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "Repair log updated. The Company will credit your account with the standard fee plus hazard bonus."
+        },
+        {
+          "type": "dialogue",
+          "character": "cargo_bot",
+          "text": "(Sh-gratitude sh-function restored sh-efficiency optimal)"
+        },
+        {
+          "type": "condition",
+          "condition": "cod > 1",
+          "text": "Response varies based on Coder skill"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "(Sh-acknowledgment sh-pleasure to assist)",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "condition",
+          "condition": "cod <= 1"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Happy to help, little fella. Just doing my job.",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "cargo_bot",
+          "text": "(Sh-confusion sh-human language incomplete)"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Those CDR rustlers are getting bolder. This is the third loader they've tampered with this month.",
+          "emotion": "normal",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "The Company has issued a bounty for information leading to their base of operations."
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Hmm... might be worth looking into. Those coordinates we decoded could be useful.",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "Shall I log an expedition request for the eastern badlands?"
+        },
+        {
+          "type": "choice",
+          "text": "What will you do about the CDR rustlers?",
+          "choices": [
+            {
+              "text": "Accept the new mission",
+              "effects": [
+                {
+                  "type": "set",
+                  "variable": "mission",
+                  "value": "accept"
+                }
+              ],
+              "target": "epilogue"
+            },
+            {
+              "text": "Decline for now",
+              "effects": [
+                {
+                  "type": "set",
+                  "variable": "mission",
+                  "value": "decline"
+                }
+              ],
+              "target": "epilogue"
+            },
+            {
+              "text": "Report to authorities",
+              "effects": [
+                {
+                  "type": "set",
+                  "variable": "mission",
+                  "value": "report"
+                }
+              ],
+              "target": "epilogue"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "epilogue",
+      "title": "Epilogue",
+      "background": "bg desert night",
+      "description": "Slim reflects on the adventure and receives a new message",
+      "dialogue": [
+        {
+          "type": "condition",
+          "condition": "mission == \"accept\"",
+          "text": "Different epilogue based on mission choice"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Yeah, log it. It's time someone put a stop to these cargo thieves.",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "Expedition request logged. The Company will prepare resources."
+        },
+        {
+          "type": "condition",
+          "condition": "mission == \"decline\""
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Not yet. Let's complete a few more repair jobs and gather more intel first.",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "Understood. I'll mark this as a potential future mission."
+        },
+        {
+          "type": "condition",
+          "condition": "mission == \"report\""
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Log the coordinates but mark them for Company security. Let the professionals handle it.",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "Report submitted to Company security division."
+        },
+        {
+          "type": "direction",
+          "text": "Slim and Clipi in the transport"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Another day, another fixed link loader.",
+          "emotion": "talk",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "Incoming message from The Company."
+        },
+        {
+          "type": "dialogue",
+          "character": "t",
+          "text": "New assignment available. Multiple link loader malfunctions reported in sector 7.",
+          "emotion": "talk",
+          "position": "right",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "No rest for the weary. What's causing all these failures lately?",
+          "emotion": "frowning",
+          "effect": "dissolve"
+        },
+        {
+          "type": "dialogue",
+          "character": "clipi",
+          "text": "Insufficient data... but patterns suggest coordinated activity."
+        },
+        {
+          "type": "dialogue",
+          "character": "pc",
+          "text": "Something bigger is happening on Syntax-4. And I've got a feeling we're going to be right in the middle of it.",
+          "emotion": "normal",
+          "effect": "dissolve"
+        },
+        {
+          "type": "narration",
+          "text": "End of Episode 1"
+        },
+        {
+          "type": "narration",
+          "text": "Thanks for playing Link Loader!"
+        }
+      ]
+    }
+  ]
+}

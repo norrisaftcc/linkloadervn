@@ -1,0 +1,216 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Link Loader Script Schema",
+  "description": "Schema for the Link Loader visual novel script format",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The title of the episode"
+    },
+    "version": {
+      "type": "string",
+      "description": "Version of the script"
+    },
+    "characters": {
+      "type": "object",
+      "description": "Character definitions",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Character's full name"
+          },
+          "color": {
+            "type": "string",
+            "description": "Color code for the character's dialogue"
+          },
+          "description": {
+            "type": "string",
+            "description": "Brief description of the character"
+          }
+        },
+        "required": ["name", "color"]
+      }
+    },
+    "stats": {
+      "type": "object",
+      "description": "Character stat definitions",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Full name of the stat"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of what the stat represents"
+          },
+          "default": {
+            "type": "integer",
+            "description": "Default value of the stat"
+          }
+        },
+        "required": ["name", "description", "default"]
+      }
+    },
+    "variables": {
+      "type": "object",
+      "description": "Game state variables",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Full name of the variable"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of what the variable tracks"
+          },
+          "default": {
+            "type": ["string", "integer", "boolean"],
+            "description": "Default value of the variable"
+          }
+        },
+        "required": ["name", "description", "default"]
+      }
+    },
+    "scenes": {
+      "type": "array",
+      "description": "List of scenes in the episode",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the scene (used for jumps)"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the scene"
+          },
+          "background": {
+            "type": "string",
+            "description": "Background image or description"
+          },
+          "music": {
+            "type": "string",
+            "description": "Background music file"
+          },
+          "ambience": {
+            "type": "string",
+            "description": "Ambient sound file"
+          },
+          "description": {
+            "type": "string",
+            "description": "Scene description for script development (not shown in game)"
+          },
+          "dialogue": {
+            "type": "array",
+            "description": "List of dialogue entries and actions",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": ["dialogue", "narration", "direction", "choice", "condition", "set", "jump", "sound"],
+                  "description": "Type of script entry"
+                },
+                "character": {
+                  "type": "string",
+                  "description": "Character ID for dialogue entries"
+                },
+                "text": {
+                  "type": "string",
+                  "description": "The text content (dialogue, narration, etc.)"
+                },
+                "emotion": {
+                  "type": "string",
+                  "description": "Character emotion/sprite to display"
+                },
+                "position": {
+                  "type": "string",
+                  "description": "Position on screen (left, right, center)"
+                },
+                "effect": {
+                  "type": "string",
+                  "description": "Transition effect"
+                },
+                "file": {
+                  "type": "string",
+                  "description": "File path for sound entries"
+                },
+                "variable": {
+                  "type": "string",
+                  "description": "Variable name for set entries"
+                },
+                "value": {
+                  "type": ["string", "integer", "boolean"],
+                  "description": "Value to set for variable"
+                },
+                "condition": {
+                  "type": "string",
+                  "description": "Condition expression"
+                },
+                "target": {
+                  "type": "string",
+                  "description": "Target scene ID for jump entries"
+                },
+                "choices": {
+                  "type": "array",
+                  "description": "Choices for choice entries",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "description": "Choice text"
+                      },
+                      "condition": {
+                        "type": "string",
+                        "description": "Condition for this choice to appear"
+                      },
+                      "target": {
+                        "type": "string",
+                        "description": "Target scene ID for this choice"
+                      },
+                      "effects": {
+                        "type": "array",
+                        "description": "Effects that happen when this choice is selected",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": ["set"],
+                              "description": "Type of effect"
+                            },
+                            "variable": {
+                              "type": "string",
+                              "description": "Variable to modify"
+                            },
+                            "value": {
+                              "type": ["string", "integer", "boolean"],
+                              "description": "New value"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": ["text", "target"]
+                  }
+                }
+              },
+              "required": ["type"]
+            }
+          }
+        },
+        "required": ["id", "title", "dialogue"]
+      }
+    }
+  },
+  "required": ["title", "version", "characters", "scenes"]
+}
