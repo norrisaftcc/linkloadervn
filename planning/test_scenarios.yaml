@@ -1,0 +1,156 @@
+# Test Scenarios for Link Loader
+
+scenarios:
+  - name: "Test Cosmonaut Path"
+    description: "Verify the cosmonaut character creation and approach"
+    choices:
+      - menu: "Choose your character background"
+        option: 1  # Welcome Comrade (Space Expert)
+      - menu: "What will you do?"
+        option: 1  # Reply in robot language
+    assertions:
+      - type: variable
+        target: cos
+        expected: 2
+      - type: variable
+        target: cow
+        expected: -1
+      - type: variable
+        target: cod
+        expected: 2
+      - type: variable
+        target: approach
+        expected: "cosmonaut"
+      - type: label_reached
+        target: scene1_intro
+      - type: label_reached
+        target: scene3_cosmonaut
+
+  - name: "Test Cowboy Path"
+    description: "Verify the cowboy character creation and approach"
+    choices:
+      - menu: "Choose your character background"
+        option: 2  # Howdy Pardner (Desert Ranger)
+      - menu: "What will you do?"
+        option: 2  # Reply in human language
+    assertions:
+      - type: variable
+        target: cos
+        expected: -1
+      - type: variable
+        target: cow
+        expected: 2
+      - type: variable
+        target: cod
+        expected: 2
+      - type: variable
+        target: approach
+        expected: "cowboy"
+      - type: label_reached
+        target: scene1_intro
+      - type: label_reached
+        target: scene3_cowboy
+
+  - name: "Test Coder Path"
+    description: "Verify the coder character creation and approach"
+    choices:
+      - menu: "Choose your character background"
+        option: 3  # Major Tom (Space Castaway)
+      - menu: "What will you do?"
+        option: 2  # Human language (since COD is -1)
+    assertions:
+      - type: variable
+        target: cos
+        expected: 2
+      - type: variable
+        target: cow
+        expected: 2
+      - type: variable
+        target: cod
+        expected: -1
+      - type: variable
+        target: approach
+        expected: "basic"  # Should be basic due to low COD
+      - type: label_reached
+        target: scene1_intro
+      - type: label_reached
+        target: scene3_basic
+
+  - name: "Test Mission Accept"
+    description: "Test accepting the mission at the end"
+    choices:
+      - menu: "Choose your character background"
+        option: 1  # Welcome Comrade
+      - menu: "What will you do?"
+        option: 1  # Robot language
+      - menu: "What brings you to"
+        option: 1  # Accept the new mission
+    assertions:
+      - type: variable
+        target: mission
+        expected: "accept"
+      - type: label_reached
+        target: scene5_resolution
+      - type: label_reached
+        target: epilogue
+
+  - name: "Test Mission Decline"
+    description: "Test declining the mission at the end"
+    choices:
+      - menu: "Choose your character background"
+        option: 2  # Howdy Pardner
+      - menu: "What will you do?"
+        option: 2  # Human language
+      - menu: "What brings you to"
+        option: 2  # Decline for now
+    assertions:
+      - type: variable
+        target: mission
+        expected: "decline"
+      - type: label_reached
+        target: scene5_resolution
+      - type: label_reached
+        target: epilogue
+
+  - name: "Test Mission Report"
+    description: "Test reporting to authorities"
+    choices:
+      - menu: "Choose your character background"
+        option: 3  # Major Tom
+      - menu: "What will you do?"
+        option: 2  # Human language
+      - menu: "What brings you to"
+        option: 3  # Report to authorities
+    assertions:
+      - type: variable
+        target: mission
+        expected: "report"
+      - type: label_reached
+        target: scene5_resolution
+      - type: label_reached
+        target: epilogue
+
+  - name: "Test Complete Playthrough"
+    description: "Test a complete playthrough from start to finish"
+    choices:
+      - menu: "Choose your character background"
+        option: 1  # Welcome Comrade
+      - menu: "What will you do?"
+        option: 1  # Robot language
+      - menu: "What brings you to"
+        option: 1  # Accept mission
+    assertions:
+      - type: label_reached
+        target: start
+      - type: label_reached
+        target: scene1_intro
+      - type: label_reached
+        target: scene2_link_loader
+      - type: label_reached
+        target: scene3_cosmonaut
+      - type: label_reached
+        target: scene4_confrontation
+      - type: label_reached
+        target: scene5_resolution
+      - type: label_reached
+        target: epilogue
