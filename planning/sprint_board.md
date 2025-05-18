@@ -9,13 +9,11 @@
 ## Week 1 (Current)
 
 ### To Do
-- [ ] Implement unreachable label detection (Chen)
-- [ ] Add character voice analysis (Chen)
 - [ ] Asset reference extraction (Julie)
 - [ ] Integration and documentation (All)
 
 ### In Progress
-- [ ] Build script parser for flow graph generation (Chen)
+- None
 
 ### Done
 - [x] Sprint planning session
@@ -24,6 +22,9 @@
 - [x] Create base TestRunner class with path execution (Bob)
 - [x] Implement assertion methods for variables and state (Bob)
 - [x] Add test coverage reporting (Bob)
+- [x] Build script parser for flow graph generation (Chen)
+- [x] Implement unreachable label detection (Chen)
+- [x] Add character voice analysis (Chen)
 
 ### Blocked
 - None
@@ -61,6 +62,13 @@
 **Chen**: Flow graph generation working for simple scripts. Need to handle menu branches.
 
 **Julie**: Found 15 unused assets and 3 missing references. Will share report.
+
+### Day 3
+**Bob**: Completed test runner with assertions and coverage reporting. 33.3% label coverage achieved.
+
+**Chen**: Finished flow graph analyzer and character voice analysis. All labels reachable, no dead ends found. Detected some voice inconsistencies.
+
+**Julie**: Working on asset reference extraction tool. Need file format specifications from team.
 
 ---
 
