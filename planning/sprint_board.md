@@ -9,17 +9,21 @@
 ## Week 1 (Current)
 
 ### To Do
+- [ ] Implement unreachable label detection (Chen)
+- [ ] Add character voice analysis (Chen)
 - [ ] Asset reference extraction (Julie)
 - [ ] Integration and documentation (All)
 
 ### In Progress
-- [ ] Create base TestRunner class with path execution (Bob)
 - [ ] Build script parser for flow graph generation (Chen)
 
 ### Done
 - [x] Sprint planning session
 - [x] Technical specifications written
 - [x] Development environment setup
+- [x] Create base TestRunner class with path execution (Bob)
+- [x] Implement assertion methods for variables and state (Bob)
+- [x] Add test coverage reporting (Bob)
 
 ### Blocked
 - None
