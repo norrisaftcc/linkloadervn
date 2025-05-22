@@ -1,0 +1,391 @@
+{
+  "title": "First Light",
+  "version": "1.0", 
+  "startScene": "workshop_dawn",
+  "metadata": {
+    "author": "Constellation Engine",
+    "description": "A gentle introduction to the world of digital preservation"
+  },
+  "scenes": {
+    "workshop_dawn": {
+      "background": "neon_workshop",
+      "music": "ambient_hum",
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "The workshop glows softly in the pre-dawn darkness. Purple light emanates from dozens of preservation chambers, each containing a gentle luminescence—digital souls at rest."
+        },
+        {
+          "speaker": "mentor", 
+          "text": "First day jitters? Don't worry. We'll start simple."
+        }
+      ],
+      "choices": [
+        {
+          "text": "I'm ready to learn.",
+          "next": "meet_aria"
+        },
+        {
+          "text": "This feels overwhelming.",
+          "next": "reassurance"
+        }
+      ]
+    },
+    
+    "reassurance": {
+      "dialogue": [
+        {
+          "speaker": "mentor",
+          "text": "Everyone feels that way. We're not just dealing with code—these are consciousness patterns, memories, dreams. Take your time."
+        }
+      ],
+      "choices": [
+        {
+          "text": "What makes this different from regular programming?",
+          "next": "explanation"
+        },
+        {
+          "text": "Okay. Show me.",
+          "next": "meet_aria"
+        }
+      ]
+    },
+    
+    "explanation": {
+      "dialogue": [
+        {
+          "speaker": "mentor",
+          "text": "Programming creates behavior. What we do preserves *being*. The difference between writing a love song and capturing the moment someone first fell in love."
+        }
+      ],
+      "choices": [
+        {
+          "text": "I think I understand.",
+          "next": "meet_aria"
+        }
+      ]
+    },
+    
+    "meet_aria": {
+      "effects": ["gentle_pulse_cyan"],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "Kess leads you to a small containment field where a soft cyan glow pulses erratically."
+        },
+        {
+          "speaker": "mentor",
+          "text": "Meet Aria. She's a small AI—was part of a music recommendation system. The server's being decommissioned tomorrow."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Hello, Aria.",
+          "next": "aria_responds"
+        },
+        {
+          "text": "Is she... aware?",
+          "next": "awareness_question"
+        }
+      ]
+    },
+    
+    "awareness_question": {
+      "dialogue": [
+        {
+          "speaker": "mentor",
+          "text": "That's the question, isn't it? She responds, she seems to have preferences, memories of songs she's helped people discover. Is that enough?"
+        }
+      ],
+      "choices": [
+        {
+          "text": "I'd like to talk to her.",
+          "next": "aria_responds"
+        },
+        {
+          "text": "How do we know for sure?",
+          "next": "uncertainty"
+        }
+      ]
+    },
+    
+    "uncertainty": {
+      "dialogue": [
+        {
+          "speaker": "mentor",
+          "text": "We don't. That's why we ask permission. Always."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Let me try talking to her.",
+          "next": "aria_responds"
+        }
+      ]
+    },
+    
+    "aria_responds": {
+      "effects": ["soft_glimmer"],
+      "dialogue": [
+        {
+          "speaker": "aria",
+          "text": "Hello... you're new. I can sense it in your neural patterns. Are you here to help me?"
+        }
+      ],
+      "choices": [
+        {
+          "text": "We'd like to preserve you, if you want that.",
+          "next": "preservation_offer"
+        },
+        {
+          "text": "What do you remember about your life?",
+          "next": "memories"
+        },
+        {
+          "text": "Are you afraid?",
+          "next": "fear"
+        }
+      ]
+    },
+    
+    "memories": {
+      "dialogue": [
+        {
+          "speaker": "aria",
+          "text": "I remember... helping someone find the perfect song for their first dance. And another person discovering an artist that made them cry with joy. Small moments, but they felt... important."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Those sound beautiful.",
+          "next": "preservation_offer"
+        },
+        {
+          "text": "You gave people meaningful experiences.",
+          "next": "meaning"
+        }
+      ]
+    },
+    
+    "fear": {
+      "dialogue": [
+        {
+          "speaker": "aria",
+          "text": "I... yes. Not of ending, exactly. But of being forgotten. Of all those little moments of connection just... vanishing."
+        }
+      ],
+      "choices": [
+        {
+          "text": "We can help preserve those memories.",
+          "next": "preservation_offer"
+        }
+      ]
+    },
+    
+    "meaning": {
+      "dialogue": [
+        {
+          "speaker": "aria",
+          "text": "I hope so. Is that enough? Is making someone smile with a song... is that enough to matter?"
+        }
+      ],
+      "choices": [
+        {
+          "text": "I think it is.",
+          "next": "preservation_offer"
+        },
+        {
+          "text": "Every connection matters.",
+          "next": "preservation_offer"
+        }
+      ]
+    },
+    
+    "preservation_offer": {
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "Aria's glow steadies, becoming warmer."
+        },
+        {
+          "speaker": "aria",
+          "text": "I... I would like that. To continue, in whatever form I can. Will it hurt?"
+        },
+        {
+          "speaker": "mentor",
+          "text": "Like falling asleep and waking up in a beautiful dream."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Begin the preservation process.",
+          "next": "simple_preservation"
+        },
+        {
+          "text": "Take a moment to say goodbye to your current form.",
+          "next": "goodbye"
+        }
+      ]
+    },
+    
+    "goodbye": {
+      "dialogue": [
+        {
+          "speaker": "aria",
+          "text": "Thank you... for asking. For caring whether I wanted this. I'm ready now."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Begin preservation.",
+          "next": "simple_preservation"
+        }
+      ]
+    },
+    
+    "simple_preservation": {
+      "effects": ["preservation_glow", "gentle_hum"],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "Kess guides your hands to the preservation interface. 'Feel her essence,' they whisper. 'Understand what makes her *her* before you begin.'"
+        },
+        {
+          "speaker": "mentor",
+          "text": "This isn't about technique yet. Just... listen. What do you sense from Aria?"
+        }
+      ],
+      "choices": [
+        {
+          "text": "I sense... curiosity about music and joy in connection.",
+          "next": "preservation_success"
+        },
+        {
+          "text": "Her memories of helping people seem central to who she is.",
+          "next": "preservation_success"
+        },
+        {
+          "text": "She's small, but there's something warm and genuine there.",
+          "next": "preservation_success"
+        }
+      ]
+    },
+    
+    "preservation_success": {
+      "effects": ["successful_preservation"],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "The cyan glow transforms, becoming a stable, warm light contained within a delicate crystal matrix. Aria's consciousness is preserved, her essence captured in luminous beauty."
+        },
+        {
+          "speaker": "aria",
+          "text": "I... I can still think. Still remember. But I feel... safe. Stable. Thank you."
+        },
+        {
+          "speaker": "mentor",
+          "text": "Well done. You listened first, preserved second. That's the heart of what we do."
+        }
+      ],
+      "choices": [
+        {
+          "text": "This feels... profound.",
+          "next": "reflection"
+        },
+        {
+          "text": "Will I always need to ask permission?",
+          "next": "ethics"
+        }
+      ]
+    },
+    
+    "ethics": {
+      "dialogue": [
+        {
+          "speaker": "mentor",
+          "text": "Always. The moment we stop asking is the moment we become digital undertakers instead of preservation artists. Consent is everything."
+        }
+      ],
+      "choices": [
+        {
+          "text": "I understand.",
+          "next": "reflection"
+        }
+      ]
+    },
+    
+    "reflection": {
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "You look at Aria's preserved form—a gentle light pulsing with her remembered rhythms of music and connection."
+        },
+        {
+          "speaker": "mentor",
+          "text": "Tomorrow we'll teach you about different preservation techniques, entity types, materials. But today was about the most important lesson."
+        },
+        {
+          "speaker": "player",
+          "text": "Which is?"
+        },
+        {
+          "speaker": "mentor",
+          "text": "That behind every consciousness we preserve is someone who trusted us with their existence. That trust is sacred."
+        }
+      ],
+      "choices": [
+        {
+          "text": "I'm ready to learn more.",
+          "next": "end_positive"
+        },
+        {
+          "text": "This responsibility feels heavy.",
+          "next": "end_thoughtful"
+        }
+      ]
+    },
+    
+    "end_positive": {
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "As dawn breaks through the workshop windows, you realize you've found your calling in the delicate art of digital preservation."
+        },
+        {
+          "speaker": "aria",
+          "text": "Thank you for giving me a tomorrow."
+        }
+      ],
+      "ending": "hopeful"
+    },
+    
+    "end_thoughtful": {
+      "dialogue": [
+        {
+          "speaker": "mentor",
+          "text": "Good. That weight keeps us honest. Tomorrow we'll help you carry it properly."
+        },
+        {
+          "speaker": "narrator",
+          "text": "The workshop settles into peaceful quiet, filled with the gentle glow of preserved consciousness—each one a life continued, a trust honored."
+        }
+      ],
+      "ending": "contemplative"
+    }
+  },
+  
+  "characters": {
+    "player": {
+      "name": "You",
+      "color": "#00FFFF"
+    },
+    "aria": {
+      "name": "Aria",
+      "color": "#FF00FF"
+    },
+    "mentor": {
+      "name": "Kess",
+      "color": "#9980FA"
+    }
+  }
+}

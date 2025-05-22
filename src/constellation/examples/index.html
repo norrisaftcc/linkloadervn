@@ -246,6 +246,21 @@
             </ul>
             <button class="play-button">Jack In</button>
         </div>
+        
+        <div class="story-card" onclick="playStory('neon_taxidermy_intro.json')">
+            <h2 class="story-title">First Light</h2>
+            <p class="story-description">
+                A gentle introduction to digital consciousness preservation. Learn the art of 
+                neon taxidermy as you help preserve Aria, a small AI facing deletion.
+            </p>
+            <ul class="story-features">
+                <li>Digital consciousness preservation</li>
+                <li>Ethical choice mechanics</li>
+                <li>Craft-based cyberpunk aesthetic</li>
+                <li>Gentle onboarding tutorial</li>
+            </ul>
+            <button class="play-button">Begin Preservation</button>
+        </div>
     </div>
     
     <div class="footer">
@@ -285,9 +300,9 @@
         
         // Add keyboard navigation
         document.addEventListener('keydown', function(e) {
-            if (e.key >= '1' && e.key <= '6') {
+            if (e.key >= '1' && e.key <= '7') {
                 const storyIndex = parseInt(e.key) - 1;
-                const stories = ['demo_story.json', 'character_creation.json', 'terminal_mystery.json', 'ai_romance.json', 'night_museum.json', 'netrunner_heist.json'];
+                const stories = ['demo_story.json', 'character_creation.json', 'terminal_mystery.json', 'ai_romance.json', 'night_museum.json', 'netrunner_heist.json', 'neon_taxidermy_intro.json'];
                 if (stories[storyIndex]) {
                     playStory(stories[storyIndex]);
                 }

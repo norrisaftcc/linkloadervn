@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Debug</title>
+</head>
+<body>
+    <h1>URL Parameter Debug</h1>
+    <div id="output"></div>
+    
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const storyFile = urlParams.get('story');
+        
+        document.getElementById('output').innerHTML = `
+            <p><strong>Full URL:</strong> ${window.location.href}</p>
+            <p><strong>Search params:</strong> ${window.location.search}</p>
+            <p><strong>Story parameter:</strong> "${storyFile}"</p>
+            <p><strong>Story length:</strong> ${storyFile ? storyFile.length : 'null'}</p>
+            <p><strong>Character codes:</strong> ${storyFile ? Array.from(storyFile).map(c => c.charCodeAt(0)).join(', ') : 'null'}</p>
+        `;
+    </script>
+</body>
+</html>
