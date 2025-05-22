@@ -1,0 +1,104 @@
+{
+  "title": "Link Loader Mini Test",
+  "author": "Test",
+  "version": "1.0",
+  "default_speaker": "Slim",
+  "variables": {
+    "cos": 0,
+    "cow": 0,
+    "cod": 0
+  },
+  "tags": ["test"],
+  "start": "start",
+  "nodes": {
+    "start": {
+      "title": "Character Creation",
+      "content": "Welcome to Link Loader. You are Slim, a troubleshooter on Syntax-4. Choose your background:",
+      "tags": ["start"],
+      "choices": [
+        {
+          "text": "Space Expert (COS+2, COD+2)",
+          "next": "game_start",
+          "effects": [
+            {"type": "set", "variable": "cos", "value": 2},
+            {"type": "set", "variable": "cow", "value": -1},
+            {"type": "set", "variable": "cod", "value": 2}
+          ]
+        },
+        {
+          "text": "Desert Ranger (COW+2, COD+2)",
+          "next": "game_start",
+          "effects": [
+            {"type": "set", "variable": "cos", "value": -1},
+            {"type": "set", "variable": "cow", "value": 2},
+            {"type": "set", "variable": "cod", "value": 2}
+          ]
+        },
+        {
+          "text": "Space Castaway (COS+2, COW+2)",
+          "next": "game_start",
+          "effects": [
+            {"type": "set", "variable": "cos", "value": 2},
+            {"type": "set", "variable": "cow", "value": 2},
+            {"type": "set", "variable": "cod", "value": -1}
+          ]
+        }
+      ]
+    },
+    "game_start": {
+      "title": "Game Start",
+      "content": "You step out into the cold desert night. Time to find that broken link loader.",
+      "next": "check_skills"
+    },
+    "check_skills": {
+      "title": "Skill Check",
+      "content": "You approach the malfunctioning loader. How will you fix it?",
+      "choices": [
+        {
+          "text": "Use space-age tools",
+          "condition": "cos > 0",
+          "next": "space_fix"
+        },
+        {
+          "text": "Apply frontier know-how",
+          "condition": "cow > 0",
+          "next": "cowboy_fix"
+        },
+        {
+          "text": "Reprogram the system",
+          "condition": "cod > 0",
+          "next": "coder_fix"
+        },
+        {
+          "text": "Try a basic approach",
+          "next": "basic_fix"
+        }
+      ]
+    },
+    "space_fix": {
+      "title": "Space Fix",
+      "content": "Using your advanced tools, you quickly diagnose and repair the loader. Your COS skill of $cos made this easy!",
+      "next": "end"
+    },
+    "cowboy_fix": {
+      "title": "Cowboy Fix",
+      "content": "With some elbow grease and practical thinking, you get the loader running. Your COW skill of $cow saved the day!",
+      "next": "end"
+    },
+    "coder_fix": {
+      "title": "Coder Fix",
+      "content": "You dive into the code and fix the syntax errors. Your COD skill of $cod let you speak the robot's language!",
+      "next": "end"
+    },
+    "basic_fix": {
+      "title": "Basic Fix",
+      "content": "It takes longer, but you manage to get the loader working through trial and error.",
+      "next": "end"
+    },
+    "end": {
+      "title": "The End",
+      "content": "Mission complete! The link loader is operational again. Your stats: COS=$cos, COW=$cow, COD=$cod",
+      "next": null
+    }
+  }
+}

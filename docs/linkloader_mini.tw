@@ -1,0 +1,136 @@
+:: StoryTitle
+Link Loader Mini Test
+
+:: StoryData
+{
+  "ifid": "D7C45122-7E3A-4B8F-9B52-7C5D4BBEB422",
+  "format": "SugarCube",
+  "format-version": "2.30.0",
+  "start": "start"
+}
+
+:: Stylesheet [stylesheet]
+
+/* Character positioning */
+.character {
+    position: absolute;
+    bottom: 10%;
+    transition: all 0.3s ease;
+}
+
+.character.left { left: 10%; }
+.character.center { left: 50%; transform: translateX(-50%); }
+.character.right { right: 10%; }
+
+.character img {
+    max-height: 400px;
+    width: auto;
+}
+
+/* Dialogue styling */
+.dialogue {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    margin: 20px;
+    border: 2px solid #00ff00;
+    font-family: monospace;
+    color: #00ff00;
+}
+
+/* Glitch effect for certain characters */
+.glitch {
+    animation: glitch 2s infinite;
+}
+
+@keyframes glitch {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+}
+
+
+:: StoryInit
+(set: $name to "Slim")
+(set: $cos to 0)
+(set: $cow to 0)
+(set: $cod to 0)
+
+:: start [start]
+<div class="dialogue">
+Welcome to Link Loader. You are Slim, a troubleshooter on Syntax-4. Choose your background:
+</div>
+
+(link: "Space Expert (COS+2, COD+2)")[(set: $cos to 2)
+(set: $cow to -1)
+(set: $cod to 2)(goto: "game_start")]
+
+(link: "Desert Ranger (COW+2, COD+2)")[(set: $cos to -1)
+(set: $cow to 2)
+(set: $cod to 2)(goto: "game_start")]
+
+(link: "Space Castaway (COS+2, COW+2)")[(set: $cos to 2)
+(set: $cow to 2)
+(set: $cod to -1)(goto: "game_start")]
+
+
+:: game_start
+<div class="dialogue">
+You step out into the cold desert night. Time to find that broken link loader.
+</div>
+
+[[Continue|check_skills]]
+
+:: check_skills
+<div class="dialogue">
+You approach the malfunctioning loader. How will you fix it?
+</div>
+
+(if: $cos  gt  0)[
+[[Use space-age tools|space_fix]]
+]
+
+(if: $cow  gt  0)[
+[[Apply frontier know-how|cowboy_fix]]
+]
+
+(if: $cod  gt  0)[
+[[Reprogram the system|coder_fix]]
+]
+
+[[Try a basic approach|basic_fix]]
+
+
+:: space_fix
+<div class="dialogue">
+Using your advanced tools, you quickly diagnose and repair the loader. Your COS skill of $cos made this easy!
+</div>
+
+[[Continue|end]]
+
+:: cowboy_fix
+<div class="dialogue">
+With some elbow grease and practical thinking, you get the loader running. Your COW skill of $cow saved the day!
+</div>
+
+[[Continue|end]]
+
+:: coder_fix
+<div class="dialogue">
+You dive into the code and fix the syntax errors. Your COD skill of $cod let you speak the robot's language!
+</div>
+
+[[Continue|end]]
+
+:: basic_fix
+<div class="dialogue">
+It takes longer, but you manage to get the loader working through trial and error.
+</div>
+
+[[Continue|end]]
+
+:: end
+<div class="dialogue">
+Mission complete! The link loader is operational again. Your stats: COS=$cos, COW=$cow, COD=$cod
+</div>

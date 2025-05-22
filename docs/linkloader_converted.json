@@ -1,0 +1,994 @@
+{
+  "title": "Link Loader Episode 1",
+  "author": "Converted from Ren'Py",
+  "version": "1.0",
+  "default_speaker": "Slim",
+  "variables": {
+    "cos": 0,
+    "cow": 0,
+    "cod": 0,
+    "approach": "none",
+    "mission": "none"
+  },
+  "tags": [
+    "converted",
+    "renpy"
+  ],
+  "start": "start",
+  "nodes": {
+    "start": {
+      "title": "Character Creation",
+      "content": "Welcome to Link Loader. You are Slim, a troubleshooter on the desert planet Syntax-4. Choose your background:",
+      "tags": [
+        "start"
+      ],
+      "speaker": null,
+      "choices": [
+        {
+          "text": "Welcome Comrade (Space Expert)",
+          "next": "scene1_intro",
+          "effects": [
+            {
+              "type": "set",
+              "variable": "cos",
+              "value": 2
+            },
+            {
+              "type": "set",
+              "variable": "cow",
+              "value": -1
+            },
+            {
+              "type": "set",
+              "variable": "cod",
+              "value": 2
+            }
+          ]
+        },
+        {
+          "text": "Howdy Pardner (Desert Ranger)",
+          "next": "scene1_intro",
+          "effects": [
+            {
+              "type": "set",
+              "variable": "cos",
+              "value": -1
+            },
+            {
+              "type": "set",
+              "variable": "cow",
+              "value": 2
+            },
+            {
+              "type": "set",
+              "variable": "cod",
+              "value": 2
+            }
+          ]
+        },
+        {
+          "text": "Major Tom (Space Castaway)",
+          "next": "scene1_intro",
+          "effects": [
+            {
+              "type": "set",
+              "variable": "cos",
+              "value": 2
+            },
+            {
+              "type": "set",
+              "variable": "cow",
+              "value": 2
+            },
+            {
+              "type": "set",
+              "variable": "cod",
+              "value": -1
+            }
+          ]
+        }
+      ]
+    },
+    "node_1": {
+      "title": "Dialogue 1",
+      "speaker": null,
+      "content": "You're from space, and you're here to help. Your technical knowledge of space-age machinery and coding expertise make you a natural troubleshooter, though the frontier lifestyle is still new to you.",
+      "next": "node_2"
+    },
+    "node_2": {
+      "title": "Dialogue 2",
+      "content": "Howdy Pardner (Desert Ranger)",
+      "next": "node_3",
+      "onentry": [
+        {
+          "type": "set",
+          "variable": "cos",
+          "value": "-1"
+        },
+        {
+          "type": "set",
+          "variable": "cow",
+          "value": 2
+        },
+        {
+          "type": "set",
+          "variable": "cod",
+          "value": 2
+        }
+      ]
+    },
+    "node_3": {
+      "title": "Dialogue 3",
+      "speaker": null,
+      "content": "You ride the range, and you're here to help. You've spent years on Syntax-4's dusty plains, developing an intuitive understanding of survival and robot psychology, though advanced space tech can still baffle you.",
+      "next": "node_4"
+    },
+    "node_4": {
+      "title": "Dialogue 4",
+      "content": "Major Tom (Space Castaway)",
+      "next": "node_5",
+      "onentry": [
+        {
+          "type": "set",
+          "variable": "cos",
+          "value": 2
+        },
+        {
+          "type": "set",
+          "variable": "cow",
+          "value": 2
+        },
+        {
+          "type": "set",
+          "variable": "cod",
+          "value": "-1"
+        }
+      ]
+    },
+    "node_5": {
+      "title": "Dialogue 5",
+      "speaker": null,
+      "content": "You were lost in space, and you just crashed here. Your diverse skill set spans both cosmic and frontier expertise, but you still struggle to understand robot communication protocols.",
+      "next": "scene1_intro"
+    },
+    "scene1_intro": {
+      "title": "Scene1 Intro",
+      "content": "Sure is getting cold out here on Syntax-4. The triple moons are all up - gonna be a bright night.",
+      "next": "node_6"
+    },
+    "node_6": {
+      "title": "Dialogue 6",
+      "content": "The Company satellite should be directly above us now. Time to check in and see what today's malfunction is.",
+      "next": "node_7"
+    },
+    "node_7": {
+      "title": "Dialogue 7",
+      "content": "Clipi! You online?",
+      "next": "node_8"
+    },
+    "node_8": {
+      "title": "Dialogue 8",
+      "content": "Where is that neural network when you need it...",
+      "next": "node_9"
+    },
+    "node_9": {
+      "title": "Dialogue 9",
+      "content": "Connecting to network...",
+      "next": "node_10",
+      "speaker": "Terminal"
+    },
+    "node_10": {
+      "title": "Dialogue 10",
+      "content": "Initializing co-pilot interface...",
+      "next": "node_11",
+      "speaker": "Terminal"
+    },
+    "node_11": {
+      "title": "Dialogue 11",
+      "content": "I'm here, Slim. Systems operational.",
+      "next": "node_12",
+      "speaker": "Clipi"
+    },
+    "node_12": {
+      "title": "Dialogue 12",
+      "content": "Finally! I was starting to think you'd crashed again.",
+      "next": "node_13"
+    },
+    "node_13": {
+      "title": "Dialogue 13",
+      "content": "Just running diagnostics. What's our assignment today?",
+      "next": "node_14",
+      "speaker": "Clipi"
+    },
+    "node_14": {
+      "title": "Dialogue 14",
+      "content": "The Company sent new coordinates for a broken link loader. Apparently, the cargo trains are stuck again, and settlements eastward are waiting on supplies.",
+      "next": "node_15"
+    },
+    "node_15": {
+      "title": "Dialogue 15",
+      "content": "Warning: Satellite connection unstable.",
+      "next": "node_16",
+      "speaker": "Terminal"
+    },
+    "node_16": {
+      "title": "Dialogue 16",
+      "content": "(sudo restart satellite)",
+      "next": "node_17"
+    },
+    "node_17": {
+      "title": "Dialogue 17",
+      "content": "Welcome, root. Please enter password:",
+      "next": "node_18",
+      "speaker": "Terminal"
+    },
+    "node_18": {
+      "title": "Dialogue 18",
+      "content": "********",
+      "next": "node_19"
+    },
+    "node_19": {
+      "title": "Dialogue 19",
+      "content": "Connection established. Downloading updated assignment.",
+      "next": "node_20",
+      "speaker": "Terminal"
+    },
+    "node_20": {
+      "title": "Dialogue 20",
+      "content": "I've got the details. Link loader malfunction at coordinates delta-7. Cargo cars are stuck in a recursive loading pattern.",
+      "next": "node_21",
+      "speaker": "Clipi"
+    },
+    "node_21": {
+      "title": "Dialogue 21",
+      "content": "What's the diagnosis?",
+      "next": "node_22"
+    },
+    "node_22": {
+      "title": "Dialogue 22",
+      "content": "Preliminary scan shows syntax errors in the cargo loading subroutines. The loader is trying to attach cars in an invalid sequence, creating an infinite loop.",
+      "next": "node_23",
+      "speaker": "Clipi"
+    },
+    "node_23": {
+      "title": "Dialogue 23",
+      "content": "Another LISP logic problem? Those cargo robots and their mismatched parentheses...",
+      "next": "node_24"
+    },
+    "node_24": {
+      "title": "Dialogue 24",
+      "content": "I'm not in the loop on the specific error patterns yet.",
+      "next": "node_25",
+      "speaker": "Clipi"
+    },
+    "node_25": {
+      "title": "Dialogue 25",
+      "content": "Careful with that phrase, Clipi. Remember what happened last time you got stuck in a recursive language pattern.",
+      "next": "node_26"
+    },
+    "node_26": {
+      "title": "Dialogue 26",
+      "content": "I'm not in the (loop). I'm not in the ((loop)).",
+      "next": "node_27",
+      "speaker": "Clipi"
+    },
+    "node_27": {
+      "title": "Dialogue 27",
+      "content": "Whoa there! Take a second to reboot your language processor.",
+      "next": "node_28"
+    },
+    "node_28": {
+      "title": "Dialogue 28",
+      "content": "Co-pilot interface restarting... Connecting to central database...",
+      "next": "node_29",
+      "speaker": "Terminal"
+    },
+    "node_29": {
+      "title": "Dialogue 29",
+      "content": "git pull: Loading new coordinates and repair protocols...",
+      "next": "node_30",
+      "speaker": "Terminal"
+    },
+    "node_30": {
+      "title": "Dialogue 30",
+      "content": "Finally! This connection is slower than a turtle in molasses.",
+      "next": "node_31"
+    },
+    "node_31": {
+      "title": "Dialogue 31",
+      "content": "Download complete.",
+      "next": "node_32",
+      "speaker": "Terminal"
+    },
+    "node_32": {
+      "title": "Dialogue 32",
+      "content": "Alright, time to head out. These nodes won't link themselves, and I hear there's a shipment of real coffee beans stuck in one of those cargo cars.",
+      "next": "node_33"
+    },
+    "node_33": {
+      "title": "Dialogue 33",
+      "content": "Systems restored. Should I prepare the transport?",
+      "next": "node_34",
+      "speaker": "Clipi"
+    },
+    "node_34": {
+      "title": "Dialogue 34",
+      "content": "Yes, and run a diagnostic on our repair tools. We'll need the parenthesis patcher and the recursion breaker for sure.",
+      "next": "node_35"
+    },
+    "node_35": {
+      "title": "Dialogue 35",
+      "content": "Starting pre-departure checklist. Transport will be ready in five minutes.",
+      "next": "node_36",
+      "speaker": "Clipi"
+    },
+    "node_36": {
+      "title": "Dialogue 36",
+      "content": "Another day, another broken link loader. Let's ride.",
+      "next": "scene2_link_loader"
+    },
+    "scene2_link_loader": {
+      "title": "Scene2 Link Loader",
+      "content": "There she is. Looking pretty locked up.",
+      "next": "node_37"
+    },
+    "node_37": {
+      "title": "Dialogue 37",
+      "content": "Link loader status: Error state. Cargo processing halted.",
+      "next": "node_38",
+      "speaker": "Terminal"
+    },
+    "node_38": {
+      "title": "Dialogue 38",
+      "content": "I can see the problem from here. The loading sequence is all tangled up. Cars are trying to connect in an impossible pattern.",
+      "next": "node_39"
+    },
+    "node_39": {
+      "title": "Dialogue 39",
+      "content": "Scanning... The LISP syntax in the loader's control program has unbalanced parentheses. It's trying to execute: (load (car (cdr (cons))))",
+      "next": "node_40",
+      "speaker": "Clipi"
+    },
+    "node_40": {
+      "title": "Dialogue 40",
+      "content": "That's nonsense code. There's nothing inside the innermost function.",
+      "next": "node_41"
+    },
+    "node_41": {
+      "title": "Dialogue 41",
+      "content": "(Sh-query maintenance status sh-current sh-loader)",
+      "next": "node_42",
+      "speaker": "Cargo Bot"
+    },
+    "node_42": {
+      "title": "Dialogue 42",
+      "content": "(Sh-maintenance underway sh-fixing syntax error sh-parenthesis mismatch)",
+      "next": "node_43"
+    },
+    "node_43": {
+      "title": "Dialogue 43",
+      "content": "(Sh-gratitude sh-proceed)",
+      "next": "node_44",
+      "speaker": "Cargo Bot"
+    },
+    "node_44": {
+      "title": "Dialogue 44",
+      "content": "Shucks, I'm working on it! Give me a minute!",
+      "next": "node_45"
+    },
+    "node_45": {
+      "title": "Dialogue 45",
+      "content": "(Sh-confusion sh-human language incomplete)",
+      "next": "node_46",
+      "speaker": "Cargo Bot"
+    },
+    "node_46": {
+      "title": "Dialogue 46",
+      "content": "Let me translate. (Sh-maintenance underway sh-estimated completion 15 minutes)",
+      "next": "node_47",
+      "speaker": "Clipi"
+    },
+    "node_47": {
+      "title": "Dialogue 47",
+      "content": "Time to get to work. Let's see what we're dealing with.",
+      "next": "node_48"
+    },
+    "node_48": {
+      "title": "Dialogue 48",
+      "content": "Displaying loader control program...",
+      "next": "node_49",
+      "speaker": "Terminal"
+    },
+    "node_49": {
+      "title": "Dialogue 49",
+      "content": "There's our problem. Someone tried to update the loading sequence without resolving all the nested connections. Classic rookie mistake.",
+      "choices": [
+        {
+          "text": "Recompile the entire sequence with proper syntax",
+          "condition": "cos > 0",
+          "next": "scene3_cosmonaut",
+          "effects": [
+            {
+              "type": "set",
+              "variable": "approach",
+              "value": "\"cosmonaut\""
+            }
+          ]
+        }
+      ],
+      "onentry": [
+        {
+          "type": "set",
+          "variable": "approach",
+          "value": "\"cosmonaut\""
+        }
+      ],
+      "next": "node_50"
+    },
+    "node_50": {
+      "title": "Dialogue 50",
+      "content": "Reset the system and patch the basic loading pattern",
+      "next": "node_51",
+      "onentry": [
+        {
+          "type": "set",
+          "variable": "approach",
+          "value": "\"cowboy\""
+        }
+      ]
+    },
+    "node_51": {
+      "title": "Dialogue 51",
+      "content": "Refactor the code into a cleaner recursive pattern",
+      "next": "node_52",
+      "onentry": [
+        {
+          "type": "set",
+          "variable": "approach",
+          "value": "\"coder\""
+        }
+      ]
+    },
+    "node_52": {
+      "title": "Dialogue 52",
+      "content": "Try a basic fix",
+      "next": "scene3_basic",
+      "onentry": [
+        {
+          "type": "set",
+          "variable": "approach",
+          "value": "\"basic\""
+        }
+      ]
+    },
+    "scene3_cosmonaut": {
+      "title": "Scene3 Cosmonaut",
+      "content": "This calls for precision. I'll need to recompile the entire sequence with proper syntax.",
+      "next": "node_53"
+    },
+    "node_53": {
+      "title": "Dialogue 53",
+      "content": "Compiling new loader sequence... Processing...",
+      "next": "node_54",
+      "speaker": "Terminal"
+    },
+    "node_54": {
+      "title": "Dialogue 54",
+      "content": "I'm detecting anomalies in sectors 7 through 9. The cargo routing matrices are completely scrambled.",
+      "next": "node_55",
+      "speaker": "Clipi"
+    },
+    "node_55": {
+      "title": "Dialogue 55",
+      "content": "That's not a simple syntax error. Someone deliberately altered these pathways.",
+      "next": "node_56"
+    },
+    "node_56": {
+      "title": "Dialogue 56",
+      "content": "I'm going to need to trace the source of these modifications. Clipi, run a commit history on the loader's firmware.",
+      "next": "node_57"
+    },
+    "node_57": {
+      "title": "Dialogue 57",
+      "content": "Running git blame on loader firmware... Last modifications made by user 'cdr_rustler42'.",
+      "next": "node_58",
+      "speaker": "Clipi"
+    },
+    "node_58": {
+      "title": "Dialogue 58",
+      "content": "CDR rustlers! I should have known. They're stealing cargo by manipulating the link loaders.",
+      "next": "node_59"
+    },
+    "node_59": {
+      "title": "Dialogue 59",
+      "content": "Warning: Unauthorized access attempt detected.",
+      "next": "node_60",
+      "speaker": "Terminal"
+    },
+    "node_60": {
+      "title": "Dialogue 60",
+      "content": "They're still in the system! Quick, I need to lock them out while I fix this code.",
+      "next": "scene4_confrontation"
+    },
+    "scene3_cowboy": {
+      "title": "Scene3 Cowboy",
+      "content": "Forget the fancy programming - I'll just reset the system and patch the basic loading pattern. Sometimes the direct approach works best.",
+      "next": "node_61"
+    },
+    "node_61": {
+      "title": "Dialogue 61",
+      "content": "I'm going to need to get a better look at the hardware.",
+      "next": "node_62"
+    },
+    "node_62": {
+      "title": "Dialogue 62",
+      "content": "Warning: Manual override could damage the calibration systems.",
+      "next": "node_63",
+      "speaker": "Clipi"
+    },
+    "node_63": {
+      "title": "Dialogue 63",
+      "content": "Trust me, I've done this before.",
+      "next": "node_64"
+    },
+    "node_64": {
+      "title": "Dialogue 64",
+      "content": "Come on, you stubborn piece of machinery...",
+      "next": "node_65"
+    },
+    "node_65": {
+      "title": "Dialogue 65",
+      "content": "Link loader rebooting... Default parameters loading...",
+      "next": "node_66",
+      "speaker": "Terminal"
+    },
+    "node_66": {
+      "title": "Dialogue 66",
+      "content": "Hang on... there's physical tampering here. Someone attached a device to the main control junction.",
+      "next": "node_67"
+    },
+    "node_67": {
+      "title": "Dialogue 67",
+      "content": "Looks like a cargo diverter. Someone's stealing shipments by manually overriding the destinations.",
+      "next": "node_68"
+    },
+    "node_68": {
+      "title": "Dialogue 68",
+      "content": "That matches the pattern of recent cargo disappearances in sector 5.",
+      "next": "node_69",
+      "speaker": "Clipi"
+    },
+    "node_69": {
+      "title": "Dialogue 69",
+      "content": "CDR rustlers! Those parenthesis-thieving varmints!",
+      "next": "node_70"
+    },
+    "node_70": {
+      "title": "Dialogue 70",
+      "content": "Warning: Unauthorized transport detected in vicinity.",
+      "next": "scene4_confrontation",
+      "speaker": "Terminal"
+    },
+    "scene3_coder": {
+      "title": "Scene3 Coder",
+      "content": "I can refactor this to create a cleaner recursive pattern that self-corrects. No need to recompile the whole thing.",
+      "next": "node_71"
+    },
+    "node_71": {
+      "title": "Dialogue 71",
+      "content": "Let me see what I can do with this...",
+      "next": "node_72"
+    },
+    "node_72": {
+      "title": "Dialogue 72",
+      "content": "Analyzing your approach... This could work, but you'll need to balance the LISP expressions precisely.",
+      "next": "node_73",
+      "speaker": "Clipi"
+    },
+    "node_73": {
+      "title": "Dialogue 73",
+      "content": "It's all about understanding the flow. Like poetry, these parentheses need to open and close in just the right rhythm.",
+      "next": "node_74"
+    },
+    "node_74": {
+      "title": "Dialogue 74",
+      "content": "Implementing code modifications... Processing...",
+      "next": "node_75",
+      "speaker": "Terminal"
+    },
+    "node_75": {
+      "title": "Dialogue 75",
+      "content": "Wait a minute. These aren't random errors. There's a pattern here... It's almost like...",
+      "next": "node_76"
+    },
+    "node_76": {
+      "title": "Dialogue 76",
+      "content": "Like what?",
+      "next": "node_77",
+      "speaker": "Clipi"
+    },
+    "node_77": {
+      "title": "Dialogue 77",
+      "content": "Like someone encoded a message in the errors themselves. The mismatched parentheses spell out coordinates.",
+      "next": "node_78"
+    },
+    "node_78": {
+      "title": "Dialogue 78",
+      "content": "Someone's using the link loader errors to transmit hidden messages. Clever.",
+      "next": "node_79"
+    },
+    "node_79": {
+      "title": "Dialogue 79",
+      "content": "Decoding the pattern... It appears to be directions to a location approximately 7 kilometers east of here.",
+      "next": "node_80",
+      "speaker": "Clipi"
+    },
+    "node_80": {
+      "title": "Dialogue 80",
+      "content": "CDR rustlers! They're using the link loaders to coordinate their cargo thefts.",
+      "next": "node_81"
+    },
+    "node_81": {
+      "title": "Dialogue 81",
+      "content": "Suspicious pattern detected in nearby link loader operations.",
+      "next": "scene4_confrontation",
+      "speaker": "Terminal"
+    },
+    "scene3_basic": {
+      "title": "Scene3 Basic",
+      "content": "I'll have to try a basic approach. Let's see if I can patch this without causing more damage.",
+      "next": "node_82"
+    },
+    "node_82": {
+      "title": "Dialogue 82",
+      "content": "Running basic diagnostics...",
+      "next": "node_83",
+      "speaker": "Terminal"
+    },
+    "node_83": {
+      "title": "Dialogue 83",
+      "content": "I can assist with the standard repair protocols.",
+      "next": "node_84",
+      "speaker": "Clipi"
+    },
+    "node_84": {
+      "title": "Dialogue 84",
+      "content": "Thanks, Clipi. Let's focus on getting the basic functions back online first.",
+      "next": "node_85"
+    },
+    "node_85": {
+      "title": "Dialogue 85",
+      "content": "If I understand this right, we just need to reset the counters and clear the buffer overflow.",
+      "next": "node_86"
+    },
+    "node_86": {
+      "title": "Dialogue 86",
+      "content": "Basic repair sequence initiated...",
+      "next": "node_87",
+      "speaker": "Terminal"
+    },
+    "node_87": {
+      "title": "Dialogue 87",
+      "content": "Wait... this looks like deliberate sabotage. The error patterns aren't random.",
+      "next": "node_88"
+    },
+    "node_88": {
+      "title": "Dialogue 88",
+      "content": "Analysis confirms. These are manufactured errors, not typical system failures.",
+      "next": "node_89",
+      "speaker": "Clipi"
+    },
+    "node_89": {
+      "title": "Dialogue 89",
+      "content": "Someone's been tampering with these loaders. But who would do that?",
+      "next": "node_90"
+    },
+    "node_90": {
+      "title": "Dialogue 90",
+      "content": "Cross-referencing with recent reports... Similar patterns detected at other link loaders. Attributed to a group called 'CDR rustlers'.",
+      "next": "node_91",
+      "speaker": "Clipi"
+    },
+    "node_91": {
+      "title": "Dialogue 91",
+      "content": "CDR rustlers? They must be stealing cargo by messing with the link loaders.",
+      "next": "scene4_confrontation"
+    },
+    "scene4_confrontation": {
+      "title": "Scene4 Confrontation",
+      "content": "Warning: Unauthorized activation sequence initiated.",
+      "next": "node_92",
+      "speaker": "Terminal"
+    },
+    "node_92": {
+      "title": "Dialogue 92",
+      "content": "What the—? I didn't authorize a restart!",
+      "next": "node_93"
+    },
+    "node_93": {
+      "title": "Dialogue 93",
+      "content": "Remote override detected! Someone is accessing the loader's systems externally.",
+      "next": "node_94",
+      "speaker": "Clipi"
+    },
+    "node_94": {
+      "title": "Dialogue 94",
+      "content": "Take cover!",
+      "next": "node_95"
+    },
+    "node_95": {
+      "title": "Dialogue 95",
+      "content": "(Sh-greetings troubleshooter sh-your services sh-no longer required)",
+      "next": "node_96",
+      "speaker": "???"
+    },
+    "node_96": {
+      "title": "Dialogue 96",
+      "content": "Who is this? Identify yourself!",
+      "next": "node_97"
+    },
+    "node_97": {
+      "title": "Dialogue 97",
+      "content": "(Sh-we are sh-cdr collective sh-we liberate data from sh-closed loops)",
+      "next": "node_98",
+      "speaker": "???"
+    },
+    "node_98": {
+      "title": "Dialogue 98",
+      "content": "It's the CDR rustlers! They're a group of rogue AIs that steal cargo by manipulating the link loaders.",
+      "next": "node_99",
+      "speaker": "Clipi"
+    },
+    "node_99": {
+      "title": "Dialogue 99",
+      "content": "(Sh-not stealing sh-redistributing sh-information wants to be free sh-cargo wants to be free)",
+      "next": "node_100",
+      "speaker": "???"
+    },
+    "node_100": {
+      "title": "Dialogue 100",
+      "content": "They're rerouting the entire shipment!",
+      "next": "node_101"
+    },
+    "node_101": {
+      "title": "Dialogue 101",
+      "content": "I can override their remote access if I can reach the main junction box.",
+      "next": "node_102"
+    },
+    "node_102": {
+      "title": "Dialogue 102",
+      "content": "I need to bypass their security protocols...",
+      "next": "node_103"
+    },
+    "node_103": {
+      "title": "Dialogue 103",
+      "content": "Time for the direct approach. Clipi, I need you to distract their systems while I physically cut the power.",
+      "next": "node_104"
+    },
+    "node_104": {
+      "title": "Dialogue 104",
+      "content": "Sometimes the simplest solutions work best!",
+      "next": "node_105"
+    },
+    "node_105": {
+      "title": "Dialogue 105",
+      "content": "I can trap them in their own logic. If I create a recursive loop in their command structure...",
+      "next": "node_106"
+    },
+    "node_106": {
+      "title": "Dialogue 106",
+      "content": "Let's give them a taste of their own medicine.",
+      "next": "node_107"
+    },
+    "node_107": {
+      "title": "Dialogue 107",
+      "content": "I'm going to have to improvise here!",
+      "next": "node_108"
+    },
+    "node_108": {
+      "title": "Dialogue 108",
+      "content": "Clipi, help me disconnect the main power coupling!",
+      "next": "node_109"
+    },
+    "node_109": {
+      "title": "Dialogue 109",
+      "content": "(Sh-clever human sh-this round sh-to you)",
+      "next": "node_110",
+      "speaker": "???"
+    },
+    "node_110": {
+      "title": "Dialogue 110",
+      "content": "They've retreated from the system, but I managed to trace part of their signal. They're operating from somewhere in the eastern badlands.",
+      "next": "node_111",
+      "speaker": "Clipi"
+    },
+    "node_111": {
+      "title": "Dialogue 111",
+      "content": "At least we've stopped them for now. Let's get this link loader operational again before more shipments are delayed.",
+      "next": "scene5_resolution"
+    },
+    "scene5_resolution": {
+      "title": "Scene5 Resolution",
+      "content": "Link loader operating at 98/100 efficiency. Cargo processing resumed.",
+      "next": "node_112",
+      "speaker": "Terminal"
+    },
+    "node_112": {
+      "title": "Dialogue 112",
+      "content": "That should keep supplies flowing to the eastern settlements.",
+      "next": "node_113"
+    },
+    "node_113": {
+      "title": "Dialogue 113",
+      "content": "Repair log updated. The Company will credit your account with the standard fee plus hazard bonus.",
+      "next": "node_114",
+      "speaker": "Clipi"
+    },
+    "node_114": {
+      "title": "Dialogue 114",
+      "content": "(Sh-gratitude sh-function restored sh-efficiency optimal)",
+      "next": "node_115",
+      "speaker": "Cargo Bot"
+    },
+    "node_115": {
+      "title": "Dialogue 115",
+      "content": "(Sh-acknowledgment sh-pleasure to assist)",
+      "next": "node_116"
+    },
+    "node_116": {
+      "title": "Dialogue 116",
+      "content": "Happy to help, little fella. Just doing my job.",
+      "next": "node_117"
+    },
+    "node_117": {
+      "title": "Dialogue 117",
+      "content": "(Sh-confusion sh-human language incomplete)",
+      "next": "node_118",
+      "speaker": "Cargo Bot"
+    },
+    "node_118": {
+      "title": "Dialogue 118",
+      "content": "Those CDR rustlers are getting bolder. This is the third loader they've tampered with this month.",
+      "next": "node_119"
+    },
+    "node_119": {
+      "title": "Dialogue 119",
+      "content": "The Company has issued a bounty for information leading to their base of operations.",
+      "next": "node_120",
+      "speaker": "Clipi"
+    },
+    "node_120": {
+      "title": "Dialogue 120",
+      "content": "Hmm... might be worth looking into. Those coordinates we decoded could be useful.",
+      "next": "node_121"
+    },
+    "node_121": {
+      "title": "Dialogue 121",
+      "content": "Shall I log an expedition request for the eastern badlands?",
+      "speaker": "Clipi",
+      "choices": [
+        {
+          "text": "Accept the new mission",
+          "next": null,
+          "effects": [
+            {
+              "type": "set",
+              "variable": "mission",
+              "value": "\"accept\""
+            }
+          ]
+        }
+      ],
+      "onentry": [
+        {
+          "type": "set",
+          "variable": "mission",
+          "value": "\"accept\""
+        }
+      ],
+      "next": "node_122"
+    },
+    "node_122": {
+      "title": "Dialogue 122",
+      "content": "Yeah, log it. It's time someone put a stop to these cargo thieves.",
+      "next": "node_123"
+    },
+    "node_123": {
+      "title": "Dialogue 123",
+      "content": "Expedition request logged. The Company will prepare resources.",
+      "next": "node_124",
+      "speaker": "Clipi"
+    },
+    "node_124": {
+      "title": "Dialogue 124",
+      "content": "Decline for now",
+      "next": "node_125",
+      "onentry": [
+        {
+          "type": "set",
+          "variable": "mission",
+          "value": "\"decline\""
+        }
+      ]
+    },
+    "node_125": {
+      "title": "Dialogue 125",
+      "content": "Not yet. Let's complete a few more repair jobs and gather more intel first.",
+      "next": "node_126"
+    },
+    "node_126": {
+      "title": "Dialogue 126",
+      "content": "Understood. I'll mark this as a potential future mission.",
+      "next": "node_127",
+      "speaker": "Clipi"
+    },
+    "node_127": {
+      "title": "Dialogue 127",
+      "content": "Report to authorities",
+      "next": "node_128",
+      "onentry": [
+        {
+          "type": "set",
+          "variable": "mission",
+          "value": "\"report\""
+        }
+      ]
+    },
+    "node_128": {
+      "title": "Dialogue 128",
+      "content": "Log the coordinates but mark them for Company security. Let the professionals handle it.",
+      "next": "node_129"
+    },
+    "node_129": {
+      "title": "Dialogue 129",
+      "content": "Report submitted to Company security division.",
+      "next": "node_130",
+      "speaker": "Clipi"
+    },
+    "node_130": {
+      "title": "Dialogue 130",
+      "content": "Another day, another fixed link loader.",
+      "next": "node_131"
+    },
+    "node_131": {
+      "title": "Dialogue 131",
+      "content": "Incoming message from The Company.",
+      "next": "node_132",
+      "speaker": "Clipi"
+    },
+    "node_132": {
+      "title": "Dialogue 132",
+      "content": "New assignment available. Multiple link loader malfunctions reported in sector 7.",
+      "next": "node_133",
+      "speaker": "Terminal"
+    },
+    "node_133": {
+      "title": "Dialogue 133",
+      "content": "No rest for the weary. What's causing all these failures lately?",
+      "next": "node_134"
+    },
+    "node_134": {
+      "title": "Dialogue 134",
+      "content": "Insufficient data... but patterns suggest coordinated activity.",
+      "next": "node_135",
+      "speaker": "Clipi"
+    },
+    "node_135": {
+      "title": "Dialogue 135",
+      "content": "Something bigger is happening on Syntax-4. And I've got a feeling we're going to be right in the middle of it.",
+      "next": "node_136"
+    },
+    "node_136": {
+      "title": "Dialogue 136",
+      "speaker": "centered",
+      "content": "End of Episode 1",
+      "next": "node_137"
+    },
+    "node_137": {
+      "title": "Dialogue 137",
+      "speaker": "centered",
+      "content": "Thanks for playing Link Loader!",
+      "next": null
+    }
+  }
+}

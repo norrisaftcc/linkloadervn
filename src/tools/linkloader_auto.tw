@@ -1,0 +1,131 @@
+:: StoryTitle
+Link Loader Story
+
+:: StoryData
+{
+  "ifid": "D7C45122-7E3A-4B8F-9B52-7C5D4BBEB422",
+  "format": "SugarCube",
+  "format-version": "2.30.0",
+  "start": "start"
+}
+
+:: StoryInit
+<<set $cos to 1>>
+<<set $cow to 1>>
+<<set $cod to 1>>
+<<set $approach to "none">>
+<<set $mission to "none">>
+
+:: start
+Slim: Sure is getting cold out here on Syntax-4. The triple moons are all up - gonna be a bright night.
+Slim: The Company satellite should be directly above us now. Time to check in and see what today's malfunction is.
+Slim: Clipi! You online?
+Slim: Where is that neural network when you need it...
+Terminal: Connecting to network...
+Terminal: Initializing co-pilot interface...
+Clipi: I'm here, Slim. Systems operational.
+Slim: Finally! I was starting to think you'd crashed again.
+Clipi: Just running diagnostics. What's our assignment today?
+Slim: The Company sent new coordinates for a broken link loader. Apparently, the cargo trains are stuck again.
+[[Continue|scene2_link_loader]]
+
+:: scene2_link_loader
+Slim: There she is. Looking pretty locked up.
+Terminal: Link loader status: Error state. Cargo processing halted.
+Slim: I can see the problem from here. The loading sequence is all tangled up.
+Clipi: Scanning... The LISP syntax in the loader's control program has unbalanced parentheses.
+Slim: That's nonsense code. There's nothing inside the innermost function.
+Cargo Bot: (Sh-query maintenance status sh-current sh-loader)
+Slim: (Sh-maintenance underway sh-fixing syntax error sh-parenthesis mismatch)
+Cargo Bot: (Sh-gratitude sh-proceed)
+Slim: Shucks, I'm working on it! Give me a minute!
+Cargo Bot: (Sh-confusion sh-human language incomplete)
+Clipi: Let me translate. (Sh-maintenance underway sh-estimated completion 15 minutes)
+Slim: Time to get to work. Let's see what we're dealing with.
+How will you fix the link loader?
+<<if $cos > 0>>
+<<link "Recompile the entire sequence with proper syntax" "scene3_cosmonaut">>
+<<set $approach to "cosmonaut">>
+<<set $approach to "cowboy">>
+<<set $approach to "coder">>
+<<set $approach to "basic">>
+<</link>>
+<</if>>
+<<if $cow > 0>>
+<<link "Reset the system and patch the basic loading pattern" "scene3_cowboy">>
+<<set $approach to "cowboy">>
+<<set $approach to "coder">>
+<<set $approach to "basic">>
+<</link>>
+<</if>>
+<<if $cod > 0>>
+<<link "Refactor the code into a cleaner recursive pattern" "scene3_coder">>
+<<set $approach to "coder">>
+<<set $approach to "basic">>
+<</link>>
+<</if>>
+<<link "Try a basic fix" "scene3_basic">>
+<<set $approach to "basic">>
+<</link>>
+
+:: scene3_cosmonaut
+Slim: This calls for precision. I'll need to recompile the entire sequence with proper syntax.
+Clipi: I'm detecting anomalies in sectors 7 through 9.
+Slim: That's not a simple syntax error. Someone deliberately altered these pathways.
+[[Continue|scene4_confrontation]]
+
+:: scene3_cowboy
+Slim: Forget the fancy programming - I'll just reset the system and patch the basic loading pattern.
+Slim: Come on, you stubborn piece of machinery...
+Terminal: Link loader rebooting... Default parameters loading...
+Slim: Hang on... there's physical tampering here.
+[[Continue|scene4_confrontation]]
+
+:: scene3_coder
+Slim: I can refactor this to create a cleaner recursive pattern that self-corrects.
+Slim: Wait a minute. These aren't random errors. There's a pattern here...
+Clipi: Decoding the pattern... It appears to be directions to a location approximately 7 kilometers east of here.
+[[Continue|scene4_confrontation]]
+
+:: scene3_basic
+Slim: I'll have to try a basic approach.
+Clipi: I can assist with the standard repair protocols.
+Slim: Wait... this looks like deliberate sabotage.
+[[Continue|scene4_confrontation]]
+
+:: scene4_confrontation
+Terminal: Warning: Unauthorized activation sequence initiated.
+Slim: What the—? I didn't authorize a restart!
+???: (Sh-greetings troubleshooter sh-your services sh-no longer required)
+Slim: Who is this? Identify yourself!
+???: (Sh-we are sh-cdr collective sh-we liberate data from sh-closed loops)
+Clipi: It's the CDR rustlers!
+cosmonaut
+Slim: I can override their remote access if I can reach the main junction box.
+cowboy
+Slim: Time for the direct approach. Clipi, distract them while I cut the power!
+coder
+Slim: I can trap them in their own logic. If I create a recursive loop in their command structure...
+Slim: I'm going to have to improvise here!
+???: (Sh-clever human sh-this round sh-to you)
+[[Continue|resolution]]
+
+:: resolution
+Terminal: Link loader operating at 98 percent efficiency. Cargo processing resumed.
+Clipi: They've retreated from the system.
+Slim: Those CDR rustlers are getting bolder.
+What will you do about the CDR rustlers?
+<<link "Accept the new mission" "next">>
+<<set $mission to "accept">>
+<<set $mission to "decline">>
+<<set $mission to "report">>
+<</link>>
+<<link "Decline for now" "next">>
+<<set $mission to "decline">>
+<<set $mission to "report">>
+<</link>>
+<<link "Report to authorities" "next">>
+<<set $mission to "report">>
+<</link>>
+Slim: Something bigger is happening on Syntax-4. And I've got a feeling we're going to be right in the middle of it.
+THE END

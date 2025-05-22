@@ -1,0 +1,315 @@
+:: StoryTitle
+Link Loader: Cargo Bot Conversation
+
+:: StoryData
+{
+  "ifid": "D7C45122-7E3A-4B8F-9B52-7C5D4BBEB422",
+  "format": "SugarCube",
+  "format-version": "2.30.0",
+  "start": "intro"
+}
+
+:: Stylesheet [stylesheet]
+
+/* Character positioning */
+.character {
+    position: absolute;
+    bottom: 10%;
+    transition: all 0.3s ease;
+}
+
+.character.left { left: 10%; }
+.character.center { left: 50%; transform: translateX(-50%); }
+.character.right { right: 10%; }
+
+.character img {
+    max-height: 400px;
+    width: auto;
+}
+
+/* Dialogue styling */
+.dialogue {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    margin: 20px;
+    border: 2px solid #00ff00;
+    font-family: monospace;
+    color: #00ff00;
+}
+
+/* Glitch effect for certain characters */
+.glitch {
+    animation: glitch 2s infinite;
+}
+
+@keyframes glitch {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+}
+
+
+:: StoryInit
+(set: $cod to 2)
+(set: $terminal_fixed to false)
+(set: $parts_collected to 0)
+(set: $knows_about_rustlers to false)
+
+:: intro [start]
+<div class="dialogue">
+**Slim:**
+I see you're having some trouble with your terminal connection. Can I help?
+</div>
+
+[[Continue|cargo_bot_response]]
+
+:: cargo_bot_response
+<div class="character right">
+<img src="images/cargo_bot_neutral.png" alt="Cargo Bot">
+</div>
+<div class="dialogue">
+**Cargo Bot:**
+<span class="glitch">(Sh-query maintenance status sh-current sh-terminal)</span>
+</div>
+
+[[I can fix your terminal for you.|offer_help]]
+
+(if: $cod  gte  2)[
+(link: "(Sh-maintenance underway sh-fixing terminal sh-connection error)")[(set: $robot_trust to $robot_trust + 1)(goto: "robot_language")]
+]
+
+(if: $cod  lt  1)[
+[[I don't understand your robot language.|confusion]]
+]
+
+
+:: offer_help
+<div class="dialogue">
+**Slim:**
+I can fix your terminal for you. Just give me a minute to check the connections.
+</div>
+
+[[Continue|cargo_bot_confusion]]
+
+:: cargo_bot_confusion
+<div class="character center">
+<img src="images/cargo_bot_neutral.png" alt="Cargo Bot">
+</div>
+<div class="dialogue">
+**Cargo Bot:**
+<span class="glitch">(Sh-confusion sh-human language incomplete)</span>
+</div>
+
+[[Continue|clipi_translation]]
+
+:: clipi_translation
+<div class="character center">
+<img src="images/clipi_helpful.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">Let me translate. The cargo bot is asking about the status of the terminal maintenance.</span>
+</div>
+
+[[Continue|repair_terminal]]
+
+:: robot_language
+<div class="character center">
+<img src="images/cargo_bot_neutral.png" alt="Cargo Bot">
+</div>
+(set: $spoken_robot_language to true)
+<div class="dialogue">
+**Cargo Bot:**
+<span class="glitch">(Sh-gratitude sh-proceed)</span>
+</div>
+
+[[Continue|repair_terminal]]
+
+:: confusion
+<div class="dialogue">
+**Slim:**
+Sorry, I don't understand what you're saying. Let me call my assistant.
+</div>
+
+[[Continue|clipi_appears]]
+
+:: clipi_appears
+<div class="character center">
+<img src="images/clipi_helpful.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">I can help translate. The cargo bot is asking about the terminal maintenance status.</span>
+</div>
+
+[[Continue|repair_terminal]]
+
+:: repair_terminal
+<div class="dialogue">
+**Slim:**
+Let me take a look at the terminal. It seems the connection is loose.
+</div>
+
+(if: $cod  gt  0)[
+(link: "Use technical approach (rewire the circuit)")[(set: $repair_method to "technical")(goto: "technical_repair")]
+]
+
+(link: "Use practical approach (turn it off and on again)")[(set: $repair_method to "practical")(goto: "practical_repair")]
+
+[[Ask Clipi for help|clipi_helps]]
+
+
+:: technical_repair
+(set: $terminal_fixed to true)
+<div class="dialogue">
+**Slim:**
+I'll rewire the circuit and recalibrate the connection points. This should optimize the data flow.
+</div>
+
+[[Continue|repair_complete]]
+
+:: practical_repair
+(set: $terminal_fixed to true)
+<div class="dialogue">
+**Slim:**
+Let's try the universal fix - turning it off and on again.
+</div>
+
+[[Continue|repair_complete]]
+
+:: clipi_helps
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+(set: $terminal_fixed to true)
+(set: $clipi_helped to true)
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">I can handle this. Running diagnostic software... fixing connection... done!</span>
+</div>
+
+[[Continue|repair_complete]]
+
+:: repair_complete
+<div class="dialogue">
+**Slim:**
+There we go! The terminal is fixed now.
+</div>
+
+[[Continue|cargo_bot_thanks]]
+
+:: cargo_bot_thanks
+<div class="character center">
+<img src="images/cargo_bot_neutral.png" alt="Cargo Bot">
+</div>
+<div class="dialogue">
+**Cargo Bot:**
+<span class="glitch">(Sh-gratitude sh-function restored sh-efficiency optimal)</span>
+</div>
+
+(if: $cod  gte  1)[
+(link: "(Sh-acknowledgment sh-pleasure to assist)")[(set: $robot_trust to $robot_trust + 1)(goto: "good_ending")]
+]
+
+[[You're welcome. Just doing my job.|neutral_ending]]
+
+(if: $knows_about_rustlers)[
+[[Now, what can you tell me about the CDR rustlers?|rustler_info]]
+]
+
+
+:: good_ending
+<div class="character center">
+<img src="images/cargo_bot_neutral.png" alt="Cargo Bot">
+</div>
+<div class="dialogue">
+**Cargo Bot:**
+<span class="glitch">(Sh-offering sh-useful information sh-nearby cache sh-replacement parts)</span>
+</div>
+
+[[Continue|parts_location]]
+
+:: neutral_ending
+<div class="character center">
+<img src="images/cargo_bot_neutral.png" alt="Cargo Bot">
+</div>
+<div class="dialogue">
+**Cargo Bot:**
+<span class="glitch">(Sh-confusion sh-human language incomplete sh-nonetheless sh-gratitude)</span>
+</div>
+
+[[Continue|end_conversation]]
+
+:: parts_location
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">The cargo bot is telling you about a cache of replacement parts nearby. This could be very useful!</span>
+</div>
+
+(link: "Ask for directions")[(set: $parts_collected to $parts_collected + 3)(goto: "get_directions")]
+
+[[Thank the bot and leave|end_conversation]]
+
+
+:: get_directions
+<div class="dialogue">
+**Slim:**
+Can you show me where these parts are located?
+</div>
+
+[[Continue|bot_gives_directions]]
+
+:: bot_gives_directions
+<div class="character center">
+<img src="images/cargo_bot_neutral.png" alt="Cargo Bot">
+</div>
+<div class="dialogue">
+**Cargo Bot:**
+<span class="glitch">(Sh-coordinates sh-uploaded sh-to your terminal)</span>
+</div>
+
+[[Continue|clipi_confirms]]
+
+:: clipi_confirms
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">Coordinates received. I've marked the location on your map. The parts cache is 500 meters northeast of our position.</span>
+</div>
+
+[[Continue|end_conversation]]
+
+:: rustler_info
+<div class="character center">
+<img src="images/cargo_bot_neutral.png" alt="Cargo Bot">
+</div>
+<div class="dialogue">
+**Cargo Bot:**
+<span class="glitch">(Sh-caution sh-cdr collective sh-dangerous sh-hijacking cargo sh-eastern badlands)</span>
+</div>
+
+[[Continue|clipi_translates_rustler]]
+
+:: clipi_translates_rustler
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">The cargo bot is warning us about the CDR rustlers. They've been hijacking cargo in the eastern badlands. It seems they have a base there.</span>
+</div>
+
+[[Continue|end_conversation]]
+
+:: end_conversation
+<div class="dialogue">
+**Slim:**
+Thanks for your help. I need to get back to my repairs now.
+</div>

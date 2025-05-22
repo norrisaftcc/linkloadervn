@@ -12,7 +12,14 @@
       "Bash(chmod:*)",
       "Bash(python:*)",
       "Bash(mv:*)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(pkill:*)",
+      "Bash(./src/constellation/start_demo.sh:*)",
+      "Bash(true)",
+      "Bash(./test_server.sh:*)",
+      "Bash(unzip:*)",
+      "Bash(./tweego --version)",
+      "Bash(./tools/tweego/tweego:*)"
     ],
     "deny": []
   }

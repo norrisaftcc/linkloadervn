@@ -1,0 +1,1360 @@
+:: StoryTitle
+Link Loader Episode 1
+
+:: StoryData
+{
+  "ifid": "D7C45122-7E3A-4B8F-9B52-7C5D4BBEB422",
+  "format": "SugarCube",
+  "format-version": "2.30.0",
+  "start": "start"
+}
+
+:: Stylesheet [stylesheet]
+
+/* Character positioning */
+.character {
+    position: absolute;
+    bottom: 10%;
+    transition: all 0.3s ease;
+}
+
+.character.left { left: 10%; }
+.character.center { left: 50%; transform: translateX(-50%); }
+.character.right { right: 10%; }
+
+.character img {
+    max-height: 400px;
+    width: auto;
+}
+
+/* Dialogue styling */
+.dialogue {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    margin: 20px;
+    border: 2px solid #00ff00;
+    font-family: monospace;
+    color: #00ff00;
+}
+
+/* Glitch effect for certain characters */
+.glitch {
+    animation: glitch 2s infinite;
+}
+
+@keyframes glitch {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+}
+
+
+:: StoryInit
+(set: $name to "Slim")
+(set: $cos to 0)
+(set: $cow to 0)
+(set: $cod to 0)
+(set: $approach to "none")
+(set: $mission to "none")
+
+:: start [start]
+<div class="dialogue">
+Welcome to Link Loader. You are Slim, a troubleshooter on the desert planet Syntax-4. Choose your background:
+</div>
+
+(link: "Welcome Comrade (Space Expert)")[(set: $cos to 2)
+(set: $cow to -1)
+(set: $cod to 2)(goto: "scene1_intro")]
+
+(link: "Howdy Pardner (Desert Ranger)")[(set: $cos to -1)
+(set: $cow to 2)
+(set: $cod to 2)(goto: "scene1_intro")]
+
+(link: "Major Tom (Space Castaway)")[(set: $cos to 2)
+(set: $cow to 2)
+(set: $cod to -1)(goto: "scene1_intro")]
+
+
+:: node_1
+<div class="dialogue">
+You're from space, and you're here to help. Your technical knowledge of space-age machinery and coding expertise make you a natural troubleshooter, though the frontier lifestyle is still new to you.
+</div>
+
+[[Continue|node_2]]
+
+:: node_2
+(set: $cos to "-1")
+(set: $cow to 2)
+(set: $cod to 2)
+<div class="dialogue">
+Howdy Pardner (Desert Ranger)
+</div>
+
+[[Continue|node_3]]
+
+:: node_3
+<div class="dialogue">
+You ride the range, and you're here to help. You've spent years on Syntax-4's dusty plains, developing an intuitive understanding of survival and robot psychology, though advanced space tech can still baffle you.
+</div>
+
+[[Continue|node_4]]
+
+:: node_4
+(set: $cos to 2)
+(set: $cow to 2)
+(set: $cod to "-1")
+<div class="dialogue">
+Major Tom (Space Castaway)
+</div>
+
+[[Continue|node_5]]
+
+:: node_5
+<div class="dialogue">
+You were lost in space, and you just crashed here. Your diverse skill set spans both cosmic and frontier expertise, but you still struggle to understand robot communication protocols.
+</div>
+
+[[Continue|scene1_intro]]
+
+:: scene1_intro
+<div class="dialogue">
+Sure is getting cold out here on Syntax-4. The triple moons are all up - gonna be a bright night.
+</div>
+
+[[Continue|node_6]]
+
+:: node_6
+<div class="dialogue">
+The Company satellite should be directly above us now. Time to check in and see what today's malfunction is.
+</div>
+
+[[Continue|node_7]]
+
+:: node_7
+<div class="dialogue">
+Clipi! You online?
+</div>
+
+[[Continue|node_8]]
+
+:: node_8
+<div class="dialogue">
+Where is that neural network when you need it...
+</div>
+
+[[Continue|node_9]]
+
+:: node_9
+<div class="character center">
+<img src="images/terminal_neutral.png" alt="Terminal">
+</div>
+<div class="dialogue">
+**Terminal:**
+Connecting to network...
+</div>
+
+[[Continue|node_10]]
+
+:: node_10
+<div class="character center">
+<img src="images/terminal_neutral.png" alt="Terminal">
+</div>
+<div class="dialogue">
+**Terminal:**
+Initializing co-pilot interface...
+</div>
+
+[[Continue|node_11]]
+
+:: node_11
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">I'm here, Slim. Systems operational.</span>
+</div>
+
+[[Continue|node_12]]
+
+:: node_12
+<div class="dialogue">
+Finally! I was starting to think you'd crashed again.
+</div>
+
+[[Continue|node_13]]
+
+:: node_13
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">Just running diagnostics. What's our assignment today?</span>
+</div>
+
+[[Continue|node_14]]
+
+:: node_14
+<div class="dialogue">
+The Company sent new coordinates for a broken link loader. Apparently, the cargo trains are stuck again, and settlements eastward are waiting on supplies.
+</div>
+
+[[Continue|node_15]]
+
+:: node_15
+<div class="character center">
+<img src="images/terminal_neutral.png" alt="Terminal">
+</div>
+<div class="dialogue">
+**Terminal:**
+Warning: Satellite connection unstable.
+</div>
+
+[[Continue|node_16]]
+
+:: node_16
+<div class="dialogue">
+(sudo restart satellite)
+</div>
+
+[[Continue|node_17]]
+
+:: node_17
+<div class="character center">
+<img src="images/terminal_neutral.png" alt="Terminal">
+</div>
+<div class="dialogue">
+**Terminal:**
+Welcome, root. Please enter password:
+</div>
+
+[[Continue|node_18]]
+
+:: node_18
+<div class="dialogue">
+********
+</div>
+
+[[Continue|node_19]]
+
+:: node_19
+<div class="character center">
+<img src="images/terminal_neutral.png" alt="Terminal">
+</div>
+<div class="dialogue">
+**Terminal:**
+Connection established. Downloading updated assignment.
+</div>
+
+[[Continue|node_20]]
+
+:: node_20
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">I've got the details. Link loader malfunction at coordinates delta-7. Cargo cars are stuck in a recursive loading pattern.</span>
+</div>
+
+[[Continue|node_21]]
+
+:: node_21
+<div class="dialogue">
+What's the diagnosis?
+</div>
+
+[[Continue|node_22]]
+
+:: node_22
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">Preliminary scan shows syntax errors in the cargo loading subroutines. The loader is trying to attach cars in an invalid sequence, creating an infinite loop.</span>
+</div>
+
+[[Continue|node_23]]
+
+:: node_23
+<div class="dialogue">
+Another LISP logic problem? Those cargo robots and their mismatched parentheses...
+</div>
+
+[[Continue|node_24]]
+
+:: node_24
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">I'm not in the loop on the specific error patterns yet.</span>
+</div>
+
+[[Continue|node_25]]
+
+:: node_25
+<div class="dialogue">
+Careful with that phrase, Clipi. Remember what happened last time you got stuck in a recursive language pattern.
+</div>
+
+[[Continue|node_26]]
+
+:: node_26
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">I'm not in the (loop). I'm not in the ((loop)).</span>
+</div>
+
+[[Continue|node_27]]
+
+:: node_27
+<div class="dialogue">
+Whoa there! Take a second to reboot your language processor.
+</div>
+
+[[Continue|node_28]]
+
+:: node_28
+<div class="character center">
+<img src="images/terminal_neutral.png" alt="Terminal">
+</div>
+<div class="dialogue">
+**Terminal:**
+Co-pilot interface restarting... Connecting to central database...
+</div>
+
+[[Continue|node_29]]
+
+:: node_29
+<div class="character center">
+<img src="images/terminal_neutral.png" alt="Terminal">
+</div>
+<div class="dialogue">
+**Terminal:**
+git pull: Loading new coordinates and repair protocols...
+</div>
+
+[[Continue|node_30]]
+
+:: node_30
+<div class="dialogue">
+Finally! This connection is slower than a turtle in molasses.
+</div>
+
+[[Continue|node_31]]
+
+:: node_31
+<div class="character center">
+<img src="images/terminal_neutral.png" alt="Terminal">
+</div>
+<div class="dialogue">
+**Terminal:**
+Download complete.
+</div>
+
+[[Continue|node_32]]
+
+:: node_32
+<div class="dialogue">
+Alright, time to head out. These nodes won't link themselves, and I hear there's a shipment of real coffee beans stuck in one of those cargo cars.
+</div>
+
+[[Continue|node_33]]
+
+:: node_33
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">Systems restored. Should I prepare the transport?</span>
+</div>
+
+[[Continue|node_34]]
+
+:: node_34
+<div class="dialogue">
+Yes, and run a diagnostic on our repair tools. We'll need the parenthesis patcher and the recursion breaker for sure.
+</div>
+
+[[Continue|node_35]]
+
+:: node_35
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">Starting pre-departure checklist. Transport will be ready in five minutes.</span>
+</div>
+
+[[Continue|node_36]]
+
+:: node_36
+<div class="dialogue">
+Another day, another broken link loader. Let's ride.
+</div>
+
+[[Continue|scene2_link_loader]]
+
+:: scene2_link_loader
+<div class="dialogue">
+There she is. Looking pretty locked up.
+</div>
+
+[[Continue|node_37]]
+
+:: node_37
+<div class="character center">
+<img src="images/terminal_neutral.png" alt="Terminal">
+</div>
+<div class="dialogue">
+**Terminal:**
+Link loader status: Error state. Cargo processing halted.
+</div>
+
+[[Continue|node_38]]
+
+:: node_38
+<div class="dialogue">
+I can see the problem from here. The loading sequence is all tangled up. Cars are trying to connect in an impossible pattern.
+</div>
+
+[[Continue|node_39]]
+
+:: node_39
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">Scanning... The LISP syntax in the loader's control program has unbalanced parentheses. It's trying to execute: (load (car (cdr (cons))))</span>
+</div>
+
+[[Continue|node_40]]
+
+:: node_40
+<div class="dialogue">
+That's nonsense code. There's nothing inside the innermost function.
+</div>
+
+[[Continue|node_41]]
+
+:: node_41
+<div class="character center">
+<img src="images/cargo_bot_neutral.png" alt="Cargo Bot">
+</div>
+<div class="dialogue">
+**Cargo Bot:**
+<span class="glitch">(Sh-query maintenance status sh-current sh-loader)</span>
+</div>
+
+[[Continue|node_42]]
+
+:: node_42
+<div class="dialogue">
+(Sh-maintenance underway sh-fixing syntax error sh-parenthesis mismatch)
+</div>
+
+[[Continue|node_43]]
+
+:: node_43
+<div class="character center">
+<img src="images/cargo_bot_neutral.png" alt="Cargo Bot">
+</div>
+<div class="dialogue">
+**Cargo Bot:**
+<span class="glitch">(Sh-gratitude sh-proceed)</span>
+</div>
+
+[[Continue|node_44]]
+
+:: node_44
+<div class="dialogue">
+Shucks, I'm working on it! Give me a minute!
+</div>
+
+[[Continue|node_45]]
+
+:: node_45
+<div class="character center">
+<img src="images/cargo_bot_neutral.png" alt="Cargo Bot">
+</div>
+<div class="dialogue">
+**Cargo Bot:**
+<span class="glitch">(Sh-confusion sh-human language incomplete)</span>
+</div>
+
+[[Continue|node_46]]
+
+:: node_46
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">Let me translate. (Sh-maintenance underway sh-estimated completion 15 minutes)</span>
+</div>
+
+[[Continue|node_47]]
+
+:: node_47
+<div class="dialogue">
+Time to get to work. Let's see what we're dealing with.
+</div>
+
+[[Continue|node_48]]
+
+:: node_48
+<div class="character center">
+<img src="images/terminal_neutral.png" alt="Terminal">
+</div>
+<div class="dialogue">
+**Terminal:**
+Displaying loader control program...
+</div>
+
+[[Continue|node_49]]
+
+:: node_49
+(set: $approach to "\"cosmonaut\"")
+<div class="dialogue">
+There's our problem. Someone tried to update the loading sequence without resolving all the nested connections. Classic rookie mistake.
+</div>
+
+(if: $cos  gt  0)[
+(link: "Recompile the entire sequence with proper syntax")[(set: $approach to "\"cosmonaut\"")(goto: "scene3_cosmonaut")]
+]
+
+
+:: node_50
+(set: $approach to "\"cowboy\"")
+<div class="dialogue">
+Reset the system and patch the basic loading pattern
+</div>
+
+[[Continue|node_51]]
+
+:: node_51
+(set: $approach to "\"coder\"")
+<div class="dialogue">
+Refactor the code into a cleaner recursive pattern
+</div>
+
+[[Continue|node_52]]
+
+:: node_52
+(set: $approach to "\"basic\"")
+<div class="dialogue">
+Try a basic fix
+</div>
+
+[[Continue|scene3_basic]]
+
+:: scene3_cosmonaut
+<div class="dialogue">
+This calls for precision. I'll need to recompile the entire sequence with proper syntax.
+</div>
+
+[[Continue|node_53]]
+
+:: node_53
+<div class="character center">
+<img src="images/terminal_neutral.png" alt="Terminal">
+</div>
+<div class="dialogue">
+**Terminal:**
+Compiling new loader sequence... Processing...
+</div>
+
+[[Continue|node_54]]
+
+:: node_54
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">I'm detecting anomalies in sectors 7 through 9. The cargo routing matrices are completely scrambled.</span>
+</div>
+
+[[Continue|node_55]]
+
+:: node_55
+<div class="dialogue">
+That's not a simple syntax error. Someone deliberately altered these pathways.
+</div>
+
+[[Continue|node_56]]
+
+:: node_56
+<div class="dialogue">
+I'm going to need to trace the source of these modifications. Clipi, run a commit history on the loader's firmware.
+</div>
+
+[[Continue|node_57]]
+
+:: node_57
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">Running git blame on loader firmware... Last modifications made by user 'cdr_rustler42'.</span>
+</div>
+
+[[Continue|node_58]]
+
+:: node_58
+<div class="dialogue">
+CDR rustlers! I should have known. They're stealing cargo by manipulating the link loaders.
+</div>
+
+[[Continue|node_59]]
+
+:: node_59
+<div class="character center">
+<img src="images/terminal_neutral.png" alt="Terminal">
+</div>
+<div class="dialogue">
+**Terminal:**
+Warning: Unauthorized access attempt detected.
+</div>
+
+[[Continue|node_60]]
+
+:: node_60
+<div class="dialogue">
+They're still in the system! Quick, I need to lock them out while I fix this code.
+</div>
+
+[[Continue|scene4_confrontation]]
+
+:: scene3_cowboy
+<div class="dialogue">
+Forget the fancy programming - I'll just reset the system and patch the basic loading pattern. Sometimes the direct approach works best.
+</div>
+
+[[Continue|node_61]]
+
+:: node_61
+<div class="dialogue">
+I'm going to need to get a better look at the hardware.
+</div>
+
+[[Continue|node_62]]
+
+:: node_62
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">Warning: Manual override could damage the calibration systems.</span>
+</div>
+
+[[Continue|node_63]]
+
+:: node_63
+<div class="dialogue">
+Trust me, I've done this before.
+</div>
+
+[[Continue|node_64]]
+
+:: node_64
+<div class="dialogue">
+Come on, you stubborn piece of machinery...
+</div>
+
+[[Continue|node_65]]
+
+:: node_65
+<div class="character center">
+<img src="images/terminal_neutral.png" alt="Terminal">
+</div>
+<div class="dialogue">
+**Terminal:**
+Link loader rebooting... Default parameters loading...
+</div>
+
+[[Continue|node_66]]
+
+:: node_66
+<div class="dialogue">
+Hang on... there's physical tampering here. Someone attached a device to the main control junction.
+</div>
+
+[[Continue|node_67]]
+
+:: node_67
+<div class="dialogue">
+Looks like a cargo diverter. Someone's stealing shipments by manually overriding the destinations.
+</div>
+
+[[Continue|node_68]]
+
+:: node_68
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">That matches the pattern of recent cargo disappearances in sector 5.</span>
+</div>
+
+[[Continue|node_69]]
+
+:: node_69
+<div class="dialogue">
+CDR rustlers! Those parenthesis-thieving varmints!
+</div>
+
+[[Continue|node_70]]
+
+:: node_70
+<div class="character center">
+<img src="images/terminal_neutral.png" alt="Terminal">
+</div>
+<div class="dialogue">
+**Terminal:**
+Warning: Unauthorized transport detected in vicinity.
+</div>
+
+[[Continue|scene4_confrontation]]
+
+:: scene3_coder
+<div class="dialogue">
+I can refactor this to create a cleaner recursive pattern that self-corrects. No need to recompile the whole thing.
+</div>
+
+[[Continue|node_71]]
+
+:: node_71
+<div class="dialogue">
+Let me see what I can do with this...
+</div>
+
+[[Continue|node_72]]
+
+:: node_72
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">Analyzing your approach... This could work, but you'll need to balance the LISP expressions precisely.</span>
+</div>
+
+[[Continue|node_73]]
+
+:: node_73
+<div class="dialogue">
+It's all about understanding the flow. Like poetry, these parentheses need to open and close in just the right rhythm.
+</div>
+
+[[Continue|node_74]]
+
+:: node_74
+<div class="character center">
+<img src="images/terminal_neutral.png" alt="Terminal">
+</div>
+<div class="dialogue">
+**Terminal:**
+Implementing code modifications... Processing...
+</div>
+
+[[Continue|node_75]]
+
+:: node_75
+<div class="dialogue">
+Wait a minute. These aren't random errors. There's a pattern here... It's almost like...
+</div>
+
+[[Continue|node_76]]
+
+:: node_76
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">Like what?</span>
+</div>
+
+[[Continue|node_77]]
+
+:: node_77
+<div class="dialogue">
+Like someone encoded a message in the errors themselves. The mismatched parentheses spell out coordinates.
+</div>
+
+[[Continue|node_78]]
+
+:: node_78
+<div class="dialogue">
+Someone's using the link loader errors to transmit hidden messages. Clever.
+</div>
+
+[[Continue|node_79]]
+
+:: node_79
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">Decoding the pattern... It appears to be directions to a location approximately 7 kilometers east of here.</span>
+</div>
+
+[[Continue|node_80]]
+
+:: node_80
+<div class="dialogue">
+CDR rustlers! They're using the link loaders to coordinate their cargo thefts.
+</div>
+
+[[Continue|node_81]]
+
+:: node_81
+<div class="character center">
+<img src="images/terminal_neutral.png" alt="Terminal">
+</div>
+<div class="dialogue">
+**Terminal:**
+Suspicious pattern detected in nearby link loader operations.
+</div>
+
+[[Continue|scene4_confrontation]]
+
+:: scene3_basic
+<div class="dialogue">
+I'll have to try a basic approach. Let's see if I can patch this without causing more damage.
+</div>
+
+[[Continue|node_82]]
+
+:: node_82
+<div class="character center">
+<img src="images/terminal_neutral.png" alt="Terminal">
+</div>
+<div class="dialogue">
+**Terminal:**
+Running basic diagnostics...
+</div>
+
+[[Continue|node_83]]
+
+:: node_83
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">I can assist with the standard repair protocols.</span>
+</div>
+
+[[Continue|node_84]]
+
+:: node_84
+<div class="dialogue">
+Thanks, Clipi. Let's focus on getting the basic functions back online first.
+</div>
+
+[[Continue|node_85]]
+
+:: node_85
+<div class="dialogue">
+If I understand this right, we just need to reset the counters and clear the buffer overflow.
+</div>
+
+[[Continue|node_86]]
+
+:: node_86
+<div class="character center">
+<img src="images/terminal_neutral.png" alt="Terminal">
+</div>
+<div class="dialogue">
+**Terminal:**
+Basic repair sequence initiated...
+</div>
+
+[[Continue|node_87]]
+
+:: node_87
+<div class="dialogue">
+Wait... this looks like deliberate sabotage. The error patterns aren't random.
+</div>
+
+[[Continue|node_88]]
+
+:: node_88
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">Analysis confirms. These are manufactured errors, not typical system failures.</span>
+</div>
+
+[[Continue|node_89]]
+
+:: node_89
+<div class="dialogue">
+Someone's been tampering with these loaders. But who would do that?
+</div>
+
+[[Continue|node_90]]
+
+:: node_90
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">Cross-referencing with recent reports... Similar patterns detected at other link loaders. Attributed to a group called 'CDR rustlers'.</span>
+</div>
+
+[[Continue|node_91]]
+
+:: node_91
+<div class="dialogue">
+CDR rustlers? They must be stealing cargo by messing with the link loaders.
+</div>
+
+[[Continue|scene4_confrontation]]
+
+:: scene4_confrontation
+<div class="character center">
+<img src="images/terminal_neutral.png" alt="Terminal">
+</div>
+<div class="dialogue">
+**Terminal:**
+Warning: Unauthorized activation sequence initiated.
+</div>
+
+[[Continue|node_92]]
+
+:: node_92
+<div class="dialogue">
+What the—? I didn't authorize a restart!
+</div>
+
+[[Continue|node_93]]
+
+:: node_93
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">Remote override detected! Someone is accessing the loader's systems externally.</span>
+</div>
+
+[[Continue|node_94]]
+
+:: node_94
+<div class="dialogue">
+Take cover!
+</div>
+
+[[Continue|node_95]]
+
+:: node_95
+<div class="character center">
+<img src="images/???_neutral.png" alt="???">
+</div>
+<div class="dialogue">
+**???:**
+(Sh-greetings troubleshooter sh-your services sh-no longer required)
+</div>
+
+[[Continue|node_96]]
+
+:: node_96
+<div class="dialogue">
+Who is this? Identify yourself!
+</div>
+
+[[Continue|node_97]]
+
+:: node_97
+<div class="character center">
+<img src="images/???_neutral.png" alt="???">
+</div>
+<div class="dialogue">
+**???:**
+(Sh-we are sh-cdr collective sh-we liberate data from sh-closed loops)
+</div>
+
+[[Continue|node_98]]
+
+:: node_98
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">It's the CDR rustlers! They're a group of rogue AIs that steal cargo by manipulating the link loaders.</span>
+</div>
+
+[[Continue|node_99]]
+
+:: node_99
+<div class="character center">
+<img src="images/???_neutral.png" alt="???">
+</div>
+<div class="dialogue">
+**???:**
+(Sh-not stealing sh-redistributing sh-information wants to be free sh-cargo wants to be free)
+</div>
+
+[[Continue|node_100]]
+
+:: node_100
+<div class="dialogue">
+They're rerouting the entire shipment!
+</div>
+
+[[Continue|node_101]]
+
+:: node_101
+<div class="dialogue">
+I can override their remote access if I can reach the main junction box.
+</div>
+
+[[Continue|node_102]]
+
+:: node_102
+<div class="dialogue">
+I need to bypass their security protocols...
+</div>
+
+[[Continue|node_103]]
+
+:: node_103
+<div class="dialogue">
+Time for the direct approach. Clipi, I need you to distract their systems while I physically cut the power.
+</div>
+
+[[Continue|node_104]]
+
+:: node_104
+<div class="dialogue">
+Sometimes the simplest solutions work best!
+</div>
+
+[[Continue|node_105]]
+
+:: node_105
+<div class="dialogue">
+I can trap them in their own logic. If I create a recursive loop in their command structure...
+</div>
+
+[[Continue|node_106]]
+
+:: node_106
+<div class="dialogue">
+Let's give them a taste of their own medicine.
+</div>
+
+[[Continue|node_107]]
+
+:: node_107
+<div class="dialogue">
+I'm going to have to improvise here!
+</div>
+
+[[Continue|node_108]]
+
+:: node_108
+<div class="dialogue">
+Clipi, help me disconnect the main power coupling!
+</div>
+
+[[Continue|node_109]]
+
+:: node_109
+<div class="character center">
+<img src="images/???_neutral.png" alt="???">
+</div>
+<div class="dialogue">
+**???:**
+(Sh-clever human sh-this round sh-to you)
+</div>
+
+[[Continue|node_110]]
+
+:: node_110
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">They've retreated from the system, but I managed to trace part of their signal. They're operating from somewhere in the eastern badlands.</span>
+</div>
+
+[[Continue|node_111]]
+
+:: node_111
+<div class="dialogue">
+At least we've stopped them for now. Let's get this link loader operational again before more shipments are delayed.
+</div>
+
+[[Continue|scene5_resolution]]
+
+:: scene5_resolution
+<div class="character center">
+<img src="images/terminal_neutral.png" alt="Terminal">
+</div>
+<div class="dialogue">
+**Terminal:**
+Link loader operating at 98/100 efficiency. Cargo processing resumed.
+</div>
+
+[[Continue|node_112]]
+
+:: node_112
+<div class="dialogue">
+That should keep supplies flowing to the eastern settlements.
+</div>
+
+[[Continue|node_113]]
+
+:: node_113
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">Repair log updated. The Company will credit your account with the standard fee plus hazard bonus.</span>
+</div>
+
+[[Continue|node_114]]
+
+:: node_114
+<div class="character center">
+<img src="images/cargo_bot_neutral.png" alt="Cargo Bot">
+</div>
+<div class="dialogue">
+**Cargo Bot:**
+<span class="glitch">(Sh-gratitude sh-function restored sh-efficiency optimal)</span>
+</div>
+
+[[Continue|node_115]]
+
+:: node_115
+<div class="dialogue">
+(Sh-acknowledgment sh-pleasure to assist)
+</div>
+
+[[Continue|node_116]]
+
+:: node_116
+<div class="dialogue">
+Happy to help, little fella. Just doing my job.
+</div>
+
+[[Continue|node_117]]
+
+:: node_117
+<div class="character center">
+<img src="images/cargo_bot_neutral.png" alt="Cargo Bot">
+</div>
+<div class="dialogue">
+**Cargo Bot:**
+<span class="glitch">(Sh-confusion sh-human language incomplete)</span>
+</div>
+
+[[Continue|node_118]]
+
+:: node_118
+<div class="dialogue">
+Those CDR rustlers are getting bolder. This is the third loader they've tampered with this month.
+</div>
+
+[[Continue|node_119]]
+
+:: node_119
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">The Company has issued a bounty for information leading to their base of operations.</span>
+</div>
+
+[[Continue|node_120]]
+
+:: node_120
+<div class="dialogue">
+Hmm... might be worth looking into. Those coordinates we decoded could be useful.
+</div>
+
+[[Continue|node_121]]
+
+:: node_121
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+(set: $mission to "\"accept\"")
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">Shall I log an expedition request for the eastern badlands?</span>
+</div>
+
+(link: "Accept the new mission")[(set: $mission to "\"accept\"")(goto: "None")]
+
+
+:: node_122
+<div class="dialogue">
+Yeah, log it. It's time someone put a stop to these cargo thieves.
+</div>
+
+[[Continue|node_123]]
+
+:: node_123
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">Expedition request logged. The Company will prepare resources.</span>
+</div>
+
+[[Continue|node_124]]
+
+:: node_124
+(set: $mission to "\"decline\"")
+<div class="dialogue">
+Decline for now
+</div>
+
+[[Continue|node_125]]
+
+:: node_125
+<div class="dialogue">
+Not yet. Let's complete a few more repair jobs and gather more intel first.
+</div>
+
+[[Continue|node_126]]
+
+:: node_126
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">Understood. I'll mark this as a potential future mission.</span>
+</div>
+
+[[Continue|node_127]]
+
+:: node_127
+(set: $mission to "\"report\"")
+<div class="dialogue">
+Report to authorities
+</div>
+
+[[Continue|node_128]]
+
+:: node_128
+<div class="dialogue">
+Log the coordinates but mark them for Company security. Let the professionals handle it.
+</div>
+
+[[Continue|node_129]]
+
+:: node_129
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">Report submitted to Company security division.</span>
+</div>
+
+[[Continue|node_130]]
+
+:: node_130
+<div class="dialogue">
+Another day, another fixed link loader.
+</div>
+
+[[Continue|node_131]]
+
+:: node_131
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">Incoming message from The Company.</span>
+</div>
+
+[[Continue|node_132]]
+
+:: node_132
+<div class="character center">
+<img src="images/terminal_neutral.png" alt="Terminal">
+</div>
+<div class="dialogue">
+**Terminal:**
+New assignment available. Multiple link loader malfunctions reported in sector 7.
+</div>
+
+[[Continue|node_133]]
+
+:: node_133
+<div class="dialogue">
+No rest for the weary. What's causing all these failures lately?
+</div>
+
+[[Continue|node_134]]
+
+:: node_134
+<div class="character center">
+<img src="images/clipi_neutral.png" alt="Clipi">
+</div>
+<div class="dialogue">
+**Clipi:**
+<span class="glitch">Insufficient data... but patterns suggest coordinated activity.</span>
+</div>
+
+[[Continue|node_135]]
+
+:: node_135
+<div class="dialogue">
+Something bigger is happening on Syntax-4. And I've got a feeling we're going to be right in the middle of it.
+</div>
+
+[[Continue|node_136]]
+
+:: node_136
+<div class="character center">
+<img src="images/centered_neutral.png" alt="centered">
+</div>
+<div class="dialogue">
+**centered:**
+End of Episode 1
+</div>
+
+[[Continue|node_137]]
+
+:: node_137
+<div class="character center">
+<img src="images/centered_neutral.png" alt="centered">
+</div>
+<div class="dialogue">
+**centered:**
+Thanks for playing Link Loader!
+</div>

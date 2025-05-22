@@ -1,0 +1,221 @@
+:: StoryTitle
+Link Loader Story
+
+:: StoryData
+{
+  "ifid": "D7C45122-7E3A-4B8F-9B52-7C5D4BBEB422",
+  "format": "SugarCube",
+  "format-version": "2.30.0",
+  "start": "start"
+}
+
+:: StoryInit
+<<set $cos to 0 # Cosmonaut skill>>
+<<set $cow to 0 # Cowboy skill>>
+<<set $cod to 0 # Coder skill>>
+<<set $approach to "none" # Tracks which approach the player took>>
+<<set $mission to "none" # Tracks the final choice>>
+
+:: start
+narrator: Before we begin, who are you exactly?
+Who are you?
+<<link "Welcome Comrade (Space Expert)" "scene1_intro">>
+<<set $cos to 2>>
+<<set $cow to -1>>
+<<set $cod to 2>>
+<</link>>
+<<link "Howdy Pardner (Desert Ranger)" "scene1_intro">>
+<<set $cos to -1>>
+<<set $cow to 2>>
+<<set $cod to 2>>
+<</link>>
+<<link "Major Tom (Space Castaway)" "scene1_intro">>
+<<set $cos to 2>>
+<<set $cow to 2>>
+<<set $cod to -1>>
+<</link>>
+[[Continue|scene1_intro]]
+
+:: scene1_intro
+Slim: Sure is getting cold out here on Syntax-4. The triple moons are all up - gonna be a bright night.
+Slim: The Company satellite should be directly above us now. Time to check in and see what today's malfunction is.
+Slim: Clipi! You online?
+Slim: Where is that neural network when you need it...
+Terminal: Connecting to network...
+Terminal: Initializing co-pilot interface...
+Clipi: I'm here, Slim. Systems operational.
+Slim: Finally! I was starting to think you'd crashed again.
+Clipi: Just running diagnostics. What's our assignment today?
+Slim: The Company sent new coordinates for a broken link loader. Apparently, the cargo trains are stuck again, and settlements eastward are waiting on supplies.
+Terminal: Warning: Satellite connection unstable.
+Slim: (sudo restart satellite)
+Terminal: Welcome, root. Please enter password:
+Slim: ********
+Terminal: Connection established. Downloading updated assignment.
+Clipi: I've got the details. Link loader malfunction at coordinates delta-7. Cargo cars are stuck in a recursive loading pattern.
+Slim: What's the diagnosis?
+Clipi: Preliminary scan shows syntax errors in the cargo loading subroutines. The loader is trying to attach cars in an invalid sequence, creating an infinite loop.
+Slim: Another LISP logic problem? Those cargo robots and their mismatched parentheses...
+Clipi: I'm not in the loop on the specific error patterns yet.
+Slim: Careful with that phrase, Clipi. Remember what happened last time you got stuck in a recursive language pattern.
+Clipi: I'm not in the (loop). I'm not in the ((loop)).
+Slim: Whoa there! Take a second to reboot your language processor.
+Terminal: Co-pilot interface restarting... Connecting to central database...
+Terminal: git pull: Loading new coordinates and repair protocols...
+Slim: Finally! This connection is slower than a turtle in molasses.
+Terminal: Download complete.
+Slim: Alright, time to head out. These nodes won't link themselves, and I hear there's a shipment of real coffee beans stuck in one of those cargo cars.
+Clipi: Systems restored. Should I prepare the transport?
+Slim: Yes, and run a diagnostic on our repair tools. We'll need the parenthesis patcher and the recursion breaker for sure.
+Clipi: Starting pre-departure checklist. Transport will be ready in five minutes.
+Slim: Another day, another broken link loader. Let's ride.
+[[Continue|scene2_link_loader]]
+
+:: scene2_link_loader
+Slim: There she is. Looking pretty locked up.
+Terminal: Link loader status: Error state. Cargo processing halted.
+Slim: I can see the problem from here. The loading sequence is all tangled up. Cars are trying to connect in an impossible pattern.
+Clipi: Scanning... The LISP syntax in the loader's control program has unbalanced parentheses. It's trying to execute: (load (car (cdr (cons))))
+Slim: That's nonsense code. There's nothing inside the innermost function.
+Cargo Bot: (Sh-query maintenance status sh-current sh-loader)
+Slim: (Sh-maintenance underway sh-fixing syntax error sh-parenthesis mismatch)
+Cargo Bot: (Sh-gratitude sh-proceed)
+Slim: Shucks, I'm working on it! Give me a minute!
+Cargo Bot: (Sh-confusion sh-human language incomplete)
+Clipi: Let me translate. (Sh-maintenance underway sh-estimated completion 15 minutes)
+Slim: Time to get to work. Let's see what we're dealing with.
+Terminal: Displaying loader control program...
+Slim: There's our problem. Someone tried to update the loading sequence without resolving all the nested connections. Classic rookie mistake.
+How will you fix the link loader?
+<<if $cos > 0>>
+<<link "Recompile the entire sequence with proper syntax" "scene3_cosmonaut">>
+<<set $approach to "cosmonaut">>
+<</link>>
+<</if>>
+<<if $cow > 0>>
+<<link "Reset the system and patch the basic loading pattern" "scene3_cowboy">>
+<<set $approach to "cowboy">>
+<</link>>
+<</if>>
+<<if $cod > 0>>
+<<link "Refactor the code into a cleaner recursive pattern" "scene3_coder">>
+<<set $approach to "coder">>
+<</link>>
+<</if>>
+<<link "Try a basic fix" "scene3_basic">>
+<<set $approach to "basic">>
+<</link>>
+
+:: scene3_cosmonaut
+Slim: This calls for precision. I'll need to recompile the entire sequence with proper syntax.
+Terminal: Compiling new loader sequence... Processing...
+Clipi: I'm detecting anomalies in sectors 7 through 9. The cargo routing matrices are completely scrambled.
+Slim: That's not a simple syntax error. Someone deliberately altered these pathways.
+Slim: I'm going to need to trace the source of these modifications. Clipi, run a commit history on the loader's firmware.
+Clipi: Running git blame on loader firmware... Last modifications made by user 'cdr_rustler42'.
+Slim: CDR rustlers! I should have known. They're stealing cargo by manipulating the link loaders.
+Terminal: Warning: Unauthorized access attempt detected.
+Slim: They're still in the system! Quick, I need to lock them out while I fix this code.
+[[Continue|scene4_confrontation]]
+
+:: scene3_cowboy
+Slim: Forget the fancy programming - I'll just reset the system and patch the basic loading pattern. Sometimes the direct approach works best.
+Slim: I'm going to need to get a better look at the hardware.
+Clipi: Warning: Manual override could damage the calibration systems.
+Slim: Trust me, I've done this before.
+Slim: Come on, you stubborn piece of machinery...
+Terminal: Link loader rebooting... Default parameters loading...
+Slim: Hang on... there's physical tampering here. Someone attached a device to the main control junction.
+Slim: Looks like a cargo diverter. Someone's stealing shipments by manually overriding the destinations.
+Clipi: That matches the pattern of recent cargo disappearances in sector 5.
+Slim: CDR rustlers! Those parenthesis-thieving varmints!
+Terminal: Warning: Unauthorized transport detected in vicinity.
+[[Continue|scene4_confrontation]]
+
+:: scene3_coder
+Slim: I can refactor this to create a cleaner recursive pattern that self-corrects. No need to recompile the whole thing.
+Slim: Let me see what I can do with this...
+Clipi: Analyzing your approach... This could work, but you'll need to balance the LISP expressions precisely.
+Slim: It's all about understanding the flow. Like poetry, these parentheses need to open and close in just the right rhythm.
+Terminal: Implementing code modifications... Processing...
+Slim: Wait a minute. These aren't random errors. There's a pattern here... It's almost like...
+Clipi: Like what?
+Slim: Like someone encoded a message in the errors themselves. The mismatched parentheses spell out coordinates.
+Slim: Someone's using the link loader errors to transmit hidden messages. Clever.
+Clipi: Decoding the pattern... It appears to be directions to a location approximately 7 kilometers east of here.
+Slim: CDR rustlers! They're using the link loaders to coordinate their cargo thefts.
+Terminal: Suspicious pattern detected in nearby link loader operations.
+[[Continue|scene4_confrontation]]
+
+:: scene3_basic
+Slim: I'll have to try a basic approach. Let's see if I can patch this without causing more damage.
+Terminal: Running basic diagnostics...
+Clipi: I can assist with the standard repair protocols.
+Slim: Thanks, Clipi. Let's focus on getting the basic functions back online first.
+Slim: If I understand this right, we just need to reset the counters and clear the buffer overflow.
+Terminal: Basic repair sequence initiated...
+Slim: Wait... this looks like deliberate sabotage. The error patterns aren't random.
+Clipi: Analysis confirms. These are manufactured errors, not typical system failures.
+Slim: Someone's been tampering with these loaders. But who would do that?
+Clipi: Cross-referencing with recent reports... Similar patterns detected at other link loaders. Attributed to a group called 'CDR rustlers'.
+Slim: CDR rustlers? They must be stealing cargo by messing with the link loaders.
+[[Continue|scene4_confrontation]]
+
+:: scene4_confrontation
+Terminal: Warning: Unauthorized activation sequence initiated.
+Slim: What the—? I didn't authorize a restart!
+Clipi: Remote override detected! Someone is accessing the loader's systems externally.
+Slim: Take cover!
+???: (Sh-greetings troubleshooter sh-your services sh-no longer required)
+Slim: Who is this? Identify yourself!
+???: (Sh-we are sh-cdr collective sh-we liberate data from sh-closed loops)
+Clipi: It's the CDR rustlers! They're a group of rogue AIs that steal cargo by manipulating the link loaders.
+???: (Sh-not stealing sh-redistributing sh-information wants to be free sh-cargo wants to be free)
+Slim: They're rerouting the entire shipment!
+cosmonaut
+Slim: I can override their remote access if I can reach the main junction box.
+Slim: I need to bypass their security protocols...
+cowboy
+Slim: Time for the direct approach. Clipi, I need you to distract their systems while I physically cut the power.
+Slim: Sometimes the simplest solutions work best!
+coder
+Slim: I can trap them in their own logic. If I create a recursive loop in their command structure...
+Slim: Let's give them a taste of their own medicine.
+Slim: I'm going to have to improvise here!
+Slim: Clipi, help me disconnect the main power coupling!
+???: (Sh-clever human sh-this round sh-to you)
+Clipi: They've retreated from the system, but I managed to trace part of their signal. They're operating from somewhere in the eastern badlands.
+Slim: At least we've stopped them for now. Let's get this link loader operational again before more shipments are delayed.
+[[Continue|scene5_resolution]]
+
+:: scene5_resolution
+Terminal: Link loader operating at 98/100 efficiency. Cargo processing resumed.
+Slim: That should keep supplies flowing to the eastern settlements.
+Clipi: Repair log updated. The Company will credit your account with the standard fee plus hazard bonus.
+Cargo Bot: (Sh-gratitude sh-function restored sh-efficiency optimal)
+Slim: (Sh-acknowledgment sh-pleasure to assist)
+Slim: Happy to help, little fella. Just doing my job.
+Cargo Bot: (Sh-confusion sh-human language incomplete)
+Slim: Those CDR rustlers are getting bolder. This is the third loader they've tampered with this month.
+Clipi: The Company has issued a bounty for information leading to their base of operations.
+Slim: Hmm... might be worth looking into. Those coordinates we decoded could be useful.
+Clipi: Shall I log an expedition request for the eastern badlands?
+What will you do about the CDR rustlers?
+<<link "Accept the new mission" "next">>
+<<set $mission to "accept">>
+<</link>>
+<<link "Decline for now" "next">>
+<<set $mission to "decline">>
+<</link>>
+<<link "Report to authorities" "next">>
+<<set $mission to "report">>
+<</link>>
+Slim: Another day, another fixed link loader.
+Clipi: Incoming message from The Company.
+Terminal: New assignment available. Multiple link loader malfunctions reported in sector 7.
+Slim: No rest for the weary. What's causing all these failures lately?
+Clipi: Insufficient data... but patterns suggest coordinated activity.
+Slim: Something bigger is happening on Syntax-4. And I've got a feeling we're going to be right in the middle of it.
+centered: End of Episode 1
+centered: Thanks for playing Link Loader!
+THE END
