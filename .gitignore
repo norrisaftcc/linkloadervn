@@ -27,3 +27,4 @@ tmp/
 current/renpy-8.3.7-sdk/launcher/game/saves/persistent
 
 **/.claude/settings.local.json
+/src/vnvenv

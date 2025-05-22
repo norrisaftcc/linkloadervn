@@ -10,7 +10,8 @@
       "Bash(find:*)",
       "Bash(git commit:*)",
       "Bash(chmod:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(mv:*)"
     ],
     "deny": []
   }

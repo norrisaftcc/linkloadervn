@@ -1,0 +1,30 @@
+2025-05-09 21:12:18.325 [info] update#setState idle
+2025-05-09 21:12:48.331 [info] update#setState checking for updates
+2025-05-09 21:12:48.646 [info] update#setState idle
+2025-05-09 21:46:11.778 [info] Extension host with pid 11226 exited with code: 0, signal: unknown.
+2025-05-09 22:56:09.546 [info] update#setState checking for updates
+2025-05-09 22:56:10.132 [info] update#setState idle
+2025-05-10 00:06:21.322 [info] update#setState checking for updates
+2025-05-10 00:06:21.642 [info] update#setState idle
+2025-05-10 01:34:29.003 [info] update#setState checking for updates
+2025-05-10 01:34:29.859 [info] update#setState idle
+2025-05-10 03:02:40.575 [info] update#setState checking for updates
+2025-05-10 03:02:41.031 [info] update#setState idle
+2025-05-10 04:30:57.900 [info] update#setState checking for updates
+2025-05-10 04:30:58.207 [info] update#setState idle
+2025-05-10 06:31:32.353 [info] update#setState checking for updates
+2025-05-10 06:31:32.905 [info] update#setState idle
+2025-05-10 07:00:00.985 [warning] No ptyHost heartbeat after 6 seconds
+2025-05-10 07:34:45.848 [info] update#setState checking for updates
+2025-05-10 07:34:46.362 [info] update#setState idle
+2025-05-10 09:35:46.591 [info] update#setState checking for updates
+2025-05-10 09:35:46.941 [info] update#setState idle
+2025-05-10 10:36:46.180 [info] update#setState checking for updates
+2025-05-10 10:36:46.491 [info] update#setState idle
+2025-05-10 10:45:33.402 [warning] No ptyHost heartbeat after 6 seconds
+2025-05-10 10:45:53.685 [warning] No ptyHost heartbeat after 6 seconds
+2025-05-10 11:37:46.034 [info] update#setState checking for updates
+2025-05-10 11:37:46.350 [info] update#setState idle
+2025-05-10 12:32:35.391 [info] Extension host with pid 16322 exited with code: 0, signal: unknown.
+2025-05-10 12:37:46.069 [info] update#setState checking for updates
+2025-05-10 12:37:46.414 [info] update#setState idle

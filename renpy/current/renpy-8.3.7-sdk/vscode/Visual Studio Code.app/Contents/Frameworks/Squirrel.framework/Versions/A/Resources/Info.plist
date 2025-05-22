@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>English</string>
+    <key>CFBundleExecutable</key>
+    <string>Squirrel</string>
+    <key>CFBundleIconFile</key>
+    <string/>
+    <key>CFBundleIdentifier</key>
+    <string>com.github.Squirrel</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>Squirrel</string>
+    <key>CFBundlePackageType</key>
+    <string>FMWK</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+    <key>CFBundleSignature</key>
+    <string>????</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>DTCompiler</key>
+    <string>com.apple.compilers.llvm.clang.1_0</string>
+    <key>DTSDKBuild</key>
+    <string>24B75</string>
+    <key>DTSDKName</key>
+    <string>macosx15.1</string>
+    <key>DTXcode</key>
+    <string>1610</string>
+    <key>DTXcodeBuild</key>
+    <string>16B40</string>
+    <key>NSHumanReadableCopyright</key>
+    <string>Copyright © 2013 GitHub. All rights reserved.</string>
+    <key>NSPrincipalClass</key>
+    <string/>
+    <key>ElectronAsarIntegrity</key>
+    <dict>
+      <key>Contents/Resources/app/node_modules.asar</key>
+      <dict>
+        <key>algorithm</key>
+        <string>SHA256</string>
+        <key>hash</key>
+        <string>b5d927df2a06d04a8b7173bddcb879df93760e6199e10b6ded018b4bfbaebe83</string>
+      </dict>
+    </dict>
+  </dict>
+</plist>

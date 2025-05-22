@@ -1,12 +1,25 @@
-# linkloader - a sample project
+# LinkLoader - A Visual Novel Game
 
 License: https://unlicense.org/
 
-demo of renpy scripting using generated assets. 
+A sci-fi/western hybrid visual novel built with Ren'Py, featuring a space cowboy protagonist who fixes broken link loaders in a LISP-themed universe.
+
 - Sample playthrough (v1.2, 10/31/22) - https://youtu.be/DO8mH-KPFnE
-- updated 11/2 - https://youtu.be/1PgRyBjnwuk
+- Updated playthrough (11/2) - https://youtu.be/1PgRyBjnwuk
 
 Demo download: https://terminalcowboy.itch.io/terminalcowboy
+
+## Repository Structure
+
+- `/renpy/` - Ren'Py game files and assets
+  - `/renpy/current/` - Current version of the game
+  - `/renpy/alphas/` - Previous alpha versions
+- `/src/` - Source code and development tools
+  - `/src/tools/` - Development and content creation tools
+  - `/src/tests/` - Test files and test runners
+  - `/src/scripts/` - Build and utility scripts
+- `/docs/` - Documentation, planning notes, and specifications
+- `/media/` - Media assets and planning materials
 ----
 [The Premise and Game mechanics]
 

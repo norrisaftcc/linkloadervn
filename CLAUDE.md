@@ -16,11 +16,17 @@ The game uses a combination of:
 
 The repository is organized into several key directories:
 
-- `/alphas/` - Contains earlier alpha versions of the game
-- `/current/` - Contains the current version of the game (link_loader_1_2)
-- `/media/` - Contains planning notes, rules, and other media assets
+- `/renpy/` - Contains all Ren'Py game files and assets
+  - `/renpy/current/` - Contains the current version of the game (link_loader_1_2)
+  - `/renpy/alphas/` - Contains earlier alpha versions of the game
+- `/src/` - Source code and development tools
+  - `/src/tools/` - Development and content creation tools
+  - `/src/tests/` - Test files and test runners
+  - `/src/scripts/` - Build and utility scripts
+- `/docs/` - Documentation, planning notes, and specifications
+- `/media/` - Media assets and planning materials
 
-The main game files are in `/current/link_loader_1_2/game/`:
+The main game files are in `/renpy/current/link_loader_1_2/game/`:
 - `script.rpy` - The main story script
 - `glitch.rpy` - Custom glitch visual effects used by characters
 - Various character image files in the `images/` directory
@@ -29,14 +35,14 @@ The main game files are in `/current/link_loader_1_2/game/`:
 
 To run the current version of the game:
 
-1. Use the Ren'Py launcher in `/current/renpy-8.3.7-sdk/`
-2. Open the `/current/link_loader_1_2/` project
+1. Use the Ren'Py launcher in `/renpy/current/renpy-8.3.7-sdk/`
+2. Open the `/renpy/current/link_loader_1_2/` project
 3. Click "Launch Project" in the Ren'Py launcher
 
 Alternatively, you can run it from the command line:
 
 ```bash
-cd /Users/norrisa/Documents/dev/github/linkloadervn/current/renpy-8.3.7-sdk
+cd /Users/norrisa/Documents/dev/github/linkloadervn/renpy/current/renpy-8.3.7-sdk
 ./renpy.sh ../link_loader_1_2
 ```
 
@@ -87,5 +93,5 @@ When adding new assets:
 ## Documentation
 
 For more information about Ren'Py development:
-- The Ren'Py documentation is available in `/current/renpy-8.3.7-sdk/doc/`
+- The Ren'Py documentation is available in `/renpy/current/renpy-8.3.7-sdk/doc/`
 - Official Ren'Py documentation is also available at: https://www.renpy.org/doc/html/
