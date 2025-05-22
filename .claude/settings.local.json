@@ -19,7 +19,9 @@
       "Bash(./test_server.sh:*)",
       "Bash(unzip:*)",
       "Bash(./tweego --version)",
-      "Bash(./tools/tweego/tweego:*)"
+      "Bash(./tools/tweego/tweego:*)",
+      "Bash(rm:*)",
+      "Bash(tree:*)"
     ],
     "deny": []
   }

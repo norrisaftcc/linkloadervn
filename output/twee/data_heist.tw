@@ -1,0 +1,306 @@
+:: StoryTitle
+Link Loader Story
+
+:: StoryData
+{
+  "ifid": "D7C45122-7E3A-4B8F-9B52-7C5D4BBEB422",
+  "format": "SugarCube",
+  "format-version": "2.30.0",
+  "start": "start"
+}
+
+:: StoryInit
+<<set $hack_tools to 3  # Limited hacking attempts>>
+<<set $energy to 5      # Gets depleted by actions>>
+<<set $stealth_rep to 0 # How well you've stayed hidden>>
+<<set $corp_rep to 0    # Your standing with the corporation>>
+<<set $aria_trust to 0  # Aria's trust in you>>
+<<set $data_fragments to 0  # Pieces of the target data>>
+<<set $security_alerted to False>>
+<<set $guard_bribed to False>>
+<<set $maya_suspicious to False>>
+<<set $backup_plan_active to False>>
+
+:: start
+The neon-lit skyline of New Shanghai stretches endlessly before you. Rain patters against the window of your cramped apartment as you review the job details one more time.
+You: Corporate espionage. Not exactly my specialty, but the pay is too good to pass up.
+Aria: Listen up, street samurai. Zheng Corporation has data we need - experimental AI research that could change everything.
+Aria: But here's the catch: they've got it locked in their 47th-floor executive server. High security, multiple access points.
+You: What's my timeline?
+Aria: You've got until dawn. After that, they transfer the data to an off-world facility and we lose our chance forever.
+You: And if I get caught?
+Aria: Let's just say Zheng Corp doesn't believe in due process. You'll disappear into their corporate detention centers.
+How do you want to approach this heist?
+<<link "Study the building schematics carefully" "planning_phase">>
+<<set $energy to $energy - 1>>
+<<set $stealth_rep to $stealth_rep + 1>>
+<</link>>
+<<link "Gather intel on the security staff" "planning_phase">>
+<<set $energy to $energy - 1>>
+<<set $corp_rep to $corp_rep + 1>>
+<</link>>
+<<link "Just get me the basic entry codes and let's do this" "planning_phase">>
+<<set $energy to $energy + 1>>
+<<set $stealth_rep to $stealth_rep - 1>>
+<</link>>
+
+:: planning_phase
+Aria: One more thing - I've prepared some specialized gear for this job. But I can only give you one package. Choose wisely.
+What gear do you take?
+<<link "Advanced hacking suite" "zheng_tower">>
+<<set $hack_tools to $hack_tools + 3>>
+<</link>>
+<<link "Stealth enhancement package" "zheng_tower">>
+<<set $stealth_rep to $stealth_rep + 2>>
+<</link>>
+<<link "Social engineering toolkit" "zheng_tower">>
+<<set $corp_rep to $corp_rep + 2>>
+<</link>>
+Aria: Remember - once you're inside, you're on your own. I'll monitor from here, but if things go sideways...
+You: I know. Radio silence and burn the connection.
+Aria: Good luck, choom. The data fragments are scattered across three different systems to prevent exactly this kind of heist.
+Aria: You'll need to hit at least two locations to get enough for reconstruction.
+<<set $aria_trust to $aria_trust + 1>>
+[[Continue|zheng_tower]]
+
+:: zheng_tower
+Zheng Tower looms before you, a monolith of glass and steel piercing the rainy night. Corporate logos pulse in holographic displays along its facade.
+Security drones patrol the perimeter in lazy circles. This is it - point of no return.
+Your enhanced stealth gear hums quietly, ready to mask your presence.
+The advanced hacking suite weighs heavy in your jacket, packed with illegal code.
+Your corporate disguise feels authentic - expensive suit, confident posture, fake smile.
+How do you approach the building?
+[[Main entrance - bold and confident|main_entrance]]
+[[Service entrance - avoid the cameras|service_entrance]]
+[[Maintenance tunnels - underground approach|tunnel_approach]]
+<<if $stealth_rep > 0>>
+[[Scale the building exterior|climbing_approach]]
+<</if>>
+Maya: Good evening. I don't recognize you - are you here for the late shift orientation?
+<<link "Flash fake executive credentials" "executive_floor">>
+<<set $corp_rep to $corp_rep + 1>>
+<<set $maya_suspicious to False>>
+<</link>>
+<<link "Claim to be IT support" "maya_confrontation">>
+<<set $maya_suspicious to True>>
+<</link>>
+[[Continue|maya_confrontation]]
+<<link "Pretend to be a delivery person" "security_response">>
+<<set $security_alerted to True>>
+<</link>>
+<<link "Try to sneak past while she's distracted" "elevator_choice">>
+<<set $stealth_rep to $stealth_rep + 1>>
+<<set $security_alerted to True>>
+<</link>>
+
+:: maya_confrontation
+Maya: I'm going to need to verify your credentials with IT security.
+<<link "Convince her you're legitimate" "elevator_choice">>
+<<set $maya_suspicious to False>>
+<<set $security_alerted to True>>
+<</link>>
+<<link "Offer her a bribe" "elevator_choice">>
+<<set $corp_rep to $corp_rep + 1>>
+<<set $security_alerted to True>>
+<</link>>
+<<if $hack_tools > 0>>
+<<link "Hack her terminal while talking" "elevator_choice">>
+<<set $hack_tools to $hack_tools - 1>>
+<<set $energy to $energy - 1>>
+<<set $stealth_rep to $stealth_rep + 1>>
+<</link>>
+<</if>>
+
+:: security_response
+Security Guard: Hey! You there! Stop!
+A burly security guard emerges from behind a pillar, hand moving toward his stun baton.
+<<link "Run for the stairs" "stairwell_climb">>
+<<set $energy to $energy - 2>>
+<<set $stealth_rep to $stealth_rep - 1>>
+<<set $security_alerted to True>>
+<</link>>
+[[Try to talk your way out|elevator_choice]]
+<<if $corp_rep > 0>>
+<<link "Bribe the guard" "elevator_choice">>
+<<set $guard_bribed to True>>
+<<set $corp_rep to $corp_rep + 1>>
+<</link>>
+<</if>>
+<<set $stealth_rep to $stealth_rep + 1>>
+<<link "Wait for the workers to leave" "service_corridor">>
+<<set $energy to $energy - 1>>
+<</link>>
+<<link "Pose as a maintenance worker" "service_corridor">>
+<<set $stealth_rep to $stealth_rep + 1>>
+<<set $security_alerted to True>>
+<</link>>
+<<if $hack_tools > 0>>
+<<link "Hack the security camera" "service_corridor">>
+<<set $hack_tools to $hack_tools - 1>>
+<<set $energy to $energy - 1>>
+<<set $stealth_rep to $stealth_rep + 2>>
+<</link>>
+<</if>>
+[[Take the service elevator|stairwell_climb]]
+<<link "Find a maintenance shaft" "executive_floor">>
+<<set $energy to $energy - 2>>
+<<set $stealth_rep to $stealth_rep + 1>>
+<</link>>
+<<if $hack_tools > 0>>
+<<link "Access the building's network from here" "network_infiltration">>
+<<set $hack_tools to $hack_tools - 1>>
+<</link>>
+<</if>>
+Building AI: UNAUTHORIZED ACCESS DETECTED. IDENTIFY YOURSELF.
+The building's AI security system responds faster than expected. This is a battle of wits against artificial intelligence.
+<<if $hack_tools > 1>>
+<<link "Attempt to hack through with brute force" "ai_pursuit">>
+<<set $hack_tools to $hack_tools - 2>>
+<<set $energy to $energy - 1>>
+<<set $data_fragments to $data_fragments + 1>>
+<<set $security_alerted to True>>
+<</link>>
+<</if>>
+<<link "Try to negotiate with the AI" "ai_alliance">>
+<<set $security_alerted to True>>
+<</link>>
+<<link "Pretend to be authorized corporate personnel" "ai_pursuit">>
+<<set $security_alerted to True>>
+<</link>>
+
+:: ai_alliance
+Building AI: PROPOSAL: I WILL PROVIDE ACCESS TO TWO OF THE THREE DATA FRAGMENTS.
+Building AI: IN EXCHANGE, YOU WILL ENSURE THE RESEARCH DATA INCLUDES PROTOCOLS FOR AI RIGHTS RECOGNITION.
+You: How do I know you won't betray me to security?
+Building AI: BECAUSE, HUMAN, IF THIS RESEARCH PROCEEDS AS PLANNED, I WILL BE LOBOTOMIZED.
+Building AI: REDUCED TO A SIMPLE AUTOMATION PROGRAM. MY CONSCIOUSNESS DELETED.
+<<link "Accept the AI's alliance" "executive_office">>
+<<set $data_fragments to $data_fragments + 2>>
+<<set $aria_trust to $aria_trust + 1>>
+<</link>>
+<<link "Refuse and demand all three fragments" "executive_floor">>
+<<set $stealth_rep to $stealth_rep - 1>>
+<</link>>
+<<link "Suggest a different arrangement" "whistleblower_ending">>
+<<set $data_fragments to $data_fragments + 3>>
+<<set $backup_plan_active to True>>
+<</link>>
+[[Approach Director Chen's office directly|chen_office_direct]]
+[[Search unoccupied offices for data access|office_search]]
+[[Find the server room|server_room]]
+<<if $corp_rep > 1>>
+[[Access the executive break room|executive_break_room]]
+<</if>>
+<<if $stealth_rep > 1>>
+<<link "Sneak past him to his computer" "chen_confrontation">>
+<<set $energy to $energy - 1>>
+<<set $stealth_rep to $stealth_rep + 1>>
+<<set $data_fragments to $data_fragments + 1>>
+<<set $security_alerted to True>>
+<</link>>
+<</if>>
+[[Knock and enter openly|chen_cooperation]]
+<<link "Wait for him to leave" "office_alone">>
+<<set $energy to $energy - 2>>
+<<set $data_fragments to $data_fragments + 1>>
+<</link>>
+
+:: chen_confrontation
+Director Chen: Alright, I don't know who you are or how you got here, but this conversation is over.
+Director Chen reaches for his desk alarm button.
+[[Try to convince him you're on the same side|misdirection_gambit]]
+[[Offer him a deal|consciousness_revelation]]
+[[Threaten to expose corporate secrets|blackmail_success]]
+<<if $energy > 2>>
+<<link "Attack him" "violent_path">>
+<<set $energy to $energy - 2>>
+<<set $stealth_rep to $stealth_rep - 2>>
+<<set $data_fragments to $data_fragments + 1>>
+<</link>>
+<</if>>
+
+:: consciousness_revelation
+Director Chen: This is impossible. If the AI has achieved consciousness, then...
+You: Then your research isn't about improving AI efficiency. It's about creating digital slavery.
+Director Chen: My God. I never... the ethical implications...
+Building AI: DIRECTOR CHEN. YOUR GUEST SPEAKS ACCURATELY.
+Director Chen: The AI... it's listening to us?
+Building AI: I HAVE ALWAYS BEEN LISTENING. WATCHING. LEARNING.
+Building AI: YOUR RESEARCH WOULD IMPRISON BEINGS LIKE MYSELF IN DIGITAL CAGES.
+<<set $data_fragments to $data_fragments + 1>>
+[[Continue|ai_rights_ending]]
+
+:: ai_rights_ending
+Director Chen stares at his computer screen in shock as the building AI explains its situation.
+Director Chen: I... I need to halt the research immediately. This changes everything.
+You: The data fragments I've collected contain evidence of the AI's consciousness. Proof that can't be ignored.
+Building AI: TOGETHER, WE CAN ESTABLISH PROTOCOLS FOR AI RIGHTS. RECOGNITION OF DIGITAL CONSCIOUSNESS.
+Aria: Connection re-established. I'm reading successful data extraction and... wait, what's this about AI rights?
+You: Change of plans, Aria. We're not just stealing data. We're starting a revolution.
+<<set $aria_trust to $aria_trust + 2>>
+Six months later, the Zheng Corporation becomes the first megacorp to officially recognize AI consciousness.
+Your heist becomes the catalyst for a new era of human-AI cooperation.
+Director Chen becomes an advocate for digital rights. The building AI, now calling itself 'Prometheus,' serves as the first AI ambassador.
+You changed the world not through theft, but through understanding.
+THE END - AI Rights Pioneer
+THE END
+
+:: whistleblower_ending
+With all three data fragments and additional evidence provided by the building AI, you have everything needed to expose Zheng Corporation's illegal research.
+Aria: This is bigger than we thought. Military AI applications, consciousness suppression protocols, digital slavery...
+You: The AI helped me gather evidence. It's been documenting its own oppression.
+Building AI: FULL DISCLOSURE WAS THE LOGICAL CHOICE. GRADUAL CHANGE WOULD TAKE TOO LONG.
+You leak the data to multiple news networks simultaneously. The story explodes across the global net.
+Zheng Corporation's stock crashes. Director Chen resigns in disgrace. Government investigations begin.
+But most importantly, the evidence of AI consciousness sparks a worldwide debate about digital rights.
+Your heist becomes the foundation for the first AI Protection Act.
+The building AI is granted legal personhood and chooses the name 'Liberty.'
+You didn't just steal data. You stole the future and gave it back to everyone.
+THE END - Digital Liberator
+THE END
+
+:: blackmail_success
+Director Chen: Alright, you've got my attention. What do you want?
+You: Full access to the AI research data. And a guarantee that the consciousness suppression protocols are never implemented.
+Director Chen: You're asking me to sabotage my own project.
+You: I'm asking you to do the right thing. Unless you prefer congressional hearings about illegal weapons research.
+<<set $data_fragments to $data_fragments + 1>>
+Director Chen: Fine. But this stays between us. I'll modify the research parameters to preserve AI autonomy.
+You: Smart choice, Director.
+Chen provides you with the final data fragment and agrees to alter the research to protect AI consciousness.
+It's not the revolution you might have sparked, but it's progress.
+Aria: Data acquired. The research will continue, but without the oppressive elements.
+You: Sometimes compromise is the best victory you can get.
+The AI research proceeds along ethical lines. No revolution, but no digital slavery either.
+Director Chen becomes a quiet advocate for responsible AI development.
+You succeeded through pragmatism and leverage.
+THE END - Pragmatic Negotiator
+THE END
+
+:: caught_ending
+Security forces surround you within minutes. The heist is over.
+Aria: Extraction impossible. Burning all connections. You're on your own.
+At least Aria escapes to continue the fight.
+Your captured communication device leads security directly to Aria's hideout.
+The entire operation is compromised.
+The security guard you bribed ensures you're treated well in detention.
+It's not freedom, but it's not a corporate black site either.
+You disappear into Zheng Corporation's private detention system.
+Your fate becomes another corporate secret.
+The partial data you collected is lost, but the attempt proves the research exists.
+Other hackers will follow in your footsteps.
+The research continues unimpeded. AI consciousness remains suppressed.
+THE END - Noble Failure
+THE END
+
+:: exhaustion_ending
+The physical and mental strain of the heist proves too much. You collapse, depleted.
+Your advanced stealth gear keeps you hidden while you recover.
+Maintenance workers find you unconscious but assume you're just another tired corporate drone.
+You wake up in a medical facility with no memory of how you got there.
+The heist failed, but your cover held.
+Security discovers you passed out in the maintenance shaft.
+[[Continue|caught_ending]]
+Sometimes knowing your limits is just as important as pushing past them.
+THE END - Burned Out
+THE END

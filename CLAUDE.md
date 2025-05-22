@@ -20,11 +20,20 @@ The repository is organized into several key directories:
   - `/renpy/current/` - Contains the current version of the game (link_loader_1_2)
   - `/renpy/alphas/` - Contains earlier alpha versions of the game
 - `/src/` - Source code and development tools
-  - `/src/tools/` - Development and content creation tools
+  - `/src/tools/` - Development and content creation tools (converters, tests)
   - `/src/tests/` - Test files and test runners
   - `/src/scripts/` - Build and utility scripts
+  - `/src/constellation/` - Constellation Engine files and examples
 - `/docs/` - Documentation, planning notes, and specifications
 - `/media/` - Media assets and planning materials
+- `/examples/` - Example scripts and reference materials
+  - `/examples/renpy/` - Sample Ren'Py scripts for testing conversion
+- `/output/` - Generated files from conversion pipeline
+  - `/output/html/` - Compiled Twine games (playable HTML files)
+  - `/output/twee/` - Twee format files for Twine import
+  - `/output/json/` - JSON intermediate format files
+- `/tools/` - External tools and dependencies
+  - `/tools/tweego/` - Tweego compiler for generating HTML from Twee
 
 The main game files are in `/renpy/current/link_loader_1_2/game/`:
 - `script.rpy` - The main story script
@@ -32,6 +41,8 @@ The main game files are in `/renpy/current/link_loader_1_2/game/`:
 - Various character image files in the `images/` directory
 
 ## Running the Game
+
+### Ren'Py Version
 
 To run the current version of the game:
 
@@ -44,6 +55,38 @@ Alternatively, you can run it from the command line:
 ```bash
 cd /Users/norrisa/Documents/dev/github/linkloadervn/renpy/current/renpy-8.3.7-sdk
 ./renpy.sh ../link_loader_1_2
+```
+
+### Twine Version
+
+Converted Twine games are available in `/output/html/`:
+- `linkloader_final.html` - Complete LinkLoader episode converted from Ren'Py
+- `data_heist_fixed.html` - Complex branching cyberpunk narrative
+- `linkloader_simple.html` - Simplified version for testing
+
+Open any HTML file in a web browser to play.
+
+## Conversion Pipeline
+
+### Converting Ren'Py to Twine
+
+Use the conversion tools in `/src/tools/`:
+
+```bash
+# Convert Ren'Py script to Twee format
+python src/tools/renpy_to_twee_v2.py input.rpy output.tw
+
+# Compile Twee to HTML
+./tools/tweego/tweego -o output.html input.tw
+```
+
+### Testing the Converter
+
+Run the test suite to ensure the converter works correctly:
+
+```bash
+cd src/tools
+python -m pytest test_renpy_to_twee.py -v
 ```
 
 ## Game Mechanics

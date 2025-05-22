@@ -120,8 +120,10 @@ class RenpyToTweeConverter:
         """Parse default variable declarations"""
         match = re.match(r'default\s+(\w+)\s*=\s*(.+)', line)
         if match:
-            var_name, var_value = match.groups()
-            self.variables[var_name] = var_value.strip()
+            var_name, var_value_with_comment = match.groups()
+            # Remove comments from the value
+            var_value = var_value_with_comment.split('#')[0].strip()
+            self.variables[var_name] = var_value
     
     def handle_label(self, line):
         """Handle label declarations"""
