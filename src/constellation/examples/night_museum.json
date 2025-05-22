@@ -1,0 +1,581 @@
+{
+  "title": "The Night Museum",
+  "version": "1.0",
+  "startScene": "entry_choice",
+  "metadata": {
+    "author": "Constellation Engine Demo",
+    "description": "A story of finding belonging through craft, empathy, and memory fragments in a mysterious museum that transforms each night"
+  },
+  "scenes": {
+    "entry_choice": {
+      "background": "images/museum_entrance_dusk.jpg",
+      "characters": [],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "The Natural History Museum stands silent as evening falls. But inside, something extraordinary happens after hours..."
+        },
+        {
+          "speaker": "narrator",
+          "text": "You've found your way here through different circumstances. Each path offers its own gifts and challenges."
+        },
+        {
+          "speaker": "narrator",
+          "text": "How did you come to be here tonight?"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Night Guard Shift - I work here",
+          "goto": "guard_entry",
+          "set": {"origin": "guard", "craft": 3, "heart": 2, "access_keys": true, "starting_item": "security_radio"}
+        },
+        {
+          "text": "School Field Trip - I got left behind",
+          "goto": "student_entry", 
+          "set": {"origin": "student", "craft": 1, "heart": 4, "curious": true, "starting_item": "sketch_pad"}
+        },
+        {
+          "text": "Urban Explorer - I snuck in",
+          "goto": "explorer_entry",
+          "set": {"origin": "explorer", "craft": 4, "heart": 1, "stealth": true, "starting_item": "climbing_gear"}
+        },
+        {
+          "text": "New Curator - My first week",
+          "goto": "curator_entry",
+          "set": {"origin": "curator", "craft": 2, "heart": 3, "museum_knowledge": true, "starting_item": "research_notes"}
+        }
+      ]
+    },
+    "guard_entry": {
+      "background": "images/security_office.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/guard_uniform.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "player",
+          "text": "Another quiet night shift... or so I thought."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Your radio crackles to life, but the voice isn't from dispatch. It's... different."
+        },
+        {
+          "speaker": "mysterious_voice",
+          "text": "The exhibits are waking up. You have the keys, but do you have the heart to help them?"
+        },
+        {
+          "speaker": "narrator",
+          "text": "Your CRAFT (3) gives you practical skills and access, while your HEART (2) helps you understand what others need."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Follow protocol - investigate the disturbance",
+          "goto": "first_encounter",
+          "set": {"approach": "methodical"}
+        },
+        {
+          "text": "Trust the voice - ask how you can help",
+          "goto": "first_encounter",
+          "set": {"approach": "empathetic"}
+        }
+      ]
+    },
+    "student_entry": {
+      "background": "images/museum_classroom.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/student_backpack.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "player",
+          "text": "I was so busy sketching the dioramas that I didn't notice everyone leave..."
+        },
+        {
+          "speaker": "narrator",
+          "text": "The emergency lights cast strange shadows. Your sketch pad seems to shimmer in the dim light."
+        },
+        {
+          "speaker": "sketchpad",
+          "text": "Draw what you see, not what you think should be there."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Your HEART (4) lets you feel the emotions of this place, while your CRAFT (1) means you'll need to learn hands-on."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Start sketching the shadows - they're moving",
+          "goto": "first_encounter",
+          "set": {"approach": "artistic"}
+        },
+        {
+          "text": "Call out to see if anyone else is here",
+          "goto": "first_encounter", 
+          "set": {"approach": "social"}
+        }
+      ]
+    },
+    "explorer_entry": {
+      "background": "images/museum_rooftop_access.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/explorer_gear.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "player",
+          "text": "Perfect. Got in through the skylight without triggering any alarms."
+        },
+        {
+          "speaker": "narrator",
+          "text": "But as you rappel down, you realize this place is already very much awake."
+        },
+        {
+          "speaker": "building",
+          "text": "Welcome, intruder. We've been waiting for someone with your... skills."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Your CRAFT (4) gives you technical expertise, but your HEART (1) means reading people will be challenging."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Assess the situation tactically",
+          "goto": "first_encounter",
+          "set": {"approach": "tactical"}
+        },
+        {
+          "text": "Try to understand what the voice wants",
+          "goto": "first_encounter",
+          "set": {"approach": "cautious"}
+        }
+      ]
+    },
+    "curator_entry": {
+      "background": "images/curator_office.jpg", 
+      "characters": [
+        {"name": "player", "sprite": "images/curator_glasses.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "player",
+          "text": "Working late on my first week... probably not the best idea."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Your research notes start writing themselves, filling with information you've never read."
+        },
+        {
+          "speaker": "research_notes",
+          "text": "Memory Fragment #1: The museum remembers everyone who has ever cared for it."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Your balanced CRAFT (2) and HEART (3) make you a natural mediator between logic and empathy."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Study the new information appearing",
+          "goto": "first_encounter",
+          "set": {"approach": "scholarly"}
+        },
+        {
+          "text": "Put the notes aside and explore",
+          "goto": "first_encounter",
+          "set": {"approach": "intuitive"}
+        }
+      ]
+    },
+    "first_encounter": {
+      "background": "images/museum_hall_transformed.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/player_amazed.png", "position": "left"},
+        {"name": "diorama_spirit", "sprite": "images/glowing_figure.png", "position": "right"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "The museum has transformed. Exhibits glow with inner light, and you're not alone."
+        },
+        {
+          "speaker": "diorama_spirit",
+          "text": "Each night, we become what we once were. But we need help remembering."
+        },
+        {
+          "speaker": "diorama_spirit",
+          "text": "You have something we need - the ability to bridge memory and reality."
+        },
+        {
+          "speaker": "narrator",
+          "text": "A Memory Fragment appears in your hand: 'CONNECTION - Where empathy meets understanding.'"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Ask what kind of help they need",
+          "goto": "help_request",
+          "set": {"memory_fragments": 1, "trust_diorama": 1}
+        },
+        {
+          "text": "Offer to use your starting item to help",
+          "goto": "item_assistance",
+          "set": {"memory_fragments": 1, "creative_approach": 1}
+        },
+        {
+          "text": "Try to understand how this transformation works",
+          "goto": "scientific_inquiry",
+          "set": {"memory_fragments": 1, "analytical_approach": 1}
+        }
+      ]
+    },
+    "help_request": {
+      "background": "images/museum_hall_transformed.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/player_listening.png", "position": "left"},
+        {"name": "diorama_spirit", "sprite": "images/spirit_explaining.png", "position": "right"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "diorama_spirit",
+          "text": "We are fragments of everyone who ever loved this place. Visitors, staff, researchers..."
+        },
+        {
+          "speaker": "diorama_spirit",
+          "text": "But memories fade. We need someone to help us remember our connections."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Your HEART stat helps you sense their longing for purpose and belonging."
+        }
+      ],
+      "choices": [
+        {
+          "text": "How can I help you remember?",
+          "goto": "memory_quest",
+          "set": {"empathy_bonus": 1}
+        },
+        {
+          "text": "What happens if you forget completely?",
+          "goto": "consequences_revealed",
+          "set": {"understanding_bonus": 1}
+        },
+        {
+          "text": "Are there others like you here?",
+          "goto": "other_spirits",
+          "set": {"social_bonus": 1}
+        }
+      ]
+    },
+    "item_assistance": {
+      "background": "images/museum_hall_transformed.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/player_offering.png", "position": "left"},
+        {"name": "diorama_spirit", "sprite": "images/spirit_curious.png", "position": "right"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "player",
+          "text": "I have my {{starting_item}}. Maybe it can help somehow?"
+        },
+        {
+          "speaker": "diorama_spirit",
+          "text": "Objects carry memories too. Let me show you..."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Your item begins to glow, revealing hidden connections throughout the museum."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Your CRAFT stat helps you understand how to use tools in new ways."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Follow the connections your item reveals",
+          "goto": "connection_network",
+          "set": {"craft_bonus": 1}
+        },
+        {
+          "text": "Ask the spirit to explain what you're seeing",
+          "goto": "guided_discovery",
+          "set": {"learning_bonus": 1}
+        },
+        {
+          "text": "Try to enhance the effect with your skills",
+          "goto": "skill_enhancement",
+          "set": {"innovation_bonus": 1}
+        }
+      ]
+    },
+    "memory_quest": {
+      "background": "images/memory_chamber.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/player_determined.png", "position": "center"},
+        {"name": "memory_keeper", "sprite": "images/ancient_spirit.png", "position": "right"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "memory_keeper",
+          "text": "Welcome to the Memory Chamber. Here, fragments of the past wait to be reunited."
+        },
+        {
+          "speaker": "narrator",
+          "text": "You see three distinct clusters of memory fragments, each calling to different aspects of your nature."
+        },
+        {
+          "speaker": "memory_keeper",
+          "text": "Choose wisely. Each path will teach you something different about belonging."
+        }
+      ],
+      "choices": [
+        {
+          "text": "EXPLORE: Follow your heart to understand the emotional memories",
+          "goto": "explore_path",
+          "condition": {"heart": ">=2"},
+          "set": {"path": "explore", "explore_skill": "{{heart + memory_fragments}}"}
+        },
+        {
+          "text": "CREATE: Use your craft to rebuild broken connections", 
+          "goto": "create_path",
+          "condition": {"craft": ">=2"},
+          "set": {"path": "create", "create_skill": "{{craft + memory_fragments}}"}
+        },
+        {
+          "text": "EXPLAIN: Combine memory and empathy to tell their stories",
+          "goto": "explain_path",
+          "condition": {"heart": ">=2", "memory_fragments": ">=1"},
+          "set": {"path": "explain", "explain_skill": "{{heart + memory_fragments}}"}
+        },
+        {
+          "text": "CODE: Use craft and memory to decode the museum's secrets",
+          "goto": "code_path", 
+          "condition": {"craft": ">=2", "memory_fragments": ">=1"},
+          "set": {"path": "code", "code_skill": "{{craft + memory_fragments}}"}
+        }
+      ]
+    },
+    "explore_path": {
+      "background": "images/emotional_landscape.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/player_empathic.png", "position": "left"},
+        {"name": "lost_child", "sprite": "images/child_spirit.png", "position": "right"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "lost_child",
+          "text": "I got separated from my family during a field trip... fifty years ago."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Your EXPLORE skill ({{explore_skill}}) helps you feel the depth of their longing."
+        },
+        {
+          "speaker": "player",
+          "text": "You're not lost anymore. This place remembers you, and now so do I."
+        },
+        {
+          "speaker": "lost_child",
+          "text": "Will you help me find the others? There are so many who need to remember they belong somewhere."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Guide them to find their museum family",
+          "goto": "family_reunion",
+          "set": {"memory_fragments": 3, "belonging_achieved": true}
+        },
+        {
+          "text": "Teach them to explore on their own",
+          "goto": "independence_path",
+          "set": {"memory_fragments": 2, "growth_achieved": true}
+        }
+      ]
+    },
+    "create_path": {
+      "background": "images/workshop_space.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/player_crafting.png", "position": "left"},
+        {"name": "old_taxidermist", "sprite": "images/craftsperson_spirit.png", "position": "right"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "old_taxidermist",
+          "text": "I spent my life preserving beauty, but I never learned to preserve connections."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Your CREATE skill ({{create_skill}}) shows you how to rebuild what's been broken."
+        },
+        {
+          "speaker": "player",
+          "text": "Let me show you - preservation isn't about stopping time, it's about honoring what was loved."
+        },
+        {
+          "speaker": "old_taxidermist",
+          "text": "Teach me to create bonds instead of just beautiful shells."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Create a new kind of art together",
+          "goto": "collaborative_art",
+          "set": {"memory_fragments": 3, "artistic_legacy": true}
+        },
+        {
+          "text": "Help them transform their old work",
+          "goto": "transformation_project",
+          "set": {"memory_fragments": 2, "redemption_achieved": true}
+        }
+      ]
+    },
+    "family_reunion": {
+      "background": "images/museum_celebration.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/player_joyful.png", "position": "center"},
+        {"name": "museum_family", "sprite": "images/group_spirits.png", "position": "right"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "museum_family",
+          "text": "You've helped us remember - we are all connected across time and space."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Dawn is approaching. The spirits begin to fade, but their gratitude remains."
+        },
+        {
+          "speaker": "lost_child",
+          "text": "Tomorrow night, will you come back? There are others who need to find their way home."
+        },
+        {
+          "speaker": "narrator",
+          "text": "You have found your place here - as a bridge between the living and the remembered."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Promise to return every night",
+          "goto": "guardian_ending"
+        },
+        {
+          "text": "I'll teach others to do this work too",
+          "goto": "teacher_ending"
+        },
+        {
+          "text": "Take the memories with you into the day",
+          "goto": "integration_ending"
+        }
+      ]
+    },
+    "guardian_ending": {
+      "background": "images/museum_dawn.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/player_peaceful.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "Night after night, you return. Each time, you help more lost souls find their belonging."
+        },
+        {
+          "speaker": "player",
+          "text": "I've found my purpose here - helping others remember they are never truly alone."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Your CRAFT and HEART have grown through service. The museum itself has become your chosen family."
+        },
+        {
+          "speaker": "narrator",
+          "text": "In finding belonging for others, you have discovered your own deepest truth."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Begin another night cycle",
+          "goto": "entry_choice",
+          "set": {"experience": "guardian", "advanced_stats": true}
+        },
+        {
+          "text": "Reflect on your journey",
+          "goto": "journey_reflection"
+        }
+      ]
+    },
+    "teacher_ending": {
+      "background": "images/museum_teaching.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/player_wise.png", "position": "left"},
+        {"name": "new_helpers", "sprite": "images/diverse_group.png", "position": "right"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "You've shown others how to bridge the gap between memory and reality."
+        },
+        {
+          "speaker": "new_helpers",
+          "text": "Thank you for teaching us that everyone deserves to belong somewhere."
+        },
+        {
+          "speaker": "player",
+          "text": "The work continues, but now it's shared. No one has to carry it alone."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Your legacy multiplies through others - a network of belonging that spans beyond the museum."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Train the next generation of memory keepers",
+          "action": "new_game_plus"
+        },
+        {
+          "text": "Explore what other places need this kind of care",
+          "goto": "expansion_ending"
+        }
+      ]
+    },
+    "journey_reflection": {
+      "background": "images/memory_garden.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/player_reflective.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "You started with CRAFT: {{craft}} and HEART: {{heart}}."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Through your choices, you collected {{memory_fragments}} Memory Fragments."
+        },
+        {
+          "speaker": "narrator",
+          "text": "You learned that belonging isn't found - it's created through connection, empathy, and shared purpose."
+        },
+        {
+          "speaker": "player",
+          "text": "Every soul deserves to be remembered. Every story deserves to be told."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Start a new story with different choices",
+          "goto": "entry_choice"
+        },
+        {
+          "text": "Exit and remember this night",
+          "action": "end_game"
+        }
+      ]
+    }
+  }
+}
