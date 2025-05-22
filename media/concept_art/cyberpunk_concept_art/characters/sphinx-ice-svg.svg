@@ -1,0 +1,274 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient and definitions -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0A0A12" />
+      <stop offset="100%" stop-color="#000000" />
+    </linearGradient>
+    
+    <!-- Glow filters -->
+    <filter id="teal-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feFlood flood-color="#55EFC4" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="glow"/>
+      <feComposite in="SourceGraphic" in2="glow" operator="over" />
+    </filter>
+    
+    <filter id="gold-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feFlood flood-color="#FFFA65" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="glow"/>
+      <feComposite in="SourceGraphic" in2="glow" operator="over" />
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="500" fill="url(#bg-gradient)" />
+  
+  <!-- Grid background with perspective -->
+  <g id="grid-background" opacity="0.3">
+    <!-- Horizon line -->
+    <line x1="0" y1="250" x2="800" y2="250" stroke="#808080" stroke-width="1" stroke-opacity="0.6" />
+    
+    <!-- Vertical grid lines -->
+    <line x1="100" y1="0" x2="100" y2="500" stroke="#808080" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="200" y1="0" x2="200" y2="500" stroke="#808080" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="300" y1="0" x2="300" y2="500" stroke="#808080" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="400" y1="0" x2="400" y2="500" stroke="#808080" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="500" y1="0" x2="500" y2="500" stroke="#808080" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="600" y1="0" x2="600" y2="500" stroke="#808080" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="700" y1="0" x2="700" y2="500" stroke="#808080" stroke-width="0.5" stroke-opacity="0.3" />
+    
+    <!-- Horizontal grid lines -->
+    <line x1="0" y1="100" x2="800" y2="100" stroke="#808080" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="0" y1="200" x2="800" y2="200" stroke="#808080" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="0" y1="300" x2="800" y2="300" stroke="#808080" stroke-width="0.5" stroke-opacity="0.3" />
+    <line x1="0" y1="400" x2="800" y2="400" stroke="#808080" stroke-width="0.5" stroke-opacity="0.3" />
+  </g>
+  
+  <!-- SPHINX.ICE Entity - Code Gate puzzle -->
+  <g id="sphinx-ice">
+    <!-- Base pedestal -->
+    <g id="pedestal">
+      <!-- Main platform -->
+      <rect x="300" y="300" width="200" height="50" fill="none" stroke="#FFFA65" stroke-width="3" stroke-opacity="0.9" filter="url(#gold-glow)" />
+      
+      <!-- Platform details -->
+      <line x1="350" y1="300" x2="350" y2="350" stroke="#FFFA65" stroke-width="1" stroke-opacity="0.7" />
+      <line x1="400" y1="300" x2="400" y2="350" stroke="#FFFA65" stroke-width="1" stroke-opacity="0.7" />
+      <line x1="450" y1="300" x2="450" y2="350" stroke="#FFFA65" stroke-width="1" stroke-opacity="0.7" />
+      
+      <!-- Decorative hieroglyphs -->
+      <path d="M 320,320 L 330,320 M 325,315 L 325,325" stroke="#FFFA65" stroke-width="1" stroke-opacity="0.8" />
+      <path d="M 370,320 L 380,320 L 375,315 L 370,320" stroke="#FFFA65" stroke-width="1" stroke-opacity="0.8" />
+      <path d="M 420,315 L 420,325 L 430,325 L 430,315 Z" stroke="#FFFA65" stroke-width="1" stroke-opacity="0.8" fill="none" />
+      <path d="M 470,315 L 480,320 L 470,325" stroke="#FFFA65" stroke-width="1" stroke-opacity="0.8" />
+      
+      <!-- Steps -->
+      <rect x="325" y="350" width="150" height="10" fill="none" stroke="#FFFA65" stroke-width="2" stroke-opacity="0.8" />
+      <rect x="350" y="360" width="100" height="10" fill="none" stroke="#FFFA65" stroke-width="2" stroke-opacity="0.7" />
+      <rect x="375" y="370" width="50" height="10" fill="none" stroke="#FFFA65" stroke-width="2" stroke-opacity="0.6" />
+    </g>
+    
+    <!-- Sphinx body -->
+    <g id="sphinx-body">
+      <!-- Main body outline -->
+      <path d="M 350,150 L 450,150 L 475,250 L 325,250 Z" fill="none" stroke="#FFFA65" stroke-width="3" stroke-opacity="0.9" filter="url(#gold-glow)" />
+      
+      <!-- Inner body details -->
+      <line x1="350" y1="150" x2="325" y2="250" stroke="#FFFA65" stroke-width="1" stroke-opacity="0.6" />
+      <line x1="450" y1="150" x2="475" y2="250" stroke="#FFFA65" stroke-width="1" stroke-opacity="0.6" />
+      <line x1="375" y1="150" x2="362.5" y2="250" stroke="#FFFA65" stroke-width="1" stroke-opacity="0.6" />
+      <line x1="425" y1="150" x2="437.5" y2="250" stroke="#FFFA65" stroke-width="1" stroke-opacity="0.6" />
+      <line x1="400" y1="150" x2="400" y2="250" stroke="#FFFA65" stroke-width="1" stroke-opacity="0.6" />
+      
+      <!-- Digital circuit patterns -->
+      <path d="M 350,200 L 375,200 L 375,225 L 400,225 L 400,200 L 425,200 L 425,175 L 450,175" stroke="#FFFA65" stroke-width="1" stroke-opacity="0.8" fill="none" />
+      <path d="M 350,175 L 365,175 L 365,210 L 390,210 L 390,190 L 415,190 L 415,225 L 450,225" stroke="#FFFA65" stroke-width="1" stroke-opacity="0.8" fill="none" />
+      
+      <!-- Connection to pedestal -->
+      <line x1="400" y1="250" x2="400" y2="300" stroke="#FFFA65" stroke-width="2" stroke-opacity="0.8" />
+      <line x1="325" y1="250" x2="300" y2="300" stroke="#FFFA65" stroke-width="1.5" stroke-opacity="0.7" />
+      <line x1="475" y1="250" x2="500" y2="300" stroke="#FFFA65" stroke-width="1.5" stroke-opacity="0.7" />
+    </g>
+    
+    <!-- Sphinx head -->
+    <g id="sphinx-head">
+      <!-- Base of head -->
+      <rect x="375" y="100" width="50" height="50" fill="none" stroke="#FFFA65" stroke-width="3" stroke-opacity="0.9" filter="url(#gold-glow)" />
+      
+      <!-- Face features -->
+      <line x1="385" y1="120" x2="395" y2="120" stroke="#FFFA65" stroke-width="1.5" stroke-opacity="0.9" /> <!-- Left eye -->
+      <line x1="405" y1="120" x2="415" y2="120" stroke="#FFFA65" stroke-width="1.5" stroke-opacity="0.9" /> <!-- Right eye -->
+      <path d="M 390,135 L 410,135" stroke="#FFFA65" stroke-width="1.5" stroke-opacity="0.9" /> <!-- Mouth -->
+      
+      <!-- Headdress/crown -->
+      <path d="M 375,100 L 400,70 L 425,100" fill="none" stroke="#FFFA65" stroke-width="2" stroke-opacity="0.9" />
+      <path d="M 385,100 L 400,80 L 415,100" fill="none" stroke="#FFFA65" stroke-width="1" stroke-opacity="0.7" />
+      
+      <!-- Data glow effect -->
+      <circle cx="400" cy="125" r="25" fill="#FFFA65" fill-opacity="0.1">
+        <animate attributeName="fill-opacity" values="0.1;0.2;0.1" dur="3s" repeatCount="indefinite" />
+      </circle>
+    </g>
+    
+    <!-- Question interface -->
+    <g id="question-interface" transform="translate(400, 200)">
+      <!-- Question display -->
+      <rect x="-150" y="-30" width="300" height="60" fill="none" stroke="#FFFA65" stroke-width="2" stroke-opacity="0.8" />
+      
+      <!-- Changing question text -->
+      <g id="question-text" opacity="1">
+        <animate attributeName="opacity" values="1;0;1" dur="10s" repeatCount="indefinite" />
+        <text x="0" y="-10" font-family="monospace" font-size="14" fill="#FFFA65" text-anchor="middle">WHAT WALKS ON FOUR LEGS</text>
+        <text x="0" y="10" font-family="monospace" font-size="14" fill="#FFFA65" text-anchor="middle">IN THE MORNING, TWO AT NOON</text>
+        <text x="0" y="30" font-family="monospace" font-size="14" fill="#FFFA65" text-anchor="middle">AND THREE IN THE EVENING?</text>
+      </g>
+      
+      <!-- Alternative question that cycles in -->
+      <g id="alt-question" opacity="0">
+        <animate attributeName="opacity" values="0;1;0" dur="10s" repeatCount="indefinite" begin="5s" />
+        <text x="0" y="-10" font-family="monospace" font-size="14" fill="#FFFA65" text-anchor="middle">WHAT IS THE SQUARE ROOT</text>
+        <text x="0" y="10" font-family="monospace" font-size="14" fill="#FFFA65" text-anchor="middle">OF 64 MULTIPLIED BY THE</text>
+        <text x="0" y="30" font-family="monospace" font-size="14" fill="#FFFA65" text-anchor="middle">THIRD PRIME NUMBER?</text>
+      </g>
+    </g>
+    
+    <!-- Energy field -->
+    <g id="energy-field">
+      <!-- Barrier field -->
+      <path d="M 300,300 C 300,200 500,200 500,300" fill="none" stroke="#FFFA65" stroke-width="3" stroke-opacity="0.5" stroke-dasharray="10 5" filter="url(#gold-glow)">
+        <animate attributeName="d" values="M 300,300 C 300,200 500,200 500,300; M 300,300 C 300,220 500,220 500,300; M 300,300 C 300,200 500,200 500,300" dur="4s" repeatCount="indefinite" />
+      </path>
+      
+      <!-- Field particles -->
+      <g id="field-particles" opacity="0.7">
+        <circle cx="350" cy="250" r="3" fill="#FFFA65" fill-opacity="0.8">
+          <animate attributeName="cy" values="250;230;250" dur="2s" repeatCount="indefinite" />
+          <animate attributeName="fill-opacity" values="0.8;0.4;0.8" dur="2s" repeatCount="indefinite" />
+        </circle>
+        
+        <circle cx="400" cy="230" r="3" fill="#FFFA65" fill-opacity="0.8">
+          <animate attributeName="cy" values="230;210;230" dur="3s" repeatCount="indefinite" />
+          <animate attributeName="fill-opacity" values="0.8;0.4;0.8" dur="3s" repeatCount="indefinite" />
+        </circle>
+        
+        <circle cx="450" cy="250" r="3" fill="#FFFA65" fill-opacity="0.8">
+          <animate attributeName="cy" values="250;230;250" dur="2.5s" repeatCount="indefinite" />
+          <animate attributeName="fill-opacity" values="0.8;0.4;0.8" dur="2.5s" repeatCount="indefinite" />
+        </circle>
+      </g>
+    </g>
+    
+    <!-- Answer interface -->
+    <g id="answer-interface" transform="translate(400, 400)">
+      <!-- Input field -->
+      <rect x="-100" y="-20" width="200" height="40" fill="none" stroke="#FFFA65" stroke-width="2" stroke-opacity="0.8" />
+      
+      <!-- Answer prompt -->
+      <text x="0" y="0" font-family="monospace" font-size="14" fill="#FFFA65" text-anchor="middle" opacity="0.8">
+        <animate attributeName="opacity" values="0.8;1;0.8" dur="1.5s" repeatCount="indefinite" />
+        INPUT ANSWER
+      </text>
+      
+      <!-- Input cursor -->
+      <line x1="85" y1="-10" x2="85" y2="10" stroke="#FFFA65" stroke-width="2" stroke-opacity="0.9">
+        <animate attributeName="stroke-opacity" values="0.9;0;0.9" dur="1s" repeatCount="indefinite" />
+      </line>
+    </g>
+    
+    <!-- Execution log -->
+    <g id="execution-log" transform="translate(650, 400)">
+      <!-- Log panel -->
+      <rect x="-120" y="-80" width="120" height="80" fill="none" stroke="#FFFA65" stroke-width="1" stroke-opacity="0.7" />
+      
+      <!-- Log entries -->
+      <text x="-110" y="-60" font-family="monospace" font-size="8" fill="#FFFA65" text-anchor="start">ATTEMPT.1: FAILED</text>
+      <text x="-110" y="-45" font-family="monospace" font-size="8" fill="#FFFA65" text-anchor="start">ATTEMPT.2: FAILED</text>
+      <text x="-110" y="-30" font-family="monospace" font-size="8" fill="#FFFA65" text-anchor="start">TRACE.INITIATED: TRUE</text>
+      <text x="-110" y="-15" font-family="monospace" font-size="8" fill="#FFFA65" text-anchor="start">REMAINING.TRIES: 1</text>
+    </g>
+  </g>
+  
+  <!-- Access counters and IC status -->
+  <g id="system-status">
+    <!-- Access stats -->
+    <g id="access-stats" transform="translate(150, 400)">
+      <!-- Stats panel -->
+      <rect x="-120" y="-80" width="120" height="80" fill="none" stroke="#FFFA65" stroke-width="1" stroke-opacity="0.7" />
+      
+      <!-- Stats entries -->
+      <text x="-110" y="-60" font-family="monospace" font-size="8" fill="#FFFA65" text-anchor="start">ICE.TYPE: CODE GATE</text>
+      <text x="-110" y="-45" font-family="monospace" font-size="8" fill="#FFFA65" text-anchor="start">ICE.STRENGTH: 4</text>
+      <text x="-110" y="-30" font-family="monospace" font-size="8" fill="#FFFA65" text-anchor="start">BREAK.COST: 7 CREDITS</text>
+      <text x="-110" y="-15" font-family="monospace" font-size="8" fill="#FFFA65" text-anchor="start">ICE.ROUTINE: RIDDLE</text>
+    </g>
+    
+    <!-- Security level -->
+    <g id="security-level" transform="translate(400, 50)">
+      <circle cx="0" cy="0" r="20" fill="none" stroke="#FFFA65" stroke-width="2" stroke-opacity="0.9" filter="url(#gold-glow)" />
+      <text x="0" y="5" font-family="monospace" font-size="16" fill="#FFFA65" text-anchor="middle">3</text>
+      <text x="0" y="35" font-family="monospace" font-size="12" fill="#FFFA65" text-anchor="middle">SECURITY LEVEL</text>
+    </g>
+  </g>
+  
+  <!-- Data flow patterns -->
+  <g id="data-patterns" opacity="0.3">
+    <!-- Binary data flow -->
+    <text x="100" y="100" font-family="monospace" font-size="8" fill="#FFFA65">01001111</text>
+    <text x="120" y="120" font-family="monospace" font-size="8" fill="#FFFA65">10110111</text>
+    <text x="140" y="140" font-family="monospace" font-size="8" fill="#FFFA65">11100101</text>
+    
+    <text x="600" y="100" font-family="monospace" font-size="8" fill="#FFFA65">11010001</text>
+    <text x="580" y="120" font-family="monospace" font-size="8" fill="#FFFA65">00101100</text>
+    <text x="560" y="140" font-family="monospace" font-size="8" fill="#FFFA65">10011010</text>
+    
+    <animate attributeName="opacity" values="0.3;0.5;0.3" dur="5s" repeatCount="indefinite" />
+  </g>
+  
+  <!-- Logic symbols scattered around -->
+  <g id="logic-symbols" opacity="0.4">
+    <!-- Logic patterns -->
+    <path d="M 150,200 C 160,190 170,190 180,200 C 170,210 160,210 150,200 Z" stroke="#FFFA65" stroke-width="1" fill="none" />
+    <path d="M 600,200 L 620,190 L 620,210 Z" stroke="#FFFA65" stroke-width="1" fill="none" />
+    <path d="M 200,150 L 200,170 L 220,160 Z" stroke="#FFFA65" stroke-width="1" fill="none" />
+    <path d="M 550,150 L 570,150 L 570,170 L 550,170 Z" stroke="#FFFA65" stroke-width="1" fill="none" />
+    
+    <animate attributeName="opacity" values="0.4;0.6;0.4" dur="4s" repeatCount="indefinite" />
+  </g>
+  
+  <!-- HUD elements -->
+  <g id="hud-elements">
+    <!-- Top status bar -->
+    <rect x="100" y="20" width="600" height="30" fill="none" stroke="#FFFA65" stroke-width="1" stroke-opacity="0.7" />
+    <text x="400" y="40" font-family="monospace" font-size="14" fill="#FFFA65" text-anchor="middle">SPHINX.ICE ENCOUNTERED</text>
+    
+    <!-- Warning indicators -->
+    <g id="warnings" transform="translate(100, 70)">
+      <text x="0" y="0" font-family="monospace" font-size="10" fill="#FF0000" text-anchor="start">WARNING: PUZZLE ICE REQUIRES SOLUTION</text>
+      <text x="0" y="20" font-family="monospace" font-size="10" fill="#FF0000" text-anchor="start">WARNING: FAILED ATTEMPTS TRIGGER TRACE</text>
+    </g>
+    
+    <!-- Tool suggestion -->
+    <g id="tool-suggestion" transform="translate(700, 70)">
+      <text x="0" y="0" font-family="monospace" font-size="10" fill="#00FFFF" text-anchor="end">RECOMMENDED: DECODER</text>
+      <text x="0" y="20" font-family="monospace" font-size="10" fill="#00FFFF" text-anchor="end">ALTERNATE: RIDDLING PROGRAM</text>
+    </g>
+  </g>
+  
+  <!-- Corporate branding -->
+  <g id="corporate-branding" transform="translate(700, 450)">
+    <circle cx="0" cy="0" r="15" fill="none" stroke="#FFFA65" stroke-width="1.5" />
+    <text x="0" y="5" font-family="monospace" font-size="10" fill="#FFFA65" text-anchor="middle">NBN</text>
+    <text x="0" y="25" font-family="monospace" font-size="8" fill="#FFFA65" text-anchor="middle">SPHINX v2.6</text>
+  </g>
+  
+  <!-- Netrunner-style card ornaments -->
+  <g id="netrunner-style">
+    <!-- Corner brackets -->
+    <path d="M 20,20 L 50,20 L 50,50" stroke="#FFFA65" stroke-width="2" fill="none" />
+    <path d="M 780,20 L 750,20 L 750,50" stroke="#FFFA65" stroke-width="2" fill="none" />
+    <path d="M 20,480 L 50,480 L 50,450" stroke="#FFFA65" stroke-width="2" fill="none" />
+    <path d="M 780,480 L 750,480 L 750,450" stroke="#FFFA65" stroke-width="2" fill="none" />
+  </g>
+</svg>

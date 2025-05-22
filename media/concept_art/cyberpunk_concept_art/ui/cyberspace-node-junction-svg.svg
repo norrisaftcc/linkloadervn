@@ -1,0 +1,277 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient and definitions -->
+  <defs>
+    <radialGradient id="bg-gradient" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#0A0A12" />
+      <stop offset="100%" stop-color="#000000" />
+    </radialGradient>
+    
+    <!-- Glow filters with different intensities -->
+    <filter id="glow-strong" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    
+    <filter id="glow-medium" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    
+    <filter id="glow-soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="500" fill="url(#bg-gradient)" />
+  
+  <!-- Deep background grid -->
+  <g id="deep-grid" opacity="0.3">
+    <!-- Vertical lines -->
+    <line x1="100" y1="0" x2="100" y2="500" stroke="#808080" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="200" y1="0" x2="200" y2="500" stroke="#808080" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="300" y1="0" x2="300" y2="500" stroke="#808080" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="400" y1="0" x2="400" y2="500" stroke="#808080" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="500" y1="0" x2="500" y2="500" stroke="#808080" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="600" y1="0" x2="600" y2="500" stroke="#808080" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="700" y1="0" x2="700" y2="500" stroke="#808080" stroke-width="0.5" stroke-opacity="0.2" />
+    
+    <!-- Horizontal lines -->
+    <line x1="0" y1="100" x2="800" y2="100" stroke="#808080" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="0" y1="200" x2="800" y2="200" stroke="#808080" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="0" y1="300" x2="800" y2="300" stroke="#808080" stroke-width="0.5" stroke-opacity="0.2" />
+    <line x1="0" y1="400" x2="800" y2="400" stroke="#808080" stroke-width="0.5" stroke-opacity="0.2" />
+  </g>
+  
+  <!-- Main node structure -->
+  <g id="node-junction">
+    <!-- Central hub -->
+    <g id="central-hub">
+      <!-- Main circle -->
+      <circle cx="400" cy="250" r="70" fill="none" stroke="#9980FA" stroke-width="3" stroke-opacity="0.9" filter="url(#glow-medium)" />
+      
+      <!-- Inner rings -->
+      <circle cx="400" cy="250" r="50" fill="none" stroke="#9980FA" stroke-width="2" stroke-opacity="0.7" />
+      <circle cx="400" cy="250" r="30" fill="none" stroke="#9980FA" stroke-width="1.5" stroke-opacity="0.5" />
+      
+      <!-- Core -->
+      <circle cx="400" cy="250" r="15" fill="#9980FA" fill-opacity="0.6" filter="url(#glow-soft)">
+        <animate attributeName="r" values="15;18;15" dur="3s" repeatCount="indefinite" />
+        <animate attributeName="fill-opacity" values="0.6;0.8;0.6" dur="3s" repeatCount="indefinite" />
+      </circle>
+      
+      <!-- Rotating elements -->
+      <g id="rotating-elements">
+        <circle cx="400" cy="250" r="60" fill="none" stroke="#9980FA" stroke-width="1" stroke-opacity="0.4" stroke-dasharray="10 5" />
+        <animateTransform 
+          attributeName="transform" 
+          type="rotate" 
+          from="0 400 250" 
+          to="360 400 250" 
+          dur="20s" 
+          repeatCount="indefinite" />
+      </g>
+      
+      <!-- Pulse animation -->
+      <circle cx="400" cy="250" r="80" fill="none" stroke="#9980FA" stroke-width="1" stroke-opacity="0">
+        <animate attributeName="r" values="70;120;70" dur="4s" repeatCount="indefinite" />
+        <animate attributeName="stroke-opacity" values="0.5;0;0.5" dur="4s" repeatCount="indefinite" />
+      </circle>
+    </g>
+    
+    <!-- Connection pathways from center -->
+    <g id="pathways">
+      <!-- Left pathway -->
+      <path d="M 330,250 L 100,250" stroke="#9980FA" stroke-width="3" stroke-opacity="0.8" fill="none" filter="url(#glow-soft)" />
+      <path d="M 330,260 L 100,260" stroke="#9980FA" stroke-width="1" stroke-opacity="0.5" fill="none" />
+      <path d="M 330,240 L 100,240" stroke="#9980FA" stroke-width="1" stroke-opacity="0.5" fill="none" />
+      
+      <!-- Right pathway -->
+      <path d="M 470,250 L 700,250" stroke="#9980FA" stroke-width="3" stroke-opacity="0.8" fill="none" filter="url(#glow-soft)" />
+      <path d="M 470,260 L 700,260" stroke="#9980FA" stroke-width="1" stroke-opacity="0.5" fill="none" />
+      <path d="M 470,240 L 700,240" stroke="#9980FA" stroke-width="1" stroke-opacity="0.5" fill="none" />
+      
+      <!-- Top pathway -->
+      <path d="M 400,180 L 400,50" stroke="#9980FA" stroke-width="3" stroke-opacity="0.8" fill="none" filter="url(#glow-soft)" />
+      <path d="M 410,180 L 410,50" stroke="#9980FA" stroke-width="1" stroke-opacity="0.5" fill="none" />
+      <path d="M 390,180 L 390,50" stroke="#9980FA" stroke-width="1" stroke-opacity="0.5" fill="none" />
+      
+      <!-- Bottom pathway -->
+      <path d="M 400,320 L 400,450" stroke="#9980FA" stroke-width="3" stroke-opacity="0.8" fill="none" filter="url(#glow-soft)" />
+      <path d="M 410,320 L 410,450" stroke="#9980FA" stroke-width="1" stroke-opacity="0.5" fill="none" />
+      <path d="M 390,320 L 390,450" stroke="#9980FA" stroke-width="1" stroke-opacity="0.5" fill="none" />
+    </g>
+    
+    <!-- Data flow animation -->
+    <g id="data-packets">
+      <!-- Left to center -->
+      <circle cx="100" cy="250" r="5" fill="#9980FA" fill-opacity="0.8">
+        <animate attributeName="cx" values="100;330;100" dur="5s" repeatCount="indefinite" />
+        <animate attributeName="fill-opacity" values="0.8;0.4;0.8" dur="5s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="150" cy="250" r="3" fill="#9980FA" fill-opacity="0.6">
+        <animate attributeName="cx" values="150;330;150" dur="4s" repeatCount="indefinite" />
+        <animate attributeName="fill-opacity" values="0.6;0.3;0.6" dur="4s" repeatCount="indefinite" />
+      </circle>
+      
+      <!-- Right to center -->
+      <circle cx="700" cy="250" r="5" fill="#9980FA" fill-opacity="0.8">
+        <animate attributeName="cx" values="700;470;700" dur="5s" repeatCount="indefinite" />
+        <animate attributeName="fill-opacity" values="0.8;0.4;0.8" dur="5s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="650" cy="250" r="3" fill="#9980FA" fill-opacity="0.6">
+        <animate attributeName="cx" values="650;470;650" dur="4.5s" repeatCount="indefinite" />
+        <animate attributeName="fill-opacity" values="0.6;0.3;0.6" dur="4.5s" repeatCount="indefinite" />
+      </circle>
+      
+      <!-- Top to center -->
+      <circle cx="400" cy="50" r="5" fill="#9980FA" fill-opacity="0.8">
+        <animate attributeName="cy" values="50;180;50" dur="4s" repeatCount="indefinite" />
+        <animate attributeName="fill-opacity" values="0.8;0.4;0.8" dur="4s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="400" cy="100" r="3" fill="#9980FA" fill-opacity="0.6">
+        <animate attributeName="cy" values="100;180;100" dur="3.5s" repeatCount="indefinite" />
+        <animate attributeName="fill-opacity" values="0.6;0.3;0.6" dur="3.5s" repeatCount="indefinite" />
+      </circle>
+      
+      <!-- Bottom to center -->
+      <circle cx="400" cy="450" r="5" fill="#9980FA" fill-opacity="0.8">
+        <animate attributeName="cy" values="450;320;450" dur="4.5s" repeatCount="indefinite" />
+        <animate attributeName="fill-opacity" values="0.8;0.4;0.8" dur="4.5s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="400" cy="400" r="3" fill="#9980FA" fill-opacity="0.6">
+        <animate attributeName="cy" values="400;320;400" dur="4s" repeatCount="indefinite" />
+        <animate attributeName="fill-opacity" values="0.6;0.3;0.6" dur="4s" repeatCount="indefinite" />
+      </circle>
+    </g>
+  </g>
+  
+  <!-- Secondary nodes at edges -->
+  <g id="secondary-nodes">
+    <!-- Left node -->
+    <g id="left-node" transform="translate(100, 250)">
+      <circle cx="0" cy="0" r="20" fill="none" stroke="#00FF41" stroke-width="2" stroke-opacity="0.8" />
+      <circle cx="0" cy="0" r="10" fill="#00FF41" fill-opacity="0.5" />
+      <text x="0" y="35" font-family="monospace" font-size="8" fill="#00FF41" text-anchor="middle">DATABASE.ACCESS</text>
+    </g>
+    
+    <!-- Right node -->
+    <g id="right-node" transform="translate(700, 250)">
+      <circle cx="0" cy="0" r="20" fill="none" stroke="#FF00FF" stroke-width="2" stroke-opacity="0.8" />
+      <circle cx="0" cy="0" r="10" fill="#FF00FF" fill-opacity="0.5" />
+      <text x="0" y="35" font-family="monospace" font-size="8" fill="#FF00FF" text-anchor="middle">SECURITY.GRID</text>
+    </g>
+    
+    <!-- Top node -->
+    <g id="top-node" transform="translate(400, 50)">
+      <circle cx="0" cy="0" r="20" fill="none" stroke="#0984E3" stroke-width="2" stroke-opacity="0.8" />
+      <circle cx="0" cy="0" r="10" fill="#0984E3" fill-opacity="0.5" />
+      <text x="0" y="35" font-family="monospace" font-size="8" fill="#0984E3" text-anchor="middle">ADMIN.SECTOR</text>
+    </g>
+    
+    <!-- Bottom node -->
+    <g id="bottom-node" transform="translate(400, 450)">
+      <circle cx="0" cy="0" r="20" fill="none" stroke="#FF9F43" stroke-width="2" stroke-opacity="0.8" />
+      <circle cx="0" cy="0" r="10" fill="#FF9F43" fill-opacity="0.5" />
+      <text x="0" y="35" font-family="monospace" font-size="8" fill="#FF9F43" text-anchor="middle">PUBLIC.ACCESS</text>
+    </g>
+  </g>
+  
+  <!-- Proximal ICE warnings -->
+  <g id="ice-warnings">
+    <!-- ICE warning - right path -->
+    <g id="right-ice" opacity="0.8">
+      <polygon points="600,230 625,250 600,270" fill="none" stroke="#FF00FF" stroke-width="2" />
+      <text x="600" y="210" font-family="monospace" font-size="8" fill="#FF00FF" text-anchor="middle">BLACK.ICE</text>
+      <text x="600" y="290" font-family="monospace" font-size="8" fill="#FF00FF" text-anchor="middle">DETECTED</text>
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite" />
+    </g>
+    
+    <!-- ICE warning - top path -->
+    <g id="top-ice" opacity="0.8">
+      <rect x="380" y="100" width="40" height="30" fill="none" stroke="#0984E3" stroke-width="2" />
+      <text x="400" y="90" font-family="monospace" font-size="8" fill="#0984E3" text-anchor="middle">SENTRY.ICE</text>
+      <text x="400" y="145" font-family="monospace" font-size="8" fill="#0984E3" text-anchor="middle">ACTIVE</text>
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite" />
+    </g>
+  </g>
+  
+  <!-- System messages -->
+  <g id="system-messages">
+    <!-- Node connection counters -->
+    <text x="400" y="245" font-family="monospace" font-size="10" fill="#F8F9FA" text-anchor="middle">NEXUS.POINT</text>
+    <text x="400" y="260" font-family="monospace" font-size="10" fill="#F8F9FA" text-anchor="middle">4 CONNECTIONS</text>
+    
+    <!-- System status -->
+    <g id="status-readout">
+      <text x="400" y="300" font-family="monospace" font-size="8" fill="#FFFA65" text-anchor="middle">SYSTEM STATUS: OPERATIONAL</text>
+      <text x="400" y="315" font-family="monospace" font-size="8" fill="#FFFA65" text-anchor="middle">TRAFFIC: MODERATE</text>
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="4s" repeatCount="indefinite" />
+    </g>
+  </g>
+  
+  <!-- HUD Elements -->
+  <g id="hud-elements">
+    <!-- Top-left HUD -->
+    <g id="connection-status" transform="translate(20, 30)">
+      <text x="0" y="0" font-family="monospace" font-size="12" fill="#00FF41" text-anchor="start">CONNECTION: STABLE</text>
+      <text x="0" y="20" font-family="monospace" font-size="12" fill="#00FF41" text-anchor="start">SIGNAL: 94%</text>
+      <text x="0" y="40" font-family="monospace" font-size="12" fill="#00FF41" text-anchor="start">LOCATION: NEXUS.327.J</text>
+    </g>
+    
+    <!-- Bottom-right debug -->
+    <g id="debug-info" transform="translate(780, 480)">
+      <text x="0" y="0" font-family="monospace" font-size="8" fill="#808080" text-anchor="end">DEBUG: MEMORY.USE:37%</text>
+      <text x="0" y="-15" font-family="monospace" font-size="8" fill="#808080" text-anchor="end">DEBUG: CPU.LOAD:22%</text>
+    </g>
+    
+    <!-- Top-right warning -->
+    <g id="security-warning" transform="translate(780, 30)">
+      <text x="0" y="0" font-family="monospace" font-size="12" fill="#FF0000" text-anchor="end">
+        <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite" />
+        WARNING: ICE PROXIMITY
+      </text>
+      <text x="0" y="20" font-family="monospace" font-size="12" fill="#FF0000" text-anchor="end">DEFENSIVE SYSTEMS ONLINE</text>
+    </g>
+    
+    <!-- Central navigation indicator -->
+    <g id="navigation" transform="translate(400, 20)">
+      <text x="0" y="0" font-family="monospace" font-size="14" fill="#FFFA65" text-anchor="middle">CHOOSE PATH</text>
+    </g>
+  </g>
+  
+  <!-- Netrunner-style card ornaments -->
+  <g id="netrunner-style">
+    <!-- Corner brackets in card style -->
+    <path d="M 10,10 L 50,10 L 50,15" stroke="#00FFFF" stroke-width="2" fill="none" />
+    <path d="M 790,10 L 750,10 L 750,15" stroke="#00FFFF" stroke-width="2" fill="none" />
+    <path d="M 10,490 L 50,490 L 50,485" stroke="#00FFFF" stroke-width="2" fill="none" />
+    <path d="M 790,490 L 750,490 L 750,485" stroke="#00FFFF" stroke-width="2" fill="none" />
+    
+    <!-- Card frame elements -->
+    <rect x="30" y="460" width="200" height="25" fill="none" stroke="#00FFFF" stroke-width="1" />
+    <text x="130" y="477" font-family="monospace" font-size="10" fill="#00FFFF" text-anchor="middle">CONSOLE.STATUS: ONLINE</text>
+    
+    <rect x="570" y="460" width="200" height="25" fill="none" stroke="#00FFFF" stroke-width="1" />
+    <text x="670" y="477" font-family="monospace" font-size="10" fill="#00FFFF" text-anchor="middle">DECK.INTEGRITY: 100%</text>
+    
+    <!-- Corporate logo (generic) -->
+    <g id="corp-logo" transform="translate(400, 470)">
+      <circle cx="0" cy="0" r="15" fill="none" stroke="#9980FA" stroke-width="2" />
+      <path d="M -10,-10 L 10,10 M -10,10 L 10,-10" stroke="#9980FA" stroke-width="2" fill="none" />
+      <text x="0" y="25" font-family="monospace" font-size="8" fill="#9980FA" text-anchor="middle">ARES MACROTECH</text>
+    </g>
+  </g>
+  
+  <!-- Ambient data visualization -->
+  <g id="ambient-data" opacity="0.2">
+    <!-- Binary data floating -->
+    <text x="200" y="100" font-family="monospace" font-size="8" fill="#F8F9FA">01101</text>
+    <text x="600" y="120" font-family="monospace" font-size="8" fill="#F8F9FA">10011</text>
+    <text x="300" y="400" font-family="monospace" font-size="8" fill="#F8F9FA">11010</text>
+    <text x="500" y="380" font-family="monospace" font-size="8" fill="#F8F9FA">00101</text>
+    
+    <animate attributeName="opacity" values="0.2;0.3;0.2" dur="5s" repeatCount="indefinite" />
+  </g>
+</svg>

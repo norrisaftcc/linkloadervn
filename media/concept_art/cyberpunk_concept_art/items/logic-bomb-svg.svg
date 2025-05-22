@@ -1,0 +1,333 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background and definitions -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0A0A12" />
+      <stop offset="70%" stop-color="#000000" />
+    </linearGradient>
+    
+    <!-- Glow filters -->
+    <filter id="teal-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feFlood flood-color="#00FFFF" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="glow"/>
+      <feComposite in="SourceGraphic" in2="glow" operator="over" />
+    </filter>
+    
+    <filter id="orange-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feFlood flood-color="#FF9F43" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="glow"/>
+      <feComposite in="SourceGraphic" in2="glow" operator="over" />
+    </filter>
+    
+    <filter id="purple-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feFlood flood-color="#9980FA" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="glow"/>
+      <feComposite in="SourceGraphic" in2="glow" operator="over" />
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="500" fill="url(#bg-gradient)" />
+  
+  <!-- Perspective floor grid -->
+  <g id="floor-grid">
+    <!-- Horizon line -->
+    <line x1="0" y1="250" x2="800" y2="250" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.5" />
+    
+    <!-- Perspective grid - emanating from center -->
+    <line x1="400" y1="250" x2="0" y2="500" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="400" y1="250" x2="100" y2="500" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="400" y1="250" x2="200" y2="500" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="400" y1="250" x2="300" y2="500" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="400" y1="250" x2="500" y2="500" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="400" y1="250" x2="600" y2="500" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="400" y1="250" x2="700" y2="500" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="400" y1="250" x2="800" y2="500" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" />
+    
+    <!-- Perspective grid - upper portion -->
+    <line x1="400" y1="250" x2="0" y2="0" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="400" y1="250" x2="100" y2="0" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="400" y1="250" x2="200" y2="0" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="400" y1="250" x2="300" y2="0" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="400" y1="250" x2="500" y2="0" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="400" y1="250" x2="600" y2="0" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="400" y1="250" x2="700" y2="0" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="400" y1="250" x2="800" y2="0" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" />
+    
+    <!-- Horizontal grid lines with perspective -->
+    <path d="M 0,300 C 200,290 600,290 800,300" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" fill="none" />
+    <path d="M 0,350 C 200,330 600,330 800,350" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" fill="none" />
+    <path d="M 0,400 C 200,370 600,370 800,400" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" fill="none" />
+    <path d="M 0,450 C 200,410 600,410 800,450" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" fill="none" />
+    
+    <path d="M 0,200 C 200,210 600,210 800,200" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" fill="none" />
+    <path d="M 0,150 C 200,170 600,170 800,150" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" fill="none" />
+    <path d="M 0,100 C 200,130 600,130 800,100" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" fill="none" />
+    <path d="M 0,50 C 200,90 600,90 800,50" stroke="#00FFFF" stroke-width="1" stroke-opacity="0.3" fill="none" />
+  </g>
+  
+  <!-- Main LOGIC.BOMB entity centered in view -->
+  <g id="logic-bomb">
+    <!-- Outer cube structure -->
+    <g id="outer-cube">
+      <!-- Front face -->
+      <rect x="300" y="150" width="200" height="200" fill="none" stroke="#55EFC4" stroke-width="3" stroke-opacity="0.9" filter="url(#teal-glow)" />
+      
+      <!-- Perspective lines to back face -->
+      <line x1="300" y1="150" x2="350" y2="100" stroke="#55EFC4" stroke-width="2" stroke-opacity="0.7" />
+      <line x1="500" y1="150" x2="550" y2="100" stroke="#55EFC4" stroke-width="2" stroke-opacity="0.7" />
+      <line x1="300" y1="350" x2="350" y2="300" stroke="#55EFC4" stroke-width="2" stroke-opacity="0.7" />
+      <line x1="500" y1="350" x2="550" y2="300" stroke="#55EFC4" stroke-width="2" stroke-opacity="0.7" />
+      
+      <!-- Back face -->
+      <rect x="350" y="100" width="200" height="200" fill="none" stroke="#55EFC4" stroke-width="2" stroke-opacity="0.5" stroke-dasharray="5,5" />
+      
+      <!-- Cube rotation animation -->
+      <animateTransform 
+        attributeName="transform" 
+        type="rotate" 
+        from="0 400 250" 
+        to="360 400 250" 
+        dur="20s" 
+        repeatCount="indefinite" />
+    </g>
+    
+    <!-- Middle nested cube -->
+    <g id="middle-cube">
+      <rect x="350" y="200" width="100" height="100" fill="none" stroke="#FFFA65" stroke-width="2" stroke-opacity="0.8" filter="url(#orange-glow)" />
+      
+      <!-- Perspective lines to back face -->
+      <line x1="350" y1="200" x2="375" y2="175" stroke="#FFFA65" stroke-width="1.5" stroke-opacity="0.6" />
+      <line x1="450" y1="200" x2="475" y2="175" stroke="#FFFA65" stroke-width="1.5" stroke-opacity="0.6" />
+      <line x1="350" y1="300" x2="375" y2="275" stroke="#FFFA65" stroke-width="1.5" stroke-opacity="0.6" />
+      <line x1="450" y1="300" x2="475" y2="275" stroke="#FFFA65" stroke-width="1.5" stroke-opacity="0.6" />
+      
+      <!-- Back face -->
+      <rect x="375" y="175" width="100" height="100" fill="none" stroke="#FFFA65" stroke-width="1.5" stroke-opacity="0.4" stroke-dasharray="4,4" />
+      
+      <!-- Opposite rotation to outer cube -->
+      <animateTransform 
+        attributeName="transform" 
+        type="rotate" 
+        from="0 400 250" 
+        to="-360 400 250" 
+        dur="10s" 
+        repeatCount="indefinite" />
+    </g>
+    
+    <!-- Inner cube with paradox core -->
+    <g id="inner-cube">
+      <rect x="375" y="225" width="50" height="50" fill="none" stroke="#FF0000" stroke-width="2" stroke-opacity="0.9" />
+      
+      <!-- Core paradox element (glitching) -->
+      <g id="paradox-core">
+        <!-- X cross -->
+        <path d="M 375,225 L 425,275 M 425,225 L 375,275" stroke="#FF0000" stroke-width="2" stroke-opacity="0.9" />
+        
+        <!-- Circle that can't exist (impossible geometry) -->
+        <circle cx="400" cy="250" r="25" fill="none" stroke="#FF0000" stroke-width="2" stroke-opacity="0" stroke-dasharray="1,1">
+          <animate attributeName="stroke-opacity" values="0;0.9;0" dur="2s" repeatCount="indefinite" />
+          <animate attributeName="r" values="25;35;25" dur="2s" repeatCount="indefinite" />
+        </circle>
+        
+        <!-- Glitchy text in the center (paradox message) -->
+        <text x="400" y="250" font-family="monospace" font-size="8" fill="#FF0000" text-anchor="middle" dominant-baseline="middle" opacity="0">
+          <animate attributeName="opacity" values="0;0.9;0" dur="1s" repeatCount="indefinite" />
+          ERROR
+        </text>
+        
+        <!-- Random rotation -->
+        <animateTransform 
+          attributeName="transform" 
+          type="rotate" 
+          values="0 400 250; 180 400 250; 90 400 250; 270 400 250; 0 400 250" 
+          dur="5s" 
+          repeatCount="indefinite" />
+      </g>
+    </g>
+    
+    <!-- Fractal unfolding animation -->
+    <g id="fractal-unfolding" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.8;0" dur="10s" repeatCount="indefinite" />
+      
+      <!-- Fractal patterns emanating from center -->
+      <path d="M 400,250 L 450,200 L 500,225 L 475,275" stroke="#55EFC4" stroke-width="1" stroke-opacity="0.7" fill="none" />
+      <path d="M 400,250 L 350,200 L 300,225 L 325,275" stroke="#55EFC4" stroke-width="1" stroke-opacity="0.7" fill="none" />
+      <path d="M 400,250 L 450,300 L 500,275 L 475,225" stroke="#55EFC4" stroke-width="1" stroke-opacity="0.7" fill="none" />
+      <path d="M 400,250 L 350,300 L 300,275 L 325,225" stroke="#55EFC4" stroke-width="1" stroke-opacity="0.7" fill="none" />
+      
+      <!-- Smaller cubes spawning -->
+      <rect x="460" y="160" width="40" height="40" fill="none" stroke="#55EFC4" stroke-width="1" />
+      <rect x="300" y="160" width="40" height="40" fill="none" stroke="#55EFC4" stroke-width="1" />
+      <rect x="460" y="300" width="40" height="40" fill="none" stroke="#55EFC4" stroke-width="1" />
+      <rect x="300" y="300" width="40" height="40" fill="none" stroke="#55EFC4" stroke-width="1" />
+    </g>
+  </g>
+  
+  <!-- Digital environment effects -->
+  <g id="digital-effects">
+    <!-- Floating code fragments -->
+    <g id="code-fragments" opacity="0.5">
+      <text x="200" y="150" font-family="monospace" font-size="8" fill="#55EFC4">if (condition == true) {</text>
+      <text x="220" y="165" font-family="monospace" font-size="8" fill="#55EFC4">  return false;</text>
+      <text x="200" y="180" font-family="monospace" font-size="8" fill="#55EFC4">}</text>
+      
+      <text x="550" y="200" font-family="monospace" font-size="8" fill="#55EFC4">while (x != y) {</text>
+      <text x="570" y="215" font-family="monospace" font-size="8" fill="#55EFC4">  x = y;</text>
+      <text x="570" y="230" font-family="monospace" font-size="8" fill="#55EFC4">  y = x + 1;</text>
+      <text x="550" y="245" font-family="monospace" font-size="8" fill="#55EFC4">}</text>
+      
+      <text x="150" y="330" font-family="monospace" font-size="8" fill="#55EFC4">function paradox() {</text>
+      <text x="170" y="345" font-family="monospace" font-size="8" fill="#55EFC4">  return !paradox();</text>
+      <text x="150" y="360" font-family="monospace" font-size="8" fill="#55EFC4">}</text>
+      
+      <animate attributeName="opacity" values="0.5;0.7;0.5" dur="5s" repeatCount="indefinite" />
+    </g>
+    
+    <!-- Visual glitches -->
+    <g id="glitches">
+      <!-- Random rectangles that appear and disappear -->
+      <rect x="380" y="235" width="40" height="5" fill="#FF0000" opacity="0">
+        <animate attributeName="opacity" values="0;0.7;0" dur="0.2s" repeatCount="indefinite" begin="1s" />
+      </rect>
+      
+      <rect x="390" y="255" width="20" height="5" fill="#FF0000" opacity="0">
+        <animate attributeName="opacity" values="0;0.7;0" dur="0.3s" repeatCount="indefinite" begin="3s" />
+      </rect>
+      
+      <rect x="375" y="245" width="50" height="3" fill="#FF0000" opacity="0">
+        <animate attributeName="opacity" values="0;0.7;0" dur="0.1s" repeatCount="indefinite" begin="5s" />
+      </rect>
+      
+      <!-- Screen tearing effect -->
+      <path d="M 350,240 C 375,260 425,230 450,250" stroke="#FFFFFF" stroke-width="1" opacity="0">
+        <animate attributeName="opacity" values="0;0.3;0" dur="0.5s" repeatCount="indefinite" begin="7s" />
+      </path>
+    </g>
+    
+    <!-- Frame rate drops visualization -->
+    <g id="frame-drops" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.5;0" dur="8s" repeatCount="indefinite" />
+      
+      <rect x="0" y="0" width="800" height="500" fill="#55EFC4" fill-opacity="0.1" />
+      <text x="400" y="50" font-family="monospace" font-size="14" fill="#FF0000" text-anchor="middle">PROCESSING LOAD: CRITICAL</text>
+      <text x="400" y="75" font-family="monospace" font-size="12" fill="#FF0000" text-anchor="middle">FRAME RATE: 12 FPS</text>
+    </g>
+  </g>
+  
+  <!-- Recursive imagery -->
+  <g id="recursive-images" opacity="0">
+    <animate attributeName="opacity" values="0;0;0;0.7;0" dur="15s" repeatCount="indefinite" />
+    
+    <!-- Multiple nested copies of the main cube, getting smaller -->
+    <g transform="translate(400, 250) scale(0.8) translate(-400, -250)">
+      <rect x="375" y="225" width="50" height="50" fill="none" stroke="#55EFC4" stroke-width="1" stroke-opacity="0.7" />
+      <path d="M 375,225 L 425,275 M 425,225 L 375,275" stroke="#55EFC4" stroke-width="1" stroke-opacity="0.7" />
+    </g>
+    
+    <g transform="translate(400, 250) scale(0.6) translate(-400, -250)">
+      <rect x="375" y="225" width="50" height="50" fill="none" stroke="#55EFC4" stroke-width="1" stroke-opacity="0.5" />
+      <path d="M 375,225 L 425,275 M 425,225 L 375,275" stroke="#55EFC4" stroke-width="1" stroke-opacity="0.5" />
+    </g>
+    
+    <g transform="translate(400, 250) scale(0.4) translate(-400, -250)">
+      <rect x="375" y="225" width="50" height="50" fill="none" stroke="#55EFC4" stroke-width="1" stroke-opacity="0.3" />
+      <path d="M 375,225 L 425,275 M 425,225 L 375,275" stroke="#55EFC4" stroke-width="1" stroke-opacity="0.3" />
+    </g>
+  </g>
+  
+  <!-- HUD and system messages -->
+  <g id="hud-elements">
+    <!-- Top status bar -->
+    <rect x="100" y="20" width="600" height="30" fill="none" stroke="#FFFA65" stroke-width="1" stroke-opacity="0.7" />
+    <text x="400" y="40" font-family="monospace" font-size="14" fill="#FFFA65" text-anchor="middle">LOGIC TRAP DETECTED</text>
+    
+    <!-- Warning messages -->
+    <g id="warning-messages" transform="translate(160, 70)">
+      <text x="0" y="0" font-family="monospace" font-size="12" fill="#FF0000" text-anchor="start">WARNING: PARADOX LOOP IDENTIFIED</text>
+      <text x="0" y="20" font-family="monospace" font-size="12" fill="#FF0000" text-anchor="start">WARNING: CPU CYCLES AT RISK</text>
+      <text x="0" y="40" font-family="monospace" font-size="12" fill="#FF0000" text-anchor="start">WARNING: LOGICAL FALLACY DEFENSE REQUIRED</text>
+    </g>
+    
+    <!-- System status -->
+    <g id="system-status" transform="translate(640, 70)">
+      <text x="0" y="0" font-family="monospace" font-size="12" fill="#00FFFF" text-anchor="end">SYSTEM: ANALYZING</text>
+      <text x="0" y="20" font-family="monospace" font-size="12" fill="#00FFFF" text-anchor="end">MEMORY: 78% ALLOCATED</text>
+      <text x="0" y="40" font-family="monospace" font-size="12" fill="#00FFFF" text-anchor="end">SECURITY: COMPROMISED</text>
+    </g>
+    
+    <!-- Bottom control panel -->
+    <g id="control-panel">
+      <rect x="250" y="430" width="300" height="50" fill="none" stroke="#00FFFF" stroke-width="2" />
+      <text x="400" y="450" font-family="monospace" font-size="14" fill="#00FFFF" text-anchor="middle">LOGICAL ANALYSIS IN PROGRESS</text>
+      <text x="400" y="470" font-family="monospace" font-size="12" fill="#00FFFF" text-anchor="middle">IDENTIFY CORE FALLACY TO DISARM</text>
+    </g>
+    
+    <!-- Progress indicator -->
+    <g id="progress-indicator" transform="translate(400, 400)">
+      <circle cx="0" cy="0" r="15" fill="none" stroke="#FFFA65" stroke-width="2" />
+      <path d="M 0,-15 A 15 15 0 0 1 13,7.5" stroke="#FFFA65" stroke-width="2" fill="none">
+        <animateTransform 
+          attributeName="transform" 
+          type="rotate" 
+          from="0 0 0" 
+          to="360 0 0" 
+          dur="2s" 
+          repeatCount="indefinite" />
+      </path>
+    </g>
+  </g>
+  
+  <!-- Corporate identification -->
+  <g id="corporate-id" transform="translate(100, 450)">
+    <rect x="-60" y="-15" width="120" height="30" fill="none" stroke="#55EFC4" stroke-width="1" />
+    <text x="0" y="0" font-family="monospace" font-size="10" fill="#55EFC4" text-anchor="middle">TESSIER-ASHPOOL</text>
+    <text x="0" y="12" font-family="monospace" font-size="8" fill="#55EFC4" text-anchor="middle">LOGIC.BOMB v2.7</text>
+  </g>
+  
+  <!-- Netrunner-style card ornaments -->
+  <g id="netrunner-style">
+    <!-- Corner brackets -->
+    <path d="M 20,20 L 50,20 L 50,50" stroke="#00FFFF" stroke-width="2" fill="none" />
+    <path d="M 780,20 L 750,20 L 750,50" stroke="#00FFFF" stroke-width="2" fill="none" />
+    <path d="M 20,480 L 50,480 L 50,450" stroke="#00FFFF" stroke-width="2" fill="none" />
+    <path d="M 780,480 L 750,480 L 750,450" stroke="#00FFFF" stroke-width="2" fill="none" />
+    
+    <!-- Card-like border elements -->
+    <line x1="50" y1="100" x2="100" y2="100" stroke="#00FFFF" stroke-width="1" />
+    <line x1="700" y1="100" x2="750" y2="100" stroke="#00FFFF" stroke-width="1" />
+    <line x1="50" y1="400" x2="100" y2="400" stroke="#00FFFF" stroke-width="1" />
+    <line x1="700" y1="400" x2="750" y2="400" stroke="#00FFFF" stroke-width="1" />
+  </g>
+  
+  <!-- Background noise -->
+  <g id="bg-noise" opacity="0.1">
+    <!-- Random static dots -->
+    <circle cx="150" cy="120" r="1" fill="#FFFFFF" />
+    <circle cx="300" cy="80" r="1" fill="#FFFFFF" />
+    <circle cx="450" cy="420" r="1" fill="#FFFFFF" />
+    <circle cx="600" cy="330" r="1" fill="#FFFFFF" />
+    <circle cx="200" cy="380" r="1" fill="#FFFFFF" />
+    <circle cx="720" cy="210" r="1" fill="#FFFFFF" />
+    <circle cx="350" cy="280" r="1" fill="#FFFFFF" />
+    <circle cx="480" cy="150" r="1" fill="#FFFFFF" />
+    <circle cx="620" cy="70" r="1" fill="#FFFFFF" />
+    <circle cx="130" cy="450" r="1" fill="#FFFFFF" />
+    
+    <circle cx="180" cy="140" r="1" fill="#FFFFFF" />
+    <circle cx="280" cy="100" r="1" fill="#FFFFFF" />
+    <circle cx="430" cy="400" r="1" fill="#FFFFFF" />
+    <circle cx="580" cy="310" r="1" fill="#FFFFFF" />
+    <circle cx="220" cy="360" r="1" fill="#FFFFFF" />
+    <circle cx="700" cy="230" r="1" fill="#FFFFFF" />
+    <circle cx="370" cy="260" r="1" fill="#FFFFFF" />
+    <circle cx="460" cy="170" r="1" fill="#FFFFFF" />
+    <circle cx="640" cy="90" r="1" fill="#FFFFFF" />
+    <circle cx="110" cy="430" r="1" fill="#FFFFFF" />
+    
+    <animate attributeName="opacity" values="0.1;0.2;0.1" dur="3s" repeatCount="indefinite" />
+  </g>
+</svg>

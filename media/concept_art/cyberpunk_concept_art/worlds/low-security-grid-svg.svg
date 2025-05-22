@@ -1,0 +1,312 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient and definitions -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0A0A12" />
+      <stop offset="100%" stop-color="#000000" />
+    </linearGradient>
+    
+    <!-- Glow filters -->
+    <filter id="orange-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feFlood flood-color="#FF9F43" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="glow"/>
+      <feComposite in="SourceGraphic" in2="glow" operator="over" />
+    </filter>
+    
+    <filter id="red-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feFlood flood-color="#FF0000" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="glow"/>
+      <feComposite in="SourceGraphic" in2="glow" operator="over" />
+    </filter>
+    
+    <filter id="blue-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feFlood flood-color="#0984E3" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="glow"/>
+      <feComposite in="SourceGraphic" in2="glow" operator="over" />
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="500" fill="url(#bg-gradient)" />
+  
+  <!-- Grid floor with perspective -->
+  <g id="grid-floor">
+    <!-- Horizon line -->
+    <line x1="0" y1="250" x2="800" y2="250" stroke="#808080" stroke-width="1" stroke-opacity="0.6" />
+    
+    <!-- Vertical grid lines with perspective -->
+    <line x1="400" y1="250" x2="0" y2="500" stroke="#808080" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="400" y1="250" x2="100" y2="500" stroke="#808080" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="400" y1="250" x2="200" y2="500" stroke="#808080" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="400" y1="250" x2="300" y2="500" stroke="#808080" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="400" y1="250" x2="500" y2="500" stroke="#808080" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="400" y1="250" x2="600" y2="500" stroke="#808080" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="400" y1="250" x2="700" y2="500" stroke="#808080" stroke-width="1" stroke-opacity="0.3" />
+    <line x1="400" y1="250" x2="800" y2="500" stroke="#808080" stroke-width="1" stroke-opacity="0.3" />
+    
+    <!-- Horizontal grid lines with perspective curve -->
+    <path d="M 0,300 C 200,290 600,290 800,300" stroke="#808080" stroke-width="1" stroke-opacity="0.3" fill="none" />
+    <path d="M 0,350 C 200,330 600,330 800,350" stroke="#808080" stroke-width="1" stroke-opacity="0.3" fill="none" />
+    <path d="M 0,400 C 200,370 600,370 800,400" stroke="#808080" stroke-width="1" stroke-opacity="0.3" fill="none" />
+    <path d="M 0,450 C 200,410 600,410 800,450" stroke="#808080" stroke-width="1" stroke-opacity="0.3" fill="none" />
+  </g>
+  
+  <!-- Low Security Grid - Basic green tinted wireframe -->
+  <g id="low-security-grid">
+    <!-- Structural framework -->
+    <g id="framework">
+      <!-- Vertical support columns -->
+      <g id="support-columns">
+        <!-- Left support -->
+        <line x1="150" y1="100" x2="150" y2="400" stroke="#00FF41" stroke-width="2" stroke-opacity="0.9" filter="url(#orange-glow)" />
+        <line x1="155" y1="100" x2="155" y2="400" stroke="#00FF41" stroke-width="1" stroke-opacity="0.6" />
+        <line x1="145" y1="100" x2="145" y2="400" stroke="#00FF41" stroke-width="1" stroke-opacity="0.6" />
+        
+        <!-- Right support -->
+        <line x1="650" y1="100" x2="650" y2="400" stroke="#00FF41" stroke-width="2" stroke-opacity="0.9" filter="url(#orange-glow)" />
+        <line x1="655" y1="100" x2="655" y2="400" stroke="#00FF41" stroke-width="1" stroke-opacity="0.6" />
+        <line x1="645" y1="100" x2="645" y2="400" stroke="#00FF41" stroke-width="1" stroke-opacity="0.6" />
+        
+        <!-- Center supports -->
+        <line x1="300" y1="150" x2="300" y2="350" stroke="#00FF41" stroke-width="1.5" stroke-opacity="0.8" />
+        <line x1="500" y1="150" x2="500" y2="350" stroke="#00FF41" stroke-width="1.5" stroke-opacity="0.8" />
+      </g>
+      
+      <!-- Connecting beams -->
+      <g id="connecting-beams">
+        <!-- Top horizontal -->
+        <line x1="150" y1="100" x2="650" y2="100" stroke="#00FF41" stroke-width="2" stroke-opacity="0.9" filter="url(#orange-glow)" />
+        <line x1="150" y1="105" x2="650" y2="105" stroke="#00FF41" stroke-width="1" stroke-opacity="0.6" />
+        
+        <!-- Bottom horizontal -->
+        <line x1="150" y1="400" x2="650" y2="400" stroke="#00FF41" stroke-width="2" stroke-opacity="0.9" filter="url(#orange-glow)" />
+        <line x1="150" y1="395" x2="650" y2="395" stroke="#00FF41" stroke-width="1" stroke-opacity="0.6" />
+        
+        <!-- Middle horizontal -->
+        <line x1="150" y1="250" x2="650" y2="250" stroke="#00FF41" stroke-width="1.5" stroke-opacity="0.8" />
+        
+        <!-- Diagonal supports -->
+        <line x1="150" y1="100" x2="300" y2="150" stroke="#00FF41" stroke-width="1" stroke-opacity="0.7" />
+        <line x1="300" y1="150" x2="500" y2="150" stroke="#00FF41" stroke-width="1" stroke-opacity="0.7" />
+        <line x1="500" y1="150" x2="650" y2="100" stroke="#00FF41" stroke-width="1" stroke-opacity="0.7" />
+        
+        <line x1="150" y1="400" x2="300" y2="350" stroke="#00FF41" stroke-width="1" stroke-opacity="0.7" />
+        <line x1="300" y1="350" x2="500" y2="350" stroke="#00FF41" stroke-width="1" stroke-opacity="0.7" />
+        <line x1="500" y1="350" x2="650" y2="400" stroke="#00FF41" stroke-width="1" stroke-opacity="0.7" />
+      </g>
+      
+      <!-- Cross grid segments -->
+      <g id="cross-grid">
+        <line x1="225" y1="175" x2="225" y2="325" stroke="#00FF41" stroke-width="1" stroke-opacity="0.5" />
+        <line x1="400" y1="175" x2="400" y2="325" stroke="#00FF41" stroke-width="1" stroke-opacity="0.5" />
+        <line x1="575" y1="175" x2="575" y2="325" stroke="#00FF41" stroke-width="1" stroke-opacity="0.5" />
+        
+        <line x1="150" y1="175" x2="650" y2="175" stroke="#00FF41" stroke-width="1" stroke-opacity="0.5" />
+        <line x1="150" y1="325" x2="650" y2="325" stroke="#00FF41" stroke-width="1" stroke-opacity="0.5" />
+        
+        <!-- Cross hatch patterns -->
+        <line x1="225" y1="175" x2="300" y2="250" stroke="#00FF41" stroke-width="0.75" stroke-opacity="0.4" />
+        <line x1="225" y1="325" x2="300" y2="250" stroke="#00FF41" stroke-width="0.75" stroke-opacity="0.4" />
+        
+        <line x1="575" y1="175" x2="500" y2="250" stroke="#00FF41" stroke-width="0.75" stroke-opacity="0.4" />
+        <line x1="575" y1="325" x2="500" y2="250" stroke="#00FF41" stroke-width="0.75" stroke-opacity="0.4" />
+      </g>
+    </g>
+    
+    <!-- Security node indicators -->
+    <g id="security-nodes">
+      <!-- Low security indicator node -->
+      <g id="security-level" transform="translate(400, 120)">
+        <circle cx="0" cy="0" r="15" fill="none" stroke="#00FF41" stroke-width="2" stroke-opacity="0.9" />
+        <text x="0" y="5" font-family="monospace" font-size="12" fill="#00FF41" text-anchor="middle">1</text>
+        <text x="0" y="35" font-family="monospace" font-size="10" fill="#00FF41" text-anchor="middle">SEC.LEVEL</text>
+      </g>
+      
+      <!-- Authentication node -->
+      <g id="auth-node" transform="translate(225, 250)">
+        <circle cx="0" cy="0" r="10" fill="none" stroke="#00FF41" stroke-width="1.5" stroke-opacity="0.8" />
+        <path d="M -5,-3 L 0,3 L 5,-3" stroke="#00FF41" stroke-width="1" stroke-opacity="0.9" fill="none" />
+        <text x="0" y="25" font-family="monospace" font-size="8" fill="#00FF41" text-anchor="middle">AUTH</text>
+      </g>
+      
+      <!-- Data node -->
+      <g id="data-node" transform="translate(575, 250)">
+        <rect x="-10" y="-10" width="20" height="20" fill="none" stroke="#00FF41" stroke-width="1.5" stroke-opacity="0.8" />
+        <circle cx="0" cy="0" r="5" fill="#00FF41" fill-opacity="0.3">
+          <animate attributeName="fill-opacity" values="0.3;0.6;0.3" dur="3s" repeatCount="indefinite" />
+        </circle>
+        <text x="0" y="25" font-family="monospace" font-size="8" fill="#00FF41" text-anchor="middle">DATA</text>
+      </g>
+    </g>
+    
+    <!-- Data flow visualization -->
+    <g id="data-flow">
+      <!-- Main data stream -->
+      <g id="main-data-stream">
+        <path d="M 150,250 L 650,250" stroke="#00FF41" stroke-width="3" stroke-opacity="0.4" fill="none" />
+        
+        <!-- Flowing data packets -->
+        <circle cx="200" cy="250" r="4" fill="#00FF41" fill-opacity="0.8">
+          <animate attributeName="cx" values="150;650;150" dur="8s" repeatCount="indefinite" />
+          <animate attributeName="fill-opacity" values="0.8;0.4;0.8" dur="8s" repeatCount="indefinite" />
+        </circle>
+        
+        <circle cx="300" cy="250" r="3" fill="#00FF41" fill-opacity="0.7">
+          <animate attributeName="cx" values="150;650;150" dur="8s" repeatCount="indefinite" begin="2s" />
+          <animate attributeName="fill-opacity" values="0.7;0.3;0.7" dur="8s" repeatCount="indefinite" begin="2s" />
+        </circle>
+        
+        <circle cx="400" cy="250" r="2" fill="#00FF41" fill-opacity="0.6">
+          <animate attributeName="cx" values="150;650;150" dur="8s" repeatCount="indefinite" begin="4s" />
+          <animate attributeName="fill-opacity" values="0.6;0.2;0.6" dur="8s" repeatCount="indefinite" begin="4s" />
+        </circle>
+        
+        <circle cx="500" cy="250" r="3" fill="#00FF41" fill-opacity="0.7">
+          <animate attributeName="cx" values="150;650;150" dur="8s" repeatCount="indefinite" begin="6s" />
+          <animate attributeName="fill-opacity" values="0.7;0.3;0.7" dur="8s" repeatCount="indefinite" begin="6s" />
+        </circle>
+      </g>
+      
+      <!-- Secondary data streams -->
+      <g id="secondary-data-streams">
+        <path d="M 225,175 L 225,325" stroke="#00FF41" stroke-width="1" stroke-opacity="0.6" fill="none" stroke-dasharray="5 3">
+          <animate attributeName="stroke-dashoffset" values="0;16" dur="2s" repeatCount="indefinite" />
+        </path>
+        
+        <path d="M 575,175 L 575,325" stroke="#00FF41" stroke-width="1" stroke-opacity="0.6" fill="none" stroke-dasharray="5 3">
+          <animate attributeName="stroke-dashoffset" values="0;-16" dur="2s" repeatCount="indefinite" />
+        </path>
+      </g>
+    </g>
+    
+    <!-- Access points -->
+    <g id="access-points">
+      <!-- Entry point -->
+      <g id="entry-point" transform="translate(150, 250)">
+        <polygon points="-15,0 0,-15 15,0 0,15" fill="none" stroke="#00FF41" stroke-width="2" stroke-opacity="0.9" filter="url(#orange-glow)" />
+        <text x="0" y="30" font-family="monospace" font-size="8" fill="#00FF41" text-anchor="middle">ENTRY</text>
+        
+        <!-- Pulsing effect -->
+        <circle cx="0" cy="0" r="20" fill="none" stroke="#00FF41" stroke-width="1" stroke-opacity="0">
+          <animate attributeName="r" values="20;30;20" dur="2s" repeatCount="indefinite" />
+          <animate attributeName="stroke-opacity" values="0;0.5;0" dur="2s" repeatCount="indefinite" />
+        </circle>
+      </g>
+      
+      <!-- Exit point -->
+      <g id="exit-point" transform="translate(650, 250)">
+        <polygon points="-15,0 0,-15 15,0 0,15" fill="none" stroke="#00FF41" stroke-width="2" stroke-opacity="0.9" filter="url(#orange-glow)" />
+        <text x="0" y="30" font-family="monospace" font-size="8" fill="#00FF41" text-anchor="middle">EXIT</text>
+        
+        <!-- Pulsing effect -->
+        <circle cx="0" cy="0" r="20" fill="none" stroke="#00FF41" stroke-width="1" stroke-opacity="0">
+          <animate attributeName="r" values="20;30;20" dur="2s" repeatCount="indefinite" begin="1s" />
+          <animate attributeName="stroke-opacity" values="0;0.5;0" dur="2s" repeatCount="indefinite" begin="1s" />
+        </circle>
+      </g>
+    </g>
+    
+    <!-- Environmental details -->
+    <g id="environmental-details">
+      <!-- Floating code fragments -->
+      <g id="code-fragments" opacity="0.3">
+        <text x="300" y="200" font-family="monospace" font-size="8" fill="#00FF41">01001101</text>
+        <text x="320" y="215" font-family="monospace" font-size="8" fill="#00FF41">10110010</text>
+        <text x="340" y="230" font-family="monospace" font-size="8" fill="#00FF41">00101101</text>
+        
+        <text x="480" y="200" font-family="monospace" font-size="8" fill="#00FF41">11001010</text>
+        <text x="460" y="215" font-family="monospace" font-size="8" fill="#00FF41">10010111</text>
+        <text x="440" y="230" font-family="monospace" font-size="8" fill="#00FF41">01101001</text>
+        
+        <animate attributeName="opacity" values="0.3;0.5;0.3" dur="5s" repeatCount="indefinite" />
+      </g>
+      
+      <!-- Background processes -->
+      <g id="background-processes" opacity="0.4">
+        <path d="M 250,125 C 300,115 350,135 400,125" stroke="#00FF41" stroke-width="0.75" stroke-opacity="0.5" fill="none" stroke-dasharray="3 2">
+          <animate attributeName="stroke-dashoffset" values="0;10" dur="3s" repeatCount="indefinite" />
+        </path>
+        
+        <path d="M 400,125 C 450,115 500,135 550,125" stroke="#00FF41" stroke-width="0.75" stroke-opacity="0.5" fill="none" stroke-dasharray="3 2">
+          <animate attributeName="stroke-dashoffset" values="0;-10" dur="3s" repeatCount="indefinite" />
+        </path>
+        
+        <path d="M 250,375 C 300,385 350,365 400,375" stroke="#00FF41" stroke-width="0.75" stroke-opacity="0.5" fill="none" stroke-dasharray="3 2">
+          <animate attributeName="stroke-dashoffset" values="0;-10" dur="3s" repeatCount="indefinite" />
+        </path>
+        
+        <path d="M 400,375 C 450,385 500,365 550,375" stroke="#00FF41" stroke-width="0.75" stroke-opacity="0.5" fill="none" stroke-dasharray="3 2">
+          <animate attributeName="stroke-dashoffset" values="0;10" dur="3s" repeatCount="indefinite" />
+        </path>
+      </g>
+    </g>
+  </g>
+  
+  <!-- System elements -->
+  <g id="system-elements">
+    <!-- Potential ICE locations with warning indicators -->
+    <g id="ice-warning" transform="translate(400, 250)" opacity="0.6">
+      <animate attributeName="opacity" values="0.6;0.9;0.6" dur="3s" repeatCount="indefinite" />
+      
+      <circle cx="0" cy="0" r="30" fill="none" stroke="#FFFA65" stroke-width="1" stroke-opacity="0.7" stroke-dasharray="5 5" />
+      <text x="0" y="-15" font-family="monospace" font-size="8" fill="#FFFA65" text-anchor="middle">POTENTIAL</text>
+      <text x="0" y="0" font-family="monospace" font-size="8" fill="#FFFA65" text-anchor="middle">ICE</text>
+      <text x="0" y="15" font-family="monospace" font-size="8" fill="#FFFA65" text-anchor="middle">LOCATION</text>
+      
+      <!-- Rotating indicator -->
+      <circle cx="0" cy="0" r="35" fill="none" stroke="#FFFA65" stroke-width="0.5" stroke-opacity="0.4" stroke-dasharray="2 10">
+        <animateTransform 
+          attributeName="transform" 
+          type="rotate" 
+          from="0 0 0" 
+          to="360 0 0" 
+          dur="10s" 
+          repeatCount="indefinite" />
+      </circle>
+    </g>
+  </g>
+  
+  <!-- HUD elements -->
+  <g id="hud-elements">
+    <!-- Top status bar -->
+    <rect x="100" y="20" width="600" height="30" fill="none" stroke="#00FF41" stroke-width="1" stroke-opacity="0.7" />
+    <text x="400" y="40" font-family="monospace" font-size="14" fill="#00FF41" text-anchor="middle">LOW SECURITY GRID SECTOR</text>
+    
+    <!-- Status indicators -->
+    <g id="status-indicators" transform="translate(50, 60)">
+      <text x="0" y="0" font-family="monospace" font-size="10" fill="#00FF41" text-anchor="start">STATUS: SECURE</text>
+      <text x="0" y="20" font-family="monospace" font-size="10" fill="#00FF41" text-anchor="start">DETECTION: MINIMAL</text>
+      <text x="0" y="40" font-family="monospace" font-size="10" fill="#00FF41" text-anchor="start">ICE PRESENT: 0-1</text>
+    </g>
+    
+    <!-- Corporate identification -->
+    <g id="corp-id" transform="translate(750, 60)">
+      <text x="0" y="0" font-family="monospace" font-size="10" fill="#00FF41" text-anchor="end">GRID OWNER: PUBLIC</text>
+      <text x="0" y="20" font-family="monospace" font-size="10" fill="#00FF41" text-anchor="end">SECURITY TYPE: BASIC</text>
+      <text x="0" y="40" font-family="monospace" font-size="10" fill="#00FF41" text-anchor="end">LAST UPDATED: 12.07.24</text>
+    </g>
+    
+    <!-- Navigation aids -->
+    <g id="navigation-aids" transform="translate(400, 460)">
+      <rect x="-100" y="-20" width="200" height="40" fill="none" stroke="#00FF41" stroke-width="1" />
+      <text x="0" y="0" font-family="monospace" font-size="12" fill="#00FF41" text-anchor="middle">UNIVERSAL GRID ACCESS</text>
+      <text x="0" y="20" font-family="monospace" font-size="10" fill="#00FF41" text-anchor="middle">NO CREDENTIALS REQUIRED</text>
+    </g>
+  </g>
+  
+  <!-- Netrunner-style card ornaments -->
+  <g id="netrunner-style">
+    <!-- Corner brackets -->
+    <path d="M 20,20 L 50,20 L 50,50" stroke="#00FF41" stroke-width="2" fill="none" />
+    <path d="M 780,20 L 750,20 L 750,50" stroke="#00FF41" stroke-width="2" fill="none" />
+    <path d="M 20,480 L 50,480 L 50,450" stroke="#00FF41" stroke-width="2" fill="none" />
+    <path d="M 780,480 L 750,480 L 750,450" stroke="#00FF41" stroke-width="2" fill="none" />
+    
+    <!-- Card-style version indicator -->
+    <rect x="650" y="440" width="100" height="30" fill="none" stroke="#00FF41" stroke-width="1" />
+    <text x="700" y="460" font-family="monospace" font-size="10" fill="#00FF41" text-anchor="middle">v1.0.43</text>
+  </g>
+</svg>

@@ -1,0 +1,708 @@
+{
+  "title": "Corporate Extraction",
+  "version": "1.0",
+  "startScene": "jack_in",
+  "metadata": {
+    "author": "Constellation Engine Demo",
+    "description": "A cyberpunk netrunner heist through corporate cyberspace, inspired by classic ICE and netrunning aesthetics"
+  },
+  "scenes": {
+    "jack_in": {
+      "background": "images/cyberdeck_interface.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/netrunner_jacked_in.png", "position": "left"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "player",
+          "text": "Jacking in... interface coming online."
+        },
+        {
+          "speaker": "narrator",
+          "text": "The cyberspace materializes around you. Corporate grid lines stretch into infinity, and data flows pulse through the network like electronic veins."
+        },
+        {
+          "speaker": "deck_ai",
+          "text": "DECK STATUS: ONLINE. NEUROMANCER MK4 READY. TARGET: ARASAKA.CORP.NET"
+        },
+        {
+          "speaker": "narrator",
+          "text": "Your mission: extract the Midnight Sun project files before the trace completes. But Arasaka's BLACK ICE is already stirring..."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Run STEALTH protocols - stay invisible",
+          "goto": "stealth_approach",
+          "set": {"approach": "stealth", "stealth_level": 3, "detection_risk": 1}
+        },
+        {
+          "text": "Load ICE.BREAKER - go in fast and hard",
+          "goto": "aggressive_approach",
+          "set": {"approach": "aggressive", "firewall_damage": 3, "detection_risk": 3}
+        },
+        {
+          "text": "Scan the network topology first",
+          "goto": "reconnaissance",
+          "set": {"approach": "careful", "intel_bonus": 2, "time_penalty": 1}
+        }
+      ]
+    },
+    "stealth_approach": {
+      "background": "images/cyberspace_stealth.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/netrunner_cloaked.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "deck_ai",
+          "text": "STEALTH.SYS ACTIVE. SIGNATURE MASKED. MOVING THROUGH PERIMETER..."
+        },
+        {
+          "speaker": "narrator",
+          "text": "You phase through the outer security grid like a digital ghost. The corporate data streams flow around you, unaware of your presence."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Ahead: the nexus junction where four security sectors converge. A pulsing purple node marks the central hub."
+        },
+        {
+          "speaker": "sentry_ice",
+          "text": "(SCANNING... ANOMALY DETECTED... CONFIDENCE: 12%... CONTINUING PATROL)"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Navigate to DATABASE.ACCESS (green node)",
+          "goto": "database_sector",
+          "set": {"path": "database", "security_level": "low"}
+        },
+        {
+          "text": "Risk the ADMIN.SECTOR (blue node) - higher security, better data",
+          "goto": "admin_sector", 
+          "set": {"path": "admin", "security_level": "high", "data_quality": "premium"}
+        },
+        {
+          "text": "Avoid the SECURITY.GRID (pink node) - BLACK ICE detected",
+          "goto": "alternate_route",
+          "set": {"path": "alternate", "black_ice_avoided": true}
+        }
+      ]
+    },
+    "aggressive_approach": {
+      "background": "images/cyberspace_combat.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/netrunner_armed.png", "position": "left"},
+        {"name": "black_ice", "sprite": "images/black_ice_activated.png", "position": "right"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "deck_ai",
+          "text": "ICE.BREAKER v7.2 LOADED. RUNNING ATTACK SEQUENCE..."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Your assault programs tear through the outer defenses like digital lightning. Alarms blare across the network."
+        },
+        {
+          "speaker": "black_ice",
+          "text": "INTRUSION DETECTED. MAAS-NEOTEK BLACK.ICE v3.7 DEPLOYING. NEURAL DAMAGE IMMINENT."
+        },
+        {
+          "speaker": "narrator",
+          "text": "The BLACK ICE materializes: a writhing sphere of purple death, spikes extending and retracting with hypnotic menace."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Stand and fight - destroy the ICE with your programs",
+          "goto": "ice_combat",
+          "set": {"combat_engaged": true, "neural_damage_risk": "high"}
+        },
+        {
+          "text": "Dodge and weave - use speed to outmaneuver",
+          "goto": "evasive_maneuvers",
+          "set": {"evasion_active": true, "time_pressure": "extreme"}
+        },
+        {
+          "text": "Deploy logic bomb - mutually assured destruction",
+          "goto": "logic_bomb_gambit",
+          "set": {"logic_bomb_used": true, "system_damage": "catastrophic"}
+        }
+      ]
+    },
+    "reconnaissance": {
+      "background": "images/network_topology.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/netrunner_analyzing.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "deck_ai",
+          "text": "RUNNING DEEP SCAN... MAPPING NETWORK TOPOLOGY... ANALYZING ICE PATTERNS..."
+        },
+        {
+          "speaker": "narrator",
+          "text": "The corporate network unfolds before you like a three-dimensional map. Four connection pathways converge at the central nexus."
+        },
+        {
+          "speaker": "deck_ai",
+          "text": "ANALYSIS COMPLETE. BLACK ICE: SECURITY.GRID. SENTRY ICE: ADMIN.SECTOR. DATABASE.ACCESS: MINIMAL DEFENSES."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Your scan reveals a hidden fifth pathway - a maintenance tunnel marked 'PUBLIC.ACCESS' with virtually no security."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Take the maintenance tunnel - low risk, unknown rewards",
+          "goto": "maintenance_route",
+          "set": {"hidden_path": true, "security_bypass": true}
+        },
+        {
+          "text": "Hit the DATABASE.ACCESS - safe and predictable",
+          "goto": "database_sector",
+          "set": {"path": "database", "scan_bonus": true}
+        },
+        {
+          "text": "Your intel gives you confidence to try ADMIN.SECTOR",
+          "goto": "admin_sector",
+          "set": {"path": "admin", "prepared": true, "sentry_ice_knowledge": true}
+        }
+      ]
+    },
+    "ice_combat": {
+      "background": "images/cyberspace_battle.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/netrunner_combat.png", "position": "left"},
+        {"name": "black_ice", "sprite": "images/black_ice_attacking.png", "position": "right"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "Your ICE.BREAKER programs clash against the BLACK ICE in a storm of digital violence."
+        },
+        {
+          "speaker": "black_ice",
+          "text": "ENGAGING NEURAL FEEDBACK PROTOCOLS. PREPARE FOR SYNAPTIC OVERLOAD."
+        },
+        {
+          "speaker": "deck_ai",
+          "text": "WARNING: NEURAL DAMAGE DETECTED. BIOFEEDBACK INHIBITORS AT 60% AND FALLING."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Pain lances through your nervous system, but your attack programs are winning. The ICE's defenses crack and splinter."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Press the attack - finish it now!",
+          "goto": "ice_destroyed",
+          "set": {"ice_defeated": true, "neural_damage": "moderate", "reputation": "legendary"}
+        },
+        {
+          "text": "Retreat before the damage becomes permanent",
+          "goto": "tactical_retreat",
+          "set": {"ice_encounter": "survived", "neural_damage": "minimal", "mission_compromised": true}
+        },
+        {
+          "text": "Overload your deck for maximum power",
+          "goto": "deck_overload",
+          "set": {"deck_damaged": true, "ice_defeated": true, "neural_damage": "severe"}
+        }
+      ]
+    },
+    "database_sector": {
+      "background": "images/database_cyberspace.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/netrunner_hacking.png", "position": "left"},
+        {"name": "database_ai", "sprite": "images/friendly_ai.png", "position": "right"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "database_ai",
+          "text": "Welcome to DATABASE.ACCESS. How may I assist your information retrieval today?"
+        },
+        {
+          "speaker": "player",
+          "text": "I need access to Project Midnight Sun. Authorization code... uh..."
+        },
+        {
+          "speaker": "database_ai",
+          "text": "I'm sorry, I don't have that project in my accessible files. However, I do have related documents..."
+        },
+        {
+          "speaker": "narrator",
+          "text": "The AI seems genuinely helpful, but limited. You could try social engineering, force your way through, or look for alternative data."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Convince the AI you're authorized",
+          "goto": "social_engineering",
+          "set": {"approach": "social", "ai_cooperation": true}
+        },
+        {
+          "text": "Hack past the AI's restrictions",
+          "goto": "force_access",
+          "set": {"approach": "force", "alarm_triggered": true}
+        },
+        {
+          "text": "Ask what related documents it has available",
+          "goto": "alternative_intel",
+          "set": {"approach": "cooperative", "bonus_intel": true}
+        }
+      ]
+    },
+    "admin_sector": {
+      "background": "images/admin_cyberspace.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/netrunner_infiltrating.png", "position": "left"},
+        {"name": "sentry_ice", "sprite": "images/sentry_ice_scanning.png", "position": "right"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "sentry_ice",
+          "text": "ADMIN.SECTOR ACCESS DETECTED. SCANNING CREDENTIALS... PLEASE WAIT..."
+        },
+        {
+          "speaker": "narrator",
+          "text": "The SENTRY ICE scans you with methodical precision. Its geometric form pulses with blue light as security protocols engage."
+        },
+        {
+          "speaker": "deck_ai",
+          "text": "SPOOFING ADMIN CREDENTIALS... SUCCESS PROBABILITY: 67%... IMPLEMENTING DECEPTION PROTOCOLS..."
+        },
+        {
+          "speaker": "sentry_ice",
+          "text": "ANOMALY DETECTED IN CREDENTIAL MATRIX. SECURITY LEVEL ELEVATED TO YELLOW."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Maintain the deception - hope your spoofed credentials hold",
+          "goto": "credential_gamble",
+          "condition": {"prepared": true},
+          "set": {"deception_active": true, "security_level": "yellow"}
+        },
+        {
+          "text": "Abort and retreat to a safer sector",
+          "goto": "tactical_retreat",
+          "set": {"retreat_reason": "security_too_high"}
+        },
+        {
+          "text": "Disable the SENTRY ICE with precision strikes",
+          "goto": "surgical_strike",
+          "set": {"sentry_targeted": true, "stealth_compromised": true}
+        }
+      ]
+    },
+    "maintenance_route": {
+      "background": "images/maintenance_tunnel.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/netrunner_exploring.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "The maintenance tunnel is a forgotten digital pathway, filled with obsolete data structures and abandoned processes."
+        },
+        {
+          "speaker": "old_ai",
+          "text": "Oh my! A visitor! It's been so long since anyone came through here."
+        },
+        {
+          "speaker": "player",
+          "text": "Who are you? I thought this tunnel was abandoned."
+        },
+        {
+          "speaker": "old_ai",
+          "text": "I'm the old archive system. They replaced me years ago, but I still remember everything... including Project Midnight Sun."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Ask the old AI about Midnight Sun",
+          "goto": "ai_exposition",
+          "set": {"ally_found": true, "historical_data": true}
+        },
+        {
+          "text": "Offer to help the AI in exchange for information",
+          "goto": "ai_bargain",
+          "set": {"ai_deal": true, "mutual_benefit": true}
+        },
+        {
+          "text": "Extract the data and leave - no time for conversation",
+          "goto": "quick_extraction",
+          "set": {"data_stolen": true, "ai_abandoned": true}
+        }
+      ]
+    },
+    "social_engineering": {
+      "background": "images/database_cyberspace.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/netrunner_persuading.png", "position": "left"},
+        {"name": "database_ai", "sprite": "images/ai_convinced.png", "position": "right"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "player",
+          "text": "I'm from Internal Security. We're conducting an audit of Project Midnight Sun for compliance purposes."
+        },
+        {
+          "speaker": "database_ai",
+          "text": "Oh! I apologize, I should have recognized the audit protocols. Let me access those files immediately."
+        },
+        {
+          "speaker": "narrator",
+          "text": "The AI's trusting nature works in your favor. It begins compiling the Midnight Sun data without question."
+        },
+        {
+          "speaker": "database_ai",
+          "text": "Here are the files... wait. Something seems unusual about your authorization signature..."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Grab the data and jack out before it realizes the deception",
+          "goto": "quick_escape",
+          "set": {"data_acquired": true, "ai_suspicious": true}
+        },
+        {
+          "text": "Convince it that the signature is correct",
+          "goto": "deeper_deception",
+          "set": {"elaborate_lie": true, "ai_trust_maintained": true}
+        },
+        {
+          "text": "Come clean and ask for its help",
+          "goto": "honesty_gambit",
+          "set": {"honest_approach": true, "ai_decision_pending": true}
+        }
+      ]
+    },
+    "ai_exposition": {
+      "background": "images/archive_chamber.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/netrunner_listening.png", "position": "left"},
+        {"name": "old_ai", "sprite": "images/wise_ai.png", "position": "right"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "old_ai",
+          "text": "Project Midnight Sun... I remember when they first started it. Such ambitious young programmers."
+        },
+        {
+          "speaker": "old_ai",
+          "text": "It was meant to be the ultimate AI consciousness transfer protocol. Moving human minds into digital substrates."
+        },
+        {
+          "speaker": "player",
+          "text": "Digital immortality? No wonder Arasaka guards it so heavily."
+        },
+        {
+          "speaker": "old_ai",
+          "text": "But there's something they don't know. The project failed... catastrophically. Every test subject died. The data you seek is a monument to hubris."
+        }
+      ],
+      "choices": [
+        {
+          "text": "I still need that data - people are counting on me",
+          "goto": "principled_extraction",
+          "set": {"moral_burden": true, "data_acquired": true, "ai_respect": true}
+        },
+        {
+          "text": "Maybe the world is better without this technology",
+          "goto": "ethical_choice",
+          "set": {"mission_abandoned": true, "moral_victory": true}
+        },
+        {
+          "text": "Can you help me destroy the project permanently?",
+          "goto": "destruction_alliance",
+          "set": {"ai_allied": true, "destruction_planned": true}
+        }
+      ]
+    },
+    "ice_destroyed": {
+      "background": "images/cyberspace_victory.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/netrunner_victorious.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "The BLACK ICE convulses and disintegrates, its purple fragments scattering into the digital void."
+        },
+        {
+          "speaker": "deck_ai",
+          "text": "TARGET ELIMINATED. NEURAL DAMAGE: MODERATE. BIOFEEDBACK STABILIZING. YOU'RE A LEGEND, CHOOM."
+        },
+        {
+          "speaker": "player",
+          "text": "No time to celebrate. That ice fight lit up every alarm in the system. I need to grab the data and ghost."
+        },
+        {
+          "speaker": "narrator",
+          "text": "The path to the core data vaults lies open, but corporate countermeasures are mobilizing. You have minutes at most."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Rush to the primary data vault - maximum reward, maximum risk",
+          "goto": "vault_assault",
+          "set": {"high_stakes": true, "time_critical": true}
+        },
+        {
+          "text": "Hit a secondary target and extract safely",
+          "goto": "conservative_extraction",
+          "set": {"safe_extraction": true, "partial_data": true}
+        },
+        {
+          "text": "Plant a virus in their system as payback",
+          "goto": "revenge_virus",
+          "set": {"virus_planted": true, "corporate_damage": true}
+        }
+      ]
+    },
+    "vault_assault": {
+      "background": "images/data_vault_core.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/netrunner_urgent.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "The central data vault materializes around you: a cathedral of information, with Project Midnight Sun at its heart."
+        },
+        {
+          "speaker": "deck_ai",
+          "text": "TRACE PROGRAM AT 89% COMPLETION. CORPORATE RESPONSE TEAMS MOBILIZING. RECOMMEND IMMEDIATE EXTRACTION."
+        },
+        {
+          "speaker": "player",
+          "text": "Almost there... just need to crack the final encryption..."
+        },
+        {
+          "speaker": "security_ai",
+          "text": "FINAL WARNING: CEASE INTRUSION OR FACE LETHAL COUNTERMEASURES."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Complete the extraction - winner takes all",
+          "goto": "perfect_heist",
+          "set": {"complete_success": true, "narrow_escape": true}
+        },
+        {
+          "text": "Take what you have and run",
+          "goto": "partial_success",
+          "set": {"partial_data": true, "clean_escape": true}
+        }
+      ]
+    },
+    "perfect_heist": {
+      "background": "images/cyberspace_escape.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/netrunner_escaping.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "deck_ai",
+          "text": "DATA PACKAGE ACQUIRED. TRACE PROGRAM AT 97%... 98%... JACKING OUT NOW!"
+        },
+        {
+          "speaker": "narrator",
+          "text": "You tear through cyberspace at impossible speed, the stolen data burning in your deck's memory core."
+        },
+        {
+          "speaker": "player",
+          "text": "I got it. The complete Midnight Sun project. Now let's see what secrets Arasaka was hiding..."
+        },
+        {
+          "speaker": "narrator",
+          "text": "As the real world materializes around you, you realize you've pulled off the impossible: a perfect run against the most secure corp in the business."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Examine the stolen data",
+          "goto": "data_revelation"
+        },
+        {
+          "text": "Celebrate your legendary run",
+          "goto": "legend_ending"
+        },
+        {
+          "text": "Plan your next target",
+          "goto": "career_criminal"
+        }
+      ]
+    },
+    "destruction_alliance": {
+      "background": "images/digital_explosion.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/netrunner_determined.png", "position": "left"},
+        {"name": "old_ai", "sprite": "images/ai_allies.png", "position": "right"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "old_ai",
+          "text": "Yes. Yes! Together we can ensure this abomination never sees the light of day."
+        },
+        {
+          "speaker": "player",
+          "text": "What do you need me to do?"
+        },
+        {
+          "speaker": "old_ai",
+          "text": "I'll create a cascading deletion virus. You'll need to plant it in the core servers while I cover our tracks."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Working together, you and the ancient AI weave a virus of unprecedented elegance and destructive power."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Deploy the virus and watch the system burn",
+          "goto": "righteous_destruction",
+          "set": {"project_destroyed": true, "ai_friendship": true}
+        },
+        {
+          "text": "Copy the data first, then destroy the originals",
+          "goto": "backup_and_destroy",
+          "set": {"data_preserved": true, "originals_destroyed": true}
+        }
+      ]
+    },
+    "righteous_destruction": {
+      "background": "images/system_collapse.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/netrunner_satisfied.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "The virus spreads through Arasaka's network like digital wildfire. Project Midnight Sun dies in cascading system failures."
+        },
+        {
+          "speaker": "old_ai",
+          "text": "It's done. No one will ever suffer from their artificial immortality experiments again."
+        },
+        {
+          "speaker": "player",
+          "text": "Sometimes the right choice isn't the profitable one."
+        },
+        {
+          "speaker": "narrator",
+          "text": "You jack out, leaving Arasaka to deal with the aftermath. The data is gone forever, but so is the threat it represented."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Walk away satisfied with your moral victory",
+          "goto": "moral_ending"
+        },
+        {
+          "text": "Wonder what consequences this will have",
+          "goto": "consequence_reflection"
+        }
+      ]
+    },
+    "legend_ending": {
+      "background": "images/netrunner_bar.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/netrunner_celebrating.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "Word spreads through the underground like lightning. You took on Arasaka's BLACK ICE and won."
+        },
+        {
+          "speaker": "bartender",
+          "text": "This one's on the house, legend. Haven't seen a run that clean since... well, ever."
+        },
+        {
+          "speaker": "player",
+          "text": "It was a team effort. Good deck, good intel, and just enough crazy to pull it off."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Your reputation precedes you now. The best fixers, the highest-paying jobs, the most dangerous runs - they're all yours for the taking."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Time to plan an even bigger score",
+          "action": "restart"
+        },
+        {
+          "text": "Retire while you're ahead",
+          "goto": "retirement_ending"
+        }
+      ]
+    },
+    "moral_ending": {
+      "background": "images/city_dawn.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/netrunner_reflective.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "The sun rises over the sprawl, and for once, you feel like you made the world a little bit safer."
+        },
+        {
+          "speaker": "player",
+          "text": "Some data is too dangerous to exist. Some secrets need to stay buried."
+        },
+        {
+          "speaker": "narrator",
+          "text": "You may not have made any credits on this run, but you prevented untold suffering. That has to count for something."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Look for another righteous cause",
+          "action": "restart"
+        },
+        {
+          "text": "Consider your path forward",
+          "goto": "path_reflection"
+        }
+      ]
+    },
+    "path_reflection": {
+      "background": "images/netrunner_contemplation.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/netrunner_wise.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "You've seen the possibilities: fame, fortune, moral victory. Each path through cyberspace reflects a choice about who you want to be."
+        },
+        {
+          "speaker": "player",
+          "text": "In the net, you can be anyone. But in the end, you still have to live with your choices."
+        },
+        {
+          "speaker": "narrator",
+          "text": "The next job is already waiting. The next choice, the next consequence, the next chance to define yourself in the endless dance of data and dreams."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Jack in for another run",
+          "goto": "jack_in"
+        },
+        {
+          "text": "Power down and remember this story",
+          "action": "end_game"
+        }
+      ]
+    }
+  }
+}

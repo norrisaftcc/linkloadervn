@@ -231,6 +231,21 @@
             </ul>
             <button class="play-button">Find Belonging</button>
         </div>
+        
+        <div class="story-card" onclick="playStory('netrunner_heist.json')">
+            <h2 class="story-title">Corporate Extraction</h2>
+            <p class="story-description">
+                A cyberpunk netrunner heist through corporate cyberspace. Navigate ICE defenses, 
+                hack data vaults, and make moral choices in the digital underworld.
+            </p>
+            <ul class="story-features">
+                <li>Classic cyberpunk ICE combat</li>
+                <li>Multiple infiltration strategies</li>
+                <li>Moral vs profitable choices</li>
+                <li>Inspired by concept art aesthetics</li>
+            </ul>
+            <button class="play-button">Jack In</button>
+        </div>
     </div>
     
     <div class="footer">
@@ -270,9 +285,9 @@
         
         // Add keyboard navigation
         document.addEventListener('keydown', function(e) {
-            if (e.key >= '1' && e.key <= '5') {
+            if (e.key >= '1' && e.key <= '6') {
                 const storyIndex = parseInt(e.key) - 1;
-                const stories = ['demo_story.json', 'character_creation.json', 'terminal_mystery.json', 'ai_romance.json', 'night_museum.json'];
+                const stories = ['demo_story.json', 'character_creation.json', 'terminal_mystery.json', 'ai_romance.json', 'night_museum.json', 'netrunner_heist.json'];
                 if (stories[storyIndex]) {
                     playStory(stories[storyIndex]);
                 }

@@ -28,12 +28,13 @@ A lightweight, web-native visual novel engine designed specifically for LinkLoad
 
 ### Try the Examples
 1. Open `examples/index.html` in your browser
-2. Choose from 5 different story types:
+2. Choose from 6 different story types:
    - **LinkLoader Demo**: Classic space western adventure
    - **Neon Isekai**: Character creation with dual personalities
    - **Terminal Mystery**: Cyberpunk detective investigation
    - **Connection Protocol**: Human-AI romance story
    - **The Night Museum**: Belonging and memory in a transforming museum
+   - **Corporate Extraction**: Cyberpunk netrunner heist with ICE combat
 
 ### Basic Usage
 
@@ -100,6 +101,7 @@ constellation/
     ├── terminal_mystery.json   # Cyberpunk detective story
     ├── ai_romance.json         # Human-AI relationship story
     ├── night_museum.json       # Museum spirits and memory fragments
+    ├── netrunner_heist.json    # Cyberpunk ICE combat and netrunning
     └── demo.html              # Legacy single-story demo
 ```
 

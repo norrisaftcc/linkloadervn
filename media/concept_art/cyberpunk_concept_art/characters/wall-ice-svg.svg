@@ -1,0 +1,268 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <radialGradient id="bg-glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#FF9F43" stop-opacity="0.1" />
+      <stop offset="70%" stop-color="#0A0A12" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect x="0" y="0" width="400" height="400" fill="#0A0A12" />
+  <circle cx="200" cy="200" r="180" fill="url(#bg-glow)" />
+  
+  <!-- Wall Grid Structure -->
+  <g id="wall-structure">
+    <!-- Base hexagonal grid -->
+    <g id="hex-grid">
+      <!-- Center hexagon -->
+      <polygon 
+        points="200,150 235,175 235,225 200,250 165,225 165,175" 
+        fill="none" 
+        stroke="#FF9F43" 
+        stroke-width="2"
+        stroke-opacity="0.9" />
+        
+      <!-- Surrounding hexagons - first ring -->
+      <!-- Top -->
+      <polygon 
+        points="200,90 235,115 235,165 200,190 165,165 165,115" 
+        fill="none" 
+        stroke="#FF9F43" 
+        stroke-width="2"
+        stroke-opacity="0.7" />
+      
+      <!-- Top Right -->
+      <polygon 
+        points="270,120 305,145 305,195 270,220 235,195 235,145" 
+        fill="none" 
+        stroke="#FF9F43" 
+        stroke-width="2"
+        stroke-opacity="0.7" />
+      
+      <!-- Bottom Right -->
+      <polygon 
+        points="270,210 305,235 305,285 270,310 235,285 235,235" 
+        fill="none" 
+        stroke="#FF9F43" 
+        stroke-width="2"
+        stroke-opacity="0.7" />
+      
+      <!-- Bottom -->
+      <polygon 
+        points="200,270 235,295 235,345 200,370 165,345 165,295" 
+        fill="none" 
+        stroke="#FF9F43" 
+        stroke-width="2"
+        stroke-opacity="0.7" />
+      
+      <!-- Bottom Left -->
+      <polygon 
+        points="130,210 165,235 165,285 130,310 95,285 95,235" 
+        fill="none" 
+        stroke="#FF9F43" 
+        stroke-width="2"
+        stroke-opacity="0.7" />
+      
+      <!-- Top Left -->
+      <polygon 
+        points="130,120 165,145 165,195 130,220 95,195 95,145" 
+        fill="none" 
+        stroke="#FF9F43" 
+        stroke-width="2"
+        stroke-opacity="0.7" />
+      
+      <!-- Partial outer hexagons - second ring -->
+      <!-- These are just hints of a larger grid extending outward -->
+      <path 
+        d="M 200,30 L 235,55 L 235,85" 
+        fill="none" 
+        stroke="#FF9F43" 
+        stroke-width="1.5"
+        stroke-opacity="0.5"
+        stroke-dasharray="5,3" />
+      
+      <path 
+        d="M 340,85 L 375,110 L 375,160" 
+        fill="none" 
+        stroke="#FF9F43" 
+        stroke-width="1.5"
+        stroke-opacity="0.5"
+        stroke-dasharray="5,3" />
+      
+      <path 
+        d="M 340,315 L 375,290 L 375,240" 
+        fill="none" 
+        stroke="#FF9F43" 
+        stroke-width="1.5"
+        stroke-opacity="0.5"
+        stroke-dasharray="5,3" />
+      
+      <path 
+        d="M 200,370 L 235,395 L 165,395" 
+        fill="none" 
+        stroke="#FF9F43" 
+        stroke-width="1.5"
+        stroke-opacity="0.5"
+        stroke-dasharray="5,3" />
+      
+      <path 
+        d="M 60,240 L 25,265 L 25,215" 
+        fill="none" 
+        stroke="#FF9F43" 
+        stroke-width="1.5"
+        stroke-opacity="0.5"
+        stroke-dasharray="5,3" />
+      
+      <path 
+        d="M 60,160 L 25,135 L 25,185" 
+        fill="none" 
+        stroke="#FF9F43" 
+        stroke-width="1.5"
+        stroke-opacity="0.5"
+        stroke-dasharray="5,3" />
+    </g>
+    
+    <!-- Inner hexagon structural elements -->
+    <g id="hex-internals">
+      <!-- Center Hex internals -->
+      <line x1="200" y1="150" x2="200" y2="250" stroke="#808080" stroke-width="1" stroke-opacity="0.6" />
+      <line x1="165" y1="175" x2="235" y2="225" stroke="#808080" stroke-width="1" stroke-opacity="0.6" />
+      <line x1="165" y1="225" x2="235" y2="175" stroke="#808080" stroke-width="1" stroke-opacity="0.6" />
+      
+      <!-- Center point with glow -->
+      <circle cx="200" cy="200" r="5" fill="#FF9F43" fill-opacity="0.8">
+        <animate attributeName="r" values="4;6;4" dur="2s" repeatCount="indefinite" />
+        <animate attributeName="fill-opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite" />
+      </circle>
+      
+      <!-- First ring - selective internals -->
+      <line x1="200" y1="90" x2="200" y2="190" stroke="#808080" stroke-width="1" stroke-opacity="0.4" />
+      <line x1="270" y1="120" x2="270" y2="220" stroke="#808080" stroke-width="1" stroke-opacity="0.4" />
+      <line x1="270" y1="210" x2="270" y2="310" stroke="#808080" stroke-width="1" stroke-opacity="0.4" />
+      <line x1="200" y1="270" x2="200" y2="370" stroke="#808080" stroke-width="1" stroke-opacity="0.4" />
+      <line x1="130" y1="210" x2="130" y2="310" stroke="#808080" stroke-width="1" stroke-opacity="0.4" />
+      <line x1="130" y1="120" x2="130" y2="220" stroke="#808080" stroke-width="1" stroke-opacity="0.4" />
+      
+      <!-- Center points for outer hexes -->
+      <circle cx="200" cy="140" r="3" fill="#FF9F43" fill-opacity="0.6" />
+      <circle cx="270" cy="170" r="3" fill="#FF9F43" fill-opacity="0.6" />
+      <circle cx="270" cy="260" r="3" fill="#FF9F43" fill-opacity="0.6" />
+      <circle cx="200" cy="320" r="3" fill="#FF9F43" fill-opacity="0.6" />
+      <circle cx="130" cy="260" r="3" fill="#FF9F43" fill-opacity="0.6" />
+      <circle cx="130" cy="170" r="3" fill="#FF9F43" fill-opacity="0.6" />
+    </g>
+  </g>
+  
+  <!-- Data flow patterns -->
+  <g id="data-flows" opacity="0.7">
+    <!-- Data streams between hexagons -->
+    <path d="M 200,200 L 200,140" stroke="#FF9F43" stroke-width="1.5" stroke-opacity="0.8" stroke-dasharray="4 2">
+      <animate attributeName="stroke-dashoffset" values="0;-12" dur="2s" repeatCount="indefinite" />
+    </path>
+    
+    <path d="M 200,200 L 270,170" stroke="#FF9F43" stroke-width="1.5" stroke-opacity="0.8" stroke-dasharray="4 2">
+      <animate attributeName="stroke-dashoffset" values="0;-12" dur="1.7s" repeatCount="indefinite" />
+    </path>
+    
+    <path d="M 200,200 L 270,260" stroke="#FF9F43" stroke-width="1.5" stroke-opacity="0.8" stroke-dasharray="4 2">
+      <animate attributeName="stroke-dashoffset" values="0;-12" dur="1.9s" repeatCount="indefinite" />
+    </path>
+    
+    <path d="M 200,200 L 200,320" stroke="#FF9F43" stroke-width="1.5" stroke-opacity="0.8" stroke-dasharray="4 2">
+      <animate attributeName="stroke-dashoffset" values="0;-12" dur="2.1s" repeatCount="indefinite" />
+    </path>
+    
+    <path d="M 200,200 L 130,260" stroke="#FF9F43" stroke-width="1.5" stroke-opacity="0.8" stroke-dasharray="4 2">
+      <animate attributeName="stroke-dashoffset" values="0;-12" dur="1.8s" repeatCount="indefinite" />
+    </path>
+    
+    <path d="M 200,200 L 130,170" stroke="#FF9F43" stroke-width="1.5" stroke-opacity="0.8" stroke-dasharray="4 2">
+      <animate attributeName="stroke-dashoffset" values="0;-12" dur="2.2s" repeatCount="indefinite" />
+    </path>
+  </g>
+  
+  <!-- Authentication scanning effects -->
+  <g id="auth-scan">
+    <!-- Horizontal scan lines -->
+    <line x1="150" y1="185" x2="250" y2="185" stroke="#808080" stroke-width="1" stroke-opacity="0.7">
+      <animate attributeName="y1" values="185;215;185" dur="3s" repeatCount="indefinite" />
+      <animate attributeName="y2" values="185;215;185" dur="3s" repeatCount="indefinite" />
+    </line>
+    
+    <!-- Authentication indicators -->
+    <text x="255" y="190" font-family="monospace" font-size="6" fill="#FF9F43" text-anchor="start" opacity="0.8">AUTH.CHECK</text>
+    
+    <!-- Authentication status -->
+    <text x="200" y="180" font-family="monospace" font-size="6" fill="#FFFA65" text-anchor="middle" opacity="0">
+      <animate attributeName="opacity" values="0;0.9;0" dur="4s" repeatCount="indefinite" begin="1s" />
+      ANALYZING...
+    </text>
+    
+    <text x="200" y="225" font-family="monospace" font-size="6" fill="#00FF41" text-anchor="middle" opacity="0">
+      <animate attributeName="opacity" values="0;0;0;0.9;0" dur="4s" repeatCount="indefinite" begin="1s" />
+      ACCESS GRANTED
+    </text>
+  </g>
+  
+  <!-- Panel realignment animation -->
+  <g id="panel-realignment">
+    <!-- Panel shift indicator lines -->
+    <line x1="205" y1="150" x2="210" y2="150" stroke="#FF9F43" stroke-width="1" opacity="0">
+      <animate attributeName="opacity" values="0;0.8;0" dur="0.5s" repeatCount="indefinite" begin="5s" />
+    </line>
+    <line x1="240" y1="175" x2="245" y2="175" stroke="#FF9F43" stroke-width="1" opacity="0">
+      <animate attributeName="opacity" values="0;0.8;0" dur="0.5s" repeatCount="indefinite" begin="5.2s" />
+    </line>
+    <line x1="240" y1="225" x2="245" y2="225" stroke="#FF9F43" stroke-width="1" opacity="0">
+      <animate attributeName="opacity" values="0;0.8;0" dur="0.5s" repeatCount="indefinite" begin="5.4s" />
+    </line>
+    <line x1="205" y1="250" x2="210" y2="250" stroke="#FF9F43" stroke-width="1" opacity="0">
+      <animate attributeName="opacity" values="0;0.8;0" dur="0.5s" repeatCount="indefinite" begin="5.6s" />
+    </line>
+    <line x1="160" y1="225" x2="155" y2="225" stroke="#FF9F43" stroke-width="1" opacity="0">
+      <animate attributeName="opacity" values="0;0.8;0" dur="0.5s" repeatCount="indefinite" begin="5.8s" />
+    </line>
+    <line x1="160" y1="175" x2="155" y2="175" stroke="#FF9F43" stroke-width="1" opacity="0">
+      <animate attributeName="opacity" values="0;0.8;0" dur="0.5s" repeatCount="indefinite" begin="6s" />
+    </line>
+  </g>
+  
+  <!-- Breach attempt visualization -->
+  <g id="breach-attempt" opacity="0">
+    <animate attributeName="opacity" values="0;0;0;0;0;0;0.9;0" dur="10s" repeatCount="indefinite" begin="7s" />
+    
+    <!-- Red warning indicators -->
+    <circle cx="200" cy="200" r="60" fill="none" stroke="#FF0000" stroke-width="2" stroke-opacity="0.8" stroke-dasharray="10 5" />
+    
+    <!-- Breach text -->
+    <text x="200" y="180" font-family="monospace" font-size="10" fill="#FF0000" text-anchor="middle">BREACH ATTEMPT</text>
+    <text x="200" y="195" font-family="monospace" font-size="8" fill="#FF0000" text-anchor="middle">RECONFIGURING</text>
+    <text x="200" y="210" font-family="monospace" font-size="8" fill="#FF0000" text-anchor="middle">PANELS</text>
+  </g>
+  
+  <!-- Corporate identification mark -->
+  <text x="200" y="370" font-family="monospace" font-size="10" fill="#FF9F43" text-anchor="middle" opacity="0.6">TESSIER-ASHPOOL WALL.ICE v6.2</text>
+  
+  <!-- Panel shifting animation - subtle movement of entire structure -->
+  <animateTransform
+    xlink:href="#hex-grid"
+    attributeName="transform"
+    type="rotate"
+    from="-2 200 200"
+    to="2 200 200"
+    dur="10s"
+    repeatCount="indefinite"
+    additive="sum" />
+    
+  <!-- Breathing animation - subtle scaling -->
+  <animateTransform
+    xlink:href="#wall-structure"
+    attributeName="transform"
+    type="scale"
+    from="0.98 0.98"
+    to="1.02 1.02"
+    dur="5s"
+    repeatCount="indefinite"
+    additive="sum" />
+</svg>

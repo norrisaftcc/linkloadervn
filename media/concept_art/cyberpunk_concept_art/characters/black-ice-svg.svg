@@ -1,0 +1,159 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background glow effect -->
+  <radialGradient id="bg-glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+    <stop offset="0%" stop-color="#FF00FF" stop-opacity="0.2" />
+    <stop offset="70%" stop-color="#0A0A12" stop-opacity="0" />
+  </radialGradient>
+  <circle cx="200" cy="200" r="190" fill="url(#bg-glow)">
+    <animate attributeName="r" values="180;190;180" dur="4s" repeatCount="indefinite" />
+  </circle>
+  
+  <!-- Core sphere structure -->
+  <g id="core-structure">
+    <!-- Base sphere wireframe -->
+    <circle cx="200" cy="200" r="100" fill="none" stroke="#FF00FF" stroke-width="2" stroke-opacity="0.7" />
+    <circle cx="200" cy="200" r="100" fill="none" stroke="#8E44AD" stroke-width="1" stroke-opacity="0.5" transform="rotate(30 200 200)" />
+    <circle cx="200" cy="200" r="100" fill="none" stroke="#FF00FF" stroke-width="1" stroke-opacity="0.3" transform="rotate(60 200 200)" />
+    
+    <!-- Cross-section circles -->
+    <ellipse cx="200" cy="200" rx="100" ry="30" fill="none" stroke="#FF00FF" stroke-width="1.5" stroke-opacity="0.6" />
+    <ellipse cx="200" cy="200" rx="100" ry="30" fill="none" stroke="#8E44AD" stroke-width="1" stroke-opacity="0.4" transform="rotate(60 200 200)" />
+    <ellipse cx="200" cy="200" rx="100" ry="30" fill="none" stroke="#FF00FF" stroke-width="1" stroke-opacity="0.2" transform="rotate(120 200 200)" />
+    
+    <!-- Center core -->
+    <circle cx="200" cy="200" r="15" fill="#FF00FF" fill-opacity="0.8">
+      <animate attributeName="fill" values="#FF00FF;#8E44AD;#FF00FF" dur="2s" repeatCount="indefinite" />
+      <animate attributeName="r" values="12;15;12" dur="1.5s" repeatCount="indefinite" />
+    </circle>
+  </g>
+  
+  <!-- Spikes Group -->
+  <g id="spikes">
+    <!-- First set of spikes -->
+    <g id="spike-set-1">
+      <line x1="200" y1="100" x2="200" y2="50" stroke="#FF00FF" stroke-width="3" stroke-opacity="0.9">
+        <animate attributeName="y2" values="50;40;50" dur="2.3s" repeatCount="indefinite" />
+      </line>
+      <line x1="200" y1="300" x2="200" y2="350" stroke="#8E44AD" stroke-width="3" stroke-opacity="0.9">
+        <animate attributeName="y2" values="350;360;350" dur="1.7s" repeatCount="indefinite" />
+      </line>
+      <line x1="100" y1="200" x2="50" y2="200" stroke="#FF00FF" stroke-width="3" stroke-opacity="0.9">
+        <animate attributeName="x2" values="50;40;50" dur="1.9s" repeatCount="indefinite" />
+      </line>
+      <line x1="300" y1="200" x2="350" y2="200" stroke="#8E44AD" stroke-width="3" stroke-opacity="0.9">
+        <animate attributeName="x2" values="350;360;350" dur="2.1s" repeatCount="indefinite" />
+      </line>
+    </g>
+    
+    <!-- Second set of spikes (diagonal) -->
+    <g id="spike-set-2" transform="rotate(45 200 200)">
+      <line x1="200" y1="100" x2="200" y2="65" stroke="#FF00FF" stroke-width="2" stroke-opacity="0.7">
+        <animate attributeName="y2" values="65;55;65" dur="2.5s" repeatCount="indefinite" />
+      </line>
+      <line x1="200" y1="300" x2="200" y2="335" stroke="#8E44AD" stroke-width="2" stroke-opacity="0.7">
+        <animate attributeName="y2" values="335;345;335" dur="1.5s" repeatCount="indefinite" />
+      </line>
+      <line x1="100" y1="200" x2="65" y2="200" stroke="#FF00FF" stroke-width="2" stroke-opacity="0.7">
+        <animate attributeName="x2" values="65;55;65" dur="2s" repeatCount="indefinite" />
+      </line>
+      <line x1="300" y1="200" x2="335" y2="200" stroke="#8E44AD" stroke-width="2" stroke-opacity="0.7">
+        <animate attributeName="x2" values="335;345;335" dur="2.2s" repeatCount="indefinite" />
+      </line>
+    </g>
+    
+    <!-- Third set of spikes (another angle) -->
+    <g id="spike-set-3" transform="rotate(90 200 200)">
+      <line x1="200" y1="100" x2="200" y2="60" stroke="#FF00FF" stroke-width="2.5" stroke-opacity="0.8">
+        <animate attributeName="y2" values="60;50;60" dur="1.8s" repeatCount="indefinite" />
+      </line>
+      <line x1="200" y1="300" x2="200" y2="340" stroke="#8E44AD" stroke-width="2.5" stroke-opacity="0.8">
+        <animate attributeName="y2" values="340;350;340" dur="2.4s" repeatCount="indefinite" />
+      </line>
+      <line x1="100" y1="200" x2="60" y2="200" stroke="#FF00FF" stroke-width="2.5" stroke-opacity="0.8">
+        <animate attributeName="x2" values="60;50;60" dur="2.7s" repeatCount="indefinite" />
+      </line>
+      <line x1="300" y1="200" x2="340" y2="200" stroke="#8E44AD" stroke-width="2.5" stroke-opacity="0.8">
+        <animate attributeName="x2" values="340;350;340" dur="1.6s" repeatCount="indefinite" />
+      </line>
+    </g>
+    
+    <!-- Additional randomly positioned spikes -->
+    <line x1="230" y1="120" x2="260" y2="80" stroke="#FF00FF" stroke-width="2" stroke-opacity="0.7">
+      <animate attributeName="x2" values="260;270;260" dur="3s" repeatCount="indefinite" />
+      <animate attributeName="y2" values="80;70;80" dur="3s" repeatCount="indefinite" />
+    </line>
+    <line x1="160" y1="130" x2="120" y2="90" stroke="#8E44AD" stroke-width="2" stroke-opacity="0.7">
+      <animate attributeName="x2" values="120;110;120" dur="2.5s" repeatCount="indefinite" />
+      <animate attributeName="y2" values="90;80;90" dur="2.5s" repeatCount="indefinite" />
+    </line>
+    <line x1="270" y1="250" x2="320" y2="280" stroke="#FF00FF" stroke-width="2" stroke-opacity="0.7">
+      <animate attributeName="x2" values="320;330;320" dur="2.2s" repeatCount="indefinite" />
+      <animate attributeName="y2" values="280;290;280" dur="2.2s" repeatCount="indefinite" />
+    </line>
+    <line x1="140" y1="270" x2="100" y2="320" stroke="#8E44AD" stroke-width="2" stroke-opacity="0.7">
+      <animate attributeName="x2" values="100;90;100" dur="2.8s" repeatCount="indefinite" />
+      <animate attributeName="y2" values="320;330;320" dur="2.8s" repeatCount="indefinite" />
+    </line>
+  </g>
+  
+  <!-- Data stream effects -->
+  <g id="data-streams" opacity="0.6">
+    <path d="M 200,200 C 220,150 250,170 270,130" fill="none" stroke="#FF00FF" stroke-width="1" stroke-dasharray="4 2">
+      <animate attributeName="d" values="M 200,200 C 220,150 250,170 270,130; M 200,200 C 230,160 260,180 280,140; M 200,200 C 220,150 250,170 270,130" dur="3s" repeatCount="indefinite" />
+    </path>
+    <path d="M 200,200 C 160,170 140,130 110,120" fill="none" stroke="#8E44AD" stroke-width="1" stroke-dasharray="4 2">
+      <animate attributeName="d" values="M 200,200 C 160,170 140,130 110,120; M 200,200 C 150,160 130,120 100,110; M 200,200 C 160,170 140,130 110,120" dur="2.7s" repeatCount="indefinite" />
+    </path>
+    <path d="M 200,200 C 230,240 260,250 290,280" fill="none" stroke="#FF00FF" stroke-width="1" stroke-dasharray="4 2">
+      <animate attributeName="d" values="M 200,200 C 230,240 260,250 290,280; M 200,200 C 240,250 270,260 300,290; M 200,200 C 230,240 260,250 290,280" dur="2.4s" repeatCount="indefinite" />
+    </path>
+    <path d="M 200,200 C 170,240 140,260 120,300" fill="none" stroke="#8E44AD" stroke-width="1" stroke-dasharray="4 2">
+      <animate attributeName="d" values="M 200,200 C 170,240 140,260 120,300; M 200,200 C 160,230 130,250 110,290; M 200,200 C 170,240 140,260 120,300" dur="3.2s" repeatCount="indefinite" />
+    </path>
+  </g>
+  
+  <!-- Digital glitch effects -->
+  <g id="glitches">
+    <rect x="185" y="185" width="30" height="5" fill="#FF00FF" opacity="0.7">
+      <animate attributeName="opacity" values="0.7;0;0.7" dur="0.2s" repeatCount="indefinite" begin="1.5s" />
+    </rect>
+    <rect x="190" y="210" width="20" height="3" fill="#8E44AD" opacity="0.7">
+      <animate attributeName="opacity" values="0.7;0;0.7" dur="0.1s" repeatCount="indefinite" begin="2.7s" />
+    </rect>
+    <line x1="160" y1="200" x2="240" y2="200" stroke="#FFFFFF" stroke-width="1" opacity="0.3">
+      <animate attributeName="opacity" values="0.3;0;0.3" dur="0.3s" repeatCount="indefinite" begin="0.7s" />
+    </line>
+  </g>
+  
+  <!-- Attack indicator - only visible during attack phase -->
+  <g id="attack-indicator" opacity="0">
+    <animate attributeName="opacity" values="0;0.9;0" dur="5s" repeatCount="indefinite" begin="3s" />
+    <circle cx="200" cy="200" r="120" stroke="#FF0000" stroke-width="3" fill="none" stroke-dasharray="10 5">
+      <animate attributeName="r" values="120;150;120" dur="1s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#FF0000;#8E44AD;#FF0000" dur="1s" repeatCount="indefinite" />
+    </circle>
+    <text x="200" y="95" font-family="monospace" font-size="12" fill="#FF0000" text-anchor="middle">NEURAL DAMAGE IMMINENT</text>
+  </g>
+  
+  <!-- Corporate identification mark -->
+  <text x="200" y="330" font-family="monospace" font-size="10" fill="#FF00FF" text-anchor="middle" opacity="0.6">MAAS-NEOTEK BLACK.ICE v3.7</text>
+  
+  <!-- Main Animation - slow rotation of entire structure -->
+  <animateTransform
+    xlink:href="#core-structure"
+    attributeName="transform"
+    type="rotate"
+    from="0 200 200"
+    to="360 200 200"
+    dur="20s"
+    repeatCount="indefinite" />
+  
+  <animateTransform
+    xlink:href="#spikes"
+    attributeName="transform"
+    type="rotate"
+    from="0 200 200"
+    to="-360 200 200"
+    dur="40s"
+    repeatCount="indefinite" />
+</svg>
