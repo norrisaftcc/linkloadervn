@@ -26,6 +26,14 @@ A lightweight, web-native visual novel engine designed specifically for LinkLoad
 
 ## Quick Start
 
+### Try the Examples
+1. Open `examples/index.html` in your browser
+2. Choose from 4 different story types:
+   - **LinkLoader Demo**: Classic space western adventure
+   - **Neon Isekai**: Character creation with dual personalities
+   - **Terminal Mystery**: Cyberpunk detective investigation
+   - **Connection Protocol**: Human-AI romance story
+
 ### Basic Usage
 
 ```html
@@ -84,9 +92,13 @@ constellation/
 ├── storage/              # Save/load system (future)
 ├── minigames/            # Interactive mini-games (future)
 └── examples/
-    ├── demo.html         # Complete demo
-    ├── demo_story.json   # Sample story
-    └── assets/           # Demo assets
+    ├── index.html              # Story showcase and launcher
+    ├── player.html             # Universal story player
+    ├── demo_story.json         # Original LinkLoader demo
+    ├── character_creation.json # Neon Isekai character creation
+    ├── terminal_mystery.json   # Cyberpunk detective story
+    ├── ai_romance.json         # Human-AI relationship story
+    └── demo.html              # Legacy single-story demo
 ```
 
 ## Story Format Reference

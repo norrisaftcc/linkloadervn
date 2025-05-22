@@ -1,0 +1,280 @@
+{
+  "title": "Neon Isekai - Character Creation",
+  "version": "1.0",
+  "startScene": "awakening",
+  "metadata": {
+    "author": "Constellation Engine Demo",
+    "description": "Character creation inspired by cyberpunk isekai themes"
+  },
+  "scenes": {
+    "awakening": {
+      "background": "images/neon_city_blur.jpg",
+      "characters": [],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "You wake up in a world that's both familiar and alien. Neon lights pierce through synthetic rain, and your reflection in a puddle shows... something different."
+        },
+        {
+          "speaker": "narrator", 
+          "text": "There are two sides to your new existence in this digital realm. Your OLD SELF - who you were before - and your NEW SELF - who you're becoming."
+        },
+        {
+          "speaker": "narrator",
+          "text": "But first, tell me... what were you in the world you left behind?"
+        }
+      ],
+      "choices": [
+        {
+          "text": "A corporate drone, optimizing systems",
+          "goto": "old_corporate",
+          "set": {"old_archetype": "corporate", "old_tech": 3, "old_social": 1, "old_wild": 0}
+        },
+        {
+          "text": "A street artist, creating guerrilla art",
+          "goto": "old_artist", 
+          "set": {"old_archetype": "artist", "old_tech": 1, "old_social": 2, "old_wild": 3}
+        },
+        {
+          "text": "A security guard, watching and waiting",
+          "goto": "old_security",
+          "set": {"old_archetype": "security", "old_tech": 2, "old_social": 0, "old_wild": 2}
+        },
+        {
+          "text": "A bartender, listening to everyone's secrets",
+          "goto": "old_bartender",
+          "set": {"old_archetype": "bartender", "old_tech": 0, "old_social": 3, "old_wild": 1}
+        }
+      ]
+    },
+    "old_corporate": {
+      "background": "images/office_memories.jpg",
+      "characters": [
+        {"name": "old_self", "sprite": "images/corporate_suit.png", "position": "left"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "old_self",
+          "text": "Efficiency was everything. Clean code, optimized processes, quarterly reports..."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Your OLD SELF brings methodical thinking and technological expertise. But what calls to your NEW SELF in this neon wilderness?"
+        }
+      ],
+      "choices": [
+        {
+          "text": "The thrill of breaking systems instead of building them",
+          "goto": "new_hacker",
+          "set": {"new_archetype": "hacker", "new_tech": 4, "new_social": 0, "new_wild": 2}
+        },
+        {
+          "text": "The rush of living without schedules or rules", 
+          "goto": "new_nomad",
+          "set": {"new_archetype": "nomad", "new_tech": 1, "new_social": 1, "new_wild": 4}
+        },
+        {
+          "text": "The power of rallying others to a cause",
+          "goto": "new_leader", 
+          "set": {"new_archetype": "leader", "new_tech": 2, "new_social": 4, "new_wild": 1}
+        }
+      ]
+    },
+    "old_artist": {
+      "background": "images/street_art_wall.jpg", 
+      "characters": [
+        {"name": "old_self", "sprite": "images/artist_paint.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "old_self",
+          "text": "Expression was life. Every wall was a canvas, every space a chance to make people think..."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Your OLD SELF brings creativity and rebellious spirit. But in this digital realm, what new form does your art take?"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Data sculpture - turning information into beauty",
+          "goto": "new_datamancer",
+          "set": {"new_archetype": "datamancer", "new_tech": 3, "new_social": 2, "new_wild": 2}
+        },
+        {
+          "text": "Social engineering - people as the medium",
+          "goto": "new_manipulator",
+          "set": {"new_archetype": "manipulator", "new_tech": 1, "new_social": 4, "new_wild": 2}
+        },
+        {
+          "text": "Pure chaos - letting the city's randomness guide you",
+          "goto": "new_chaoswalker",
+          "set": {"new_archetype": "chaoswalker", "new_tech": 0, "new_social": 1, "new_wild": 5}
+        }
+      ]
+    },
+    "old_security": {
+      "background": "images/security_monitors.jpg",
+      "characters": [
+        {"name": "old_self", "sprite": "images/guard_uniform.png", "position": "right"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "old_self", 
+          "text": "Vigilance was key. Watch. Wait. Protect what matters, even if no one notices..."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Your OLD SELF brings patience and protective instincts. But who do you protect in this new world?"
+        }
+      ],
+      "choices": [
+        {
+          "text": "The innocent - becoming a digital guardian angel",
+          "goto": "new_guardian",
+          "set": {"new_archetype": "guardian", "new_tech": 2, "new_social": 3, "new_wild": 1}
+        },
+        {
+          "text": "The truth - exposing the lies behind the neon facade",
+          "goto": "new_seeker",
+          "set": {"new_archetype": "seeker", "new_tech": 3, "new_social": 1, "new_wild": 3}
+        },
+        {
+          "text": "Yourself - trusting no one in this digital maze",
+          "goto": "new_loner",
+          "set": {"new_archetype": "loner", "new_tech": 4, "new_social": 0, "new_wild": 3}
+        }
+      ]
+    },
+    "old_bartender": {
+      "background": "images/old_bar_memories.jpg",
+      "characters": [
+        {"name": "old_self", "sprite": "images/bartender_apron.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "old_self",
+          "text": "Everyone needs someone to listen. Stories, secrets, sorrows... I heard them all."
+        },
+        {
+          "speaker": "narrator", 
+          "text": "Your OLD SELF brings empathy and social intuition. But in this neon-soaked world, how do you connect with others?"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Become an information broker - trading in digital secrets",
+          "goto": "new_broker",
+          "set": {"new_archetype": "broker", "new_tech": 2, "new_social": 4, "new_wild": 1}
+        },
+        {
+          "text": "Build a found family among the digital outcasts", 
+          "goto": "new_connector",
+          "set": {"new_archetype": "connector", "new_tech": 1, "new_social": 5, "new_wild": 1}
+        },
+        {
+          "text": "Use people's trust to manipulate the system",
+          "goto": "new_spider",
+          "set": {"new_archetype": "spider", "new_tech": 3, "new_social": 3, "new_wild": 2}
+        }
+      ]
+    },
+    "new_hacker": {
+      "background": "images/neon_city_night.jpg",
+      "characters": [
+        {"name": "old_self", "sprite": "images/corporate_suit.png", "position": "left"},
+        {"name": "new_self", "sprite": "images/hacker_hoodie.png", "position": "right"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "new_self",
+          "text": "The systems you once served... now they're just puzzles to solve. Beautiful, breakable puzzles."
+        },
+        {
+          "speaker": "old_self",
+          "text": "But we know how they think. We built them, after all."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Your dual nature is set: The METHODICAL CORPORATE and the REBELLIOUS HACKER. Sometimes they work together, sometimes they clash."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Accept this duality and begin your journey",
+          "goto": "character_complete"
+        },
+        {
+          "text": "This doesn't feel right... let me try again",
+          "goto": "awakening"
+        }
+      ]
+    },
+    "character_complete": {
+      "background": "images/neon_city_night.jpg",
+      "characters": [
+        {"name": "player", "sprite": "images/player_composite.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "Your character is complete. You are a being of two natures, sometimes in harmony, sometimes in conflict."
+        },
+        {
+          "speaker": "narrator",
+          "text": "In this digital realm, you'll need to decide when to lean into your OLD SELF's strengths and when to embrace your NEW SELF's calling."
+        },
+        {
+          "speaker": "player",
+          "text": "Time to see what this neon world has in store for me..."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Begin your adventure",
+          "action": "start_main_game"
+        },
+        {
+          "text": "View your character sheet",
+          "goto": "character_sheet"
+        },
+        {
+          "text": "Create a different character",
+          "goto": "awakening"
+        }
+      ]
+    },
+    "character_sheet": {
+      "background": "images/character_display.jpg",
+      "characters": [],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "=== CHARACTER PROFILE ==="
+        },
+        {
+          "speaker": "narrator",
+          "text": "OLD SELF: {{old_archetype}} - Tech: {{old_tech}}, Social: {{old_social}}, Wild: {{old_wild}}"
+        },
+        {
+          "speaker": "narrator", 
+          "text": "NEW SELF: {{new_archetype}} - Tech: {{new_tech}}, Social: {{new_social}}, Wild: {{new_wild}}"
+        },
+        {
+          "speaker": "narrator",
+          "text": "When your two selves align, you're powerful. When they conflict, you must choose which side to follow."
+        }
+      ],
+      "choices": [
+        {
+          "text": "This looks good - let's play!",
+          "action": "start_main_game"
+        },
+        {
+          "text": "I want to remake my character",
+          "goto": "awakening"
+        }
+      ]
+    }
+  }
+}

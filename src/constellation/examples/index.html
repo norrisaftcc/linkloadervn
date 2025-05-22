@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constellation Engine - Story Examples</title>
+    <link rel="stylesheet" href="../ui/constellation.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(45deg, #000020, #001100);
+            font-family: 'Courier New', monospace;
+            color: #00ff00;
+            min-height: 100vh;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 0 0 10px #00ff00;
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 1.2em;
+            color: #88ff88;
+        }
+        
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .story-card {
+            background: rgba(0, 20, 0, 0.8);
+            border: 2px solid #004400;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .story-card:hover {
+            border-color: #00ff00;
+            background: rgba(0, 40, 0, 0.9);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 0, 0.2);
+        }
+        
+        .story-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #00ffff;
+            text-shadow: 0 0 5px #00ffff;
+        }
+        
+        .story-description {
+            color: #ccffcc;
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+        
+        .story-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .story-features li {
+            color: #88ff88;
+            padding: 3px 0;
+            font-size: 0.9em;
+        }
+        
+        .story-features li:before {
+            content: "▸ ";
+            color: #00ff00;
+        }
+        
+        .play-button {
+            background: linear-gradient(45deg, #004400, #006600);
+            border: 1px solid #00ff00;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 1em;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            transition: all 0.2s ease;
+        }
+        
+        .play-button:hover {
+            background: linear-gradient(45deg, #006600, #008800);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .tech-info {
+            background: rgba(0, 0, 20, 0.8);
+            border: 1px solid #0066ff;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            color: #88ccff;
+        }
+        
+        .tech-info h3 {
+            color: #00ccff;
+            margin-top: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .stories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>⭐ Constellation Engine</h1>
+        <p>Interactive Story Examples - Web-Native Visual Novel Engine</p>
+    </div>
+    
+    <div class="tech-info">
+        <h3>About Constellation Engine</h3>
+        <p>A lightweight, web-native visual novel engine built with pure HTML5, CSS3, and JavaScript. 
+        No external dependencies, cross-platform compatible, and optimized for both desktop and mobile devices.</p>
+    </div>
+    
+    <div class="stories-grid">
+        <div class="story-card" onclick="playStory('demo_story.json')">
+            <h2 class="story-title">LinkLoader Demo</h2>
+            <p class="story-description">
+                Meet Slim, the space cowboy who fixes broken link loaders in the digital frontier. 
+                A classic adventure showcasing the core LinkLoader universe.
+            </p>
+            <ul class="story-features">
+                <li>Classic space western atmosphere</li>
+                <li>LISP-themed dialogue and terminology</li>
+                <li>Multiple branching paths</li>
+                <li>Character interactions with terminals</li>
+            </ul>
+            <button class="play-button">Play Demo Story</button>
+        </div>
+        
+        <div class="story-card" onclick="playStory('character_creation.json')">
+            <h2 class="story-title">Neon Isekai: Character Creation</h2>
+            <p class="story-description">
+                Create a character with dual nature - your OLD SELF from the world you left behind, 
+                and your NEW SELF in this neon-soaked digital realm.
+            </p>
+            <ul class="story-features">
+                <li>Cyberpunk isekai theme</li>
+                <li>Dual personality system</li>
+                <li>Stat-based character building</li>
+                <li>Multiple archetype combinations</li>
+            </ul>
+            <button class="play-button">Create Character</button>
+        </div>
+        
+        <div class="story-card" onclick="playStory('terminal_mystery.json')">
+            <h2 class="story-title">The Terminal Mystery</h2>
+            <p class="story-description">
+                A cyberpunk detective story where you investigate a crime scene and uncover 
+                a conspiracy that goes deeper than CDR rustling.
+            </p>
+            <ul class="story-features">
+                <li>Detective/mystery gameplay</li>
+                <li>Multiple investigation paths</li>
+                <li>Corporate conspiracy plot</li>
+                <li>Different ending branches</li>
+            </ul>
+            <button class="play-button">Solve Mystery</button>
+        </div>
+        
+        <div class="story-card" onclick="playStory('ai_romance.json')">
+            <h2 class="story-title">Connection Protocol</h2>
+            <p class="story-description">
+                A touching story about connection between human and AI, exploring themes of 
+                consciousness, creativity, and love in the digital age.
+            </p>
+            <ul class="story-features">
+                <li>Human-AI relationship</li>
+                <li>Digital art and poetry</li>
+                <li>Emotional depth and choices</li>
+                <li>Virtual world exploration</li>
+            </ul>
+            <button class="play-button">Make Connection</button>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Constellation Engine - Part of the LinkLoader Project</p>
+        <p>Built with ❤️ and pure web technologies</p>
+    </div>
+    
+    <script>
+        function playStory(storyFile) {
+            // Create URL parameters to pass the story file
+            const params = new URLSearchParams({
+                story: storyFile
+            });
+            
+            // Open the universal player with the selected story
+            window.open(`player.html?${params.toString()}`, '_blank');
+        }
+        
+        // Add some subtle animation effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.story-card');
+            
+            cards.forEach((card, index) => {
+                // Stagger the appearance animation
+                setTimeout(() => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    card.style.transition = 'all 0.5s ease';
+                    
+                    requestAnimationFrame(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    });
+                }, index * 100);
+            });
+        });
+        
+        // Add keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key >= '1' && e.key <= '4') {
+                const storyIndex = parseInt(e.key) - 1;
+                const stories = ['demo_story.json', 'character_creation.json', 'terminal_mystery.json', 'ai_romance.json'];
+                if (stories[storyIndex]) {
+                    playStory(stories[storyIndex]);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

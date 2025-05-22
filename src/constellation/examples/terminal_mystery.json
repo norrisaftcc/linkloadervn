@@ -1,0 +1,370 @@
+{
+  "title": "The Terminal Mystery",
+  "version": "1.0", 
+  "startScene": "crime_scene",
+  "metadata": {
+    "author": "Constellation Engine Demo",
+    "description": "A cyberpunk detective story set in the LinkLoader universe"
+  },
+  "scenes": {
+    "crime_scene": {
+      "background": "images/dark_alley_terminal.jpg",
+      "characters": [
+        {"name": "detective", "sprite": "images/detective_coat.png", "position": "left"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "The terminal sits silent in the rain-soaked alley, its screen flickering with corrupted data."
+        },
+        {
+          "speaker": "detective",
+          "text": "Another CDR rustler hit... but this one's different. They left the terminal intact."
+        },
+        {
+          "speaker": "narrator",
+          "text": "As you approach, you notice three things: burn marks on the ground, a strange symbol etched into the terminal's casing, and a data crystal lying in the puddle nearby."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Examine the burn marks first",
+          "goto": "burn_marks",
+          "set": {"clue_burns": true}
+        },
+        {
+          "text": "Investigate the strange symbol",
+          "goto": "symbol_analysis", 
+          "set": {"clue_symbol": true}
+        },
+        {
+          "text": "Retrieve the data crystal",
+          "goto": "crystal_retrieval",
+          "set": {"clue_crystal": true}
+        }
+      ]
+    },
+    "burn_marks": {
+      "background": "images/dark_alley_terminal.jpg",
+      "characters": [
+        {"name": "detective", "sprite": "images/detective_examining.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "detective",
+          "text": "These aren't raygun burns... too precise. Almost like a surgical laser."
+        },
+        {
+          "speaker": "narrator",
+          "text": "The marks form a perfect circle around where someone might have stood. Whatever caused this was aimed outward, not inward."
+        },
+        {
+          "speaker": "detective",
+          "text": "Self-defense? Or maybe the victim had some kind of protective shield device..."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Look for fragments of the device",
+          "goto": "device_search",
+          "condition": {"clue_burns": true}
+        },
+        {
+          "text": "Examine the strange symbol now",
+          "goto": "symbol_analysis",
+          "condition": {"clue_symbol": false}
+        },
+        {
+          "text": "Check out that data crystal",
+          "goto": "crystal_retrieval", 
+          "condition": {"clue_crystal": false}
+        }
+      ]
+    },
+    "symbol_analysis": {
+      "background": "images/terminal_closeup.jpg",
+      "characters": [
+        {"name": "detective", "sprite": "images/detective_thinking.png", "position": "right"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "detective",
+          "text": "This symbol... I've seen it before. But where?"
+        },
+        {
+          "speaker": "narrator",
+          "text": "The symbol is carved deep into the metal: a stylized parenthesis wrapped around a star. It's the mark of the Constellation Collective."
+        },
+        {
+          "speaker": "detective",
+          "text": "The Collective? They're supposed to be freedom fighters, not rustlers. Unless..."
+        }
+      ],
+      "choices": [
+        {
+          "text": "This changes everything - call for backup",
+          "goto": "backup_call"
+        },
+        {
+          "text": "Keep investigating quietly",
+          "goto": "continue_investigation"
+        },
+        {
+          "text": "Try to contact the Collective directly",
+          "goto": "collective_contact",
+          "set": {"contacted_collective": true}
+        }
+      ]
+    },
+    "crystal_retrieval": {
+      "background": "images/data_crystal_glowing.jpg",
+      "characters": [
+        {"name": "detective", "sprite": "images/detective_coat.png", "position": "left"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "The crystal pulses with a soft blue light as you lift it from the water. Still active."
+        },
+        {
+          "speaker": "detective",
+          "text": "Military-grade encryption, but there's something else... a hidden partition."
+        },
+        {
+          "speaker": "narrator",
+          "text": "As you interface with the crystal, a voice recording begins to play:"
+        },
+        {
+          "speaker": "unknown_voice",
+          "text": "If you're hearing this, then I'm probably dead. The rustlers... they're not what they seem. The real enemy is—"
+        },
+        {
+          "speaker": "narrator",
+          "text": "The recording cuts off abruptly."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Try to recover the rest of the recording",
+          "goto": "data_recovery",
+          "set": {"attempted_recovery": true}
+        },
+        {
+          "text": "Analyze the voice pattern",
+          "goto": "voice_analysis"
+        },
+        {
+          "text": "Check if there are other hidden files",
+          "goto": "deep_scan"
+        }
+      ]
+    },
+    "collective_contact": {
+      "background": "images/secure_comm_channel.jpg",
+      "characters": [
+        {"name": "detective", "sprite": "images/detective_comm.png", "position": "left"},
+        {"name": "collective_agent", "sprite": "images/hooded_figure.png", "position": "right"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "collective_agent",
+          "text": "(That symbol... you know what it means.)"
+        },
+        {
+          "speaker": "detective",
+          "text": "I'm investigating a crime scene. Your mark was left behind."
+        },
+        {
+          "speaker": "collective_agent",
+          "text": "(We don't leave marks. That's someone trying to frame us.)"
+        },
+        {
+          "speaker": "collective_agent",
+          "text": "(The real rustlers are corporate agents. They're stealing data to sell back to the highest bidder.)"
+        },
+        {
+          "speaker": "detective",
+          "text": "Can you prove that?"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Ask for evidence",
+          "goto": "evidence_request"
+        },
+        {
+          "text": "This could be a trap - end the call",
+          "goto": "suspicious_ending"
+        },
+        {
+          "text": "Offer to work together",
+          "goto": "alliance_proposal"
+        }
+      ]
+    },
+    "data_recovery": {
+      "background": "images/data_recovery_screen.jpg",
+      "characters": [
+        {"name": "detective", "sprite": "images/detective_hacking.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "detective",
+          "text": "Come on... just a few more sectors..."
+        },
+        {
+          "speaker": "narrator",
+          "text": "The data slowly reconstructs. The voice becomes clearer:"
+        },
+        {
+          "speaker": "unknown_voice",
+          "text": "The real enemy is MegaCorp Security. They're staging these rustler attacks to justify their new surveillance protocols."
+        },
+        {
+          "speaker": "unknown_voice",
+          "text": "I have proof in my private server. Access code: (cons truth justice). They'll come for me now, but maybe you can—"
+        },
+        {
+          "speaker": "narrator",
+          "text": "The crystal suddenly cracks and goes dark. Someone triggered a remote wipe."
+        }
+      ],
+      "choices": [
+        {
+          "text": "You have the access code - investigate MegaCorp",
+          "goto": "megacorp_investigation",
+          "set": {"has_access_code": true}
+        },
+        {
+          "text": "This is bigger than you thought - call for help",
+          "goto": "backup_call"
+        },
+        {
+          "text": "Someone's watching - get out of here fast",
+          "goto": "escape_scene"
+        }
+      ]
+    },
+    "megacorp_investigation": {
+      "background": "images/corporate_server_room.jpg",
+      "characters": [
+        {"name": "detective", "sprite": "images/detective_infiltrating.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "detective",
+          "text": "Access code: (cons truth justice)... I'm in."
+        },
+        {
+          "speaker": "narrator",
+          "text": "The files are all here: staged attacks, falsified evidence, even payoffs to corrupt officials."
+        },
+        {
+          "speaker": "detective",
+          "text": "The CDR rustlers were just a cover story. MegaCorp's been running the whole operation."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Suddenly, alarms begin blaring. Security is closing in."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Download everything and run",
+          "goto": "data_theft_escape"
+        },
+        {
+          "text": "Plant evidence to expose them publicly",
+          "goto": "whistleblower_route"
+        },
+        {
+          "text": "Destroy their servers to stop the operation",
+          "goto": "sabotage_route"
+        }
+      ]
+    },
+    "whistleblower_route": {
+      "background": "images/news_broadcast.jpg",
+      "characters": [
+        {"name": "detective", "sprite": "images/detective_confident.png", "position": "left"},
+        {"name": "news_anchor", "sprite": "images/news_reporter.png", "position": "right"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "news_anchor",
+          "text": "Tonight at 11: MegaCorp Security exposed in massive fraud scandal. Anonymous sources provided evidence of staged attacks..."
+        },
+        {
+          "speaker": "detective",
+          "text": "Justice served. The real rustlers are behind bars, and the Constellation Collective's name is cleared."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Your investigation has brought the truth to light. The digital frontier is a little safer tonight."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Case closed - time for the next mystery",
+          "action": "restart"
+        },
+        {
+          "text": "Reflect on the choices you made",
+          "goto": "ending_reflection"
+        }
+      ]
+    },
+    "sabotage_route": {
+      "background": "images/server_explosion.jpg",
+      "characters": [
+        {"name": "detective", "sprite": "images/detective_silhouette.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "detective",
+          "text": "Sometimes the system can't be reformed. Sometimes it has to be broken."
+        },
+        {
+          "speaker": "narrator",
+          "text": "The servers burn, taking MegaCorp's conspiracy with them. No more staged attacks, no more innocent people framed."
+        },
+        {
+          "speaker": "narrator",
+          "text": "But in the shadows, you wonder: what other conspiracies are still running in the dark corners of the net?"
+        }
+      ],
+      "choices": [
+        {
+          "text": "The work continues - start investigating another case",
+          "action": "restart"
+        },
+        {
+          "text": "Consider what you've become",
+          "goto": "dark_reflection"
+        }
+      ]
+    },
+    "ending_reflection": {
+      "background": "images/detective_office_dawn.jpg",
+      "characters": [
+        {"name": "detective", "sprite": "images/detective_peaceful.png", "position": "center"}
+      ],
+      "dialogue": [
+        {
+          "speaker": "detective",
+          "text": "Every case teaches you something. This one taught me that the truth isn't always where you expect to find it."
+        },
+        {
+          "speaker": "narrator",
+          "text": "In the digital frontier, appearances can be deceiving. But with patience and determination, justice can still be served."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Ready for the next case",
+          "action": "restart"
+        }
+      ]
+    }
+  }
+}
