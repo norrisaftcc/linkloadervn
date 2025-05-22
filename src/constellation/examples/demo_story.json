@@ -1,0 +1,286 @@
+{
+  "title": "LinkLoader Demo - Constellation Engine",
+  "version": "1.0",
+  "startScene": "opening",
+  "metadata": {
+    "author": "LinkLoader Team",
+    "description": "A demo story for testing the Constellation engine"
+  },
+  "scenes": {
+    "opening": {
+      "background": "images/bg_desert_night.jpg",
+      "characters": [
+        {
+          "name": "slim",
+          "sprite": "images/slim_neutral.png",
+          "position": "center"
+        }
+      ],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "The desert night stretched endlessly before you, stars twinkling like distant code repositories in the cosmic void."
+        },
+        {
+          "speaker": "slim",
+          "text": "Well, I'll be... Another busted link loader out here in the middle of nowhere."
+        },
+        {
+          "speaker": "slim",
+          "text": "Looks like it's (cons car cdr) time again. Better get to work before those CDR rustlers show up."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Examine the terminal closely",
+          "goto": "terminal_examine",
+          "set": {"examined_terminal": true}
+        },
+        {
+          "text": "Look around for other clues",
+          "goto": "look_around"
+        },
+        {
+          "text": "Just start fixing it immediately",
+          "goto": "start_fixing"
+        }
+      ]
+    },
+    "terminal_examine": {
+      "background": "images/bg_desert_night.jpg",
+      "characters": [
+        {
+          "name": "slim",
+          "sprite": "images/slim_frown.png",
+          "position": "left"
+        },
+        {
+          "name": "terminal",
+          "sprite": "images/terminal_static.png",
+          "position": "right"
+        }
+      ],
+      "dialogue": [
+        {
+          "speaker": "slim",
+          "text": "Hmm... This terminal's got some serious glitching going on."
+        },
+        {
+          "speaker": "terminal",
+          "text": "(ERROR: STACK OVERFLOW IN CONS CELL ALLOCATION)"
+        },
+        {
+          "speaker": "slim",
+          "text": "Yep, that's a classic case of CDR corruption. Someone's been messing with the pointers."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Try to communicate with the terminal",
+          "goto": "terminal_talk",
+          "condition": {"coder_skill": ">=2"}
+        },
+        {
+          "text": "Start debugging the code",
+          "goto": "debug_sequence"
+        },
+        {
+          "text": "Go back and look for other options",
+          "goto": "opening"
+        }
+      ]
+    },
+    "look_around": {
+      "background": "images/bg_desert_night.jpg",
+      "characters": [
+        {
+          "name": "slim",
+          "sprite": "images/slim_neutral.png",
+          "position": "center"
+        }
+      ],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "You scan the horizon with your trained eye, looking for signs of trouble."
+        },
+        {
+          "speaker": "slim",
+          "text": "No dust clouds on the horizon... that's good. Means the CDR rustlers aren't riding tonight."
+        },
+        {
+          "speaker": "slim",
+          "text": "But I can hear some strange humming coming from that terminal. Better check it out."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Approach the terminal",
+          "goto": "terminal_examine"
+        },
+        {
+          "text": "Set up camp and wait until morning",
+          "goto": "camp_ending"
+        }
+      ]
+    },
+    "start_fixing": {
+      "background": "images/bg_desert_night.jpg",
+      "characters": [
+        {
+          "name": "slim",
+          "sprite": "images/slim_talk.png",
+          "position": "center"
+        }
+      ],
+      "dialogue": [
+        {
+          "speaker": "slim",
+          "text": "No time to waste! Let's get this baby humming again."
+        },
+        {
+          "speaker": "narrator",
+          "text": "You roll up your sleeves and dive straight into the repair work."
+        },
+        {
+          "speaker": "slim",
+          "text": "Just need to realign these data structures and... wait. Something's not right here."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continue fixing despite the problems",
+          "goto": "hasty_fix"
+        },
+        {
+          "text": "Stop and examine things more carefully",
+          "goto": "terminal_examine"
+        }
+      ]
+    },
+    "debug_sequence": {
+      "background": "images/bg_desert_night.jpg",
+      "characters": [
+        {
+          "name": "slim",
+          "sprite": "images/slim_neutral.png",
+          "position": "left"
+        },
+        {
+          "name": "terminal",
+          "sprite": "images/terminal_talk.png",
+          "position": "right"
+        }
+      ],
+      "dialogue": [
+        {
+          "speaker": "slim",
+          "text": "Alright, let's trace through this code step by step..."
+        },
+        {
+          "speaker": "terminal",
+          "text": "(DEBUGGING MODE ACTIVATED)"
+        },
+        {
+          "speaker": "terminal",
+          "text": "(TRACE: LOADING CARGO_LIST... SUCCESS)"
+        },
+        {
+          "speaker": "terminal",
+          "text": "(TRACE: PROCESSING LINKS... ERROR AT POSITION 0x2A7F)"
+        },
+        {
+          "speaker": "slim",
+          "text": "There! Found the corrupted memory address. Just need to patch it and we're golden."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Apply the fix",
+          "goto": "successful_fix"
+        },
+        {
+          "text": "Make a backup first",
+          "goto": "cautious_fix"
+        }
+      ]
+    },
+    "successful_fix": {
+      "background": "images/bg_desert_night.jpg",
+      "characters": [
+        {
+          "name": "slim",
+          "sprite": "images/slim_laughing.png",
+          "position": "left"
+        },
+        {
+          "name": "terminal",
+          "sprite": "images/terminal_idle.png",
+          "position": "right"
+        }
+      ],
+      "dialogue": [
+        {
+          "speaker": "terminal",
+          "text": "(SYSTEM RESTORED - ALL FUNCTIONS NOMINAL)"
+        },
+        {
+          "speaker": "terminal",
+          "text": "(THANK YOU, SPACE COWBOY. THE CARGO IS SECURE.)"
+        },
+        {
+          "speaker": "slim",
+          "text": "Another satisfied customer! That's what I call a clean (cons fix complete)."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Mission accomplished! The link loader purrs back to life, ready to transport cargo across the digital frontier."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Ride off into the sunset",
+          "goto": "victory_ending"
+        },
+        {
+          "text": "Stay and chat with the terminal",
+          "goto": "terminal_conversation"
+        }
+      ]
+    },
+    "victory_ending": {
+      "background": "images/bg_desert_dawn.jpg",
+      "characters": [
+        {
+          "name": "slim",
+          "sprite": "images/slim_neutral.png",
+          "position": "center"
+        }
+      ],
+      "dialogue": [
+        {
+          "speaker": "narrator",
+          "text": "As dawn breaks over the digital desert, you mount your trusty hover-bike and ride toward the next adventure."
+        },
+        {
+          "speaker": "slim",
+          "text": "Just another day in the life of a space cowboy coder. Wonder what broken links I'll find next?"
+        },
+        {
+          "speaker": "narrator",
+          "text": "THE END... for now."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Start a new adventure",
+          "goto": "opening"
+        },
+        {
+          "text": "Exit game",
+          "action": "quit"
+        }
+      ]
+    }
+  }
+}

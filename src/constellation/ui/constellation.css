@@ -1,0 +1,256 @@
+/**
+ * Constellation Engine - Core Styles
+ * A web-native visual novel engine for LinkLoader
+ */
+
+.constellation-engine {
+    width: 100%;
+    height: 100vh;
+    font-family: 'Courier New', monospace;
+    background: #000;
+    color: #fff;
+    overflow: hidden;
+    position: relative;
+}
+
+.constellation-viewport {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Background Layer */
+.constellation-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    transition: opacity 0.5s ease;
+}
+
+/* Characters Layer */
+.constellation-characters {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.character {
+    position: absolute;
+    bottom: 0;
+    width: 300px;
+    height: 500px;
+    transform: translateX(-50%);
+    transition: all 0.3s ease;
+    opacity: 0.9;
+}
+
+.character:hover {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.05);
+}
+
+/* Dialogue Box */
+.constellation-dialogue-box {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 800px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #444;
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 3;
+    backdrop-filter: blur(5px);
+}
+
+.dialogue-speaker {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #00ff00;
+    margin-bottom: 10px;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+.dialogue-text {
+    font-size: 1.1em;
+    line-height: 1.4;
+    min-height: 60px;
+    color: #fff;
+}
+
+.dialogue-continue {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    font-size: 1.5em;
+    color: #888;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.3; }
+}
+
+/* Choices Container */
+.constellation-choices {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 800px;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.choice-button {
+    background: rgba(0, 100, 0, 0.7);
+    border: 2px solid #00ff00;
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.choice-button:hover {
+    background: rgba(0, 150, 0, 0.9);
+    border-color: #00ff88;
+    transform: translateX(5px);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.choice-button:active {
+    background: rgba(0, 200, 0, 1);
+    transform: translateX(3px);
+}
+
+/* UI Layer */
+.constellation-ui {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.constellation-ui button {
+    pointer-events: all;
+}
+
+/* Menu and UI Elements */
+.constellation-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.constellation-menu button {
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #666;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.constellation-menu button:hover {
+    background: rgba(0, 0, 0, 0.9);
+    border-color: #00ff00;
+    color: #00ff00;
+}
+
+/* Loading and Error States */
+.constellation-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+    color: #00ff00;
+    text-align: center;
+    z-index: 5;
+}
+
+.constellation-error {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(100, 0, 0, 0.9);
+    border: 2px solid #ff0000;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .constellation-dialogue-box {
+        width: 95%;
+        padding: 15px;
+        bottom: 10px;
+    }
+    
+    .character {
+        width: 200px;
+        height: 350px;
+    }
+    
+    .dialogue-speaker {
+        font-size: 1em;
+    }
+    
+    .dialogue-text {
+        font-size: 0.9em;
+    }
+    
+    .choice-button {
+        padding: 12px 15px;
+        font-size: 0.9em;
+    }
+}
+
+/* Sci-fi/Western Theme Enhancements */
+.constellation-engine.theme-western {
+    background: linear-gradient(to bottom, #2a1810, #1a0f08);
+}
+
+.constellation-engine.theme-scifi {
+    background: linear-gradient(to bottom, #0a0a20, #000005);
+}
+
+.constellation-engine.theme-western .dialogue-speaker {
+    color: #ff8800;
+    text-shadow: 0 0 5px #ff8800;
+}
+
+.constellation-engine.theme-scifi .dialogue-speaker {
+    color: #00ffff;
+    text-shadow: 0 0 5px #00ffff;
+}
