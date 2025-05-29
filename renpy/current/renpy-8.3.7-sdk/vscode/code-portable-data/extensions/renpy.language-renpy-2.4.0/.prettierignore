@@ -1,9 +1,0 @@
-# Ignore artifacts:
-**/out
-**/dist
-
-# Ignore all markdown files:
-*.md
-
-# Ignore all generated typescript files:
-*.g.ts

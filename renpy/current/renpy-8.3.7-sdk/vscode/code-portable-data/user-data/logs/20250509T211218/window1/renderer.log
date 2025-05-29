@@ -1,6 +1,0 @@
-2025-05-09 21:12:18.855 [info] ChatSessionStore: Migrating 0 chat sessions from storage service to file system
-2025-05-09 21:12:18.885 [info] Started local extension host with pid 11226.
-2025-05-09 21:12:18.957 [info] ComputeTargetPlatform: darwin-arm64
-2025-05-09 21:12:19.412 [error] Unable to write to Workspace Settings because no workspace is opened. Please open a workspace first and try again.
-2025-05-09 21:12:20.303 [info] Settings Sync: Account status changed from uninitialized to unavailable
-2025-05-09 21:12:21.648 [info] [perf] Render performance baseline is 16ms
