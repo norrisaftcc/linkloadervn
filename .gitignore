@@ -18,7 +18,11 @@ errors.txt
 traceback.txt
 
 # Temporary folders
-*vscode/*
+# Ignore VS Code bundled with Ren'Py
+renpy/*/renpy-*/vscode/
+*.framework
+# Or more specifically:
+renpy/current/renpy-8.3.7-sdk/vscode/
 tmp/
 /current/renpy-8.3.7-sdk/lib
 /current/renpy-8.3.7-sdk/module
