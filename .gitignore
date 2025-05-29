@@ -18,6 +18,7 @@ errors.txt
 traceback.txt
 
 # Temporary folders
+*vscode/*
 tmp/
 /current/renpy-8.3.7-sdk/lib
 /current/renpy-8.3.7-sdk/module
