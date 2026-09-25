@@ -25,6 +25,7 @@ import json
 import os
 import shutil
 import tempfile
+import tomllib
 from pathlib import Path
 
 from .exporter import build_ladder, build_lexicon, build_puzzles_data, export_story
@@ -93,8 +94,15 @@ def _copy_assets(used_assets: dict, root: Path, dist_assets_dir: Path) -> dict:
     # sources with the same file name must not overwrite each other.
     taken: dict = {}
 
+    root_resolved = root.resolve()
+
     def copy_one(rel_path: str) -> str:
-        src = root / rel_path
+        # Paths in assets.toml are relative to the repository root. Refuse
+        # an absolute path, a `..` escape or a symlink that leads outside
+        # it, so a story can never copy other files on the machine.
+        src = (root / rel_path).resolve()
+        if Path(rel_path).is_absolute() or not src.is_relative_to(root_resolved):
+            raise BuildError(f"asset path leaves the repository: {rel_path}")
         if not src.exists():
             raise BuildError(f"asset referenced by the story is missing on disk: {src}")
         dist_name = _dist_asset_name(rel_path)
@@ -175,7 +183,10 @@ def build(
     web_dir = web_dir or DEFAULT_WEB_DIR
 
     story = load_story(story_dir)
-    cast, assets = load_cast_and_assets(story_dir)
+    try:
+        cast, assets = load_cast_and_assets(story_dir)
+    except (FileNotFoundError, ValueError, tomllib.TOMLDecodeError) as e:
+        raise BuildError(f"cannot read cast.toml or assets.toml: {e}") from e
     puzzles_dir = root / "puzzles"
     errors, warnings = validate(story, cast, assets, puzzles_dir)
     if errors:

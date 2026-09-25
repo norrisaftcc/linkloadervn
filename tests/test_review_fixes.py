@@ -193,3 +193,26 @@ def test_assets_with_the_same_file_name_do_not_collide(tmp_path):
     assert p1 != p2
     assert (tmp_path / "dist" / p1.split("/", 1)[1]).read_bytes() == b"AAA"
     assert (tmp_path / "dist" / p2.split("/", 1)[1]).read_bytes() == b"BBB"
+
+
+@pytest.mark.parametrize("bad", ["../secret.png", "/etc/hostname"])
+def test_asset_paths_may_not_leave_the_repository(tmp_path, bad):
+    from linkloader.build import BuildError, _copy_assets
+
+    root = tmp_path / "root"
+    root.mkdir()
+    (tmp_path / "secret.png").write_bytes(b"x")
+    with pytest.raises(BuildError, match="leaves the repository"):
+        _copy_assets({"bg": {"a": bad}, "sprite": {}}, root, tmp_path / "dist")
+
+
+def test_build_reports_a_malformed_manifest_as_a_build_error(tmp_path, repo_root):
+    import shutil as _sh
+
+    from linkloader.build import BuildError, build
+
+    story = tmp_path / "story"
+    _sh.copytree(repo_root / "tests" / "fixtures" / "demo", story)
+    (story / "cast.toml").write_text("this is [not toml", encoding="utf-8")
+    with pytest.raises(BuildError, match="cast.toml or assets.toml"):
+        build(story, tmp_path / "dist", repo_root)
