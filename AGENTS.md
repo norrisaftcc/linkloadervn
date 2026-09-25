@@ -37,7 +37,7 @@ The old alphas and HTML builds are in history at commit `79da7b8`.
 
 ## Check your work
 
-Run all four before you commit. All must pass.
+Run every command below before you commit. All must pass.
 
 ```bash
 pytest tests
