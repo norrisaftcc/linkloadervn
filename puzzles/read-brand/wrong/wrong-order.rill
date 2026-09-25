@@ -1,0 +1,6 @@
+;; Wrong: hesh and tull swapped. Takes the head first, which is a
+;; symbol, then calls tull on that symbol. Must FAIL: tull on a
+;; non-pair errors immediately.
+(stake read-brand
+  (rig (chain-in)
+    (tull (hesh chain-in))))

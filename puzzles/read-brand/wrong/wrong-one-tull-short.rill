@@ -1,0 +1,5 @@
+;; Wrong: one tull short. Returns the second word instead of the
+;; third. Must FAIL: every check comes back one word early.
+(stake read-brand
+  (rig (chain-in)
+    (hesh (tull chain-in))))

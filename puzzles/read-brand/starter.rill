@@ -1,0 +1,5 @@
+;; read-brand — fill in the blank, then save this as answer.rill.
+
+(stake read-brand
+  (rig (chain-in)
+    ___))

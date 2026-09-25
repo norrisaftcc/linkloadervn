@@ -1,0 +1,6 @@
+;; Wrong: one tull too many. Returns the fourth word on a four-word
+;; chain, but errors on any chain with only three couplings left
+;; after the drop. Must FAIL: it crashes on the shorter test chains.
+(stake read-brand
+  (rig (chain-in)
+    (hesh (tull (tull (tull chain-in))))))
