@@ -574,6 +574,10 @@ export function evaluate(source, env) {
 }
 
 export function checkAnswer(cases, answerText) {
+  // No cases means nothing to check against: never a pass.
+  if (!Array.isArray(cases) || cases.length === 0) {
+    return { pass: false, results: [], error: "this puzzle has no test cases" };
+  }
   let env;
   try {
     env = makeEnv();

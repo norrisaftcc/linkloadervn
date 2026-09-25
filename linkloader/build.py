@@ -21,7 +21,9 @@ AGENTS.md).
 from __future__ import annotations
 
 import json
+import os
 import shutil
+import tempfile
 from pathlib import Path
 
 from .exporter import build_ladder, build_lexicon, build_puzzles_data, export_story
@@ -124,6 +126,24 @@ def _copy_web_runner(dist_dir: Path, web_dir: Path) -> None:
                 shutil.copyfile(item, rill_dst / item.name)
 
 
+def _swap_into_place(stage: Path, out_dir: Path) -> None:
+    """Replace out_dir with stage. The old directory is moved aside first
+    and deleted only after the new one is in place."""
+    old = None
+    if out_dir.exists():
+        old = out_dir.with_name(f".{out_dir.name}.old-{os.getpid()}")
+        shutil.rmtree(old, ignore_errors=True)
+        out_dir.rename(old)
+    try:
+        stage.rename(out_dir)
+    except BaseException:
+        if old is not None:
+            old.rename(out_dir)
+        raise
+    if old is not None:
+        shutil.rmtree(old, ignore_errors=True)
+
+
 def build(
     story_dir: Path,
     out_dir: Path,
@@ -150,28 +170,45 @@ def build(
             + "\n".join(f"  {e}" for e in errors)
         )
 
-    out_dir.mkdir(parents=True, exist_ok=True)
+    # Build into a staging directory next to out_dir, and swap it into
+    # place only when every step has succeeded. A failed build leaves the
+    # old dist/ as it was, never a partial or mixed one.
+    out_dir.parent.mkdir(parents=True, exist_ok=True)
+    stage = Path(tempfile.mkdtemp(prefix=f".{out_dir.name}.build-", dir=out_dir.parent))
+    stage.chmod(0o755)  # mkdtemp makes it 0700; dist/ must be readable to a web server
+    try:
+        data = export_story(story, cast, assets)
+        used_assets = referenced_assets(story, assets)
+        data["assets"] = _copy_assets(used_assets, root, stage / "assets")
+        data["ladder"] = build_ladder()
+        puzzle_ids = referenced_puzzle_ids(story)
+        data["puzzles"] = build_puzzles_data(puzzles_dir, puzzle_ids)
+        incomplete = [pid for pid, p in data["puzzles"].items() if not p["cases"] or not p["starter"]]
+        if incomplete:
+            # Without cases, any answer would pass in the browser.
+            raise BuildError(
+                "puzzle(s) with no test cases or no starter; build refused: "
+                + ", ".join(incomplete)
+            )
+        lexicon_path = puzzles_dir / "rill" / "lexicon.md"
+        data["lexicon"] = (
+            build_lexicon(lexicon_path.read_text(encoding="utf-8")) if lexicon_path.exists() else []
+        )
 
-    data = export_story(story, cast, assets)
-    used_assets = referenced_assets(story, assets)
-    data["assets"] = _copy_assets(used_assets, root, out_dir / "assets")
-    data["ladder"] = build_ladder()
-    puzzle_ids = referenced_puzzle_ids(story)
-    data["puzzles"] = build_puzzles_data(puzzles_dir, puzzle_ids)
-    lexicon_path = puzzles_dir / "rill" / "lexicon.md"
-    data["lexicon"] = (
-        build_lexicon(lexicon_path.read_text(encoding="utf-8")) if lexicon_path.exists() else []
-    )
+        (stage / "story.json").write_text(
+            json.dumps(data, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+        )
 
-    (out_dir / "story.json").write_text(
-        json.dumps(data, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-    )
+        tokens_src = root / "docs" / "style" / "tokens.css"
+        if tokens_src.exists():
+            shutil.copyfile(tokens_src, stage / "tokens.css")
 
-    tokens_src = root / "docs" / "style" / "tokens.css"
-    if tokens_src.exists():
-        shutil.copyfile(tokens_src, out_dir / "tokens.css")
+        _copy_web_runner(stage, web_dir)
 
-    _copy_web_runner(out_dir, web_dir)
+        _swap_into_place(stage, out_dir)
+    except BaseException:
+        shutil.rmtree(stage, ignore_errors=True)
+        raise
 
     assets_copied = len(data["assets"]["bg"]) + sum(
         len(v) for v in data["assets"]["sprite"].values()

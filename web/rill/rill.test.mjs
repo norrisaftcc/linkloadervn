@@ -260,3 +260,9 @@ test("rig rejects duplicate parameter names, like chibi's lambda", () => {
 test("comments are ignored", () => {
   assert.equal(evaluate("; a comment\n(sum 1 2) ; trailing"), "3");
 });
+
+test("checkAnswer never passes when a puzzle has no cases", () => {
+  const r = checkAnswer([], "(stake answer (seal (a)))");
+  assert.equal(r.pass, false);
+  assert.match(r.error, /no test cases/);
+});

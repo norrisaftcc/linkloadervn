@@ -7,6 +7,8 @@ from __future__ import annotations
 
 import json
 
+import pytest
+
 from linkloader.build import BuildError, build, referenced_assets, referenced_puzzle_ids
 from linkloader.loader import load_cast_and_assets, load_story
 
@@ -114,3 +116,30 @@ def test_build_raises_on_missing_asset_file(repo_root, make_story, tmp_path):
         assert False, "expected BuildError"
     except BuildError as e:
         assert "does_not_exist.png" in str(e)
+
+
+def test_build_refuses_a_puzzle_without_cases_and_keeps_old_dist(tmp_path, repo_root):
+    import shutil as _sh
+
+    from linkloader.build import BuildError, build
+
+    root = tmp_path / "root"
+    _sh.copytree(repo_root / "puzzles", root / "puzzles")
+    _sh.copytree(repo_root / "docs" / "style", root / "docs" / "style")
+    story_dir = root / "story"
+    story_dir.mkdir()
+    _sh.copy(repo_root / "tests" / "fixtures" / "demo" / "cast.toml", story_dir)
+    (story_dir / "assets.toml").write_text("[bg]\n", encoding="utf-8")
+    (story_dir / "a.scene").write_text(
+        "== start\npuzzle ghost\n    pass -> start\n    lockout -> start\n", encoding="utf-8"
+    )
+    (root / "puzzles" / "ghost").mkdir()
+    (root / "puzzles" / "ghost" / "starter.rill").write_text("(stake answer 0)\n", encoding="utf-8")
+
+    out = tmp_path / "dist"
+    out.mkdir()
+    (out / "story.json").write_text("OLD", encoding="utf-8")
+    with pytest.raises(BuildError, match="ghost"):
+        build(story_dir, out, root)
+    assert (out / "story.json").read_text(encoding="utf-8") == "OLD"
+    assert not any(p.name.startswith(".dist.build-") for p in tmp_path.iterdir())
