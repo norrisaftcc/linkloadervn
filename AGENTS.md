@@ -23,7 +23,9 @@ Audience: students, and volunteer testers from game dev, graphic design and prog
 | `docs/scene-format.md` | The scene format spec |
 | `docs/canon/` | Story bible, kept lines, found-document source, cut list |
 | `docs/style/` | Brand guide, writing guide, `tokens.css`, specimen page |
-| `renpy/current/.../link_loader_1_2/game/` | The old Ren'Py game. Source material only |
+| `web/` | The static web runner (`index.html`, `runner.js`, `stage.css`) and `web/rill/` (the JS Rill evaluator, contract C1 in its own files) |
+| `dist/` | Output of `python -m linkloader build`: the playable one-folder web game. Generated, not committed |
+| `renpy/current/.../link_loader_1_2/game/` | The old Ren'Py game. Source material only, and a later port target |
 
 The old alphas and HTML builds are in history at commit `79da7b8` (tag `legacy/alphas`).
 
@@ -41,7 +43,16 @@ pytest tests
 bash puzzles/check/run.sh
 python -m linkloader check story/
 python tools/assets/despill.py --scan renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images
+python -m linkloader build story/ -o dist/
+cd web/rill && node --test
 ```
+
+`pytest tests` already includes `tests/e2e/test_web.py`, the Playwright suite against a built
+`dist/`. It skips itself cleanly if Playwright or a Chromium build is missing.
+
+Run `node --test` from inside `web/rill/` (or pass it explicit files, `node --test
+web/rill/*.test.mjs`). Passing `web/rill/` as a bare path to `node --test` from the repo root
+does not recurse into it on every Node build; the two forms above do.
 
 Other commands:
 
