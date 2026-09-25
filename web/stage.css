@@ -90,6 +90,55 @@ button {
 
 .topbar-link:hover { color: var(--color-white); }
 
+/* ---- mode: inner ----
+   Clipi's interior during the reboot (docs/plans/wave2.md, section 5
+   item 3): a dot-halftone overlay and low scanlines on the stage, a
+   heavier ink border on the dialogue box, and choices drawn as flat
+   labeled tiles. Existing tokens only; magenta stays a flat fill;
+   no animation, so prefers-reduced-motion needs no extra rule. */
+
+[data-mode="inner"] .stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(var(--color-ink) 1px, transparent 1px);
+  background-size: 6px 6px;
+  opacity: 0.14;
+}
+
+[data-mode="inner"] .stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    var(--color-ink) 0,
+    var(--color-ink) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  opacity: 0.06;
+}
+
+[data-mode="inner"] .dialogue-box {
+  border-top-width: var(--space-1);
+  border-top-style: solid;
+  border-top-color: var(--color-ink);
+}
+
+[data-mode="inner"] .choice-btn {
+  background: var(--color-paper-deep);
+  border: var(--rule-thin) solid var(--color-ink);
+  border-left: var(--rule-thick) solid var(--color-ink);
+  margin-bottom: var(--space-2);
+}
+
+[data-mode="inner"] .choice-btn:hover,
+[data-mode="inner"] .choice-btn:focus-visible {
+  border-left-color: var(--color-orange);
+}
+
 /* ---- stage: bg + sprites ---- */
 .stage {
   position: relative;

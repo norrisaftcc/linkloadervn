@@ -198,6 +198,7 @@ class Game {
     }
     this.currentLabel = label;
     this.stack = [{ stmts: scene.statements, i: 0 }];
+    this.setMode("default");
     if (fresh) {
       // A new game: start from an empty stage. Moving between scenes
       // keeps the stage; only `show`, `hide` and `bg` change it.
@@ -238,6 +239,9 @@ class Game {
           continue;
         case "set":
           for (const a of stmt.assignments) this.applyAssignment(a);
+          continue;
+        case "mode":
+          this.setMode(stmt.name);
           continue;
         case "if": {
           const branch = this.evalCondition(stmt.condition) ? stmt.then : stmt.else;
@@ -297,6 +301,15 @@ class Game {
       const s = stage.sprites && stage.sprites[pos];
       this.setSprite(pos, s ? s.path : null, s ? s.id : undefined);
     }
+  }
+
+  // Sets #game's data-mode attribute. A scene always starts in
+  // "default" (gotoScene resets it on every entry), and a `mode`
+  // statement inside the scene can switch it to "inner" until the
+  // next scene entry. Not part of the save: scene-entry state is
+  // always "default", so there is nothing to restore.
+  setMode(name) {
+    this.els.game.dataset.mode = name;
   }
 
   setBg(name) {
@@ -601,6 +614,7 @@ class Game {
 function collectEls() {
   const $ = (id) => document.getElementById(id);
   return {
+    game: $("game"),
     bgLayer: $("bg-layer"),
     sprites: { left: $("sprite-left"), center: $("sprite-center"), right: $("sprite-right") },
     dialogueBox: $("dialogue-box"),
