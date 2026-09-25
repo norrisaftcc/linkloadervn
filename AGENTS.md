@@ -28,7 +28,7 @@ Audience: students, and volunteer testers from game dev, graphic design and prog
 | `dist/` | Output of `python -m linkloader build`: the playable one-folder web game. Generated, not committed |
 | `renpy/current/.../link_loader_1_2/game/` | The old Ren'Py game. Source material only, and a later port target |
 
-The old alphas and HTML builds are in history at commit `79da7b8` (tag `legacy/alphas`).
+The old alphas and HTML builds are in history at commit `79da7b8`.
 
 ## Set up
 

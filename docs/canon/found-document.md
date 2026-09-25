@@ -9,7 +9,7 @@ by its old name. Use it as-is for the "Clipi's corrupted memory" scene:
 have Clipi read pieces of it back, in order, with no narration added.
 
 Source for every quote below: `renpy/alphas/ll_alpha0.2/game/script.rpy`
-as archived at commit `79da7b8` (tag `legacy/alphas`), read with
+as archived at commit `79da7b8`, read with
 `git show 79da7b8:renpy/alphas/ll_alpha0.2/game/script.rpy`. The sibling
 alpha `renpy/alphas/link_loader_1_1/game/script.rpy` (same commit)
 repeats lines 2–25 of this log verbatim at the same line numbers; it is

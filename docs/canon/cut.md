@@ -46,7 +46,7 @@ since this is a structural claim about the script rather than a quoted
 line), and one claim from an earlier draft of this document that did
 not hold up and has been removed:
 
-- The alpha scripts at commit `79da7b8` (tag `legacy/alphas`) each
+- The alpha scripts at commit `79da7b8` each
   define a dead `game`/`scene2` pair. In
   `renpy/alphas/link_loader_1_1/game/script.rpy`, `label start:` ends
   in a `return` at line 219; `label game:` begins at line 225, after
