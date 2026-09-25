@@ -17,9 +17,11 @@ def repo_root() -> Path:
 
 @pytest.fixture
 def demo_story_dir(repo_root: Path) -> Path:
-    """The real story/ directory, including demo.scene, cast.toml, and
-    assets.toml."""
-    return repo_root / "story"
+    """The demo story fixture (demo.scene, cast.toml, assets.toml):
+    a small story exercising every statement in the format, used by
+    the core test suite. Moved out of story/ so that directory holds
+    only the real story (see tests/test_story.py)."""
+    return repo_root / "tests" / "fixtures" / "demo"
 
 
 @pytest.fixture

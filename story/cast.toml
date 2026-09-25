@@ -1,5 +1,6 @@
 # story/cast.toml — speaker ids usable in dialogue lines and in
-# `show`/`hide` statements. See docs/scene-format.md.
+# `show`/`hide` statements. See docs/scene-format.md and
+# docs/canon/bible.md (Cast).
 
 [slim]
 name = "Slim"
@@ -9,3 +10,9 @@ name = "Terminal"
 
 [clipi]
 name = "Clipi"
+
+[cargo_bot]
+name = "Cargo Bot"
+
+[rustler]
+name = "Rustler"

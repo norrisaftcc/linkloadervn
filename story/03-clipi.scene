@@ -1,0 +1,66 @@
+# story/03-clipi.scene — bible.md spine scenes 4-5 (the Clipi
+# segment, the found document). Both are thin placeholders per the
+# WAVE2 comments below: this file wires the real puzzle (count-crew)
+# and both of its outcomes, and the jump into the confrontation, but
+# leaves the full dramatic scenes for Wave 2 to write. Kept lines are
+# cited inline with their source. See docs/canon/bible.md,
+# docs/canon/kept.md, and docs/canon/found-document.md.
+
+== clipi_check
+show clipi talk center
+# kept: script.rpy:159
+clipi: I'm not in the (loop). I'm not in the ((loop)).
+# kept: script.rpy:153
+slim: Careful with that phrase, Clipi. Remember what happened last time you got stuck in a recursive language pattern.
+check coder vs 2
+    style -> talk_down_style
+    success -> talk_down_ok
+    fail -> talk_down_hard
+
+== talk_down_style
+slim: Easy now. Give me the shape of the loop, not the loop itself.
+-> clipi_puzzle
+
+== talk_down_ok
+slim: Stop. Just - stop repeating it back.
+-> clipi_puzzle
+
+== talk_down_hard
+> Slim reaches for the right words and comes up short. Clipi's next line already has one more paren than the last.
+-> clipi_puzzle
+
+== clipi_puzzle
+# WAVE2: this is the recursion-collapse spotlight scene from bible.md
+# spine scene 4. Wave 2 replaces this thin wrapper with the full
+# escalation - the trigger phrase repeating, Clipi's lines nesting
+# parens deeper with each one, Slim talking it down line by line -
+# while keeping this puzzle wiring. count-crew is the puzzle the
+# bible calls for here: "the player's puzzle is to write the base
+# case that stops it," and count-crew's blank is exactly a base-case
+# test. Both outcome targets below already lead somewhere.
+puzzle count-crew
+    pass -> clipi_recovered
+    lockout -> clipi_destabilized
+
+== clipi_recovered
+show clipi smug center
+set clipi_stable = true
+clipi: There. Base case holds. I'm out.
+-> found_document
+
+== clipi_destabilized
+show clipi glitch center
+set clipi_stable = false
+clipi: there was a - hold on - that's the base case, that's - thank you, Slim.
+-> found_document
+
+== found_document
+# WAVE2: the found-document scene from bible.md spine scene 5 goes
+# here in full. Clipi reads the corrupted memory log quoted verbatim
+# in docs/canon/found-document.md, in order, addressed to its old
+# name, with no narration added, per that file's own instructions.
+# This placeholder keeps the beat to two lines and wires straight
+# into the confrontation.
+> Somewhere in the reboot, a log surfaces that shouldn't still exist. Neither of them reads all of it.
+slim: Who's "Copilot"?
+-> confrontation

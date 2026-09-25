@@ -1,0 +1,38 @@
+# story/02-sabotage.scene — bible.md spine scene 3 (Signs of
+# sabotage). Kept lines are cited inline with their source. See
+# docs/canon/bible.md and docs/canon/kept.md.
+
+== sabotage_evidence
+bg desert_night
+> The tull coupling isn't broken. It's rerouted - spliced clean, no scorch, no strain. Whoever did this knew exactly which wire carried the towed half of the train.
+check cowboy vs 2
+    style -> tracked_expert
+    success -> tracked_ok
+    fail -> tracked_missed
+
+== tracked_expert
+show slim talk left
+slim: Splice like that, someone worked this line before. Boots, not a drone.
+-> git_blame
+
+== tracked_ok
+slim: Somebody's been here. Recently, and on purpose.
+-> git_blame
+
+== tracked_missed
+> Slim misses the print in the dust. The cargo bot doesn't.
+cargo_bot: (Sh-query maintenance status sh-current sh-loader)
+-> git_blame
+
+== git_blame
+if not met_clipi
+    show terminal idle right
+    terminal: Patch requested. Routing co-pilot Clipi to this channel.
+    set met_clipi = true
+show clipi talk center
+# kept: script.rpy:309
+clipi: Running git blame on loader firmware... Last modifications made by user 'cdr_rustler42'.
+# kept: script.rpy:357
+slim: CDR rustlers! Those parenthesis-thieving varmints!
+> Not a jam. A theft, coupled clean into the chain like it belonged there.
+-> clipi_check

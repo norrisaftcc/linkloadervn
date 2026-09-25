@@ -1,0 +1,66 @@
+# story/04-confrontation.scene — bible.md spine scene 6
+# (Confrontation, the climax-weight Rill puzzle). Kept lines are
+# cited inline with their source. See docs/canon/bible.md and
+# docs/canon/kept.md.
+
+== confrontation
+bg relay_point
+show terminal static right
+> The Terminal's own channel answers back, in a voice no login ever granted.
+# kept: script.rpy:475
+rustler: (Sh-greetings troubleshooter sh-your services sh-no longer required)
+choice
+    "Ask them why." -> rustler_why
+    "Cut the channel now." -> rustler_cut
+
+== rustler_why
+# kept: script.rpy:481
+rustler: (Sh-we are sh-cdr collective sh-we liberate data from sh-closed loops)
+# kept: script.rpy:487
+rustler: (Sh-not stealing sh-redistributing sh-information wants to be free sh-cargo wants to be free)
+set rustler_sympathy += 1
+-> confrontation_check
+
+== rustler_cut
+> Slim doesn't answer. The channel stays open anyway - it was never asking permission.
+-> confrontation_check
+
+== confrontation_check
+check cosmonaut vs 4
+    style -> hold_style
+    success -> hold_ok
+    fail -> hold_hard
+
+== hold_style
+show slim talk left
+slim: Not today.
+-> find_signal_puzzle
+
+== hold_ok
+> Slim keeps the channel open, hands steady, waiting for one clean signal in the noise.
+-> find_signal_puzzle
+
+== hold_hard
+set channel_unstable = true
+> The channel bucks under Slim's hands. It holds. Barely.
+-> find_signal_puzzle
+
+== find_signal_puzzle
+puzzle find-signal
+    pass -> rustler_expelled
+    lockout -> rustler_escaped
+
+== rustler_expelled
+# kept: script.rpy:518
+rustler: (Sh-clever human sh-this round sh-to you)
+show terminal idle right
+if channel_unstable
+    terminal: Connection stabilized. Barely.
+else
+    terminal: Connection stable. Channel clear.
+-> resolution
+
+== rustler_escaped
+> The trace clears half a second too late. Whatever the rustler came for, it's already gone with them.
+> The loader itself is sound - coupled, linked, running clean. That much, at least, holds.
+-> ending_escaped

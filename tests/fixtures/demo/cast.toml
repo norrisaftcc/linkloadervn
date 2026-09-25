@@ -1,0 +1,11 @@
+# story/cast.toml — speaker ids usable in dialogue lines and in
+# `show`/`hide` statements. See docs/scene-format.md.
+
+[slim]
+name = "Slim"
+
+[terminal]
+name = "Terminal"
+
+[clipi]
+name = "Clipi"
