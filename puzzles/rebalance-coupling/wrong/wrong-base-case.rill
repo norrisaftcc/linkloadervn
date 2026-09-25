@@ -1,0 +1,10 @@
+;; Wrong: the base case is (seal (voth)) instead of an empty chain, so
+;; every result gets a trailing voth. Must FAIL: on (kessa voth kessa)
+;; it gives (kessa kessa voth), not (kessa kessa).
+(stake rebalance
+  (rig (links)
+    (reckon (husk? links)
+            (seal (voth))
+            (reckon (same? (hesh links) (seal voth))
+                    (rebalance (tull links))
+                    (bind (hesh links) (rebalance (tull links)))))))

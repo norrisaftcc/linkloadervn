@@ -1,0 +1,10 @@
+;; Wrong: the inner reckon's two branches are swapped, so this keeps
+;; only the wrecks and drops every sound link. Must FAIL: on
+;; (kessa voth kessa) it gives (voth), not (kessa kessa).
+(stake rebalance
+  (rig (links)
+    (reckon (husk? links)
+            (chain)
+            (reckon (same? (hesh links) (seal voth))
+                    (bind (hesh links) (rebalance (tull links)))
+                    (rebalance (tull links))))))

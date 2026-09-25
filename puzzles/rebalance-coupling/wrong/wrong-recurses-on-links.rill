@@ -1,0 +1,11 @@
+;; Wrong: both recursive calls pass links instead of (tull links), so
+;; this never reaches the empty case on any non-empty coupling. Must
+;; FAIL: chibi stops it with "out of stack space" and rill.js stops it
+;; with "ran too long".
+(stake rebalance
+  (rig (links)
+    (reckon (husk? links)
+            (chain)
+            (reckon (same? (hesh links) (seal voth))
+                    (rebalance links)
+                    (bind (hesh links) (rebalance links))))))

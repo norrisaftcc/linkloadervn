@@ -1,0 +1,10 @@
+;; rebalance-coupling reference answer: an empty coupling rebuilds
+;; into an empty chain; a wreck is skipped; a sound link is bound onto
+;; the front of whatever the rest of the coupling rebuilds into.
+(stake rebalance
+  (rig (links)
+    (reckon (husk? links)
+            (chain)
+            (reckon (same? (hesh links) (seal voth))
+                    (rebalance (tull links))
+                    (bind (hesh links) (rebalance (tull links)))))))

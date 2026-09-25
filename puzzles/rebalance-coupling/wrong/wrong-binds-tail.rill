@@ -1,0 +1,10 @@
+;; Wrong: binds (tull links) in place of the head, so the result is
+;; nested instead of flat. Must FAIL: on (kessa voth kessa) it does
+;; not give the flat chain (kessa kessa).
+(stake rebalance
+  (rig (links)
+    (reckon (husk? links)
+            (chain)
+            (reckon (same? (hesh links) (seal voth))
+                    (rebalance (tull links))
+                    (bind (tull links) (rebalance (tull links)))))))
