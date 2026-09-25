@@ -237,6 +237,5 @@ input (see below).
 - How much mainframe-comic ink survives on a 390px phone screen before
   the halftone just reads as noise (test with real testers, not a
   guess).
-- `terminal talk.png` and its siblings carry a pale yellow haze of the
-  same kind. It is not magenta, so `despill.py` leaves it. Decide whether
-  to treat it too.
+- Decided: the pale yellow haze on `terminal talk.png` and its siblings
+  is intended CRT glow. It stays. `despill.py` does not touch it.
