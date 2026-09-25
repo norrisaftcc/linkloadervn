@@ -98,12 +98,18 @@ def test_reaches_ending_company(repo_root: Path, story_dir: Path):
         "1",
         "1",
         _answer(repo_root, "decode-buoy"),
-        "n",
-        "n",
+        "n",  # cowboy reroll decline
+        "2",  # brand_choice: leave it (optional read-brand puzzle)
+        "n",  # coder reroll decline
+        "3",  # clipi_phrase: "You're not going anywhere. Say fen."
         _answer(repo_root, "count-crew"),
+        "1",  # room_hub: open the chest of drawers
+        _answer(repo_root, "count-herd"),
+        "2",  # room_hub: go through the door
         "2",  # cut the channel: no rustler sympathy
         "n",
         _answer(repo_root, "find-signal"),
+        "2",  # resolution: skip the optional rebalance-coupling puzzle
         "1",  # report to the Company
     ]
     ending, flags, visited = _play(story_dir, repo_root, script)
@@ -118,11 +124,17 @@ def test_reaches_ending_mercy(repo_root: Path, story_dir: Path):
         "2",
         _answer(repo_root, "decode-buoy"),
         "n",
+        "2",  # brand_choice: leave it
         "n",
+        "3",  # clipi_phrase: say fen
         _answer(repo_root, "count-crew"),
+        "1",  # room_hub: open the chest of drawers
+        _answer(repo_root, "count-herd"),
+        "2",  # room_hub: go through the door
         "2",
         "n",
         _answer(repo_root, "find-signal"),
+        "2",  # resolution: skip the optional rebalance-coupling puzzle
         "2",  # let it go
     ]
     ending, flags, visited = _play(story_dir, repo_root, script)
@@ -135,11 +147,17 @@ def test_reaches_ending_defect_after_asking_the_rustlers_why(repo_root: Path, st
         "1",
         _answer(repo_root, "decode-buoy"),
         "n",
+        "2",  # brand_choice: leave it
         "n",
+        "3",  # clipi_phrase: say fen
         _answer(repo_root, "count-crew"),
+        "1",  # room_hub: open the chest of drawers
+        _answer(repo_root, "count-herd"),
+        "2",  # room_hub: go through the door
         "1",  # ask them why -> rustler_sympathy
         "n",
         _answer(repo_root, "find-signal"),
+        "2",  # resolution: skip the optional rebalance-coupling puzzle
         "3",  # copy what they were reaching for
     ]
     ending, flags, visited = _play(story_dir, repo_root, script)
@@ -160,11 +178,17 @@ def test_resolution_hides_the_defect_option_without_rustler_sympathy(
         "1",
         _answer(repo_root, "decode-buoy"),
         "n",
+        "2",  # brand_choice: leave it
         "n",
+        "3",  # clipi_phrase: say fen
         _answer(repo_root, "count-crew"),
+        "1",  # room_hub: open the chest of drawers
+        _answer(repo_root, "count-herd"),
+        "2",  # room_hub: go through the door
         "2",  # cut the channel
         "n",
         _answer(repo_root, "find-signal"),
+        "2",  # resolution: skip the optional rebalance-coupling puzzle
         "1",
     ]
     player = Player(
@@ -191,8 +215,13 @@ def test_find_signal_lockout_reaches_ending_escaped(repo_root: Path, story_dir: 
         "1",
         _answer(repo_root, "decode-buoy"),
         "n",
+        "2",  # brand_choice: leave it
         "n",
+        "3",  # clipi_phrase: say fen
         _answer(repo_root, "count-crew"),
+        "1",  # room_hub: open the chest of drawers
+        _answer(repo_root, "count-herd"),
+        "2",  # room_hub: go through the door
         "1",
         "n",
         _wrong(repo_root, "find-signal", "wrong-base-case.rill"),
@@ -211,11 +240,17 @@ def test_decode_buoy_pass_and_lockout_both_reachable(repo_root: Path, story_dir:
         "1",
         _answer(repo_root, "decode-buoy"),
         "n",
+        "2",  # brand_choice: leave it
         "n",
+        "3",  # clipi_phrase: say fen
         _answer(repo_root, "count-crew"),
+        "1",  # room_hub: open the chest of drawers
+        _answer(repo_root, "count-herd"),
+        "2",  # room_hub: go through the door
         "2",
         "n",
         _answer(repo_root, "find-signal"),
+        "2",  # resolution: skip the optional rebalance-coupling puzzle
         "1",
     ]
     _, _, visited_pass = _play(story_dir, repo_root, pass_script)
@@ -227,11 +262,17 @@ def test_decode_buoy_pass_and_lockout_both_reachable(repo_root: Path, story_dir:
         "1",
         _wrong(repo_root, "decode-buoy", "wrong-word.rill"),
         "n",
+        "2",  # brand_choice: leave it
         "n",
+        "3",  # clipi_phrase: say fen
         _answer(repo_root, "count-crew"),
+        "1",  # room_hub: open the chest of drawers
+        _answer(repo_root, "count-herd"),
+        "2",  # room_hub: go through the door
         "2",
         "n",
         _answer(repo_root, "find-signal"),
+        "2",  # resolution: skip the optional rebalance-coupling puzzle
         "1",
     ]
     _, flags, visited_lockout = _play(story_dir, repo_root, lockout_script)
@@ -245,11 +286,17 @@ def test_count_crew_pass_and_lockout_both_reachable(repo_root: Path, story_dir: 
         "1",
         _answer(repo_root, "decode-buoy"),
         "n",
+        "2",  # brand_choice: leave it
         "n",
+        "3",  # clipi_phrase: say fen
         _answer(repo_root, "count-crew"),
+        "1",  # room_hub: open the chest of drawers
+        _answer(repo_root, "count-herd"),
+        "2",  # room_hub: go through the door
         "2",
         "n",
         _answer(repo_root, "find-signal"),
+        "2",  # resolution: skip the optional rebalance-coupling puzzle
         "1",
     ]
     _, flags_pass, visited_pass = _play(story_dir, repo_root, pass_script)
@@ -261,11 +308,17 @@ def test_count_crew_pass_and_lockout_both_reachable(repo_root: Path, story_dir: 
         "1",
         _answer(repo_root, "decode-buoy"),
         "n",
+        "2",  # brand_choice: leave it
         "n",
+        "3",  # clipi_phrase: say fen
         _wrong(repo_root, "count-crew", "wrong-base-case.rill"),
+        "1",  # room_hub: open the chest of drawers
+        _answer(repo_root, "count-herd"),
+        "2",  # room_hub: go through the door
         "2",
         "n",
         _answer(repo_root, "find-signal"),
+        "2",  # resolution: skip the optional rebalance-coupling puzzle
         "1",
     ]
     _, flags_lockout, visited_lockout = _play(story_dir, repo_root, lockout_script)
@@ -279,11 +332,17 @@ def test_find_signal_pass_and_lockout_both_reachable(repo_root: Path, story_dir:
         "1",
         _answer(repo_root, "decode-buoy"),
         "n",
+        "2",  # brand_choice: leave it
         "n",
+        "3",  # clipi_phrase: say fen
         _answer(repo_root, "count-crew"),
+        "1",  # room_hub: open the chest of drawers
+        _answer(repo_root, "count-herd"),
+        "2",  # room_hub: go through the door
         "2",
         "n",
         _answer(repo_root, "find-signal"),
+        "2",  # resolution: skip the optional rebalance-coupling puzzle
         "1",
     ]
     ending_pass, _, visited_pass = _play(story_dir, repo_root, pass_script)
@@ -295,8 +354,13 @@ def test_find_signal_pass_and_lockout_both_reachable(repo_root: Path, story_dir:
         "1",
         _answer(repo_root, "decode-buoy"),
         "n",
+        "2",  # brand_choice: leave it
         "n",
+        "3",  # clipi_phrase: say fen
         _answer(repo_root, "count-crew"),
+        "1",  # room_hub: open the chest of drawers
+        _answer(repo_root, "count-herd"),
+        "2",  # room_hub: go through the door
         "2",
         "n",
         _wrong(repo_root, "find-signal", "wrong-base-case.rill"),

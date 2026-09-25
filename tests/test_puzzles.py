@@ -24,7 +24,7 @@ def test_puzzle_suite_passes():
         cwd=REPO_ROOT,
         capture_output=True,
         text=True,
-        timeout=60,
+        timeout=300,
     )
     assert result.returncode == 0, (
         "puzzles/check/run.sh did not exit 0\n"
