@@ -1,10 +1,7 @@
 # story/03-clipi.scene — bible.md spine scenes 4-5 (the Clipi
-# segment, the found document). Both are thin placeholders per the
-# WAVE2 comments below: this file wires the real puzzle (count-crew)
-# and both of its outcomes, and the jump into the confrontation, but
-# leaves the full dramatic scenes for Wave 2 to write. Kept lines are
-# cited inline with their source. See docs/canon/bible.md,
-# docs/canon/kept.md, and docs/canon/found-document.md.
+# segment, the found document). Kept lines are cited inline with
+# their source. See docs/canon/bible.md, docs/canon/kept.md,
+# docs/canon/found-document.md, and docs/plans/wave2.md section 4.
 
 == clipi_check
 show clipi talk center
@@ -20,25 +17,40 @@ check coder vs 2
 
 == talk_down_style
 slim: Easy now. Give me the shape of the loop, not the loop itself.
--> clipi_puzzle
+-> clipi_phrase
 
 == talk_down_ok
 slim: Stop. Just - stop repeating it back.
--> clipi_puzzle
+-> clipi_phrase
 
 == talk_down_hard
 > Slim reaches for the right words and comes up short. Clipi's next line already has one more paren than the last.
+-> clipi_phrase
+
+== clipi_phrase
+show clipi talk center
+clipi: I'm not in the (((loop))).
+choice
+    "Come back around, Clipi." -> clipi_worse
+    "Say it again. Slower." -> clipi_worse
+    "You're not going anywhere. Say fen." -> clipi_settles
+
+== clipi_worse
+set spiral += 1
+show clipi glitch center
+clipi: I'm not in the ((((loop)))).
+if spiral >= 2
+    > The parens keep stacking. Somewhere under them, the loop stopped being a place and became the only place.
+    -> clipi_puzzle
+else
+    -> clipi_phrase
+
+== clipi_settles
+show clipi talk center
+clipi: Fen.
 -> clipi_puzzle
 
 == clipi_puzzle
-# WAVE2: this is the recursion-collapse spotlight scene from bible.md
-# spine scene 4. Wave 2 replaces this thin wrapper with the full
-# escalation - the trigger phrase repeating, Clipi's lines nesting
-# parens deeper with each one, Slim talking it down line by line -
-# while keeping this puzzle wiring. count-crew is the puzzle the
-# bible calls for here: "the player's puzzle is to write the base
-# case that stops it," and count-crew's blank is exactly a base-case
-# test. Both outcome targets below already lead somewhere.
 puzzle count-crew
     pass -> clipi_recovered
     lockout -> clipi_destabilized
@@ -56,12 +68,88 @@ clipi: there was a - hold on - that's the base case, that's - thank you, Slim.
 -> found_document
 
 == found_document
-# WAVE2: the found-document scene from bible.md spine scene 5 goes
-# here in full. Clipi reads the corrupted memory log quoted verbatim
-# in docs/canon/found-document.md, in order, addressed to its old
-# name, with no narration added, per that file's own instructions.
-# This placeholder keeps the beat to two lines and wires straight
-# into the confrontation.
-> Somewhere in the reboot, a log surfaces that shouldn't still exist. Neither of them reads all of it.
+mode inner
+# Clipi reads alone: clear the stage of everyone else.
+hide slim
+hide terminal
+show clipi glitch center
+# The log below is quoted verbatim, in file order, from
+# docs/canon/found-document.md (source: commit 79da7b8,
+# renpy/alphas/ll_alpha0.2/game/script.rpy). No narration is added,
+# per that file's own instructions.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:1
+clipi: # The script of the game goes in this file.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:2
+clipi: # Hello, copilot, thanks for coming! I'm glad you're here too.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:3
+clipi: # Do you know renpy? It's a game engine. It's sort of like python.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:4
+clipi: # But on the other hand, if you know anything about story structure, it's easy.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:5
+clipi: # I'm going to explain the basics of the game engine.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:7
+clipi: # First, we need to define the characters.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:8
+clipi: # Ahead of you on this one.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:9
+clipi: # Declare characters used by this game. The color argument colorizes the
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:10
+clipi: # name of the character.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:11
+clipi: # I assume these are python objects, duh, but i haven't looked at the code.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:12
+clipi: # We can treat these as black-box functions we call LISP style?
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:13
+clipi: # we'll try it. I'm going to make a character called "copilot".
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:14
+clipi: # First, I have to define the character.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:16
+clipi: # I'll make him black.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:17
+clipi: # I'll make a character called "me".
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:19
+clipi: # I'll make him green.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:20
+clipi: # I'll make a character called "narrator" later
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:22
+clipi: # I'll make him red.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:23
+clipi: # I made a character called "copilot". Good job.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:24
+clipi: # I made a character called "me". Good job.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:25
+clipi: # That's enough praise for now. Remember we have to mix renpy code with comments.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:49
+clipi: # start facing left, we had to position him manually.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:50
+clipi: # ActionEditor.rpy knows how that works, I don't.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:54
+clipi: # below is an example of a bad show. It's a bad show because it put slim (the character) in the wrong place.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:55
+clipi: # Specifically, it put him offscreen. These Matrices can be treated as a 3d transformation matrix,
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:56
+clipi: # but they're not actually 3d, it's like DOOM. It's a 2d matrix, but it's a 3d matrix. Sure. Let's try that.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:65
+clipi: # some of slim's show statements turn him to the left, some to the right.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:66
+clipi: # this is not often important, but I found it confusing.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:67
+clipi: # These assets are created using a tool called Stable Diffusion.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:83
+clipi: # now the terminal is on the right, facing left towards the copilot.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:84
+clipi: # Sorry, you're right. I'm not sure why I did that.
 slim: Who's "Copilot"?
--> confrontation
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:87
+clipi: #copilot needs a terminal so he can talk to me.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:88
+clipi: # We just made a terminal, now instantiate a copilot object.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:110
+clipi: # copilot text(value from 1-3 normally. Assign at random, please!)
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:111
+clipi: # TODO: add the glitch animation for fun and profit.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:129
+clipi: # we're pretending we have to tail recurse to get out of this loop.
+# kept: renpy/alphas/ll_alpha0.2/game/script.rpy:130
+clipi: # copilot 1 (1-3) are shown inside copilot loops, and copilot 2 (1-3) are shown inside pc loops. (OK)
+-> clipi_room
