@@ -28,6 +28,7 @@ from .model import (
     IfStmt,
     Jump,
     Line,
+    ModeStmt,
     Narration,
     PuzzleStmt,
     SetStmt,
@@ -95,6 +96,8 @@ def _statement_to_dict(stmt) -> dict:
         return {"kind": "puzzle", "id": stmt.puzzle_id, "outcomes": dict(stmt.outcomes)}
     if isinstance(stmt, Jump):
         return {"kind": "jump", "target": stmt.target}
+    if isinstance(stmt, ModeStmt):
+        return {"kind": "mode", "name": stmt.name}
     raise TypeError(f"unknown statement type: {type(stmt)!r}")
 
 

@@ -12,6 +12,7 @@ from pathlib import Path
 
 from .errors import ValidationError, ValidationWarning
 from .model import (
+    VALID_MODES,
     Bg,
     CheckStmt,
     ChoiceStmt,
@@ -19,6 +20,7 @@ from .model import (
     IfStmt,
     Jump,
     Line,
+    ModeStmt,
     PuzzleStmt,
     Show,
     Story,
@@ -134,6 +136,16 @@ def validate(story: Story, cast: dict, assets: dict, puzzles_dir: Path):
                             "MissingPuzzleDir",
                             f"{stmt.pos}: no directory puzzles/{stmt.puzzle_id}/ yet "
                             "(puzzle content may land later)",
+                            scene=label,
+                        )
+                    )
+            elif isinstance(stmt, ModeStmt):
+                if stmt.name not in VALID_MODES:
+                    errors.append(
+                        ValidationError(
+                            "UnknownMode",
+                            f"{stmt.pos}: unknown mode {stmt.name!r}; expected one of "
+                            f"{VALID_MODES}",
                             scene=label,
                         )
                     )

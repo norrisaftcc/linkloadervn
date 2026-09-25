@@ -23,6 +23,7 @@ from .model import (
     IfStmt,
     Jump,
     Line,
+    ModeStmt,
     Narration,
     PuzzleStmt,
     SetStmt,
@@ -168,6 +169,8 @@ class Player:
                     return target
             elif isinstance(stmt, Jump):
                 return stmt.target
+            elif isinstance(stmt, ModeStmt):
+                pass  # the terminal player has no visual mode; ignored on purpose
             else:
                 raise TypeError(f"unknown statement: {type(stmt)!r}")
         return None

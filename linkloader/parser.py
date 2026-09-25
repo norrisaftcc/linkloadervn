@@ -23,6 +23,7 @@ from .model import (
     IfStmt,
     Jump,
     Line,
+    ModeStmt,
     Narration,
     Pos,
     PuzzleStmt,
@@ -42,6 +43,7 @@ DIALOGUE_RE = re.compile(rf"^({IDENT}):\s(.*)$")
 JUMP_RE = re.compile(rf"^->\s*({IDENT})\s*$")
 CHECK_RE = re.compile(rf"^check\s+({IDENT})\s+vs\s+(\d+)\s*$")
 PUZZLE_RE = re.compile(rf"^puzzle\s+({PUZZLE_ID})\s*$")
+MODE_RE = re.compile(rf"^mode\s+({IDENT})\s*$")
 OUTCOME_CHECK_RE = re.compile(rf"^(style|success|tie|fail)\s*->\s*({IDENT})\s*$")
 OUTCOME_PUZZLE_RE = re.compile(rf"^(pass|lockout)\s*->\s*({IDENT})\s*$")
 OPTION_RE = re.compile(r'^"([^"]*)"\s*->\s*(' + IDENT + r")(?:\s*\[if\s+(.+)\])?\s*$")
@@ -185,6 +187,12 @@ def _parse_statement(lines: list[_Line], idx: int, indent: int):
         if not m:
             raise _err(line, "BadStatement", f"malformed puzzle: {text!r}")
         return _parse_puzzle(lines, idx + 1, indent, m.group(1), pos)
+
+    if text.startswith("mode "):
+        m = MODE_RE.match(text)
+        if not m:
+            raise _err(line, "BadStatement", f"malformed mode: {text!r}")
+        return ModeStmt(name=m.group(1), pos=pos), idx + 1
 
     if text.startswith("bg "):
         m = BG_RE.match(text)

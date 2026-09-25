@@ -255,11 +255,34 @@ written), not an error.
 
 **Errors**: `BadJump` (validator: target label does not exist).
 
+### `mode` — the runner's visual mode
+
+```
+mode <name>
+```
+
+Sets the presentation mode the web runner draws the scene in.
+`<name>` is `default` or `inner`; any other identifier parses fine
+(the parser accepts any identifier here, the same way it does for
+`bg`) but fails validation. `mode` is a top-level statement, but it
+may also appear inside an `if`/`else` block — the same as any other
+statement — since the web runner just treats it as "set `data-mode`
+now" and there is nothing more for a nested `mode` to coordinate with.
+
+The terminal player ignores `mode` entirely; it has no visual
+presentation to switch. In the web runner, a scene starts in `default`
+mode on every entry (a `mode` statement earlier in the same scene, or
+in an earlier scene, never carries over), and a `mode inner` statement
+lasts until the runner enters another scene.
+
+**Errors**: `UnknownMode` (validator: `<name>` is not `default` or
+`inner`).
+
 ## Statement count
 
-The format has eight statement families: scene headers, `bg`,
-`show`/`hide`, dialogue/narration, `choice`, `set`/`if`, `check`, and
-`puzzle`/`->` (jumps). That's the whole grammar.
+The format has nine statement families: scene headers, `bg`,
+`show`/`hide`, dialogue/narration, `choice`, `set`/`if`, `check`,
+`puzzle`/`->` (jumps), and `mode`. That's the whole grammar.
 
 ## Stats and the ladder
 
@@ -312,7 +335,8 @@ Every error is one of two kinds:
   choice, check outcome, or puzzle outcome ever reaches, starting
   from `start`), `UnknownAsset` (a `bg` or `show` name not in
   `assets.toml`), `UnknownSpeaker` (a dialogue speaker or `show`
-  sprite not in `cast.toml`).
+  sprite not in `cast.toml`), `UnknownMode` (a `mode` name that is not
+  `default` or `inner`).
 - **Validation warnings** — printed, but do not fail `check`:
   `MissingPuzzleDir` (a `puzzle <id>` with no `puzzles/<id>/` on
   disk yet).
@@ -346,7 +370,8 @@ JSON object, meant for a future web runner:
          "outcomes": {"style": "label_a", "success": "label_b", "tie": null, "fail": "label_c"}},
         {"kind": "puzzle", "id": "count-crew",
          "outcomes": {"pass": "label_a", "lockout": null}},
-        {"kind": "jump", "target": "some_label"}
+        {"kind": "jump", "target": "some_label"},
+        {"kind": "mode", "name": "inner"}
       ]
     }
   },

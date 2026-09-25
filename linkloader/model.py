@@ -128,6 +128,15 @@ class Jump:
     pos: Pos
 
 
+@dataclass(frozen=True)
+class ModeStmt:
+    name: str  # any identifier at parse time; validated to "default" | "inner"
+    pos: Pos
+
+
+VALID_MODES = ("default", "inner")
+
+
 Statement = (
     Bg
     | Show
@@ -140,6 +149,7 @@ Statement = (
     | CheckStmt
     | PuzzleStmt
     | Jump
+    | ModeStmt
 )
 
 
