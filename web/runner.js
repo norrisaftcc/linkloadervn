@@ -107,6 +107,7 @@ class Game {
     this.puzzleRerolled = false;
     this.hintBought = false;
     this.lexiconRowsRendered = false;
+    this.stageState = { bg: null, sprites: { left: null, center: null, right: null } };
   }
 
   // -- boot / save ---------------------------------------------------
@@ -120,6 +121,7 @@ class Game {
       this.rngSeed = typeof saved.rngSeed === "number" ? saved.rngSeed : (Date.now() >>> 0);
       const state = typeof saved.rngState === "number" ? saved.rngState : this.rngSeed;
       this.rng = mulberry32(state);
+      this.restoreStage(saved.stage);
       this.gotoScene(saved.label || this.story.start, { fresh: false });
       return;
     }
@@ -129,7 +131,8 @@ class Game {
   }
 
   // The save is a snapshot taken when a scene starts: its label, and the
-  // flags, Fate points and dice state at that moment. A reload replays
+  // flags, Fate points, dice state and stage (background and sprites)
+  // at that moment. A reload replays
   // the scene from its first statement with exactly that state, so a
   // `set` earlier in the scene does not apply twice and the dice do not
   // restart. Progress inside a scene is not saved.
@@ -140,6 +143,7 @@ class Game {
       fate: this.fate,
       rngSeed: this.rngSeed,
       rngState: this.rng.state(),
+      stage: JSON.parse(JSON.stringify(this.stageState)),
     });
   }
 
@@ -195,7 +199,9 @@ class Game {
     this.currentLabel = label;
     this.stack = [{ stmts: scene.statements, i: 0 }];
     if (fresh) {
-      // A brand-new scene: drop any lingering sprites from the last one.
+      // A new game: start from an empty stage. Moving between scenes
+      // keeps the stage; only `show`, `hide` and `bg` change it.
+      this.setBg(null);
       this.setSprite("left", null);
       this.setSprite("center", null);
       this.setSprite("right", null);
@@ -255,7 +261,7 @@ class Game {
           return;
         case "jump":
           this.hideAllPanels();
-          this.gotoScene(stmt.target, { fresh: true });
+          this.gotoScene(stmt.target);
           return;
         default:
           console.warn("unknown statement kind", stmt.kind, stmt);
@@ -267,7 +273,7 @@ class Game {
   resolveOutcome(outcomeLabel) {
     if (outcomeLabel) {
       this.hideAllPanels();
-      this.gotoScene(outcomeLabel, { fresh: true });
+      this.gotoScene(outcomeLabel);
     } else {
       // Falls through: keep playing the current scene from here.
       this.step();
@@ -282,14 +288,27 @@ class Game {
 
   // -- rendering: stage --------------------------------------------------
 
+  // Put back the background and sprites saved at scene entry, so a
+  // reload shows what the scene started with.
+  restoreStage(stage) {
+    if (!stage) return;
+    this.setBg(stage.bg || null);
+    for (const pos of ["left", "center", "right"]) {
+      const s = stage.sprites && stage.sprites[pos];
+      this.setSprite(pos, s ? s.path : null, s ? s.id : undefined);
+    }
+  }
+
   setBg(name) {
-    const path = this.assetFor("bg", name);
+    this.stageState.bg = name || null;
+    const path = name ? this.assetFor("bg", name) : null;
     this.els.bgLayer.style.backgroundImage = path ? `url("${path}")` : "none";
   }
 
   setSprite(position, path, spriteId) {
     const img = this.els.sprites[position];
     if (!img) return;
+    this.stageState.sprites[position] = path ? { path, id: spriteId || "" } : null;
     if (path) {
       img.src = path;
       img.dataset.spriteId = spriteId || "";
@@ -399,7 +418,7 @@ class Game {
       btn.appendChild(document.createTextNode(opt.text));
       btn.addEventListener("click", () => {
         this.hideAllPanels();
-        this.gotoScene(opt.target, { fresh: true });
+        this.gotoScene(opt.target);
       });
       li.appendChild(btn);
       this.els.choicesList.appendChild(li);

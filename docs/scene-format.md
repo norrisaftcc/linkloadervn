@@ -85,6 +85,10 @@ hide <sprite>
 `<expression>` must be a key under `[sprite.<sprite>]` in
 `assets.toml`.
 
+The stage carries over from one scene to the next. Only `bg`, `show`
+and `hide` change it; a jump, a choice or an outcome never clears it.
+A new game starts with an empty stage.
+
 **Errors**: `UnknownSpeaker` (sprite not in cast), `UnknownAsset`
 (expression not mapped) — both from the validator.
 

@@ -344,3 +344,26 @@ def test_no_horizontal_scroll_at_mobile_width(browser, base_url):
         assert not overflow, "page has horizontal scroll at 390x844"
     finally:
         ctx.close()
+
+
+def test_stage_carries_over_between_scenes_and_survives_reload(page, base_url):
+    """Scenes do not clear the stage; only show, hide and bg change it.
+    The origin choice leads to a scene with no show of its own, and Slim
+    must still be on stage there, and after a reload."""
+    goto(page, base_url, seed=3)
+    page.evaluate("() => localStorage.clear()")
+    goto(page, base_url, seed=3)
+    advance_until(page, "#choices-wrap")
+    page.query_selector_all("#choices-list button")[0].click()
+    page.wait_for_timeout(50)
+    label = page.evaluate("() => window.__linkloaderGame.currentLabel")
+    assert label != "start"
+    assert page.is_visible("#sprite-left")
+    bg = page.evaluate("() => document.getElementById('bg-layer').style.backgroundImage")
+    assert "assets/" in bg
+
+    # Reload without the seed so the save is used.
+    page.goto(base_url + "/")
+    page.wait_for_selector("#dialogue-box, #choices-wrap", state="visible")
+    assert page.is_visible("#sprite-left")
+    assert "assets/" in page.evaluate("() => document.getElementById('bg-layer').style.backgroundImage")
