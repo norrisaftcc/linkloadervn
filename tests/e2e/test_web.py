@@ -144,6 +144,13 @@ def pick_head_out(options):
     return 0
 
 
+def pick_cowboy_origin_then_head_out(options):
+    for i, text in enumerate(options):
+        if "dirt, fixing" in text:  # the cowboy origin option
+            return i
+    return pick_head_out(options)
+
+
 # ---------------------------------------------------------------------------
 # Tests.
 
@@ -207,6 +214,46 @@ def test_check_shows_four_dice_and_ladder_result(page, base_url):
     assert "->" in result_text
     tier = result_text.split("->")[-1].strip()
     assert tier in {"STYLE", "SUCCESS", "TIE", "FAIL"}
+
+
+def test_check_shows_a_nonzero_stat_after_the_origin_choice(page, base_url):
+    # Picking the cowboy origin sets cowboy=2 (see story/01-arrival.scene);
+    # story/02-sabotage.scene's first check is "check cowboy vs 2", so
+    # the check panel must show a nonzero cowboy stat, not the old
+    # hardcoded 0.
+    goto(page, base_url, seed=1)
+    advance_until(page, "#puzzle-panel", choose=pick_cowboy_origin_then_head_out)
+    answer = (REPO_ROOT / "puzzles" / "decode-buoy" / "answer.rill").read_text(
+        encoding="utf-8"
+    )
+    page.fill("#puzzle-editor", answer)
+    page.click("#puzzle-check-btn")
+    advance_until(page, "#check-panel")
+
+    title = page.inner_text("#check-title")
+    assert "cowboy +2" in title.lower()
+    result_text = page.inner_text("#check-result")
+    assert "cowboy +2" in result_text
+
+
+def test_lexicon_panel_shows_grammar_and_theme_words_without_losing_editor_text(
+    page, base_url
+):
+    _reach_decode_buoy(page, base_url, seed=1)
+    page.fill("#puzzle-editor", "(stake answer (seal (draft draft)))")
+
+    page.click("#puzzle-lexicon-btn")
+    page.wait_for_selector("#lexicon-panel", state="visible")
+    assert page.inner_text("#lexicon-grammar-body").strip() != ""
+    assert page.inner_text("#lexicon-theme-body").strip() != ""
+    assert "signal" in page.inner_text("#lexicon-theme-body")
+
+    # Opening the lexicon never touches what the player already typed.
+    assert page.input_value("#puzzle-editor") == "(stake answer (seal (draft draft)))"
+
+    page.click("#lexicon-close-btn")
+    assert page.is_hidden("#lexicon-panel")
+    assert page.input_value("#puzzle-editor") == "(stake answer (seal (draft draft)))"
 
 
 def _reach_decode_buoy(page, base_url, seed=None):

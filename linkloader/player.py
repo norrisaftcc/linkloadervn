@@ -47,14 +47,18 @@ class Player:
         stats: dict | None = None,
         out=print,
     ):
+        """`stats`, if given, seeds the initial flags (e.g. from the
+        CLI's --cosmonaut/--cowboy/--coder). A `check`'s stat value is
+        read from the flag of the same name at roll time (see
+        `_stat_value`), so a scene's own `set` (e.g. the origin choice
+        in story/01-arrival.scene) overrides whatever `stats` seeded."""
         self.story = story
         self.cast = cast
         self.root = Path(root)
         self.rng = random.Random(seed)
         self.script = deque(script) if script is not None else None
         self.fate = fate_points
-        self.stats = stats or {"cosmonaut": 0, "cowboy": 0, "coder": 0}
-        self.flags: dict = {}
+        self.flags: dict = dict(stats) if stats else {}
         self.out = out
 
     # -- input -------------------------------------------------------
@@ -189,8 +193,18 @@ class Player:
                 pass
             self.out(f"[enter a number from 1 to {len(options)}]")
 
+    def _stat_value(self, stat: str) -> int:
+        """A check's stat value is the story flag with the same name
+        as the stat (cosmonaut, cowboy, coder) if it holds an integer,
+        else 0. See docs/scene-format.md, "check", and the matching
+        rule in web/runner.js's renderCheck."""
+        value = self.flags.get(stat, 0)
+        if isinstance(value, int) and not isinstance(value, bool):
+            return value
+        return 0
+
     def _do_check(self, stmt: CheckStmt) -> str | None:
-        stat_value = self.stats.get(stmt.stat, 0)
+        stat_value = self._stat_value(stmt.stat)
         result = roll_check(stat_value, stmt.difficulty, self.rng)
         self.out(
             f"[check {stmt.stat}+{stat_value} vs {stmt.difficulty}: "

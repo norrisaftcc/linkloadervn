@@ -103,6 +103,7 @@ class Game {
     this.puzzleAttempts = 0;
     this.puzzleRerolled = false;
     this.hintBought = false;
+    this.lexiconRowsRendered = false;
   }
 
   // -- boot / save ---------------------------------------------------
@@ -315,6 +316,47 @@ class Game {
     ]) {
       el.hidden = true;
     }
+    this.closeLexicon();
+  }
+
+  // -- rendering: lexicon (puzzle panel) --------------------------------
+  // A read-only reference panel over the puzzle panel. It never
+  // touches the editor's contents (rule 6, brand.md: accretion, not
+  // replacement -- the player's own work stays put).
+
+  renderLexiconTables() {
+    if (this.lexiconRowsRendered) return;
+    const lexicon = this.story.lexicon || [];
+    this.els.lexiconGrammarBody.innerHTML = "";
+    this.els.lexiconThemeBody.innerHTML = "";
+    for (const entry of lexicon) {
+      const tr = document.createElement("tr");
+      const word = document.createElement("td");
+      word.className = "lexicon-word";
+      word.textContent = entry.word;
+      tr.appendChild(word);
+      if (entry.kind === "grammar") {
+        const scheme = document.createElement("td");
+        scheme.className = "lexicon-word";
+        scheme.textContent = entry.scheme || "";
+        tr.appendChild(scheme);
+      }
+      const gloss = document.createElement("td");
+      gloss.textContent = entry.gloss;
+      tr.appendChild(gloss);
+      const body = entry.kind === "grammar" ? this.els.lexiconGrammarBody : this.els.lexiconThemeBody;
+      body.appendChild(tr);
+    }
+    this.lexiconRowsRendered = true;
+  }
+
+  openLexicon() {
+    this.renderLexiconTables();
+    this.els.lexiconPanel.hidden = false;
+  }
+
+  closeLexicon() {
+    this.els.lexiconPanel.hidden = true;
   }
 
   renderDialogue(stmt) {
@@ -364,11 +406,19 @@ class Game {
 
   // -- rendering: check --------------------------------------------------
 
+  // A check's stat value is the story flag of the same name, if it
+  // holds an integer, else 0 (see docs/scene-format.md, "check", and
+  // the matching rule in linkloader/player.py's `_stat_value`).
+  statValueFor(stat) {
+    const value = this.getFlag(stat);
+    return typeof value === "number" ? value : 0;
+  }
+
   renderCheck(stmt) {
     this.hideAllPanels();
     this.checkStmt = stmt;
     this.checkRerolled = false;
-    const statValue = 0; // No character-sheet stat input in wave 1; see README note.
+    const statValue = this.statValueFor(stmt.stat);
     this.runCheck(stmt, statValue);
     this.els.checkPanel.hidden = false;
   }
@@ -382,7 +432,8 @@ class Game {
     this.lastCheckResult = { dice, total, shift, tier };
     this.save();
 
-    this.els.checkTitle.textContent = `Check: ${stmt.stat} vs ${stmt.difficulty}`;
+    const signedStat = statValue >= 0 ? `+${statValue}` : String(statValue);
+    this.els.checkTitle.textContent = `Check: ${stmt.stat} ${signedStat} vs ${stmt.difficulty}`;
     this.els.diceRow.innerHTML = "";
     dice.forEach((face) => {
       const span = document.createElement("span");
@@ -392,7 +443,7 @@ class Game {
       this.els.diceRow.appendChild(span);
     });
     this.els.checkResult.textContent =
-      `dice ${dice.join(", ")} + stat ${statValue} = ${total} vs ${stmt.difficulty} -> ${tier.toUpperCase()}`;
+      `dice ${dice.join(", ")} + ${stmt.stat} ${signedStat} = ${total} vs ${stmt.difficulty} -> ${tier.toUpperCase()}`;
 
     this.els.checkActions.innerHTML = "";
     if (this.fate > 0 && !this.checkRerolled) {
@@ -442,6 +493,9 @@ class Game {
     this.els.puzzleHintBtn.disabled = !data.hint || this.fate <= 0;
     this.els.puzzleAttempts.textContent =
       `Attempt 1 of ${MAX_PUZZLE_ATTEMPTS}. Fate: ${this.fate}.`;
+    this.closeLexicon();
+    const lexicon = this.story.lexicon || [];
+    this.els.puzzleLexiconBtn.hidden = lexicon.length === 0;
     this.els.puzzlePanel.hidden = false;
     this.els.puzzleEditor.focus();
   }
@@ -539,9 +593,14 @@ function collectEls() {
     puzzleEditor: $("puzzle-editor"),
     puzzleCheckBtn: $("puzzle-check-btn"),
     puzzleHintBtn: $("puzzle-hint-btn"),
+    puzzleLexiconBtn: $("puzzle-lexicon-btn"),
     puzzleAttempts: $("puzzle-attempts"),
     puzzleResults: $("puzzle-results"),
     puzzleHintText: $("puzzle-hint-text"),
+    lexiconPanel: $("lexicon-panel"),
+    lexiconCloseBtn: $("lexicon-close-btn"),
+    lexiconGrammarBody: $("lexicon-grammar-body"),
+    lexiconThemeBody: $("lexicon-theme-body"),
     endingPanel: $("ending-panel"),
     endingLabel: $("ending-label"),
     fateCount: $("fate-count"),
@@ -570,6 +629,8 @@ async function main() {
   els.dialogueBox.addEventListener("click", () => game.advanceDialogue());
   els.puzzleCheckBtn.addEventListener("click", () => game.puzzleCheck());
   els.puzzleHintBtn.addEventListener("click", () => game.puzzleHint());
+  els.puzzleLexiconBtn.addEventListener("click", () => game.openLexicon());
+  els.lexiconCloseBtn.addEventListener("click", () => game.closeLexicon());
   els.restartBtn.addEventListener("click", () => game.restart());
   els.endingRestartBtn.addEventListener("click", () => game.restart());
 

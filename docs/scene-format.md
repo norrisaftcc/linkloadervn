@@ -187,6 +187,16 @@ ladder," below). `<difficulty>` is a non-negative integer, normally
 one of `0`, `2`, `4`, `6` (the four named tiers), though the parser
 accepts any non-negative integer.
 
+**Stat value.** At play time, a check's stat value is the story flag
+of the same name (`cosmonaut`, `cowboy`, or `coder`) if that flag
+holds an integer, and `0` otherwise (unset, `true`/`false`, or any
+non-integer). There is no separate character-sheet input — a scene
+sets the stat flags directly with `set` (see story/01-arrival.scene's
+origin choice, which sets the chosen origin's stat to `2` and the
+other two to `1`). The Python player (`linkloader/player.py`,
+`_stat_value`) and the web runner (`web/runner.js`, `renderCheck`)
+apply this rule identically.
+
 Every outcome line is optional. An outcome that is present jumps to
 its label. An outcome that is **absent** falls through: play
 continues with the statement right after the `check` block, as if the
@@ -350,6 +360,49 @@ Notes for the runner author:
   label exists.
 - Asset paths are copied from `assets.toml` verbatim (paths relative
   to the repository root); the exporter does not rewrite them.
+
+`python -m linkloader build` (not `export`) writes this same shape
+plus three more top-level keys for the web runner, per contract C2:
+`"ladder"` (the 4dF outcome ladder, see `exporter.build_ladder`),
+`"puzzles"` (per-puzzle prompt/starter/hint/cases, see
+`exporter.build_puzzles_data` and "Puzzle prompts," below), and
+`"lexicon"`:
+
+```jsonc
+"lexicon": [
+  {"word": "hesh", "gloss": "the head, the lead car", "kind": "grammar", "scheme": "car"},
+  {"word": "voth", "gloss": "wreck, dead husk", "kind": "theme", "scheme": null}
+]
+```
+
+Parsed from `puzzles/rill/lexicon.md`'s two tables (`exporter.
+build_lexicon`): `kind` is `"grammar"` or `"theme"`; `scheme` is the
+Scheme primitive a grammar root aliases (`null` for a theme word). The
+web runner's Lexicon button (see docs/style/brand.md, "UI rules")
+renders this as two read-only tables in the puzzle panel.
+
+## Puzzle prompts
+
+Each `puzzles/<id>/puzzle.md` has three parts, top to bottom: a
+player-facing body (what the game shows first — the situation in a
+sentence or two, the task, and the answer's shape), an optional `##
+Hint` section, and an optional `## Terminal` section.
+
+`exporter.build_puzzles_data` maps this to the puzzle data
+(`"prompt"`, `"hint"`) that ships to the web runner:
+
+- Everything above `## Hint` (or the whole file, if there is no `##
+  Hint`) becomes `"prompt"`.
+- The text between `## Hint` and the next `##` heading becomes
+  `"hint"` (`null` if there is no `## Hint` section). The web runner
+  shows it only after the player spends a Fate point.
+- `## Terminal` and everything under it — the puzzle's directory, the
+  answer file name, and the `bash puzzles/check/run.sh` command — is
+  for someone working in the repo. It never reaches `"prompt"` or
+  `"hint"`, and the web runner never shows it: the browser puzzle
+  panel has its own editor and Check button instead.
+
+A hint names the method, never the answer (see docs/style/writing.md).
 
 ## One full example
 

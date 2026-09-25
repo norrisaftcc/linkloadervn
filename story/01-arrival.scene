@@ -21,17 +21,17 @@ choice
     "Talk about the year spent only talking to machines." -> origin_coder
 
 == origin_cosmonaut
-set origin = 0
+set origin = 0, cosmonaut = 2, cowboy = 1, coder = 1
 slim: Trained on a station with a view and no horizon. Down here, the horizon's the whole job.
 -> muster
 
 == origin_cowboy
-set origin = 1
+set origin = 1, cosmonaut = 1, cowboy = 2, coder = 1
 slim: Grew up patching fence and engines with whatever was on hand. A link loader's just a fence that thinks.
 -> muster
 
 == origin_coder
-set origin = 2
+set origin = 2, cosmonaut = 1, cowboy = 1, coder = 2
 slim: Spent a year out past the relay towers with nobody but the machines for company. Learned to like the quiet parens make.
 -> muster
 

@@ -66,6 +66,71 @@ def test_script_exhaustion_raises_a_clear_error(demo_story_dir, repo_root):
         player.run()
 
 
+def test_check_stat_value_comes_from_the_flag_of_the_same_name(make_story, repo_root):
+    # seed=5 rolls (1, 0, 1, 0) -> sum 2 (see test_core_dice.py). With
+    # `coder` set to 3 by `set`, total = 5 vs difficulty 2, which is a
+    # "style" per the ladder (>= difficulty + 3). If the stat value
+    # were still hardcoded/defaulted to 0, total would be 2 -> "tie".
+    story_dir = make_story(
+        "== start\n"
+        "set coder = 3\n"
+        "check coder vs 2\n"
+        "    style -> style_end\n"
+        "    success -> success_end\n"
+        "    tie -> tie_end\n"
+        "    fail -> fail_end\n"
+        "== style_end\n> style\n"
+        "== success_end\n> success\n"
+        "== tie_end\n> tie\n"
+        "== fail_end\n> fail\n"
+    )
+    story = load_story(story_dir)
+    cast, _assets = load_cast_and_assets(story_dir)
+    player = Player(
+        story, cast, root=repo_root, seed=5, script=[], fate_points=0, out=lambda *_: None
+    )
+    ending = player.run()
+    assert ending == "style_end"
+    assert player.flags["coder"] == 3
+
+
+def test_check_stat_value_defaults_to_zero_when_the_flag_is_unset(make_story, repo_root):
+    story_dir = make_story(
+        "== start\n"
+        "check coder vs 2\n"
+        "    style -> style_end\n"
+        "    tie -> tie_end\n"
+        "== style_end\n> style\n"
+        "== tie_end\n> tie\n"
+    )
+    story = load_story(story_dir)
+    cast, _assets = load_cast_and_assets(story_dir)
+    player = Player(
+        story, cast, root=repo_root, seed=5, script=[], fate_points=0, out=lambda *_: None
+    )
+    ending = player.run()
+    assert ending == "tie_end"
+
+
+def test_check_stat_value_ignores_a_non_integer_flag(make_story, repo_root):
+    story_dir = make_story(
+        "== start\n"
+        "set coder = true\n"
+        "check coder vs 2\n"
+        "    style -> style_end\n"
+        "    tie -> tie_end\n"
+        "== style_end\n> style\n"
+        "== tie_end\n> tie\n"
+    )
+    story = load_story(story_dir)
+    cast, _assets = load_cast_and_assets(story_dir)
+    player = Player(
+        story, cast, root=repo_root, seed=5, script=[], fate_points=0, out=lambda *_: None
+    )
+    ending = player.run()
+    assert ending == "tie_end"
+
+
 def test_reroll_spends_a_fate_point(demo_story_dir, repo_root):
     story, cast, _assets = _load(demo_story_dir, repo_root)
     answer = str(repo_root / "puzzles" / "count-crew" / "answer.rill")
