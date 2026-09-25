@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LinkLoader style specimen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.5;
+  }
+  .wrap {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-6) var(--space-4) var(--space-8);
+  }
+  h1, h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    margin: 0 0 var(--space-2);
+  }
+  h1 { font-size: var(--text-2xl); }
+  h2 {
+    font-size: var(--text-md);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-bottom: var(--rule-thick) solid var(--color-ink);
+    padding-bottom: var(--space-2);
+    margin-top: var(--space-7);
+  }
+  p.lede {
+    font-size: var(--text-md);
+    max-width: 60ch;
+  }
+  section { margin-bottom: var(--space-6); }
+
+  /* ---- palette ---- */
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+  }
+  .swatch {
+    border: var(--rule-thin) solid var(--color-ink);
+  }
+  .swatch .fill { height: 72px; }
+  .swatch .label {
+    background: var(--color-paper);
+    padding: var(--space-2) var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+  }
+  .fill.paper { background: var(--color-paper); }
+  .fill.paper-deep { background: var(--color-paper-deep); }
+  .fill.ink { background: var(--color-ink); }
+  .fill.teal { background: var(--color-teal); }
+  .fill.orange { background: var(--color-orange); }
+  .fill.magenta { background: var(--color-magenta); }
+  .fill.ochre { background: var(--color-ochre); }
+
+  /* ---- type ---- */
+  .type-row { margin-bottom: var(--space-3); }
+  .type-row .sample { font-family: var(--font-display); }
+  .type-row .tag {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-teal);
+  }
+  .display-sample { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; }
+  .body-sample { font-family: var(--font-body); font-size: var(--text-base); max-width: 60ch; }
+  .mono-sample { font-family: var(--font-mono); font-size: var(--text-sm); }
+
+  /* ---- dialogue box ---- */
+  .dialogue-box {
+    background: var(--color-paper-deep);
+    padding: var(--space-5);
+    border-top: var(--rule-thick) solid var(--color-orange);
+    max-width: 640px;
+  }
+  .speaker {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-white);
+    background: var(--color-orange);
+    padding: var(--space-1) var(--space-3);
+    margin-bottom: var(--space-3);
+  }
+  .dialogue-box p {
+    margin: 0;
+    font-size: var(--text-md);
+  }
+
+  /* ---- choices ---- */
+  .choices {
+    list-style: none;
+    margin: var(--space-4) 0 0;
+    padding: 0;
+    max-width: 640px;
+  }
+  .choices li {
+    border-bottom: var(--rule-thin) solid var(--color-ink);
+    padding: var(--space-3) var(--space-3) var(--space-3) var(--space-4);
+    cursor: default;
+  }
+  .choices li.selected {
+    border-left: var(--rule-thick) solid var(--color-orange);
+    padding-left: calc(var(--space-4) - var(--rule-thick));
+    font-weight: 600;
+  }
+
+  /* ---- puzzle panel ---- */
+  .puzzle-panel {
+    background: var(--color-paper);
+    border: var(--rule-thin) solid var(--color-ink);
+    padding: var(--space-5);
+    background-image:
+      linear-gradient(var(--color-ink) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-ink) 1px, transparent 1px);
+    background-size: 22px 22px;
+    background-position: -1px -1px;
+    background-color: var(--color-paper);
+    position: relative;
+  }
+  .puzzle-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--color-paper);
+    opacity: 0.92;
+  }
+  .puzzle-panel > * { position: relative; }
+  .puzzle-panel h3 {
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 var(--space-3);
+    color: var(--color-teal);
+  }
+  pre.rill {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    background: var(--color-ink);
+    color: var(--color-paper);
+    padding: var(--space-4);
+    margin: 0 0 var(--space-3);
+    overflow-x: auto;
+    line-height: 1.6;
+  }
+  .error-chip {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    background: var(--color-magenta);
+    color: var(--color-white);
+    padding: var(--space-1) var(--space-3);
+  }
+  footer {
+    margin-top: var(--space-8);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-teal);
+    border-top: var(--rule-thin) solid var(--color-ink);
+    padding-top: var(--space-3);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>LinkLoader style specimen</h1>
+  <p class="lede">Pelican-book modernism, outer stratum. Flat shapes, one clean sans, a short restrained palette on cream. See <code>brand.md</code> for the rules behind every choice on this page.</p>
+
+  <section>
+    <h2>Palette</h2>
+    <div class="swatches">
+      <div class="swatch"><div class="fill paper"></div><div class="label">--color-paper<br>#F3EDDC</div></div>
+      <div class="swatch"><div class="fill paper-deep"></div><div class="label">--color-paper-deep<br>#EAE0C4</div></div>
+      <div class="swatch"><div class="fill ink"></div><div class="label" style="background:var(--color-ink);color:var(--color-paper);">--color-ink<br>#1A1A1A</div></div>
+      <div class="swatch"><div class="fill teal"></div><div class="label">--color-teal<br>#1B4D5C</div></div>
+      <div class="swatch"><div class="fill orange"></div><div class="label">--color-orange<br>#B84A25</div></div>
+      <div class="swatch"><div class="fill magenta"></div><div class="label">--color-magenta<br>#951655</div></div>
+      <div class="swatch"><div class="fill ochre"></div><div class="label">--color-ochre<br>#8A6415</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Type</h2>
+    <div class="type-row"><span class="tag">--font-display / Space Grotesk 700</span><div class="display-sample">CDR RUSTLERS OFF THE FEN BUOY</div></div>
+    <div class="type-row"><span class="tag">--font-body / IBM Plex Sans 400</span><div class="body-sample">Rustlers got to it first. Look at the <code>tull</code> — stripped clean. Slim doesn't say much else; the loader says the rest.</div></div>
+    <div class="type-row"><span class="tag">--font-mono / IBM Plex Mono 400</span><div class="mono-sample">(sil drev mora dray fen)</div></div>
+  </section>
+
+  <section>
+    <h2>Dialogue box</h2>
+    <div class="dialogue-box">
+      <span class="speaker">Slim</span>
+      <p>Rustlers got to it first. Look at the <code>tull</code> — stripped clean.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Choices</h2>
+    <ul class="choices">
+      <li class="selected">Ask Clipi to run the diagnostic again.</li>
+      <li>Check the loader's <code>tull</code> yourself.</li>
+      <li>Radio the Company outpost.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Rill puzzle panel</h2>
+    <div class="puzzle-panel">
+      <h3>Puzzle — Find one good signal</h3>
+      <pre class="rill">(stake find-signal
+  (rig (chain-in)
+    (reckon (husk? chain-in)
+            (seal fen)
+            (reckon (same? (hesh chain-in) (seal voth))
+                    (find-signal (tull chian-in))
+                    (hesh chain-in)))))</pre>
+      <span class="error-chip">chibi-scheme: ERROR in find-signal: undefined variable: chian-in</span>
+    </div>
+  </section>
+
+  <footer>TOKENS=v0.1 &middot; STRATUM=PELICAN &middot; specimen.html</footer>
+
+</div>
+</body>
+</html>
