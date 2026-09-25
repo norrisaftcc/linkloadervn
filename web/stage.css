@@ -369,8 +369,9 @@ button {
   padding: var(--space-4);
   overflow-x: auto;
   line-height: 1.6;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
+  /* Keep Rill's indentation: a long line scrolls inside its own block
+     rather than wrapping, since the indentation shows the structure. */
+  white-space: pre;
 }
 
 .puzzle-prompt code {
