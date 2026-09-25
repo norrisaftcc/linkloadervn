@@ -4,7 +4,7 @@
 
 - `/renpy/` - Ren'Py game files and assets
   - `/renpy/current/` - Current version (link_loader_1_2)
-  - `/renpy/alphas/` - Earlier alpha versions
+  - Earlier alphas: git tag `legacy/alphas`
 - `/src/` - Source code and development tools
   - `/src/tools/` - Converters and tests
   - `/src/tests/` - Test files and runners
@@ -15,7 +15,6 @@
 - `/examples/` - Example scripts
   - `/examples/renpy/` - Sample Ren'Py scripts
 - `/output/` - Generated files
-  - `/output/html/` - Playable HTML files
   - `/output/twee/` - Twee format files
   - `/output/json/` - JSON intermediate files
 - `/tools/` - External tools

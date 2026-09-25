@@ -16,7 +16,7 @@ python src/tools/renpy_to_twee_v2.py input.rpy output.tw
 ## Key Paths
 - Game: `/renpy/current/link_loader_1_2/game/`
 - Tools: `/src/tools/`
-- Playable HTML: `/output/html/`
+- Old alphas and HTML builds: git tag `legacy/alphas`
 
 ## Development
 - Edit `.rpy` files directly
