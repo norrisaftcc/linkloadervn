@@ -166,3 +166,30 @@ def test_player_equality_is_type_strict():
     assert p._eval_condition(Condition(flag="met", op="!=", value=1))
     assert p._eval_condition(Condition(flag="trust", op="==", value=1))
     assert not p._eval_condition(Condition(flag="trust", op="==", value=True))
+
+
+def test_terminal_section_is_stripped_even_without_a_hint():
+    from linkloader.exporter import _parse_puzzle_md
+
+    md = "# t\n\nSolve it.\n\n## Terminal\n\nbash puzzles/check/run.sh x a.rill\n"
+    title, prompt, hint = _parse_puzzle_md(md)
+    assert "run.sh" not in prompt and "Terminal" not in prompt
+    assert "Solve it." in prompt and hint is None
+
+    md2 = "# t\n\nSolve it.\n\n## Terminal\n\nrun.sh\n\n## Hint\n\nLook left.\n"
+    _t, prompt2, hint2 = _parse_puzzle_md(md2)
+    assert "run.sh" not in prompt2 and "Look left." in hint2
+
+
+def test_assets_with_the_same_file_name_do_not_collide(tmp_path):
+    from linkloader.build import _copy_assets
+
+    for folder, color in [("a", b"AAA"), ("b", b"BBB")]:
+        (tmp_path / folder).mkdir()
+        (tmp_path / folder / "x.png").write_bytes(color)
+    used = {"bg": {"one": "a/x.png"}, "sprite": {"s": {"e": "b/x.png"}}}
+    out = _copy_assets(used, tmp_path, tmp_path / "dist")
+    p1, p2 = out["bg"]["one"], out["sprite"]["s"]["e"]
+    assert p1 != p2
+    assert (tmp_path / "dist" / p1.split("/", 1)[1]).read_bytes() == b"AAA"
+    assert (tmp_path / "dist" / p2.split("/", 1)[1]).read_bytes() == b"BBB"

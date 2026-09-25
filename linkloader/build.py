@@ -20,6 +20,7 @@ AGENTS.md).
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import shutil
@@ -88,12 +89,20 @@ def _copy_assets(used_assets: dict, root: Path, dist_assets_dir: Path) -> dict:
     "assets/<file>" paths relative to dist/index.html."""
     dist_assets_dir.mkdir(parents=True, exist_ok=True)
     out: dict = {"bg": {}, "sprite": {}}
+    # dist name -> the source path it was copied from. Two different
+    # sources with the same file name must not overwrite each other.
+    taken: dict = {}
 
     def copy_one(rel_path: str) -> str:
         src = root / rel_path
         if not src.exists():
             raise BuildError(f"asset referenced by the story is missing on disk: {src}")
         dist_name = _dist_asset_name(rel_path)
+        if taken.get(dist_name, rel_path) != rel_path:
+            digest = hashlib.sha1(rel_path.encode("utf-8")).hexdigest()[:8]
+            stem, suffix = dist_name.rsplit(".", 1) if "." in dist_name else (dist_name, "")
+            dist_name = f"{stem}-{digest}" + (f".{suffix}" if suffix else "")
+        taken[dist_name] = rel_path
         shutil.copyfile(src, dist_assets_dir / dist_name)
         return f"assets/{dist_name}"
 

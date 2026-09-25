@@ -210,6 +210,15 @@ def _parse_puzzle_md(text: str) -> tuple[str, str, str | None]:
         body_start = 1
     body = "\n".join(lines[body_start:])
 
+    # "## Terminal" holds repository instructions (file names, run.sh).
+    # It never reaches the player, whether or not a hint exists. It runs
+    # to the next heading of the same or higher level.
+    terminal = re.search(r"(?m)^##\s+Terminal\s*$", body)
+    if terminal:
+        rest = body[terminal.end() :]
+        nxt = re.search(r"(?m)^#{1,2}\s+\S", rest)
+        body = body[: terminal.start()] + (rest[nxt.start() :] if nxt else "")
+
     hint_match = re.search(r"(?m)^##\s+Hint\s*$", body)
     if hint_match is None:
         return title, _md_to_html(body), None
