@@ -27,19 +27,15 @@
 ;; chibi-scheme's `environment` objects do not leak definitions back
 ;; out.
 ;;
-;; That is the whole guarantee. It does NOT mean the candidate is
-;; running inside "Rill" as a restricted language:
-;;   - The sandbox's base library is r7rs (scheme base), which is far
-;;     bigger than the 12 Rill grammar roots (it has call/cc, strings,
-;;     vectors, higher-order procedures, and more). A candidate could
-;;     use any of it. Nothing here parses or restricts syntax to the
-;;     Rill subset; the prelude only offers convenient aliases. Full
-;;     enforcement would need a real parser/allowlist, which this
-;;     small a game doesn't have yet.
-;;   - There is no time limit or memory limit. An infinite loop in a
-;;     candidate hangs the chibi-scheme process. Run puzzles/check/
-;;     run.sh (or any single check) under `timeout` if you don't
-;;     trust the input.
+;; That is the whole guarantee of the sandbox itself. Two more guards
+;; sit around it:
+;;   - Before loading, `check-candidate` (below) reads the candidate's
+;;     forms and rejects any symbol, form or datum outside the Rill
+;;     subset: no define, lambda, let, strings, vectors, multi-body
+;;     rig or one-armed reckon. This keeps chibi in step with rill.js.
+;;   - run.sh stops each check after RILL_TIMEOUT seconds (default 5),
+;;     so an infinite loop fails instead of hanging.
+;;   There is no memory limit.
 ;;   - A candidate can still break ITS OWN code by shadowing a Rill
 ;;     grammar root before using it (e.g. redefining `hesh` inside its
 ;;     own answer) — that only affects that one candidate's sandbox,
@@ -56,7 +52,7 @@
 ;; that IS the fail signal. `run.sh` reads the exit code, not any
 ;; caught condition.
 
-(import (scheme eval))
+(import (scheme eval) (scheme file) (scheme cxr))
 
 (define *harness-args* (command-line))
 (if (< (length *harness-args*) 4)
@@ -83,6 +79,86 @@
         (display "  expected=") (write expected)
         (display "  actual=") (write actual)
         (newline))))
+
+;; ---- Rill subset check ------------------------------------------
+;; The sandbox below is full r7rs, so chibi alone would accept `let`,
+;; `lambda`, strings and the rest. The browser's rill.js does not. To
+;; keep the two in step, reject any candidate that uses a form outside
+;; the Rill subset before it is loaded. The rules follow the SUPPORTED
+;; FORMS list in puzzles/rill/prelude.scm.
+
+(define *rill-roots*
+  '(stake rig reckon bind hesh tull chain sum less seal husk? same?))
+
+(define (read-all-forms path)
+  (call-with-input-file path
+    (lambda (port)
+      (let loop ((acc '()))
+        (let ((form (read port)))
+          (if (eof-object? form) (reverse acc) (loop (cons form acc))))))))
+
+(define (not-rill what)
+  (display "  FAIL  not Rill: ") (write what) (newline)
+  (error "candidate uses a form outside the Rill subset" what))
+
+(define (proper-list? x)
+  (or (null? x) (and (pair? x) (proper-list? (cdr x)))))
+
+;; Check one expression. `bound` holds the names the candidate may use
+;; besides the grammar roots: its own stake names and enclosing rig
+;; parameters.
+(define (check-expr x bound)
+  (cond
+    ((symbol? x)
+     (if (not (or (memq x *rill-roots*) (memq x bound))) (not-rill x)))
+    ((or (number? x) (boolean? x)) #t)
+    ((pair? x)
+     (if (not (proper-list? x)) (not-rill x))
+     (let ((head (car x)) (args (cdr x)))
+       (cond
+         ((or (eq? head 'seal) (eq? head 'quote))
+          (if (not (= (length args) 1)) (not-rill x))
+          (check-datum (car args)))
+         ((eq? head 'stake) (not-rill x))  ; only allowed at top level
+         ((eq? head 'rig)
+          (if (not (and (= (length args) 2)
+                        (proper-list? (car args))
+                        (let all-symbols ((ps (car args)))
+                          (or (null? ps)
+                              (and (symbol? (car ps)) (all-symbols (cdr ps)))))))
+              (not-rill x))
+          (check-expr (cadr args) (append (car args) bound)))
+         ((eq? head 'reckon)
+          (if (not (= (length args) 3)) (not-rill x))
+          (for-each (lambda (a) (check-expr a bound)) args))
+         (else
+          (for-each (lambda (a) (check-expr a bound)) x)))))
+    (else (not-rill x))))
+
+;; Quoted data may hold only symbols, integers, booleans and lists.
+(define (check-datum d)
+  (cond ((or (symbol? d) (number? d) (boolean? d) (null? d)) #t)
+        ((pair? d) (check-datum (car d)) (check-datum (cdr d)))
+        (else (not-rill d))))
+
+(define (check-candidate forms)
+  (let ((names (let collect ((fs forms) (acc '()))
+                 (cond ((null? fs) acc)
+                       ((and (pair? (car fs)) (eq? (caar fs) 'stake)
+                             (proper-list? (car fs)) (= (length (car fs)) 3)
+                             (symbol? (cadar fs)))
+                        (collect (cdr fs) (cons (cadar fs) acc)))
+                       (else (collect (cdr fs) acc))))))
+    (for-each
+      (lambda (f)
+        (if (and (pair? f) (eq? (car f) 'stake))
+            (if (and (proper-list? f) (= (length f) 3) (symbol? (cadr f)))
+                (check-expr (caddr f) names)
+                (not-rill f))
+            (check-expr f names)))
+      forms)))
+
+(check-candidate (read-all-forms *candidate-file*))
 
 ;; The sandbox: r7rs base + the Rill prelude. The candidate's file is
 ;; loaded into it below, before tests.scm ever runs.

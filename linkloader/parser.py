@@ -40,7 +40,7 @@ SHOW_RE = re.compile(rf"^show\s+({IDENT})\s+({IDENT})(?:\s+({IDENT}))?\s*$")
 HIDE_RE = re.compile(rf"^hide\s+({IDENT})\s*$")
 DIALOGUE_RE = re.compile(rf"^({IDENT}):\s(.*)$")
 JUMP_RE = re.compile(rf"^->\s*({IDENT})\s*$")
-CHECK_RE = re.compile(rf"^check\s+({IDENT})\s+vs\s+(-?\d+)\s*$")
+CHECK_RE = re.compile(rf"^check\s+({IDENT})\s+vs\s+(\d+)\s*$")
 PUZZLE_RE = re.compile(rf"^puzzle\s+({PUZZLE_ID})\s*$")
 OUTCOME_CHECK_RE = re.compile(rf"^(style|success|tie|fail)\s*->\s*({IDENT})\s*$")
 OUTCOME_PUZZLE_RE = re.compile(rf"^(pass|lockout)\s*->\s*({IDENT})\s*$")
@@ -145,6 +145,8 @@ def _parse_condition(text: str, line: _Line) -> Condition:
     m = COND_CMP_RE.match(text)
     if m:
         flag, op, value = m.groups()
+        if op in (">=", "<=", ">", "<") and value in ("true", "false"):
+            raise _err(line, "BadCondition", f"{op} compares integers, not {value}: {text!r}")
         return Condition(flag=flag, op=op, value=_parse_value(value))
     m = COND_TRUTHY_RE.match(text)
     if m:

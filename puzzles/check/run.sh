@@ -16,9 +16,8 @@
 #
 # Each check runs chibi-scheme in its own process (see
 # puzzles/check/harness.scm for what that isolation does and does not
-# buy you). No timeout is applied by default — an infinite loop in an
-# answer will hang; wrap calls in `timeout` yourself if you're running
-# untrusted input unattended.
+# buy you). Each check stops after RILL_TIMEOUT seconds (default 5),
+# so an answer that loops forever fails instead of hanging the run.
 
 set -euo pipefail
 ORIGINAL_PWD="$(pwd)"
