@@ -29,4 +29,26 @@ def load_assets(path: Path) -> dict:
         data = tomllib.load(f)
     data.setdefault("bg", {})
     data.setdefault("sprite", {})
+    _check_shape(data, path)
     return data
+
+
+def _check_shape(data: dict, path: Path) -> None:
+    """Every mapped value must be a path string, and [sprite] must hold
+    one table per sprite id. A ValueError here is reported by the CLI and
+    the build as one error line, not a traceback."""
+    if not isinstance(data["bg"], dict):
+        raise ValueError(f"{path}: [bg] must be a table")
+    for name, value in data["bg"].items():
+        if not isinstance(value, str):
+            raise ValueError(f"{path}: bg.{name} must be a path string, not {type(value).__name__}")
+    if not isinstance(data["sprite"], dict):
+        raise ValueError(f"{path}: [sprite] must hold one table per sprite")
+    for sprite_id, table in data["sprite"].items():
+        if not isinstance(table, dict):
+            raise ValueError(f"{path}: sprite.{sprite_id} must be a table of expression = path")
+        for expr, value in table.items():
+            if not isinstance(value, str):
+                raise ValueError(
+                    f"{path}: sprite.{sprite_id}.{expr} must be a path string, not {type(value).__name__}"
+                )

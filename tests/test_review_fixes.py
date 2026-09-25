@@ -216,3 +216,25 @@ def test_build_reports_a_malformed_manifest_as_a_build_error(tmp_path, repo_root
     (story / "cast.toml").write_text("this is [not toml", encoding="utf-8")
     with pytest.raises(BuildError, match="cast.toml or assets.toml"):
         build(story, tmp_path / "dist", repo_root)
+
+
+@pytest.mark.parametrize(
+    "toml",
+    [
+        "[bg]\ndesert = 42\n",
+        "[sprite]\nslim = \"x.png\"\n",
+        "[sprite.slim]\nneutral = [1, 2]\n",
+    ],
+)
+def test_malformed_asset_values_are_a_clean_error(tmp_path, repo_root, toml):
+    import shutil as _sh
+
+    from linkloader.build import BuildError, build
+    from linkloader.cli import main
+
+    story = tmp_path / "story"
+    _sh.copytree(repo_root / "tests" / "fixtures" / "demo", story)
+    (story / "assets.toml").write_text(toml, encoding="utf-8")
+    with pytest.raises(BuildError, match="assets.toml"):
+        build(story, tmp_path / "dist", repo_root)
+    assert main(["--root", str(repo_root), "check", str(story)]) == 1
