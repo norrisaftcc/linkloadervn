@@ -79,6 +79,17 @@ button {
 
 .topbar-btn:hover { background: var(--color-magenta); }
 
+.topbar-link {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-paper);
+  text-underline-offset: 3px;
+}
+
+.topbar-link:hover { color: var(--color-white); }
+
 /* ---- stage: bg + sprites ---- */
 .stage {
   position: relative;

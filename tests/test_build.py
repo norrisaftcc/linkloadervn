@@ -143,3 +143,15 @@ def test_build_refuses_a_puzzle_without_cases_and_keeps_old_dist(tmp_path, repo_
         build(story_dir, out, root)
     assert (out / "story.json").read_text(encoding="utf-8") == "OLD"
     assert not any(p.name.startswith(".dist.build-") for p in tmp_path.iterdir())
+
+
+def test_build_ships_the_style_guide(tmp_path, repo_root):
+    out = tmp_path / "dist"
+    build(repo_root / "story", out, repo_root)
+    guide = out / "guide" / "index.html"
+    assert guide.exists()
+    html = guide.read_text(encoding="utf-8")
+    for name in ["dialogue", "choices", "check", "puzzle", "lexicon"]:
+        assert f"shots/{name}.jpg" in html
+        assert (out / "guide" / "shots" / f"{name}.jpg").exists()
+    assert 'href="guide/"' in (out / "index.html").read_text(encoding="utf-8")

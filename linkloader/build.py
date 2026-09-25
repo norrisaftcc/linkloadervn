@@ -106,8 +106,8 @@ def _copy_assets(used_assets: dict, root: Path, dist_assets_dir: Path) -> dict:
 
 def _copy_web_runner(dist_dir: Path, web_dir: Path) -> None:
     """Copies every file directly under web/ (index.html, runner.js,
-    stage.css, ...) except the web/rill/ subtree, then copies
-    web/rill/ into dist/rill/ verbatim."""
+    stage.css, ...), then web/rill/ into dist/rill/ (without its tests)
+    and web/guide/ into dist/guide/."""
     if not web_dir.is_dir():
         raise BuildError(f"web runner directory not found: {web_dir}")
     for item in sorted(web_dir.iterdir()):
@@ -124,6 +124,11 @@ def _copy_web_runner(dist_dir: Path, web_dir: Path) -> None:
             # Ship the evaluator itself, not its own test file(s).
             if item.is_file() and ".test." not in item.name:
                 shutil.copyfile(item, rill_dst / item.name)
+
+    # The style guide ships next to the game, at dist/guide/.
+    guide_src = web_dir / "guide"
+    if guide_src.is_dir():
+        shutil.copytree(guide_src, dist_dir / "guide", dirs_exist_ok=True)
 
 
 def _swap_into_place(stage: Path, out_dir: Path) -> None:

@@ -24,6 +24,7 @@ Audience: students, and volunteer testers from game dev, graphic design and prog
 | `docs/canon/` | Story bible, kept lines, found-document source, cut list |
 | `docs/style/` | Brand guide, writing guide, `tokens.css`, specimen page |
 | `web/` | The static web runner (`index.html`, `runner.js`, `stage.css`) and `web/rill/` (the JS Rill evaluator, contract C1 in its own files) |
+| `web/guide/` | The shareable style guide page. The build copies it to `dist/guide/`. Refresh its screenshots with `python tools/guide/capture.py dist/ web/guide/shots/` |
 | `dist/` | Output of `python -m linkloader build`: the playable one-folder web game. Generated, not committed |
 | `renpy/current/.../link_loader_1_2/game/` | The old Ren'Py game. Source material only, and a later port target |
 
