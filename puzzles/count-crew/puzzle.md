@@ -1,7 +1,13 @@
 # count-crew — Count the crew
 
-One grammar root is missing from a working Rill function. It counts a
-chain (list) of kin.
+A chain (list) of kin needs a count. Someone left one grammar root
+blank in an otherwise working Rill function.
+
+## Task
+
+Fill in the blank. Any grammar root that correctly tests "is this
+chain empty" passes — not only the one word this puzzle was written
+with.
 
 ```scheme
 (stake haan-count
@@ -11,13 +17,17 @@ chain (list) of kin.
             (sum 1 (haan-count (tull roster))))))
 ```
 
-## Task
+Bind your answer to the name `haan-count`, as a `rig` of one argument.
 
-Fill in the blank. Any grammar root that correctly tests "is this
-chain empty" will pass — not only the one word this puzzle was written
-with.
+## Hint
 
-## Check it
+Look up the grammar root that answers "is the hold empty, a husk?" in
+the Lexicon. It takes one argument and returns true or false.
+
+## Terminal
+
+Work in `puzzles/count-crew/`. Copy `starter.rill` to `answer.rill`
+and fill in the blank. Check it:
 
 ```
 bash puzzles/check/run.sh count-crew answer.rill

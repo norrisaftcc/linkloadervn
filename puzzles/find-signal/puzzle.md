@@ -21,7 +21,16 @@ Recursion only. Rill has no loops.
                     (hesh chain-in)))))
 ```
 
-## Check it
+## Hint
+
+Handle the empty chain first, then look at only the head of what is
+left. Recurse on the tail when the head is a wreck; otherwise, that
+head is your answer.
+
+## Terminal
+
+Work in `puzzles/find-signal/`. Copy `starter.rill` to `answer.rill`
+and fill in the blanks. Check it:
 
 ```
 bash puzzles/check/run.sh find-signal answer.rill

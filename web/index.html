@@ -55,10 +55,28 @@
       <div class="puzzle-actions">
         <button type="button" id="puzzle-check-btn" class="btn btn-primary">Check</button>
         <button type="button" id="puzzle-hint-btn" class="btn">Hint (−1 Fate)</button>
+        <button type="button" id="puzzle-lexicon-btn" class="btn">Lexicon</button>
       </div>
       <p id="puzzle-attempts"></p>
       <div id="puzzle-results" class="puzzle-results" role="status"></div>
       <p id="puzzle-hint-text" class="puzzle-hint-text" hidden></p>
+
+      <div id="lexicon-panel" class="lexicon-panel" hidden role="dialog" aria-label="Rill lexicon">
+        <div class="lexicon-header">
+          <h4>Lexicon</h4>
+          <button type="button" id="lexicon-close-btn" class="btn">Close</button>
+        </div>
+        <h5>Grammar roots</h5>
+        <table class="lexicon-table">
+          <thead><tr><th>Rill</th><th>Scheme</th><th>Gloss</th></tr></thead>
+          <tbody id="lexicon-grammar-body"></tbody>
+        </table>
+        <h5>Theme words</h5>
+        <table class="lexicon-table">
+          <thead><tr><th>Rill</th><th>Gloss</th></tr></thead>
+          <tbody id="lexicon-theme-body"></tbody>
+        </table>
+      </div>
     </section>
 
     <section class="ending-panel" id="ending-panel" hidden>

@@ -309,6 +309,8 @@ button {
   padding: var(--space-4);
   overflow-x: auto;
   line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .puzzle-prompt code {
@@ -380,6 +382,71 @@ button {
   margin-top: var(--space-3);
 }
 
+/* ---- lexicon panel (over the puzzle panel; never touches the editor) ---- */
+.lexicon-panel {
+  margin-top: var(--space-4);
+  background: var(--color-paper);
+  border: var(--rule-thin) solid var(--color-ink);
+  border-top: var(--rule-thick) solid var(--color-teal);
+  padding: var(--space-4);
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.lexicon-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+}
+
+.lexicon-header h4 {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-teal);
+  margin: 0;
+}
+
+.lexicon-panel h5 {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-ink);
+  margin: var(--space-3) 0 var(--space-1);
+}
+
+.lexicon-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-2);
+}
+
+.lexicon-table th {
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-ink);
+  border-bottom: var(--rule-thin) solid var(--color-ink);
+  padding: var(--space-1) var(--space-2);
+}
+
+.lexicon-table td {
+  padding: var(--space-1) var(--space-2);
+  border-bottom: var(--rule-thin) solid var(--color-paper-deep);
+  vertical-align: top;
+}
+
+.lexicon-word {
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+
 /* ---- ending ---- */
 .ending-panel {
   background: var(--color-paper-deep);
@@ -412,6 +479,8 @@ button {
 @media (max-width: 480px) {
   .panel-area { padding: var(--space-3); }
   .dialogue-box, .check-panel, .puzzle-panel { padding: var(--space-3); }
+  .lexicon-panel { padding: var(--space-3); max-height: 50vh; }
+  .lexicon-table { font-size: var(--text-xs); }
   .choice-btn { padding: var(--space-4) var(--space-2); }
   .die { width: 2rem; height: 2rem; font-size: var(--text-base); }
 }

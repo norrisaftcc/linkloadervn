@@ -42,6 +42,15 @@ def test_story_json_has_ladder_puzzles_start(repo_root, demo_story_dir, tmp_path
     assert entry["starter"]  # non-empty: starter.rill exists for this puzzle
     assert isinstance(entry["cases"], list) and len(entry["cases"]) > 0
 
+    assert "lexicon" in data
+    lexicon = data["lexicon"]
+    assert isinstance(lexicon, list) and len(lexicon) > 0
+    by_word = {e["word"]: e for e in lexicon}
+    assert by_word["husk?"]["kind"] == "grammar"
+    assert by_word["husk?"]["scheme"] == "null?"
+    assert by_word["fen"]["kind"] == "theme"
+    assert by_word["fen"]["scheme"] is None
+
 
 def test_every_referenced_asset_exists_in_dist(repo_root, demo_story_dir, tmp_path):
     out_dir = tmp_path / "dist"

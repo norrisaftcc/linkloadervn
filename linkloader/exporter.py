@@ -223,6 +223,56 @@ def _parse_puzzle_md(text: str) -> tuple[str, str, str | None]:
     return title, _md_to_html(prompt_body), _md_to_html(hint_body)
 
 
+def _parse_lexicon_table_rows(block: str) -> list[list[str]]:
+    """Pulls the data rows out of one Markdown table (a run of `|...|`
+    lines): drops the header row and the `|---|---|` separator row,
+    and un-backtick/strip every cell. Tolerant of extra whitespace and
+    of a table that isn't perfectly column-aligned."""
+    rows: list[list[str]] = []
+    for line in block.splitlines():
+        line = line.strip()
+        if not line.startswith("|"):
+            continue
+        cells = [c.strip() for c in line.strip("|").split("|")]
+        if all(re.fullmatch(r":?-{2,}:?", c) for c in cells):
+            continue  # the `|---|---|` separator row
+        rows.append([c.strip("`").strip() for c in cells])
+    return rows[1:] if len(rows) > 1 else []  # drop the header row
+
+
+def build_lexicon(text: str) -> list[dict]:
+    """Parses `puzzles/rill/lexicon.md` into a flat list of
+    {"word", "gloss", "kind", "scheme"} entries: "grammar" rows carry
+    the Scheme primitive they alias (e.g. `car`), "theme" rows carry
+    `scheme: None`. Robust to the exact heading wording (matched by
+    prefix, case-insensitively) and to `(12)`/`(8)`-style counts in
+    the heading, so a lexicon edit that adds or renames a word still
+    parses."""
+    entries: list[dict] = []
+    for heading, body in re.findall(r"(?m)^##\s+(.+?)\s*$\n((?:(?!^##\s).*\n?)*)", text):
+        rows = _parse_lexicon_table_rows(body)
+        if not rows:
+            continue
+        heading_lower = heading.strip().lower()
+        if heading_lower.startswith("grammar"):
+            for row in rows:
+                if len(row) < 3:
+                    continue
+                word, scheme, gloss = row[0], row[1], row[2]
+                if not word:
+                    continue
+                entries.append({"word": word, "gloss": gloss, "kind": "grammar", "scheme": scheme})
+        elif heading_lower.startswith("thematic") or heading_lower.startswith("theme"):
+            for row in rows:
+                if len(row) < 2:
+                    continue
+                word, gloss = row[0], row[1]
+                if not word:
+                    continue
+                entries.append({"word": word, "gloss": gloss, "kind": "theme", "scheme": None})
+    return entries
+
+
 def build_puzzles_data(puzzles_dir: Path, puzzle_ids) -> dict:
     """Per contract C2: {"<id>": {"id", "title", "prompt", "starter",
     "hint", "cases"}} for each id in `puzzle_ids`."""

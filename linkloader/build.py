@@ -3,8 +3,8 @@
 Builds the one-folder static web game:
 
 - `dist/story.json` — the exporter's scene JSON, extended with
-  "ladder" and "puzzles" per contract C2 (see docs/scene-format.md
-  and exporter.py).
+  "ladder", "puzzles", and "lexicon" per contract C2 (see
+  docs/scene-format.md and exporter.py).
 - `dist/index.html`, `dist/runner.js`, `dist/stage.css` (and any other
   file living directly under `web/`) — copied from the web runner.
 - `dist/rill/` — copied from `web/rill/` (the Rill evaluator; a
@@ -24,7 +24,7 @@ import json
 import shutil
 from pathlib import Path
 
-from .exporter import build_ladder, build_puzzles_data, export_story
+from .exporter import build_ladder, build_lexicon, build_puzzles_data, export_story
 from .loader import load_cast_and_assets, load_story
 from .model import Bg, PuzzleStmt, Show, Story
 from .validator import validate, walk_statements
@@ -158,6 +158,10 @@ def build(
     data["ladder"] = build_ladder()
     puzzle_ids = referenced_puzzle_ids(story)
     data["puzzles"] = build_puzzles_data(puzzles_dir, puzzle_ids)
+    lexicon_path = puzzles_dir / "rill" / "lexicon.md"
+    data["lexicon"] = (
+        build_lexicon(lexicon_path.read_text(encoding="utf-8")) if lexicon_path.exists() else []
+    )
 
     (out_dir / "story.json").write_text(
         json.dumps(data, indent=2, sort_keys=True) + "\n", encoding="utf-8"
