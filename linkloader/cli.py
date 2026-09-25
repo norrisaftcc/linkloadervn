@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import tomllib
 from pathlib import Path
 
 from .build import BuildError, build as run_build
@@ -26,7 +27,13 @@ def _load_and_validate(story_dir: Path, root: Path):
     LinkLoaderError only for problems that stop us before validation
     can even run (a parse error, or a missing cast/assets file)."""
     story = load_story(story_dir)
-    cast, assets = load_cast_and_assets(story_dir)
+    try:
+        cast, assets = load_cast_and_assets(story_dir)
+    except (FileNotFoundError, ValueError, tomllib.TOMLDecodeError) as e:
+        # A missing or malformed cast.toml/assets.toml. Report it like a
+        # parse error, not a traceback. Caught here only, so a ValueError
+        # from a real bug elsewhere still shows its traceback.
+        raise LinkLoaderError(f"error: {e}") from e
     puzzles_dir = root / "puzzles"
     errors, warnings = validate(story, cast, assets, puzzles_dir)
     return story, cast, assets, errors, warnings

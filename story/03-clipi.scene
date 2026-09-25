@@ -15,6 +15,7 @@ slim: Careful with that phrase, Clipi. Remember what happened last time you got 
 check coder vs 2
     style -> talk_down_style
     success -> talk_down_ok
+    tie -> talk_down_ok
     fail -> talk_down_hard
 
 == talk_down_style

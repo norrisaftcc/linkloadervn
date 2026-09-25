@@ -138,6 +138,25 @@ def validate(story: Story, cast: dict, assets: dict, puzzles_dir: Path):
                         )
                     )
 
+    # A check or puzzle that is the last statement of its scene and leaves
+    # an outcome out ends the game when that outcome comes up (an absent
+    # outcome falls through, and there is nothing to fall through to).
+    for label, scene in story.scenes.items():
+        if not scene.statements:
+            continue
+        last = scene.statements[-1]
+        if isinstance(last, (CheckStmt, PuzzleStmt)):
+            missing = [k for k, v in last.outcomes.items() if v is None]
+            if missing:
+                warnings.append(
+                    ValidationWarning(
+                        "OutcomeEndsGame",
+                        f"{last.pos}: outcome(s) {', '.join(missing)} are missing and "
+                        "nothing follows, so the game ends there",
+                        scene=label,
+                    )
+                )
+
     # Reachability, from `start`, over every jump-capable statement.
     reachable = {story.start}
     frontier = [story.start]

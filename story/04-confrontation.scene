@@ -29,6 +29,7 @@ set rustler_sympathy += 1
 check cosmonaut vs 4
     style -> hold_style
     success -> hold_ok
+    tie -> hold_ok
     fail -> hold_hard
 
 == hold_style

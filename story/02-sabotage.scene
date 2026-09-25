@@ -8,6 +8,7 @@ bg desert_night
 check cowboy vs 2
     style -> tracked_expert
     success -> tracked_ok
+    tie -> tracked_ok
     fail -> tracked_missed
 
 == tracked_expert
