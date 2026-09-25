@@ -1,0 +1,8 @@
+;; Wrong: tests (tull roster) instead of roster itself. Must FAIL: it
+;; crashes on an empty roster (`tull` on an empty chain errors), and
+;; undercounts everything else by one.
+(stake haan-count
+  (rig (roster)
+    (reckon (husk? (tull roster))
+            0
+            (sum 1 (haan-count (tull roster))))))

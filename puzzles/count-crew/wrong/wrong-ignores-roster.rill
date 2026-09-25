@@ -1,0 +1,4 @@
+;; Wrong: ignores the roster entirely and always returns 0. Must FAIL
+;; on any non-empty roster.
+(stake haan-count
+  (rig (roster) 0))

@@ -1,0 +1,4 @@
+;; Wrong: `haan-count` is bound to a number, not a function. Must FAIL:
+;; calling it errors ("not applicable"), which crashes the check
+;; process with a nonzero exit code.
+(stake haan-count 42)

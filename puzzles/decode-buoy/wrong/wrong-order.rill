@@ -1,0 +1,3 @@
+;; Wrong: right words, wrong order. Must FAIL because decode-buoy
+;; checks word order, not just the word set.
+(stake answer (seal (home drift dust star signal)))

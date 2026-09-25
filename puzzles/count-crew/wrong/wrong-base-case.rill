@@ -1,0 +1,7 @@
+;; Wrong: base case returns 1 instead of 0. Must FAIL: every count
+;; comes out one too high.
+(stake haan-count
+  (rig (roster)
+    (reckon (husk? roster)
+            1
+            (sum 1 (haan-count (tull roster))))))

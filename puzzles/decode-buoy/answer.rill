@@ -1,0 +1,3 @@
+;; decode-buoy reference answer.
+;; sil=signal drev=star mora=dust dray=drift fen=home
+(stake answer (seal (signal star dust drift home)))

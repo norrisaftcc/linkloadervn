@@ -1,0 +1,8 @@
+;; find-signal reference answer.
+(stake find-signal
+  (rig (chain-in)
+    (reckon (husk? chain-in)
+            (seal fen)
+            (reckon (same? (hesh chain-in) (seal voth))
+                    (find-signal (tull chain-in))
+                    (hesh chain-in)))))

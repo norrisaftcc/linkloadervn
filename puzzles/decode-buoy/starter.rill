@@ -1,0 +1,6 @@
+;; decode-buoy — fill in the blanks, then save this as answer.rill.
+;;
+;; Transmission: (sil drev mora dray fen)
+;; Translate word for word, in order, into English.
+
+(stake answer (seal (___ ___ ___ ___ ___)))

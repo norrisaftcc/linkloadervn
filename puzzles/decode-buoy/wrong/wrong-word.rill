@@ -1,0 +1,3 @@
+;; Wrong: mistranslates `drev` (star) as `signal` again, so the first
+;; two words duplicate. Must FAIL: one word is simply wrong.
+(stake answer (seal (signal signal dust drift home)))
