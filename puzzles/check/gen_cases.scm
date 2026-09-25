@@ -41,6 +41,29 @@
 
 (eval '(stake answer (seal (signal star dust drift home))) *sandbox*)
 
+(eval '(stake read-brand
+         (rig (chain-in)
+           (hesh (tull (tull chain-in)))))
+      *sandbox*)
+
+(eval '(stake herd-count
+         (rig (chest)
+           (reckon (husk? chest)
+                   0
+                   (reckon (same? (hesh chest) (seal voth))
+                           (herd-count (tull chest))
+                           (sum 1 (herd-count (tull chest)))))))
+      *sandbox*)
+
+(eval '(stake rebalance
+         (rig (links)
+           (reckon (husk? links)
+                   (chain)
+                   (reckon (same? (hesh links) (seal voth))
+                           (rebalance (tull links))
+                           (bind (hesh links) (rebalance (tull links)))))))
+      *sandbox*)
+
 (define (printed-of form)
   (call-with-output-string
    (lambda (port) (write (eval form *sandbox*) port))))
@@ -83,7 +106,25 @@
           (list "(find-signal (seal (sil)))" '(find-signal (seal (sil))))
           (list "(find-signal (seal (voth voth sil)))" '(find-signal (seal (voth voth sil))))
           (list "(find-signal (seal (sil voth voth)))" '(find-signal (seal (sil voth voth))))
-          (list "(find-signal (seal (voth sil voth sil)))" '(find-signal (seal (voth sil voth sil))))))))
+          (list "(find-signal (seal (voth sil voth sil)))" '(find-signal (seal (voth sil voth sil))))))
+   (list "read-brand"
+         (list
+          (list "(read-brand (seal (kessa voth sil fen)))" '(read-brand (seal (kessa voth sil fen))))
+          (list "(read-brand (seal (haan haan drev)))" '(read-brand (seal (haan haan drev))))
+          (list "(read-brand (seal (mora dray fen)))" '(read-brand (seal (mora dray fen))))))
+   (list "count-herd"
+         (list
+          (list "(herd-count (chain))" '(herd-count (chain)))
+          (list "(herd-count (seal (voth)))" '(herd-count (seal (voth))))
+          (list "(herd-count (seal (haan voth haan)))" '(herd-count (seal (haan voth haan))))
+          (list "(herd-count (seal (voth haan voth haan haan)))"
+                '(herd-count (seal (voth haan voth haan haan))))))
+   (list "rebalance-coupling"
+         (list
+          (list "(rebalance (chain))" '(rebalance (chain)))
+          (list "(rebalance (seal (voth voth)))" '(rebalance (seal (voth voth))))
+          (list "(rebalance (seal (kessa voth kessa)))" '(rebalance (seal (kessa voth kessa))))
+          (list "(rebalance (seal (voth sil voth fen)))" '(rebalance (seal (voth sil voth fen))))))))
 
 (define (json-string s)
   (string-append "\"" s "\""))

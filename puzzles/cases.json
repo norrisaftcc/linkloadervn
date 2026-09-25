@@ -37,6 +37,23 @@
       {"input": "(find-signal (seal (voth voth sil)))", "expected": "sil"},
       {"input": "(find-signal (seal (sil voth voth)))", "expected": "sil"},
       {"input": "(find-signal (seal (voth sil voth sil)))", "expected": "sil"}
+    ],
+    "read-brand": [
+      {"input": "(read-brand (seal (kessa voth sil fen)))", "expected": "sil"},
+      {"input": "(read-brand (seal (haan haan drev)))", "expected": "drev"},
+      {"input": "(read-brand (seal (mora dray fen)))", "expected": "fen"}
+    ],
+    "count-herd": [
+      {"input": "(herd-count (chain))", "expected": "0"},
+      {"input": "(herd-count (seal (voth)))", "expected": "0"},
+      {"input": "(herd-count (seal (haan voth haan)))", "expected": "2"},
+      {"input": "(herd-count (seal (voth haan voth haan haan)))", "expected": "3"}
+    ],
+    "rebalance-coupling": [
+      {"input": "(rebalance (chain))", "expected": "()"},
+      {"input": "(rebalance (seal (voth voth)))", "expected": "()"},
+      {"input": "(rebalance (seal (kessa voth kessa)))", "expected": "(kessa kessa)"},
+      {"input": "(rebalance (seal (voth sil voth fen)))", "expected": "(sil fen)"}
     ]
   }
 }
