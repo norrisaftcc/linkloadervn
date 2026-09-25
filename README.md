@@ -13,7 +13,7 @@ Demo download: https://terminalcowboy.itch.io/terminalcowboy
 
 - `/renpy/` - Ren'Py game files and assets
   - `/renpy/current/` - Current version of the game
-  - Earlier alphas are archived under the git tag `legacy/alphas`
+  - Earlier alphas are archived under the git tag `legacy/alphas` (commit `79da7b8`)
 - `/src/` - Source code and development tools
   - `/src/tools/` - Development and content creation tools
   - `/src/tests/` - Test files and test runners

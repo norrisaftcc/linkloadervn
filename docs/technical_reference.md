@@ -4,7 +4,7 @@
 
 - `/renpy/` - Ren'Py game files and assets
   - `/renpy/current/` - Current version (link_loader_1_2)
-  - Earlier alphas: git tag `legacy/alphas`
+  - Earlier alphas: git tag `legacy/alphas` (commit `79da7b8`)
 - `/src/` - Source code and development tools
   - `/src/tools/` - Converters and tests
   - `/src/tests/` - Test files and runners
