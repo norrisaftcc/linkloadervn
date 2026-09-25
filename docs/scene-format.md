@@ -124,8 +124,8 @@ player. A `choice` needs at least one option, and needs at least one
 option reachable when all flags are at their default (so the menu can
 never be empty on a fresh playthrough).
 
-**Errors**: `EmptyChoice` (no options), `UnreachableChoice` (every
-option is guarded, so the menu could be empty), `BadJump` (validator:
+**Errors**: `EmptyChoice` (no options), `UnreachableChoice` (no option
+is open when every flag is at its default, so the menu could be empty), `BadJump` (validator:
 target label does not exist).
 
 ### `set` — assign flags

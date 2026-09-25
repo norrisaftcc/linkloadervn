@@ -275,13 +275,30 @@ def _parse_choice(lines: list[_Line], idx: int, indent: int, pos: Pos):
         raise _err(lines[idx], "BadIndent", "unexpected indent inside `choice`")
     if not options:
         raise _err(lines[idx], "EmptyChoice", "`choice` has no options")
-    if all(o.condition is not None for o in options):
+    if not any(o.condition is None or _true_at_defaults(o.condition) for o in options):
         raise _err(
             lines[idx - len(options)],
             "UnreachableChoice",
-            "every option in this `choice` is guarded by `if`; the menu could be empty",
+            "no option in this `choice` is open when every flag is at its default; "
+            "the menu could be empty",
         )
     return ChoiceStmt(options=tuple(options), pos=pos), idx
+
+
+def _true_at_defaults(cond: Condition) -> bool:
+    """Evaluate a condition as a fresh playthrough would: every flag unset,
+    so it reads as false (and as 0 in an ordering comparison). Equality is
+    type-strict, as in the player and the web runner."""
+    value = False
+    if cond.op == "truthy":
+        return False
+    if cond.op == "not":
+        return True
+    if cond.op == "==":
+        return type(value) is type(cond.value) and value == cond.value
+    if cond.op == "!=":
+        return not (type(value) is type(cond.value) and value == cond.value)
+    return {">=": 0 >= cond.value, "<=": 0 <= cond.value, ">": 0 > cond.value, "<": 0 < cond.value}[cond.op]
 
 
 def _parse_if(lines: list[_Line], idx: int, indent: int, cond: Condition, pos: Pos):

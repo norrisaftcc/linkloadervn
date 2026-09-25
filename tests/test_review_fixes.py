@@ -137,3 +137,32 @@ def test_unrelated_value_error_is_not_swallowed(monkeypatch):
         action.set_defaults(func=boom)
     with pytest.raises(ValueError):
         cli.main(["check", "story/"])
+
+
+@pytest.mark.parametrize(
+    "guard",
+    ["not met_clipi", "met_clipi == false", "trust == false", "trust <= 0", "trust != 1"],
+)
+def test_all_guarded_choice_open_at_defaults_is_allowed(tmp_path, guard):
+    path = _scene(tmp_path, f'== start\nchoice\n    "A" -> start [if {guard}]\n')
+    parse_file(path)
+
+
+@pytest.mark.parametrize("guard", ["met_clipi", "trust >= 1", "trust == 0", "met_clipi == true"])
+def test_all_guarded_choice_closed_at_defaults_is_rejected(tmp_path, guard):
+    path = _scene(tmp_path, f'== start\nchoice\n    "A" -> start [if {guard}]\n')
+    with pytest.raises(ParseError) as exc:
+        parse_file(path)
+    assert exc.value.code == "UnreachableChoice"
+
+
+def test_player_equality_is_type_strict():
+    from linkloader.model import Condition
+    from linkloader.player import Player
+
+    p = Player.__new__(Player)
+    p.flags = {"met": True, "trust": 1}
+    assert not p._eval_condition(Condition(flag="met", op="==", value=1))
+    assert p._eval_condition(Condition(flag="met", op="!=", value=1))
+    assert p._eval_condition(Condition(flag="trust", op="==", value=1))
+    assert not p._eval_condition(Condition(flag="trust", op="==", value=True))

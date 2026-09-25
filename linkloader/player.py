@@ -84,10 +84,12 @@ class Player:
         if cond.op == "not":
             return not value
         other = cond.value
+        # Type-strict, like === in the web runner: true is not 1.
+        same = type(value) is type(other) and value == other
         if cond.op == "==":
-            return value == other
+            return same
         if cond.op == "!=":
-            return value != other
+            return not same
         # >=, <=, >, < all need an int on the left; unset flags default to 0
         # for numeric comparisons, since they default to False (falsy).
         left = value if isinstance(value, int) and not isinstance(value, bool) else 0

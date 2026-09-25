@@ -311,6 +311,27 @@ def test_save_and_continue_survives_reload(page, base_url):
     assert label_after == label_before
 
 
+def test_save_is_a_scene_entry_snapshot(page, base_url):
+    """A reload replays the scene from its start with the flags, Fate and
+    dice state it had on entry, so nothing in the scene applies twice."""
+    goto(page, base_url)
+    page.wait_for_selector("#dialogue-box", state="visible")
+    saved = page.evaluate("() => JSON.parse(localStorage.getItem('linkloader-save-v1'))")
+    assert isinstance(saved["rngState"], int)
+    entry_flags = saved["flags"]
+
+    # Change flags and dice mid-scene; the save must not move.
+    page.evaluate(
+        "() => { const g = window.__linkloaderGame; g.flags.probe = 7; g.rng(); g.rng(); }"
+    )
+    after = page.evaluate("() => JSON.parse(localStorage.getItem('linkloader-save-v1'))")
+    assert after == saved
+    page.reload()
+    page.wait_for_selector("#dialogue-box, #choices-wrap", state="visible")
+    flags = page.evaluate("() => window.__linkloaderGame.flags")
+    assert flags == entry_flags
+
+
 def test_no_horizontal_scroll_at_mobile_width(browser, base_url):
     ctx = browser.new_context(viewport={"width": 390, "height": 844})
     page = ctx.new_page()
