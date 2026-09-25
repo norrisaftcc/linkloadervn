@@ -3,6 +3,7 @@
     python -m linkloader check story/
     python -m linkloader export story/ -o build/story.json
     python -m linkloader play story/ [--seed N] [--script inputs.txt]
+    python -m linkloader build story/ -o dist/
 """
 
 from __future__ import annotations
@@ -12,6 +13,7 @@ import json
 import sys
 from pathlib import Path
 
+from .build import BuildError, build as run_build
 from .errors import LinkLoaderError, ParseError, ValidationError
 from .exporter import export_story
 from .loader import load_cast_and_assets, load_story
@@ -114,6 +116,26 @@ def cmd_play(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_build(args: argparse.Namespace) -> int:
+    story_dir = Path(args.story_dir)
+    root = Path(args.root) if args.root else Path.cwd()
+    out_dir = Path(args.output)
+    try:
+        report = run_build(story_dir, out_dir, root)
+    except (LinkLoaderError, BuildError) as e:
+        print(str(e), file=sys.stderr)
+        return 1
+
+    for w in report["warnings"]:
+        print(f"warning: {w}")
+    print(
+        f"OK: built {report['scenes']} scene(s), "
+        f"{len(report['puzzle_ids'])} puzzle(s), "
+        f"{report['assets_copied']} asset(s) -> {out_dir}"
+    )
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="python -m linkloader")
     parser.add_argument(
@@ -141,6 +163,11 @@ def build_parser() -> argparse.ArgumentParser:
     p_play.add_argument("--cowboy", type=int, default=0)
     p_play.add_argument("--coder", type=int, default=0)
     p_play.set_defaults(func=cmd_play)
+
+    p_build = sub.add_parser("build", help="build the static web game into a dist/ folder")
+    p_build.add_argument("story_dir")
+    p_build.add_argument("-o", "--output", required=True)
+    p_build.set_defaults(func=cmd_build)
 
     return parser
 
