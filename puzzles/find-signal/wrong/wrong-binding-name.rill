@@ -1,0 +1,11 @@
+;; Wrong: correct logic, wrong name. The puzzle requires the function
+;; be named `find-signal`. Must FAIL: tests.scm calls `find-signal` in
+;; the sandbox and gets an undefined-variable error, which crashes the
+;; check process with a nonzero exit code.
+(stake locate-signal
+  (rig (chain-in)
+    (reckon (husk? chain-in)
+            (seal fen)
+            (reckon (same? (hesh chain-in) (seal voth))
+                    (locate-signal (tull chain-in))
+                    (hesh chain-in)))))

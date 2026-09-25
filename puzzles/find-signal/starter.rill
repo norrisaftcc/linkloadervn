@@ -1,0 +1,9 @@
+;; find-signal — fill in the blanks, then save this as answer.rill.
+
+(stake find-signal
+  (rig (chain-in)
+    (reckon (husk? chain-in)
+            ___
+            (reckon (same? (hesh chain-in) ___)
+                    (find-signal (tull chain-in))
+                    (hesh chain-in)))))

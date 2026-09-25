@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LinkLoader Style Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+  /* One deliberate look: warm paper, like a Pelican cover. The guide is
+     the brand, so it does not switch to a dark theme. Every colour is set
+     explicitly, so the page reads the same on any host background. */
+  :root {
+    color-scheme: light;
+    --paper: #F3EDDC;
+    --paper-deep: #EAE0C4;
+    --ink: #1A1A1A;
+    --ink-soft: #4A463C;
+    --white: #FFFFFF;
+    --teal: #1B4D5C;
+    --orange: #B84A25;
+    --magenta: #951655;
+    --ochre: #8A6415;
+    --display: "Space Grotesk", "IBM Plex Sans", system-ui, sans-serif;
+    --body: "IBM Plex Sans", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "Courier New", monospace;
+    --measure: 66ch;
+    --radius: 2px;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--paper); }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 1rem/1.6 var(--body);
+    padding-inline: 16px;
+    padding-block: 0 4rem;
+  }
+  a { color: var(--teal); text-underline-offset: 3px; }
+  a:hover { color: var(--orange); }
+  :focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
+  code, pre, kbd { font-family: var(--mono); font-size: 0.9em; }
+  h1, h2, h3 { font-family: var(--display); line-height: 1.15; text-wrap: balance; margin: 0; }
+  h2 { font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.2rem); font-weight: 700; }
+  h3 { font-size: 1.2rem; font-weight: 700; }
+  p { margin: 0; }
+  .wrap { max-width: 1080px; margin-inline: auto; }
+  .prose { max-width: var(--measure); display: grid; gap: 0.9rem; }
+  .eyebrow {
+    font: 500 0.78rem/1 var(--mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+
+  /* Masthead: one flat plate and one mark, as on a Pelican cover. */
+  .masthead {
+    margin-inline: -16px;
+    background: var(--teal);
+    color: var(--paper);
+    padding-inline: 16px;
+    padding-block: calc(env(safe-area-inset-top, 0px) + 2.5rem) 2.5rem;
+    border-bottom: 6px solid var(--orange);
+  }
+  .masthead .wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 2rem;
+    align-items: center;
+  }
+  .masthead .eyebrow { color: var(--paper-deep); }
+  .masthead h1 {
+    font-size: clamp(2.4rem, 1.6rem + 4vw, 4.6rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-block: 0.6rem 1rem;
+  }
+  .masthead p { max-width: 52ch; color: var(--paper-deep); font-size: 1.08rem; }
+  .masthead .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+  .mark { width: clamp(120px, 20vw, 220px); height: auto; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font: 500 0.9rem/1 var(--display);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.8rem 1.1rem; border-radius: var(--radius);
+    text-decoration: none; border: 2px solid transparent; cursor: pointer;
+  }
+  .btn-orange { background: var(--orange); color: var(--white); }
+  .btn-orange:hover { background: var(--ink); color: var(--white); }
+  .btn-line { border-color: var(--paper-deep); color: var(--paper); background: transparent; }
+  .btn-line:hover { background: var(--paper); color: var(--teal); }
+
+  nav.toc {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 2;
+    margin-inline: -16px; padding-inline: 16px;
+    background: var(--paper); border-bottom: 1px solid var(--ink);
+  }
+  nav.toc ul {
+    list-style: none; margin: 0 auto; padding: 0.7rem 0; max-width: 1080px;
+    display: flex; gap: 1.25rem; overflow-x: auto; white-space: nowrap;
+    font: 500 0.82rem/1 var(--display); letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  nav.toc a { color: var(--ink); text-decoration: none; }
+  nav.toc a:hover { color: var(--orange); }
+
+  section { padding-block: 4rem 0; }
+  section > .wrap { display: grid; gap: 1.75rem; }
+  .section-head { display: grid; gap: 0.6rem; border-top: 3px solid var(--ink); padding-top: 1rem; }
+
+  /* Two strata diagram */
+  .strata { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 0; border: 2px solid var(--ink); }
+  .stratum { padding: 1.5rem; display: grid; gap: 0.6rem; align-content: start; }
+  .stratum.outer { background: var(--paper-deep); }
+  .stratum.inner {
+    background: var(--white);
+    background-image: radial-gradient(var(--ink) 0.9px, transparent 1.1px);
+    background-size: 6px 6px;
+    border-left: 2px solid var(--ink);
+  }
+  .stratum.inner > * { background: var(--white); padding: 0.1rem 0.3rem; justify-self: start; }
+  .stratum.inner h3 { font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.04em; border: 2px solid var(--ink); }
+  @media (max-width: 660px) { .stratum.inner { border-left: 0; border-top: 2px solid var(--ink); } }
+
+  .board { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+  .board th, .board td { text-align: left; vertical-align: top; padding: 0.7rem 0.8rem 0.7rem 0; border-bottom: 1px solid var(--ink); }
+  .board th { font: 500 0.75rem/1.2 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); }
+  .board td:first-child { font-weight: 600; width: 32%; }
+  .scroll { overflow-x: auto; }
+
+  /* Palette */
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 1rem; }
+  .swatch { border: 2px solid var(--ink); display: grid; grid-template-rows: 7.5rem auto; }
+  .swatch .chip { display: flex; align-items: flex-end; padding: 0.7rem; font: 700 1.5rem/1 var(--display); }
+  .swatch .meta { padding: 0.8rem; display: grid; gap: 0.25rem; background: var(--paper); border-top: 2px solid var(--ink); }
+  .swatch .meta b { font-family: var(--display); }
+  .swatch .meta code { color: var(--ink-soft); font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+  .swatch .meta span { font-size: 0.88rem; }
+  .rule-box {
+    border: 2px solid var(--magenta); padding: 1.1rem 1.25rem; display: grid; gap: 0.5rem; max-width: var(--measure);
+  }
+  .rule-box .tag { justify-self: start; background: var(--magenta); color: var(--white); font: 500 0.75rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; padding: 0.4rem 0.55rem; }
+  .figure-halo { display: grid; gap: 0.6rem; }
+  .figure-halo img { width: 100%; max-width: 760px; border: 2px solid var(--ink); display: block; }
+  .caption { font-size: 0.88rem; color: var(--ink-soft); max-width: var(--measure); }
+
+  /* Type */
+  .type-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 1rem; }
+  .face { border-top: 2px solid var(--ink); padding-top: 1rem; display: grid; gap: 0.6rem; align-content: start; }
+  .face .sample { font-size: 2.4rem; line-height: 1.05; }
+  .face .role { font: 500 0.75rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); }
+  .face p:last-child { font-size: 0.92rem; }
+
+  .rules { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 0; border-top: 2px solid var(--ink); }
+  .rules li { padding: 1rem 1rem 1rem 0; border-bottom: 1px solid var(--ink); display: grid; gap: 0.35rem; }
+  .rules li b { font-family: var(--display); font-size: 1.05rem; }
+
+  /* Components: screenshot + rule */
+  .component { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 1.75rem; align-items: start; border-top: 1px solid var(--ink); padding-top: 1.5rem; }
+  .component + .component { margin-top: 1rem; }
+  .shots { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 1fr); gap: 0.75rem; align-items: start; }
+  .shots img { width: 100%; height: auto; display: block; border: 2px solid var(--ink); background: var(--paper-deep); }
+  .shots figcaption { font: 400 0.72rem/1.3 var(--mono); color: var(--ink-soft); margin-top: 0.3rem; }
+  .component .text { display: grid; gap: 0.75rem; }
+  .component .text ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.35rem; }
+  .play-link { font: 500 0.85rem/1 var(--display); letter-spacing: 0.05em; text-transform: uppercase; }
+  @media (max-width: 820px) { .component { grid-template-columns: 1fr; } }
+
+  /* Writing */
+  .grid-puzzle {
+    background-color: var(--paper);
+    background-image: radial-gradient(rgba(26,26,26,0.14) 1px, transparent 1.2px);
+    background-size: 14px 14px;
+  }
+  .rule-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 1.5rem; }
+  .rule-cols ol { margin: 0; padding-left: 1.3rem; display: grid; gap: 0.4rem; }
+  .ba { width: 100%; border-collapse: collapse; }
+  .ba th, .ba td { text-align: left; vertical-align: top; padding: 0.8rem 1rem 0.8rem 0; border-bottom: 1px solid var(--ink); }
+  .ba th { font: 500 0.75rem/1.2 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; }
+  .ba th:nth-child(2) { color: var(--magenta); }
+  .ba th:nth-child(3) { color: var(--teal); }
+  .ba td:first-child { font: 500 0.78rem/1.3 var(--mono); color: var(--ink-soft); width: 7rem; }
+  .ba td:nth-child(2) { color: var(--ink-soft); }
+  .ba td:nth-child(3) { font-weight: 500; }
+
+  .copyblock { border: 2px solid var(--ink); background: var(--ink); color: var(--paper); }
+  .copyblock header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.7rem 0.9rem; border-bottom: 1px solid #3a3a3a; }
+  .copyblock header span { font: 500 0.78rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper-deep); }
+  .copyblock pre { margin: 0; padding: 1rem 0.9rem; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 0.86rem; line-height: 1.55; max-height: 34rem; }
+  .copy-btn { font: 500 0.78rem/1 var(--display); letter-spacing: 0.06em; text-transform: uppercase; background: var(--orange); color: var(--white); border: 0; border-radius: var(--radius); padding: 0.55rem 0.8rem; cursor: pointer; }
+  .copy-btn:hover { background: var(--paper); color: var(--ink); }
+
+  .open-list { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.5rem; max-width: var(--measure); }
+  footer { margin-top: 4rem; border-top: 3px solid var(--ink); padding-top: 1rem; font-size: 0.88rem; color: var(--ink-soft); }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
+
+  @media (max-width: 560px) {
+    .masthead .wrap { grid-template-columns: 1fr; }
+    .mark { width: 110px; order: -1; }
+    .shots { grid-template-columns: minmax(0, 1fr); }
+    .shots figure:last-child { max-width: 60%; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Style guide · v0.1</p>
+      <h1>LinkLoader</h1>
+      <p>A sci-fi western about a coder who fixes machines on a desert moon. This guide turns one Pinterest board of Pelican covers into rules for its screens and its words, then shows each rule in the running game.</p>
+      <div class="actions">
+        <a class="btn btn-orange" href="../index.html" data-runner>Play the game</a>
+        <a class="btn btn-line" href="#instructions">Project instructions</a>
+      </div>
+    </div>
+    <!-- The Rill mark: one s-expression, as big as a cover. -->
+    <svg class="mark" viewBox="0 0 220 220" role="img" aria-label="The Rill mark: a pair of parentheses around a dot">
+      <rect x="0" y="0" width="220" height="220" fill="#F3EDDC"/>
+      <path d="M78 34 C 40 70, 40 150, 78 186" fill="none" stroke="#B84A25" stroke-width="18" stroke-linecap="butt"/>
+      <path d="M142 34 C 180 70, 180 150, 142 186" fill="none" stroke="#B84A25" stroke-width="18" stroke-linecap="butt"/>
+      <circle cx="110" cy="110" r="22" fill="#1B4D5C"/>
+    </svg>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sections">
+  <ul>
+    <li><a href="#origin">Origin</a></li>
+    <li><a href="#palette">Palette</a></li>
+    <li><a href="#type">Type</a></li>
+    <li><a href="#shape">Shape</a></li>
+    <li><a href="#screens">In the game</a></li>
+    <li><a href="#sprites">Sprites</a></li>
+    <li><a href="#inner">Inner stratum</a></li>
+    <li><a href="#writing">Writing</a></li>
+    <li><a href="#instructions">Project instructions</a></li>
+    <li><a href="#tokens">Tokens</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<section id="origin">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Origin</p>
+      <h2>Two strata, one system</h2>
+    </div>
+    <div class="prose">
+      <p>The board and the game's own art pull in two directions. The board is flat, printed and calm. The game's sprites are airbrushed renders, and the story needs a place for strange, broken machine memory. The guide keeps both by giving each a job.</p>
+    </div>
+    <div class="strata">
+      <div class="stratum outer">
+        <p class="eyebrow">Outer stratum</p>
+        <h3>Pelican modernism</h3>
+        <p>Everything the player uses: the dialogue box, choices, dice, the puzzle editor, menus and docs. Flat geometric shapes, one clean sans, a short palette on warm paper.</p>
+      </div>
+      <div class="stratum inner">
+        <p class="eyebrow">Inner stratum</p>
+        <h3>Mainframe comic ink</h3>
+        <p>Only for found documents inside the story: Clipi's corrupted memory, old Company bulletins, salvage-yard signs. Halftone, heavy line, comic lettering.</p>
+      </div>
+    </div>
+    <div class="scroll">
+      <table class="board">
+        <thead><tr><th>From the board</th><th>What it gave the system</th></tr></thead>
+        <tbody>
+          <tr><td>Pelican covers: <i>The Spell of Mathematics</i>, the probability-dice grid</td><td>Flat colour plates and one graphic idea per screen. A visible grid is allowed as decoration.</td></tr>
+          <tr><td>The atom-eye poster</td><td>One mark can carry a whole cover. That became the Rill mark above: one s-expression, drawn large.</td></tr>
+          <tr><td>Munari, <i>Design as Art</i></td><td>Design as a set of rules someone else can follow. That is why every rule here names a value, not a feeling.</td></tr>
+          <tr><td>The two mainframe comics</td><td>A second voice, not a second palette: what a document found inside the fiction looks like.</td></tr>
+          <tr><td>Touretzky, <i>Common Lisp</i></td><td>Parentheses, s-expressions and a dot lattice as honest puzzle decoration.</td></tr>
+          <tr><td><i>Spiral Dynamics</i></td><td>Not its rainbow. Its idea that each stage includes the last: a solved puzzle stays visible in the next one.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="palette">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Palette</p>
+      <h2>Seven colours, each with a job</h2>
+    </div>
+    <div class="prose">
+      <p>Paper and ink carry the page. Each accent belongs to a character or a kind of machine, so colour tells the player who is speaking before they read the name. Every pair below that carries body text passes WCAG AA at 4.5:1 or better.</p>
+    </div>
+    <div class="swatches">
+      <div class="swatch"><div class="chip" style="background:#F3EDDC;color:#1A1A1A">Aa</div><div class="meta"><b>Paper</b><code>--color-paper · #F3EDDC</code><span>Page and panel ground. Warmer than a lab white, to read as desert.</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#EAE0C4;color:#1A1A1A">Aa</div><div class="meta"><b>Deep paper</b><code>--color-paper-deep · #EAE0C4</code><span>A panel that sits behind the page: the dialogue box, an inset.</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#1A1A1A;color:#F3EDDC">Aa</div><div class="meta"><b>Ink</b><code>--color-ink · #1A1A1A</code><span>Body text and rules. 14.9:1 on paper.</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#1B4D5C;color:#FFFFFF">Aa</div><div class="meta"><b>Teal</b><code>--color-teal · #1B4D5C</code><span>The Terminal, the Company, anything machine-cool. 7.9:1 on paper.</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#B84A25;color:#FFFFFF">Aa</div><div class="meta"><b>Orange</b><code>--color-orange · #B84A25</code><span>Slim, desert warmth, the one action you want pressed.</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#951655;color:#FFFFFF">Aa</div><div class="meta"><b>Magenta</b><code>--color-magenta · #951655</code><span>Clipi, glitches, danger. A flat fill only; see the rule below.</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#8A6415;color:#FFFFFF">Aa</div><div class="meta"><b>Ochre</b><code>--color-ochre · #8A6415</code><span>Cargo Bot, sand, rust. 4.6:1 on paper: dusty on purpose.</span></div></div>
+    </div>
+    <div class="rule-box">
+      <span class="tag">Hard rule</span>
+      <h3>Magenta is a flat fill, never a glow</h3>
+      <p>Use magenta only as solid text, a solid badge, or a solid rule. Never as a shadow, an outer glow, a gradient or an edge. Set the background and the text colour together on every chip, so a badge never loses its fill and becomes unreadable.</p>
+      <p>The rule exists because of a real bug, shown under <a href="#sprites">Sprites</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section id="type">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Type</p>
+      <h2>Three faces, all free</h2>
+    </div>
+    <div class="type-grid">
+      <div class="face">
+        <p class="role">Display · headings</p>
+        <p class="sample" style="font-family:var(--display);font-weight:700">Space Grotesk</p>
+        <p>Geometric and a little mechanical. It reads as a 1968 terminal without turning into chrome science fiction.</p>
+      </div>
+      <div class="face">
+        <p class="role">Body · everything you read</p>
+        <p class="sample" style="font-family:var(--body)">IBM Plex Sans</p>
+        <p>Humanist and legible at small sizes. The IBM name is a quiet joke in a mainframe story.</p>
+      </div>
+      <div class="face">
+        <p class="role">Mono · anything a machine emitted</p>
+        <p class="sample" style="font-family:var(--mono);font-size:2rem">(hesh roster)</p>
+        <p>IBM Plex Mono, for Rill code, terminal output and corrupted logs. A human character never speaks in mono.</p>
+      </div>
+    </div>
+    <p class="caption">Scale: a 1.25 ratio from a 16 px base (10, 13, 16, 20, 25, 31, 39 px). Spacing: a 4 px grid. Corners: 2 px.</p>
+  </div>
+</section>
+
+<section id="shape">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Shape</p>
+      <h2>Six rules for composition</h2>
+    </div>
+    <ul class="rules">
+      <li><b>Flat shapes, hard edges.</b><span>No drop shadows, bevels or soft gradients. A shape is one flat colour plate.</span></li>
+      <li><b>One graphic idea per screen.</b><span>Pick the one shape that carries the moment: a background, a character, or a panel.</span></li>
+      <li><b>Thick, even outlines.</b><span>Redrawn or vector art uses one heavy line weight, like the atom-eye poster.</span></li>
+      <li><b>A grid may show.</b><span>The puzzle panel sits on a faint grid. It is decoration, and it never lowers legibility.</span></li>
+      <li><b>No rainbow systems.</b><span>Colour marks who or what, never a level or a rank.</span></li>
+      <li><b>Accretion, not replacement.</b><span>A solved puzzle stays visible, folded into the next panel.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="screens">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">In the game</p>
+      <h2>Each rule, on a real screen</h2>
+    </div>
+    <div class="prose">
+      <p>These are screenshots of the current build, at desktop and phone width. Each one links to the playable game, so you can check the rule against the real thing.</p>
+    </div>
+
+    <article class="component">
+      <div class="shots">
+        <figure><img src="shots/dialogue.jpg" alt="Slim on a night desert, with a narration line in a paper panel below" width="1100" height="760"><figcaption>Desktop</figcaption></figure>
+        <figure><img src="shots/dialogue-phone.jpg" alt="The same beat at phone width" width="390" height="844"><figcaption>Phone</figcaption></figure>
+      </div>
+      <div class="text">
+        <h3>Dialogue box</h3>
+        <ul>
+          <li>Flat deep-paper panel, ink text in Plex Sans.</li>
+          <li>A thick rule along the top edge only. A full coloured border on every box gets loud.</li>
+          <li>The speaker's name in Space Grotesk capitals, on a filled chip with white text.</li>
+          <li>The rule says the top edge and the chip take the speaker's accent colour. Today both are always orange; see <a href="#tokens">Still open</a>.</li>
+        </ul>
+        <a class="play-link" href="../index.html" data-runner>Open in the game →</a>
+      </div>
+    </article>
+
+    <article class="component">
+      <div class="shots">
+        <figure><img src="shots/choices.jpg" alt="A list of three choices under the scene" width="1100" height="760"><figcaption>Desktop</figcaption></figure>
+        <figure><img src="shots/choices-phone.jpg" alt="The choice list at phone width" width="390" height="844"><figcaption>Phone</figcaption></figure>
+      </div>
+      <div class="text">
+        <h3>Choices</h3>
+        <ul>
+          <li>A flat list with a 1 px ink rule under each row. No card shadows.</li>
+          <li>The hovered or selected row gets a solid orange bar on its left edge, never a full-row fill.</li>
+          <li>Number keys pick a choice, so the list also shows its numbers.</li>
+        </ul>
+        <a class="play-link" href="../index.html" data-runner>Open in the game →</a>
+      </div>
+    </article>
+
+    <article class="component">
+      <div class="shots">
+        <figure><img src="shots/check.jpg" alt="A dice check: four dice showing minus, minus, plus, plus; cowboy plus 2 against 2, a tie" width="1100" height="760"><figcaption>Desktop</figcaption></figure>
+        <figure><img src="shots/check-phone.jpg" alt="The dice check at phone width" width="390" height="844"><figcaption>Phone</figcaption></figure>
+      </div>
+      <div class="text">
+        <h3>Dice check</h3>
+        <ul>
+          <li>Four Fate dice as flat squares: orange for minus, teal for plus, ink for blank.</li>
+          <li>The whole sum is written out in mono, so a student can check the arithmetic.</li>
+          <li>One primary action (Continue) in teal; the reroll, which costs a Fate point, is an outline button.</li>
+        </ul>
+        <a class="play-link" href="../index.html" data-runner>Open in the game →</a>
+      </div>
+    </article>
+
+    <article class="component">
+      <div class="shots">
+        <figure><img src="shots/puzzle.jpg" alt="The Rill puzzle panel on a dot grid, with the prompt, an editor, and a failed check result" width="1100" height="760"><figcaption>Desktop</figcaption></figure>
+        <figure><img src="shots/puzzle-phone.jpg" alt="The puzzle panel at phone width" width="390" height="844"><figcaption>Phone</figcaption></figure>
+      </div>
+      <div class="text">
+        <h3>Puzzle panel</h3>
+        <ul>
+          <li>The panel sits on a faint square grid, printed at 8% so it never lowers legibility. The code sits on ink, in mono.</li>
+          <li>Results say exactly what came back and what was expected. A failure is plain text, never a red squiggle or a glow.</li>
+          <li>The attempt count and Fate points stay in view, because they are the stakes.</li>
+        </ul>
+        <a class="play-link" href="../index.html" data-runner>Open in the game →</a>
+      </div>
+    </article>
+
+    <article class="component">
+      <div class="shots">
+        <figure><img src="shots/lexicon.jpg" alt="The lexicon panel open under the puzzle, with tables of grammar roots and theme words" width="1100" height="760"><figcaption>Desktop</figcaption></figure>
+        <figure><img src="shots/lexicon-phone.jpg" alt="The lexicon at phone width" width="390" height="844"><figcaption>Phone</figcaption></figure>
+      </div>
+      <div class="text">
+        <h3>Lexicon</h3>
+        <ul>
+          <li>Two plain tables: grammar roots (with the Scheme word each one stands for) and theme words.</li>
+          <li>It opens under the puzzle and never clears what the player typed.</li>
+          <li>A table is the right shape here. Nothing is a card.</li>
+        </ul>
+        <a class="play-link" href="../index.html" data-runner>Open in the game →</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="sprites">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Sprites</p>
+      <h2>The bug behind the magenta rule</h2>
+    </div>
+    <div class="prose">
+      <p>The character art was cut out of a magenta background. Every cut-out kept a magenta rim or glow along its edge, and on a dark scene it showed as a pink halo. A tool in the repository, <code>despill.py</code>, finds magenta that touches the transparent outside of a sprite and removes it. Magenta that the art itself encloses, such as Clipi's screen band, stays.</p>
+    </div>
+    <figure class="figure-halo">
+      <img src="shots/halo.jpg" alt="Four sprites over a dark background: the top row shows pink halos around each silhouette; the bottom row shows the same sprites with clean edges" width="1000" height="500">
+      <figcaption class="caption">Top: as shipped. Bottom: after the fix. The pale yellow haze on the terminal is intended CRT glow, so it stays.</figcaption>
+    </figure>
+    <div class="prose">
+      <p>The next step for the art is a duotone pass: shadows mapped to ink, highlights to the character's accent (Slim orange, the Terminal teal, Clipi magenta, Cargo Bot ochre), set in front of one flat deep-paper plate. That makes the airbrushed renders sit inside the flat system. It is not done yet.</p>
+    </div>
+  </div>
+</section>
+
+<section id="inner">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Inner stratum</p>
+      <h2>Clipi's memory, and Clipi's room</h2>
+    </div>
+    <div class="prose">
+      <p>Two scenes leave the ordinary game view for a second visual mode, set with a <code>mode inner</code> line at the top of the scene (see <code>docs/scene-format.md</code>). Everywhere else, the game is the default stratum shown above. In these two, three rules change at once: a dot-halftone overlay and low scanlines over the stage, a heavier ink rule on the dialogue box, and choices drawn as flat tiles instead of a plain list.</p>
+    </div>
+
+    <article class="component">
+      <div class="shots">
+        <figure><img src="shots/found-document.jpg" alt="Clipi's screen alone on stage, with a found log line quoted verbatim in the dialogue box below" width="1100" height="760"><figcaption>Desktop</figcaption></figure>
+        <figure><img src="shots/found-document-phone.jpg" alt="The same beat at phone width" width="390" height="844"><figcaption>Phone</figcaption></figure>
+      </div>
+      <div class="text">
+        <h3>Found document</h3>
+        <ul>
+          <li>Clipi reads a corrupted memory log back verbatim, in file order, line by line: no narration, no reaction from Clipi beyond the words themselves.</li>
+          <li>Clipi is alone on stage. Every other character is hidden, so nothing competes with the words.</li>
+          <li>The heavier top rule on the dialogue box shows plainly. The halftone and scanlines read faint over photographic art like this.</li>
+        </ul>
+        <a class="play-link" href="../index.html" data-runner>Open in the game →</a>
+      </div>
+    </article>
+
+    <article class="component">
+      <div class="shots">
+        <figure><img src="shots/room.jpg" alt="A flat ink-line room: a chest of drawers, a round window that reads as an eye, and a door, all under a visible halftone dot grid" width="1100" height="760"><figcaption>Desktop</figcaption></figure>
+        <figure><img src="shots/room-phone.jpg" alt="The same room at phone width, with the same choice tiles" width="390" height="844"><figcaption>Phone</figcaption></figure>
+      </div>
+      <div class="text">
+        <h3>The room</h3>
+        <ul>
+          <li>Clipi's interior during the reboot: a chest of drawers (the <code>count-herd</code> puzzle), a round window that reads as an eye, and a door. No character stands in it. Clipi is the room, and speaks only as a voice.</li>
+          <li>It appears once, between the found document and the confrontation, and its door leads out.</li>
+          <li>Choices render as flat labeled tiles here instead of a plain list, each with a heavier left rule.</li>
+          <li>Over this flat ink-line art, the halftone and scanlines read clearly at both widths, unlike over the photographic stage art above. The dot grid stays legible at 390px; it does not blur into noise on a phone screen.</li>
+        </ul>
+        <a class="play-link" href="../index.html" data-runner>Open in the game →</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="writing" class="grid-puzzle">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Writing</p>
+      <h2>Plain for instructions, precise for story</h2>
+    </div>
+    <div class="prose">
+      <p>Two sources, for two jobs. Anything a reader must act on correctly the first time follows Simplified Technical English and Orwell. Dialogue and scene text take Gene Wolfe and Jack Vance as touchstones: their precision, not their difficulty.</p>
+    </div>
+    <div class="rule-cols">
+      <div>
+        <h3>Simplified Technical English</h3>
+        <ol>
+          <li>One instruction per sentence.</li>
+          <li>Active voice.</li>
+          <li>Present tense for how things work; imperative for what to do.</li>
+          <li>Instructions under 20 words; description under 25.</li>
+          <li>Use the same word for the same thing, every time.</li>
+          <li>Write the steps in the order the reader does them.</li>
+        </ol>
+      </div>
+      <div>
+        <h3>Orwell's six rules</h3>
+        <ol>
+          <li>Never use a figure of speech you have seen in print.</li>
+          <li>Never use a long word where a short one will do.</li>
+          <li>If a word can be cut, cut it.</li>
+          <li>Never use the passive where you can use the active.</li>
+          <li>Never use jargon if an everyday word will do.</li>
+          <li>Break any of these rules sooner than write something barbarous.</li>
+        </ol>
+      </div>
+      <div>
+        <h3>Wolfe and Vance, for story only</h3>
+        <ol>
+          <li>One exact detail, not three adjectives.</li>
+          <li>Never explain the world to the reader.</li>
+          <li>One unusual word where it counts, not five.</li>
+          <li>This licence stops at the fourth wall: a button label or an error message is always plain.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="scroll">
+      <table class="ba">
+        <thead><tr><th>Where</th><th>Before</th><th>After</th></tr></thead>
+        <tbody>
+          <tr><td>UI text</td><td>You are able to proceed to the next available terminal whenever you are ready to do so.</td><td>Go to the next terminal.</td></tr>
+          <tr><td>UI text</td><td>An error has occurred while attempting to save your progress.</td><td>Save failed. Try again.</td></tr>
+          <tr><td>Puzzle prompt</td><td>It should be noted that recursion will be necessary in order to solve this particular puzzle, as loops are not a construct that exists within the Rill language.</td><td>Rill has no loops. Use recursion.</td></tr>
+          <tr><td>Puzzle prompt</td><td>In the event that the chain is found to be empty, the correct behavior is for your function to return the symbol fen.</td><td>If the chain is empty, return <code>fen</code>.</td></tr>
+          <tr><td>Dialogue</td><td>Well now, partner, I reckon this here link loader's about as broken as broken gets, on account of the CDR rustlers having gotten to it first.</td><td>Rustlers got to it first. Look at the <code>tull</code>: stripped clean.</td></tr>
+          <tr><td>Dialogue</td><td>I have detected an anomaly in the current data stream. Would you like me to run a diagnostic?</td><td>there was a — hold on — there was a shape in the — run it again, Slim. run it again.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="instructions">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Project instructions</p>
+      <h2>Paste this into an AI project</h2>
+    </div>
+    <div class="prose">
+      <p>This is the whole guide as instructions for an AI assistant, such as a Claude project or a custom GPT. Paste it as the project's instructions, and the assistant will write and design within the system. The repository uses the same rules in <code>AGENTS.md</code>.</p>
+    </div>
+    <div class="copyblock">
+      <header><span>Project instructions</span><button class="copy-btn" type="button" data-copy="instructions-text">Copy</button></header>
+<pre id="instructions-text">You help make LinkLoader, a sci-fi western visual novel with code puzzles. Follow these rules in everything you write or design.
+
+LOOK
+- Two strata. The interface (menus, dialogue box, choices, dice, puzzle panel, docs) is Pelican-book modernism: flat geometric shapes, one clean sans, a short palette on warm paper. Mainframe-comic ink (halftone, heavy line, comic lettering) is only for documents found inside the story, such as Clipi's corrupted memory.
+- Palette: paper #F3EDDC, deep paper #EAE0C4, ink #1A1A1A, teal #1B4D5C (the Terminal, the Company), orange #B84A25 (Slim), magenta #951655 (Clipi, glitches, danger), ochre #8A6415 (Cargo Bot). Use white #FFFFFF only for text on teal, orange or magenta.
+- Set the background and the text colour together on every chip or badge.
+- Magenta is a flat fill: solid text, a solid badge or a solid rule. Never a glow, shadow, gradient or edge.
+- Type: Space Grotesk for headings, IBM Plex Sans for body text, IBM Plex Mono for code and anything a machine emitted. A human character never speaks in mono.
+- Flat shapes and hard edges, 2 px corners. No drop shadows, bevels or soft gradients.
+- One graphic idea per screen. A faint grid may show as decoration.
+- Colour marks who or what. Never use rainbow gradients or colour by level.
+- Body text must reach 4.5:1 contrast.
+
+WORDS
+- For instructions, docs, UI labels, puzzle prompts and error messages, use Simplified Technical English and Orwell's six rules:
+  - One instruction per sentence. Active voice.
+  - Present tense for how things work; imperative for what to do.
+  - Instructions under 20 words; description under 25.
+  - Use the same word for the same thing every time.
+  - Cut every word you can. No stock phrases.
+- For dialogue and scene text, take Gene Wolfe and Jack Vance as touchstones:
+  - One exact detail, not three adjectives.
+  - Never explain the world to the reader.
+  - One unusual word where it counts, not five.
+- Never let story style into a button label, prompt or error message.
+
+WHEN UNSURE
+- Choose the plainer option.
+- Name the rule you followed if someone asks why.</pre>
+    </div>
+  </div>
+</section>
+
+<section id="tokens">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Tokens</p>
+      <h2>The same values, as CSS</h2>
+    </div>
+    <div class="prose">
+      <p>The game loads these from <code>docs/style/tokens.css</code>. Use the names, not the raw values, so a change in one place reaches every screen.</p>
+    </div>
+    <div class="copyblock">
+      <header><span>tokens.css</span><button class="copy-btn" type="button" data-copy="tokens-text">Copy</button></header>
+<pre id="tokens-text">:root {
+  --color-paper: #F3EDDC;
+  --color-paper-deep: #EAE0C4;
+  --color-ink: #1A1A1A;
+  --color-white: #FFFFFF;
+  --color-teal: #1B4D5C;     /* Terminal, the Company */
+  --color-orange: #B84A25;   /* Slim, desert */
+  --color-magenta: #951655;  /* Clipi, glitch: flat fill only */
+  --color-ochre: #8A6415;    /* Cargo Bot, sand */
+
+  --font-display: "Space Grotesk", "IBM Plex Sans", sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --text-xs: 0.64rem;  --text-sm: 0.8rem;   --text-base: 1rem;
+  --text-md: 1.25rem;  --text-lg: 1.563rem; --text-xl: 1.953rem;
+  --text-2xl: 2.441rem;
+
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+  --space-4: 1rem;    --space-5: 1.5rem; --space-6: 2rem;
+  --space-7: 3rem;    --space-8: 4rem;
+
+  --radius: 2px;
+  --rule-thin: 1px;
+  --rule-thick: 3px;
+}</pre>
+    </div>
+    <div class="section-head">
+      <p class="eyebrow">Still open</p>
+      <h3>What v0.2 needs</h3>
+    </div>
+    <ul class="open-list">
+      <li>Per-speaker colour in the dialogue box: the top rule and name chip should take Slim's orange, the Terminal's teal, Clipi's magenta or Cargo Bot's ochre. The game uses orange for everyone.</li>
+      <li>The duotone pass on the four main sprites, and new art or a duotone treatment for Cargo Bot and Syntax-4.</li>
+      <li>A finished Rill mark. The one at the top of this page is a first sketch.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>LinkLoader style guide v0.1. The source is <code>docs/style/brand.md</code> and <code>docs/style/writing.md</code>.</span>
+    <a href="../index.html" data-runner>Play the game →</a>
+  </div>
+</footer>
+
+<script>
+  // Copy buttons. Clipboard access can be refused; then select the text.
+  document.querySelectorAll("[data-copy]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var pre = document.getElementById(btn.getAttribute("data-copy"));
+      var text = pre.textContent;
+      function selectText() {
+        var range = document.createRange();
+        range.selectNodeContents(pre);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        btn.textContent = "Selected";
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () {
+          btn.textContent = "Copied";
+        }, selectText);
+      } else {
+        selectText();
+      }
+      setTimeout(function () { btn.textContent = "Copy"; }, 2000);
+    });
+  });
+</script>
+</body>
+</html>

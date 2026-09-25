@@ -1,0 +1,9 @@
+;; count-herd — fill in both blanks, then save this as answer.rill.
+
+(stake herd-count
+  (rig (chest)
+    (reckon (husk? chest)
+            0
+            (reckon (same? (hesh chest) (seal ___))
+                    (herd-count (tull chest))
+                    (sum 1 (herd-count ___))))))

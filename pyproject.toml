@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "linkloader"
+version = "0.1.0"
+description = "Scene format, parser, validator, and terminal player for the Link Loader revival."
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest", "pillow", "numpy", "scipy"]
+
+[tool.setuptools]
+packages = ["linkloader"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

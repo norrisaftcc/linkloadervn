@@ -1,0 +1,50 @@
+# story/03b-room.scene — bible.md spine, the room between the found
+# document and the confrontation. Per docs/plans/wave2.md section 2
+# and section 4 ("Room scenes"): Clipi's interior during the reboot,
+# a symptom that appears once. Clipi has no sprite here and speaks
+# only as `clipi:` lines; the room itself is the interface. All three
+# object beats live here: the chest (count-herd), the window
+# (flavor), the door (exit to confrontation, which sets its own bg).
+
+== clipi_room
+mode inner
+bg clipi_room
+hide slim
+hide terminal
+hide clipi
+hide cargo_bot
+> The floor holds. Drawers, a window, a door: none of it Clipi's, all of it Clipi.
+-> room_hub
+
+== room_hub
+mode inner
+choice
+    "Open the chest of drawers." -> room_chest [if not herd_done]
+    "Look out the window." -> room_window
+    "Go through the door." -> confrontation [if herd_done]
+
+== room_chest
+mode inner
+clipi: Top drawer first, Slim. Then whatever's still in the chest under it.
+puzzle count-herd
+    pass -> room_chest_pass
+    lockout -> room_chest_lockout
+
+== room_chest_pass
+set herd_done = true
+clipi: Counted clean. No wrecks left in that drawer.
+-> room_hub
+
+== room_chest_lockout
+set herd_done = true
+clipi: Leave it shut. I know what's in there now.
+-> room_hub
+
+== room_window
+mode inner
+if clipi_stable
+    > A strip of desert shows through the glass, sun flat on the salt pan.
+else
+    > The glass holds only static, grey and even as sand.
+clipi: You can stop looking at me through the eye. I already know you're there.
+-> room_hub

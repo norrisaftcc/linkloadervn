@@ -1,0 +1,59 @@
+# story/02-sabotage.scene — bible.md spine scene 3 (Signs of
+# sabotage). Kept lines are cited inline with their source. See
+# docs/canon/bible.md and docs/canon/kept.md.
+
+== sabotage_evidence
+bg desert_night
+> The tull coupling isn't broken. It's rerouted - spliced clean, no scorch, no strain. Whoever did this knew exactly which wire carried the towed half of the train.
+check cowboy vs 2
+    style -> tracked_expert
+    success -> tracked_ok
+    tie -> tracked_ok
+    fail -> tracked_missed
+
+== tracked_expert
+show slim talk left
+slim: Splice like that, someone worked this line before. Boots, not a drone.
+-> brand_choice
+
+== tracked_ok
+slim: Somebody's been here. Recently, and on purpose.
+-> brand_choice
+
+== tracked_missed
+> Slim misses the print in the dust. The cargo bot doesn't.
+cargo_bot: (Sh-query maintenance status sh-current sh-loader)
+-> brand_choice
+
+== brand_choice
+> Burned into the housing, under the splice: a seal, four words to a chain. (seal (kessa voth sil fen))
+choice
+    "Read the brand." -> brand_attempt
+    "Leave it. It isn't cargo." -> git_blame
+
+== brand_attempt
+puzzle read-brand
+    pass -> brand_read_pass
+    lockout -> brand_read_lockout
+
+== brand_read_pass
+set read_brand = true
+> Slim works the chain down to the third word, sil, and keeps it.
+-> git_blame
+
+== brand_read_lockout
+> The brand stays a jumble - kessa, voth, and no way through to the rest.
+-> git_blame
+
+== git_blame
+if not met_clipi
+    show terminal idle right
+    terminal: Patch requested. Routing co-pilot Clipi to this channel.
+    set met_clipi = true
+show clipi talk center
+# kept: script.rpy:309
+clipi: Running git blame on loader firmware... Last modifications made by user 'cdr_rustler42'.
+# kept: script.rpy:357
+slim: CDR rustlers! Those parenthesis-thieving varmints!
+> Not a jam. A theft, coupled clean into the chain like it belonged there.
+-> clipi_check

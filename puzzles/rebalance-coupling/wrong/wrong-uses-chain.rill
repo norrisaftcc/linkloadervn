@@ -1,0 +1,10 @@
+;; Wrong: uses chain in place of bind, so the head lands as one entry
+;; of a two-entry list next to the rebuilt rest, instead of spliced
+;; onto its front. Must FAIL: the result is nested, not flat.
+(stake rebalance
+  (rig (links)
+    (reckon (husk? links)
+            (chain)
+            (reckon (same? (hesh links) (seal voth))
+                    (rebalance (tull links))
+                    (chain (hesh links) (rebalance (tull links)))))))

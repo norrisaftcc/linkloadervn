@@ -1,0 +1,21 @@
+# story/assets.toml — maps `bg` and `show` names to art files under
+# renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images. Images
+# are not moved or copied; this file only points at them. See
+# docs/scene-format.md.
+
+[bg]
+desert_night = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/bg desert night.png"
+
+[sprite.slim]
+neutral = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/slim neutral.png"
+talk = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/slim talk.png"
+laughing = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/slim laughing.png"
+
+[sprite.terminal]
+idle = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/terminal idle.png"
+talk = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/terminal talk.png"
+
+[sprite.clipi]
+talk = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/clipi talk.png"
+smug = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/clipi smug.png"
+glitch = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/clipi glitch.png"

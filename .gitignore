@@ -33,3 +33,7 @@ current/renpy-8.3.7-sdk/launcher/game/saves/persistent
 
 **/.claude/settings.local.json
 /src/vnvenv
+
+# Build outputs (source of truth is story/ and puzzles/; see AGENTS.md)
+/dist/
+/build/

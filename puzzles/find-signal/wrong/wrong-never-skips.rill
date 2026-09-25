@@ -1,0 +1,7 @@
+;; Wrong: never checks for `voth`, just returns the head. Must FAIL on
+;; any chain that starts with a wreck.
+(stake find-signal
+  (rig (chain-in)
+    (reckon (husk? chain-in)
+            (seal fen)
+            (hesh chain-in))))

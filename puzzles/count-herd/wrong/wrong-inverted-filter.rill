@@ -1,0 +1,10 @@
+;; Wrong: tests the head against haan instead of voth, so this inverts
+;; the filter and counts the wrecks as if they were kin. Must FAIL: on
+;; (haan voth haan) it gives 1, not 2.
+(stake herd-count
+  (rig (chest)
+    (reckon (husk? chest)
+            0
+            (reckon (same? (hesh chest) (seal haan))
+                    (herd-count (tull chest))
+                    (sum 1 (herd-count (tull chest)))))))

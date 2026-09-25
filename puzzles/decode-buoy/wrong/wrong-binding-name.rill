@@ -1,0 +1,7 @@
+;; Wrong: correct translation, but bound to the wrong name. The puzzle
+;; requires the name `answer`. Must FAIL: tests.scm asks the sandbox
+;; for `answer` and gets an undefined-variable error, which crashes
+;; the check process with a nonzero exit code (see harness.scm's note
+;; on chibi -q having no working exception handling to catch this
+;; more gracefully).
+(stake translation (seal (signal star dust drift home)))

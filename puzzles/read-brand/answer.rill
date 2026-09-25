@@ -1,0 +1,5 @@
+;; read-brand reference answer: drop the first two couplings with
+;; tull, then take the head that is left with hesh.
+(stake read-brand
+  (rig (chain-in)
+    (hesh (tull (tull chain-in)))))

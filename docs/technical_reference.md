@@ -1,66 +1,54 @@
 # Technical Reference
 
-## Repository Structure
+How the pieces of the revived build fit together. The rules for working in
+the repository, and the checks to run before a commit, are in `AGENTS.md`.
 
-- `/renpy/` - Ren'Py game files and assets
-  - `/renpy/current/` - Current version (link_loader_1_2)
-  - `/renpy/alphas/` - Earlier alpha versions
-- `/src/` - Source code and development tools
-  - `/src/tools/` - Converters and tests
-  - `/src/tests/` - Test files and runners
-  - `/src/scripts/` - Build scripts
-  - `/src/constellation/` - Constellation Engine
-- `/docs/` - Documentation
-- `/media/` - Media assets
-- `/examples/` - Example scripts
-  - `/examples/renpy/` - Sample Ren'Py scripts
-- `/output/` - Generated files
-  - `/output/html/` - Playable HTML files
-  - `/output/twee/` - Twee format files
-  - `/output/json/` - JSON intermediate files
-- `/tools/` - External tools
-  - `/tools/tweego/` - Tweego compiler
+## Pipeline
 
-## Game Mechanics
+1. `story/*.scene` hold the story, in the format described in
+   `docs/scene-format.md`. `story/cast.toml` names the speakers and
+   `story/assets.toml` maps backgrounds and sprites to image files.
+2. `linkloader/parser.py` reads the scene files. `linkloader/validator.py`
+   checks that every jump resolves, every scene is reachable, every asset
+   and speaker exists, and no check or puzzle ends the game by accident.
+3. `linkloader/exporter.py` turns the story into JSON.
+   `linkloader/build.py` adds the dice ladder, the puzzles and the lexicon,
+   copies the art the story uses, and writes `dist/` in one step: a failed
+   build leaves the old `dist/` as it was.
+4. `web/runner.js` plays `dist/story.json` in the browser.
+   `linkloader/player.py` plays the same story in a terminal.
 
-### Character Stats
-- Cosmonaut (COS) - Space/high-tech skills
-- Cowboy (COW) - Desert/low-tech skills
-- Coder (COD) - Robot communication skills
+## Puzzles
 
-### Character Archetypes
-- "Welcome Comrade" (COS +2, COW -1, COD +2)
-- "Howdy Pardner" (COS -1, COW +2, COD +2)
-- "Major Tom" (COS +2, COW +2, COD -1)
+- Rill is defined in `puzzles/rill/prelude.scm`. Its lexicon is
+  `puzzles/rill/lexicon.md`.
+- Each puzzle folder holds `puzzle.md` (player text, `## Hint` and
+  `## Terminal`), `starter.rill`, `answer.rill`, `tests.scm` and `wrong/`.
+- `puzzles/check/run.sh` checks answers under chibi-scheme. It rejects any
+  form outside the Rill subset and stops each check after `RILL_TIMEOUT`
+  seconds (default 5).
+- `web/rill/rill.js` checks answers in the browser. Its tests replay
+  `puzzles/cases.json` and compare every answer with chibi-scheme.
 
-## Ren'Py Development
+## Stats and checks
 
-### Key Concepts
-- Character definitions: `define pc = Character(...)`
-- Scene/show statements for visuals
-- Labels for scenes/paths
-- Transforms for effects
-- Audio playback
-- Python functions (e.g., glitch effect)
+The three stats are cosmonaut, cowboy and coder. A check rolls 4dF, adds the
+story flag with the stat's name, and reads the result against the
+difficulty on the four-step ladder from High Tech, Low Lives: style,
+success, tie, fail. A Fate point rerolls a check once or buys a puzzle hint.
 
-### File Compilation
-- Edit `.rpy` files
-- Engine compiles to `.rpyc` on launch
-- Test by running the game
-
-### Asset Management
-- Images: `/game/images/`
-- Audio: `/game/audio/`
-- Reference in scripts with Ren'Py commands
-
-## Testing
+## Tests
 
 ```bash
-# Test converter
-cd src/tools
-python -m pytest test_renpy_to_twee.py -v
+pytest tests                      # includes the Playwright end-to-end tests
+bash puzzles/check/run.sh         # every puzzle under chibi-scheme
+cd web/rill && node --test        # Rill in JavaScript, with chibi parity
 ```
 
-## Resources
-- Local docs: `/renpy/current/renpy-8.3.7-sdk/doc/`
-- Online: https://www.renpy.org/doc/html/
+## Legacy
+
+- `renpy/current/` holds the original Ren'Py game. The committed SDK has no
+  Python standard library, so it does not run from this repository.
+- `src/tools/` holds the old Ren'Py-to-Twee and Ren'Py-to-JSON converters.
+  Only `renpy_to_twee_v2.py` and `renpy_to_json.py` still run.
+- The alphas and old HTML builds are in git history at commit `79da7b8`.

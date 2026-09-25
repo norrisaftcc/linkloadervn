@@ -1,0 +1,28 @@
+# story/assets.toml — maps `bg` and `show` names to art files under
+# renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images. Images
+# are not moved or copied; this file only points at them. See
+# docs/scene-format.md.
+
+[bg]
+desert_night = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/bg desert night.png"
+relay_point = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/01166-24311509-a desert scene with an antenna and a star filled sky in the background with nebulae and planets, by Salvador Dali.png"
+clipi_room = "story/art/clipi_room.svg"
+
+[sprite.slim]
+neutral = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/slim neutral.png"
+talk = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/slim talk.png"
+laughing = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/slim laughing.png"
+frown = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/slim frown.png"
+tired = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/slim frowning.png"
+normal = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/slim normal.png"
+
+[sprite.terminal]
+idle = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/terminal idle.png"
+talk = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/terminal talk.png"
+static = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/terminal static.png"
+
+[sprite.clipi]
+talk = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/clipi talk.png"
+smug = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/clipi smug.png"
+glitch = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/clipi glitch.png"
+text1 = "renpy/current/renpy-8.3.7-sdk/link_loader_1_2/game/images/clipi text (1).png"

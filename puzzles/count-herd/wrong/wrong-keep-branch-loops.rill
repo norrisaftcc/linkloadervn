@@ -1,0 +1,11 @@
+;; Wrong: the kept-entry branch recurses on chest instead of
+;; (tull chest), so this never ends on any chest with a kin entry.
+;; Must FAIL: chibi stops it with "out of stack space" and rill.js
+;; stops it with "ran too long".
+(stake herd-count
+  (rig (chest)
+    (reckon (husk? chest)
+            0
+            (reckon (same? (hesh chest) (seal voth))
+                    (herd-count (tull chest))
+                    (sum 1 (herd-count chest))))))

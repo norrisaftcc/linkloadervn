@@ -1,0 +1,3 @@
+;; Wrong: drops the last word (fen/home). Must FAIL: the list is too
+;; short to equal the 5-word expected translation.
+(stake answer (seal (signal star dust drift)))

@@ -1,0 +1,547 @@
+/*
+  LinkLoader web runner — layout and component styles.
+  Tokens come from tokens.css (colors, type, spacing); see
+  docs/style/brand.md for the rules behind every choice here:
+  flat shapes, hard edges, magenta as a flat fill only, the puzzle
+  panel's dot-grid decoration.
+*/
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.5;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: var(--rule-thick) solid var(--color-orange);
+  outline-offset: 2px;
+}
+
+.game {
+  max-width: 720px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--color-paper);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- topbar ---- */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-display);
+}
+
+.topbar-title {
+  font-weight: 700;
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  flex: 1;
+}
+
+.fate-counter {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-paper);
+}
+
+.topbar-btn {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: var(--color-orange);
+  color: var(--color-white);
+  border: none;
+  padding: var(--space-1) var(--space-3);
+}
+
+.topbar-btn:hover { background: var(--color-magenta); }
+
+.topbar-link {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-paper);
+  text-underline-offset: 3px;
+}
+
+.topbar-link:hover { color: var(--color-white); }
+
+/* ---- mode: inner ----
+   Clipi's interior during the reboot (docs/plans/wave2.md, section 5
+   item 3): a dot-halftone overlay and low scanlines on the stage, a
+   heavier ink border on the dialogue box, and choices drawn as flat
+   labeled tiles. Existing tokens only; magenta stays a flat fill;
+   no animation, so prefers-reduced-motion needs no extra rule. */
+
+[data-mode="inner"] .stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(var(--color-ink) 1px, transparent 1px);
+  background-size: 6px 6px;
+  opacity: 0.14;
+}
+
+[data-mode="inner"] .stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    var(--color-ink) 0,
+    var(--color-ink) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  opacity: 0.06;
+}
+
+[data-mode="inner"] .dialogue-box {
+  border-top-width: var(--space-1);
+  border-top-style: solid;
+  border-top-color: var(--color-ink);
+}
+
+[data-mode="inner"] .choice-btn {
+  background: var(--color-paper-deep);
+  border: var(--rule-thin) solid var(--color-ink);
+  border-left: var(--rule-thick) solid var(--color-ink);
+  margin-bottom: var(--space-2);
+}
+
+[data-mode="inner"] .choice-btn:hover,
+[data-mode="inner"] .choice-btn:focus-visible {
+  border-left-color: var(--color-orange);
+}
+
+/* ---- stage: bg + sprites ---- */
+.stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--color-teal);
+  overflow: hidden;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-teal);
+}
+
+.sprite {
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  width: auto;
+  max-width: 55%;
+  object-fit: contain;
+  object-position: bottom;
+}
+
+.sprite-left { left: 0; }
+.sprite-center { left: 50%; transform: translateX(-50%); }
+.sprite-right { right: 0; }
+
+/* ---- panel area ---- */
+.panel-area {
+  flex: 1;
+  padding: var(--space-4);
+}
+
+/* ---- dialogue box ---- */
+.dialogue-box {
+  background: var(--color-paper-deep);
+  padding: var(--space-5);
+  border-top: var(--rule-thick) solid var(--color-orange);
+  cursor: pointer;
+}
+
+.speaker {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-white);
+  background: var(--color-orange);
+  padding: var(--space-1) var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.speaker:empty { display: none; }
+
+.dialogue-box p#dialogue-text {
+  margin: 0;
+  font-size: var(--text-md);
+  color: var(--color-ink);
+}
+
+.advance-hint {
+  margin: var(--space-3) 0 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-teal);
+}
+
+/* ---- choices ---- */
+.choices {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.choices li {
+  border-bottom: var(--rule-thin) solid var(--color-ink);
+}
+
+.choice-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  border: none;
+  border-left: var(--rule-thick) solid transparent;
+  padding: var(--space-3) var(--space-3) var(--space-3) var(--space-3);
+  font-size: var(--text-base);
+  font-family: var(--font-body);
+}
+
+.choice-btn:hover,
+.choice-btn:focus-visible {
+  border-left-color: var(--color-orange);
+  font-weight: 600;
+}
+
+.choice-num {
+  display: inline-block;
+  min-width: 1.4em;
+  font-family: var(--font-mono);
+  color: var(--color-teal);
+}
+
+/* ---- check panel ---- */
+.check-panel {
+  background: var(--color-paper-deep);
+  border: var(--rule-thin) solid var(--color-ink);
+  padding: var(--space-5);
+}
+
+.check-panel h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 var(--space-3);
+  color: var(--color-teal);
+}
+
+.dice-row {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.die {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: var(--text-md);
+  background: var(--color-ink);
+  color: var(--color-paper);
+  border: var(--rule-thin) solid var(--color-ink);
+}
+
+.die[data-face="1"] { background: var(--color-teal); }
+.die[data-face="-1"] { background: var(--color-orange); }
+
+#check-result {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.check-actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+/* ---- generic buttons ---- */
+.btn {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  border: var(--rule-thin) solid var(--color-ink);
+  padding: var(--space-2) var(--space-4);
+}
+
+.btn:hover:not(:disabled) { background: var(--color-orange); color: var(--color-white); border-color: var(--color-orange); }
+
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-primary {
+  background: var(--color-teal);
+  color: var(--color-white);
+  border-color: var(--color-teal);
+}
+
+.btn-primary:hover:not(:disabled) { background: var(--color-orange); border-color: var(--color-orange); }
+
+/* ---- puzzle panel ---- */
+.puzzle-panel {
+  background: var(--color-paper);
+  border: var(--rule-thin) solid var(--color-ink);
+  padding: var(--space-5);
+  background-image:
+    linear-gradient(var(--color-ink) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-ink) 1px, transparent 1px);
+  background-size: 22px 22px;
+  background-position: -1px -1px;
+  position: relative;
+}
+
+.puzzle-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-paper);
+  opacity: 0.92;
+}
+
+.puzzle-panel > * { position: relative; }
+
+.puzzle-panel h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 var(--space-3);
+  color: var(--color-teal);
+}
+
+.puzzle-prompt {
+  font-size: var(--text-base);
+  margin-bottom: var(--space-4);
+  max-width: 68ch;
+}
+
+.puzzle-prompt pre {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  background: var(--color-ink);
+  color: var(--color-paper);
+  padding: var(--space-4);
+  overflow-x: auto;
+  line-height: 1.6;
+  /* Keep Rill's indentation: a long line scrolls inside its own block
+     rather than wrapping, since the indentation shows the structure. */
+  white-space: pre;
+}
+
+.puzzle-prompt code {
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+}
+
+.puzzle-editor-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-teal);
+  margin-bottom: var(--space-1);
+}
+
+.puzzle-editor {
+  width: 100%;
+  min-height: 8rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  background: var(--color-ink);
+  color: var(--color-paper);
+  border: var(--rule-thin) solid var(--color-ink);
+  padding: var(--space-3);
+  margin-bottom: var(--space-3);
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.puzzle-actions {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+  flex-wrap: wrap;
+}
+
+#puzzle-attempts {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-teal);
+}
+
+.puzzle-results { margin-top: var(--space-3); }
+
+.result-row {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  padding: var(--space-2) 0;
+  border-bottom: var(--rule-thin) solid var(--color-paper-deep);
+}
+
+.result-pass::before { content: "PASS  "; color: var(--color-teal); font-weight: 600; }
+.result-fail::before { content: "FAIL  "; }
+
+.error-chip {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  background: var(--color-magenta);
+  color: var(--color-white);
+  padding: var(--space-1) var(--space-3);
+}
+
+.puzzle-hint-text {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  background: var(--color-paper-deep);
+  padding: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+/* ---- lexicon panel (over the puzzle panel; never touches the editor) ---- */
+.lexicon-panel {
+  margin-top: var(--space-4);
+  background: var(--color-paper);
+  border: var(--rule-thin) solid var(--color-ink);
+  border-top: var(--rule-thick) solid var(--color-teal);
+  padding: var(--space-4);
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.lexicon-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+}
+
+.lexicon-header h4 {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-teal);
+  margin: 0;
+}
+
+.lexicon-panel h5 {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-ink);
+  margin: var(--space-3) 0 var(--space-1);
+}
+
+.lexicon-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-2);
+}
+
+.lexicon-table th {
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-ink);
+  border-bottom: var(--rule-thin) solid var(--color-ink);
+  padding: var(--space-1) var(--space-2);
+}
+
+.lexicon-table td {
+  padding: var(--space-1) var(--space-2);
+  border-bottom: var(--rule-thin) solid var(--color-paper-deep);
+  vertical-align: top;
+}
+
+.lexicon-word {
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+
+/* ---- ending ---- */
+.ending-panel {
+  background: var(--color-paper-deep);
+  padding: var(--space-6);
+  text-align: center;
+}
+
+.ending-panel h2 {
+  font-family: var(--font-display);
+  margin-top: 0;
+}
+
+#ending-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-teal);
+}
+
+/* ---- load error ---- */
+.load-error {
+  margin: var(--space-4);
+  padding: var(--space-3);
+  background: var(--color-magenta);
+  color: var(--color-white);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+/* ---- small screens: no horizontal scroll, comfortable touch targets ---- */
+@media (max-width: 480px) {
+  .panel-area { padding: var(--space-3); }
+  .dialogue-box, .check-panel, .puzzle-panel { padding: var(--space-3); }
+  .lexicon-panel { padding: var(--space-3); max-height: 50vh; }
+  .lexicon-table { font-size: var(--text-xs); }
+  .choice-btn { padding: var(--space-4) var(--space-2); }
+  .die { width: 2rem; height: 2rem; font-size: var(--text-base); }
+}

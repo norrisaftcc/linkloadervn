@@ -1,0 +1,64 @@
+# story/05-resolution.scene — bible.md spine scene 7 (Resolution).
+# Kept lines are cited inline with their source. See docs/canon/
+# bible.md and docs/canon/kept.md.
+
+== resolution
+show slim neutral left
+slim: Loader's linked. Rustlers are somebody else's problem now - or nobody's.
+choice
+    "Rebalance the coupling before it hauls." -> resolution_rebalance
+    "Skip it. The chain will hold or it won't." -> resolution_choice
+
+== resolution_rebalance
+puzzle rebalance-coupling
+    pass -> resolution_rebalance_pass
+    lockout -> resolution_rebalance_lockout
+
+== resolution_rebalance_pass
+> The wrecks drop clean out of the chain; what's left hauls true.
+-> resolution_choice
+
+== resolution_rebalance_lockout
+> The chain hauls wrecks and all. It'll hold, probably.
+-> resolution_choice
+
+== resolution_choice
+choice
+    "Report the relay point to the Company." -> ending_company
+    "Let it go. Say the trail went cold." -> ending_mercy
+    "Copy what they were reaching for, before the log clears." -> ending_defect [if rustler_sympathy >= 1]
+
+== ending_company
+> The report goes out clean, coordinates and all. The Company will send someone with less patience than Slim had.
+show slim tired left
+# kept: script.rpy:637
+slim: No rest for the weary. What's causing all these failures lately?
+show clipi text1 center
+# kept: script.rpy:640
+clipi: Insufficient data... but patterns suggest coordinated activity.
+show slim normal left
+# kept: script.rpy:643
+slim: Something bigger is happening on Syntax-4. And I've got a feeling we're going to be right in the middle of it.
+
+== ending_mercy
+> The report Slim files says the trail went cold at the relay point. It isn't true. It's close enough to true that the Company doesn't ask twice.
+show clipi talk center
+clipi: You know they'll be back.
+show slim neutral left
+slim: So will I.
+
+== ending_defect
+> The copy is small - a few kilobytes of whatever the rustlers wanted badly enough to risk a channel this exposed. Slim doesn't read it before burying it in the field log, unindexed.
+show clipi glitch center
+clipi: That's not in any report I'm filing.
+show slim talk left
+slim: Wasn't asking you to.
+
+== ending_escaped
+show slim frown left
+> The loader runs. The rustler doesn't answer a second hail. Whatever left with them, it isn't coming back on this channel.
+show clipi glitch center
+clipi: Insufficient data.
+show slim tired left
+slim: Story of the week.
+

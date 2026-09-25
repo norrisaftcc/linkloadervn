@@ -1,0 +1,10 @@
+;; Wrong: the inner reckon's two branches are swapped, so it keeps a
+;; wreck and skips past a good signal. Must FAIL: e.g. on chain (sil)
+;; it returns `fen` instead of `sil`.
+(stake find-signal
+  (rig (chain-in)
+    (reckon (husk? chain-in)
+            (seal fen)
+            (reckon (same? (hesh chain-in) (seal voth))
+                    (hesh chain-in)
+                    (find-signal (tull chain-in))))))

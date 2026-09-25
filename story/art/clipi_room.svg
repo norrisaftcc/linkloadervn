@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+  <!-- Clipi's room: flat CRT interior, no perspective. One idea per shape. -->
+  <!-- Back wall -->
+  <rect x="0" y="0" width="1600" height="620" fill="#EAE0C4" stroke="#1A1A1A" stroke-width="10"/>
+  <!-- Floor -->
+  <rect x="0" y="620" width="1600" height="280" fill="#EAE0C4"/>
+  <line x1="0" y1="620" x2="1600" y2="620" stroke="#1A1A1A" stroke-width="10"/>
+
+  <!-- Rug: a flat band on the floor, centred, with a thin inner border -->
+  <g>
+    <rect x="520" y="700" width="560" height="90" fill="#F3EDDC" stroke="#1A1A1A" stroke-width="10"/>
+    <rect x="545" y="718" width="510" height="54" fill="none" stroke="#1A1A1A" stroke-width="4"/>
+  </g>
+
+  <!-- Chest of drawers, left of centre -->
+  <g>
+    <rect x="220" y="440" width="360" height="180" fill="#F3EDDC" stroke="#1A1A1A" stroke-width="10"/>
+    <line x1="220" y1="500" x2="580" y2="500" stroke="#1A1A1A" stroke-width="8"/>
+    <line x1="220" y1="560" x2="580" y2="560" stroke="#1A1A1A" stroke-width="8"/>
+    <rect x="380" y="465" width="40" height="14" fill="#951655"/>
+    <rect x="380" y="525" width="40" height="14" fill="#951655"/>
+    <rect x="380" y="585" width="40" height="14" fill="#951655"/>
+  </g>
+
+  <!-- Round window, right of centre, clear of the door. It reads as an eye: Clipi is the room. -->
+  <g>
+    <circle cx="960" cy="260" r="140" fill="#F3EDDC" stroke="#1A1A1A" stroke-width="10"/>
+    <circle cx="960" cy="260" r="112" fill="#1B4D5C" stroke="#1A1A1A" stroke-width="6"/>
+    <circle cx="960" cy="260" r="10" fill="#951655"/>
+  </g>
+
+  <!-- Door, right -->
+  <g>
+    <rect x="1280" y="300" width="260" height="320" fill="#F3EDDC" stroke="#1A1A1A" stroke-width="10"/>
+    <rect x="1500" y="450" width="16" height="16" fill="#951655"/>
+  </g>
+</svg>

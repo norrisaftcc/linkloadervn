@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LinkLoader</title>
+<meta name="description" content="LinkLoader — a sci-fi western visual novel with Rill code puzzles.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="stage.css">
+</head>
+<body>
+
+<div id="game" class="game" aria-live="polite">
+
+  <header class="topbar">
+    <span class="topbar-title">LinkLoader</span>
+    <span class="fate-counter" id="fate-counter" title="Fate points">Fate: <span id="fate-count">3</span></span>
+    <a href="guide/" class="topbar-link" data-guide>Style guide</a>
+    <button type="button" id="restart-btn" class="topbar-btn">Restart</button>
+  </header>
+
+  <div class="stage" id="stage">
+    <div class="bg" id="bg-layer"></div>
+    <img class="sprite sprite-left"   id="sprite-left"   alt="" hidden>
+    <img class="sprite sprite-center" id="sprite-center" alt="" hidden>
+    <img class="sprite sprite-right"  id="sprite-right"  alt="" hidden>
+  </div>
+
+  <main class="panel-area" id="panel-area">
+
+    <section class="dialogue-box" id="dialogue-box" hidden>
+      <span class="speaker" id="speaker-name"></span>
+      <p id="dialogue-text"></p>
+      <p class="advance-hint">Press Space, Enter, or click to continue.</p>
+    </section>
+
+    <nav class="choices-wrap" id="choices-wrap" hidden aria-label="Choices">
+      <ul class="choices" id="choices-list"></ul>
+    </nav>
+
+    <section class="check-panel" id="check-panel" hidden aria-label="Dice check">
+      <h3 id="check-title"></h3>
+      <div class="dice-row" id="dice-row"></div>
+      <p id="check-result"></p>
+      <div class="check-actions" id="check-actions"></div>
+    </section>
+
+    <section class="puzzle-panel" id="puzzle-panel" hidden aria-label="Rill puzzle">
+      <h3 id="puzzle-title"></h3>
+      <div id="puzzle-prompt" class="puzzle-prompt"></div>
+      <label class="puzzle-editor-label" for="puzzle-editor">Your answer (Rill)</label>
+      <textarea id="puzzle-editor" class="puzzle-editor" wrap="off" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>
+      <div class="puzzle-actions">
+        <button type="button" id="puzzle-check-btn" class="btn btn-primary">Check</button>
+        <button type="button" id="puzzle-hint-btn" class="btn">Hint (−1 Fate)</button>
+        <button type="button" id="puzzle-lexicon-btn" class="btn">Lexicon</button>
+      </div>
+      <p id="puzzle-attempts"></p>
+      <div id="puzzle-results" class="puzzle-results" role="status"></div>
+      <p id="puzzle-hint-text" class="puzzle-hint-text" hidden></p>
+
+      <div id="lexicon-panel" class="lexicon-panel" hidden role="dialog" aria-label="Rill lexicon">
+        <div class="lexicon-header">
+          <h4>Lexicon</h4>
+          <button type="button" id="lexicon-close-btn" class="btn">Close</button>
+        </div>
+        <h5>Grammar roots</h5>
+        <table class="lexicon-table">
+          <thead><tr><th>Rill</th><th>Scheme</th><th>Gloss</th></tr></thead>
+          <tbody id="lexicon-grammar-body"></tbody>
+        </table>
+        <h5>Theme words</h5>
+        <table class="lexicon-table">
+          <thead><tr><th>Rill</th><th>Gloss</th></tr></thead>
+          <tbody id="lexicon-theme-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="ending-panel" id="ending-panel" hidden>
+      <h2>The story ends here.</h2>
+      <p id="ending-label"></p>
+      <button type="button" id="ending-restart-btn" class="btn btn-primary">Play again</button>
+    </section>
+
+  </main>
+
+  <p class="load-error" id="load-error" hidden></p>
+
+</div>
+
+<script type="module" src="runner.js"></script>
+</body>
+</html>

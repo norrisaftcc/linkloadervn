@@ -1,0 +1,6 @@
+;; count-crew reference answer: husk? (null?) tests an empty chain.
+(stake haan-count
+  (rig (roster)
+    (reckon (husk? roster)
+            0
+            (sum 1 (haan-count (tull roster))))))

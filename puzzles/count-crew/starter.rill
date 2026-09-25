@@ -1,0 +1,7 @@
+;; count-crew — fill in the blank, then save this as answer.rill.
+
+(stake haan-count
+  (rig (roster)
+    (reckon (___ roster)
+            0
+            (sum 1 (haan-count (tull roster))))))

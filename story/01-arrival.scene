@@ -1,0 +1,97 @@
+# story/01-arrival.scene — bible.md spine scenes 1-2 (Hook, First
+# loader). Kept lines are cited inline with their source. See
+# docs/canon/bible.md and docs/canon/kept.md.
+
+== start
+bg desert_night
+show slim neutral left
+# kept: script.rpy:78
+slim: Sure is getting cold out here on Syntax-4. The triple moons are all up - gonna be a bright night.
+> A satellite hums somewhere overhead, hunting for a lock.
+show terminal idle right
+# kept: script.rpy:119
+slim: (sudo restart satellite)
+# kept: script.rpy:122
+terminal: Welcome, root. Please enter password:
+terminal: Accepted. Handshake complete.
+> Best pass the wait telling it something true.
+choice
+    "Talk about the climb up from the orbital yards." -> origin_cosmonaut
+    "Talk about growing up on dirt, fixing what breaks." -> origin_cowboy
+    "Talk about the year spent only talking to machines." -> origin_coder
+
+== origin_cosmonaut
+set origin = 0, cosmonaut = 2, cowboy = 1, coder = 1
+slim: Trained on a station with a view and no horizon. Down here, the horizon's the whole job.
+-> muster
+
+== origin_cowboy
+set origin = 1, cosmonaut = 1, cowboy = 2, coder = 1
+slim: Grew up patching fence and engines with whatever was on hand. A link loader's just a fence that thinks.
+-> muster
+
+== origin_coder
+set origin = 2, cosmonaut = 1, cowboy = 1, coder = 2
+slim: Spent a year out past the relay towers with nobody but the machines for company. Learned to like the quiet parens make.
+-> muster
+
+== muster
+# kept: script.rpy:172
+terminal: git pull: Loading new coordinates and repair protocols...
+# kept: script.rpy:175
+slim: Finally! This connection is slower than a turtle in molasses.
+terminal: Diagnostic package staged. Confirm load?
+# kept: script.rpy:190
+slim: Yes, and run a diagnostic on our repair tools. We'll need the parenthesis patcher and the recursion breaker for sure.
+# kept: script.rpy:181 (the "won't link themselves" title pun)
+slim: Alright, time to head out. These nodes won't link themselves, and I hear there's a shipment of real coffee beans stuck in one of those cargo cars.
+choice
+    "Call Clipi in before heading out." -> call_clipi
+    "Head out first. Loop Clipi in from the field." -> head_out
+
+== call_clipi
+show clipi talk center
+clipi: Online and current, Slim. Say the word and I'm in the loop.
+set met_clipi = true
+hide terminal
+-> loader_site
+
+== head_out
+hide terminal
+> Terminal goes quiet behind. Clipi stays dark for now.
+-> loader_site
+
+== loader_site
+show slim talk left
+> The loader squats at the rail joint, coupling arm locked half open. A cargo bot stands over it, patient as stone, waiting on a chain that will not close.
+# kept: script.rpy:240
+cargo_bot: (Sh-query maintenance status sh-current sh-loader)
+if origin == 0
+    > The half-open arm reminds Slim of yard couplings — cleaner work, kinder gravity.
+if origin == 1
+    > The half-open arm reminds Slim of fence wire. Same stubborn geometry, no atmosphere to speak of.
+if origin == 2
+    > The half-open arm reminds Slim of a terminal left running too long. Patient, and past reasoning with.
+if met_clipi
+    show clipi talk center
+    clipi: Buoy's been repeating itself for an hour. Words, not code yet. Read it before you touch the arm.
+else
+    > A handheld chirps on Slim's belt. The Fen buoy, saying the same five words over and over.
+puzzle decode-buoy
+    pass -> transmission_clear
+    lockout -> transmission_garbled
+
+== transmission_clear
+slim: Signal, star, dust, drift, home. Just a beacon riding stardust, calling for harbor. This loader's not broken. It's flinching at an echo.
+> The fix, once you know it's an echo and not a break, takes ten minutes.
+show slim laughing left
+slim: Clean bind, first try. Some jobs are just jobs.
+-> sabotage_evidence
+
+== transmission_garbled
+> Two words come through clean: signal, home. The rest stays static.
+> Slim fixes the arm by hand, the slow way, without the buoy's warning to go on.
+set messy_fix = true
+show slim frown left
+slim: Held. Didn't need to be pretty.
+-> sabotage_evidence

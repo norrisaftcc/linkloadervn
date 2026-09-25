@@ -1,0 +1,558 @@
+"""End-to-end tests for the web build (dist/), driven with Playwright.
+
+Builds a fresh dist/ into a temp directory, serves it with
+`python -m http.server`, and drives it with a real Chromium. Skips
+cleanly (pytest.skip) if Playwright or the pinned Chromium build is
+missing, so the rest of the suite still runs where those are absent.
+
+See AGENTS.md "Check your work" and the SHARED CONTRACTS note in
+web/runner.js and web/rill/rill.js for what this checks.
+"""
+
+from __future__ import annotations
+
+import http.server
+import socket
+import subprocess
+import sys
+import threading
+from pathlib import Path
+
+import pytest
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+CHROMIUM_PATH = Path("/opt/pw-browsers/chromium-1194/chrome-linux/chrome")
+
+playwright_sync_api = pytest.importorskip(
+    "playwright.sync_api",
+    reason="playwright is not installed; skipping web e2e tests",
+)
+
+if not CHROMIUM_PATH.exists():
+    pytest.skip(
+        f"pinned Chromium not found at {CHROMIUM_PATH}; skipping web e2e tests",
+        allow_module_level=True,
+    )
+
+sync_playwright = playwright_sync_api.sync_playwright
+
+
+# ---------------------------------------------------------------------------
+# Build + serve fixtures.
+
+
+@pytest.fixture(scope="session")
+def dist_dir(tmp_path_factory):
+    out_dir = tmp_path_factory.mktemp("dist")
+    subprocess.run(
+        [sys.executable, "-m", "linkloader", "build", "story/", "-o", str(out_dir)],
+        cwd=REPO_ROOT,
+        check=True,
+    )
+    return out_dir
+
+
+def _free_port() -> int:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.bind(("127.0.0.1", 0))
+        return s.getsockname()[1]
+
+
+class _QuietHandler(http.server.SimpleHTTPRequestHandler):
+    def log_message(self, fmt, *args):  # noqa: D401 - silence per-request logging
+        pass
+
+
+@pytest.fixture(scope="session")
+def base_url(dist_dir):
+    port = _free_port()
+    handler = lambda *args, **kwargs: _QuietHandler(*args, directory=str(dist_dir), **kwargs)
+    httpd = http.server.ThreadingHTTPServer(("127.0.0.1", port), handler)
+    thread = threading.Thread(target=httpd.serve_forever, daemon=True)
+    thread.start()
+    try:
+        yield f"http://127.0.0.1:{port}"
+    finally:
+        httpd.shutdown()
+        thread.join(timeout=5)
+
+
+@pytest.fixture(scope="session")
+def browser():
+    with sync_playwright() as p:
+        b = p.chromium.launch(executable_path=str(CHROMIUM_PATH))
+        yield b
+        b.close()
+
+
+@pytest.fixture
+def page(browser):
+    ctx = browser.new_context(viewport={"width": 1280, "height": 800})
+    pg = ctx.new_page()
+    yield pg
+    ctx.close()
+
+
+# ---------------------------------------------------------------------------
+# Driving helpers.
+
+MAX_STEPS = 400
+
+
+def advance_until(page, selector, choose=None, max_steps=MAX_STEPS):
+    """Drives the game forward (Space for dialogue, clicking choices
+    and check "Continue" buttons) until `selector` is visible, or
+    raises after max_steps.
+
+    `choose(option_texts) -> int` picks a choice's index (0-based) when
+    a choice panel appears; defaults to always picking the first option.
+    """
+    choose = choose or (lambda _options: 0)
+    for _ in range(max_steps):
+        target = page.query_selector(selector)
+        if target and target.is_visible():
+            return
+        if page.is_visible("#dialogue-box"):
+            page.keyboard.press("Space")
+            continue
+        if page.is_visible("#choices-wrap"):
+            buttons = page.query_selector_all("#choices-list button")
+            texts = [b.inner_text() for b in buttons]
+            idx = choose(texts)
+            buttons[idx].click()
+            continue
+        if page.is_visible("#check-panel"):
+            page.click("#check-actions .btn-primary")
+            continue
+        # Nothing recognized is showing yet (e.g. mid-transition); give
+        # the page a moment and re-check.
+        page.wait_for_timeout(20)
+    raise AssertionError(f"gave up waiting for {selector!r} after {max_steps} steps")
+
+
+def goto(page, base_url, seed=None):
+    url = base_url + "/"
+    if seed is not None:
+        url += f"?seed={seed}"
+    page.goto(url)
+
+
+def pick_head_out(options):
+    for i, text in enumerate(options):
+        if "Head out" in text:
+            return i
+    return 0
+
+
+def pick_cowboy_origin_then_head_out(options):
+    for i, text in enumerate(options):
+        if "dirt, fixing" in text:  # the cowboy origin option
+            return i
+    return pick_head_out(options)
+
+
+# ---------------------------------------------------------------------------
+# Tests.
+
+
+def _is_environment_noise(text: str) -> bool:
+    """Two failures are artifacts of this sandbox, not the app: the
+    proxy blocks the Google Fonts preconnect with an untrusted cert,
+    and Chromium always requests /favicon.ico whether or not one
+    exists."""
+    return "ERR_CERT_AUTHORITY_INVALID" in text or "404" in text
+
+
+def test_game_loads_with_no_console_errors(page, base_url):
+    errors = []
+    page.on("console", lambda msg: errors.append(msg.text) if msg.type == "error" else None)
+    page.on("pageerror", lambda exc: errors.append(str(exc)))
+    goto(page, base_url)
+    page.wait_for_selector("#dialogue-box", state="visible")
+    real_errors = [e for e in errors if not _is_environment_noise(e)]
+    assert real_errors == [], f"console/page errors on load: {real_errors}"
+
+
+def test_click_and_keys_advance_dialogue(page, base_url):
+    goto(page, base_url)
+    page.wait_for_selector("#dialogue-box", state="visible")
+    first_text = page.inner_text("#dialogue-text")
+
+    # A click on the dialogue box advances it.
+    page.click("#dialogue-box")
+    page.wait_for_timeout(20)
+    second_text = page.inner_text("#dialogue-text")
+    assert second_text != first_text
+
+    # Space/Enter also advance it.
+    page.keyboard.press("Space")
+    page.wait_for_timeout(20)
+    third_text = page.inner_text("#dialogue-text")
+    assert third_text != second_text
+
+    page.keyboard.press("Enter")
+    page.wait_for_timeout(20)
+    fourth_text = page.inner_text("#dialogue-text")
+    assert fourth_text != third_text
+
+
+def test_check_shows_four_dice_and_ladder_result(page, base_url):
+    # The first "check" statement (see story/02-sabotage.scene) comes
+    # right after decode-buoy's puzzle -- pass the reference answer to
+    # get there, then let the check panel appear.
+    _reach_decode_buoy(page, base_url, seed=1)
+    answer = (REPO_ROOT / "puzzles" / "decode-buoy" / "answer.rill").read_text(
+        encoding="utf-8"
+    )
+    page.fill("#puzzle-editor", answer)
+    page.click("#puzzle-check-btn")
+    advance_until(page, "#check-panel")
+
+    dice = page.query_selector_all("#dice-row .die")
+    assert len(dice) == 4
+    result_text = page.inner_text("#check-result")
+    assert "->" in result_text
+    tier = result_text.split("->")[-1].strip()
+    assert tier in {"STYLE", "SUCCESS", "TIE", "FAIL"}
+
+
+def test_check_shows_a_nonzero_stat_after_the_origin_choice(page, base_url):
+    # Picking the cowboy origin sets cowboy=2 (see story/01-arrival.scene);
+    # story/02-sabotage.scene's first check is "check cowboy vs 2", so
+    # the check panel must show a nonzero cowboy stat, not the old
+    # hardcoded 0.
+    goto(page, base_url, seed=1)
+    advance_until(page, "#puzzle-panel", choose=pick_cowboy_origin_then_head_out)
+    answer = (REPO_ROOT / "puzzles" / "decode-buoy" / "answer.rill").read_text(
+        encoding="utf-8"
+    )
+    page.fill("#puzzle-editor", answer)
+    page.click("#puzzle-check-btn")
+    advance_until(page, "#check-panel")
+
+    title = page.inner_text("#check-title")
+    assert "cowboy +2" in title.lower()
+    result_text = page.inner_text("#check-result")
+    assert "cowboy +2" in result_text
+
+
+def test_lexicon_panel_shows_grammar_and_theme_words_without_losing_editor_text(
+    page, base_url
+):
+    _reach_decode_buoy(page, base_url, seed=1)
+    page.fill("#puzzle-editor", "(stake answer (seal (draft draft)))")
+
+    page.click("#puzzle-lexicon-btn")
+    page.wait_for_selector("#lexicon-panel", state="visible")
+    assert page.inner_text("#lexicon-grammar-body").strip() != ""
+    assert page.inner_text("#lexicon-theme-body").strip() != ""
+    assert "signal" in page.inner_text("#lexicon-theme-body")
+
+    # Opening the lexicon never touches what the player already typed.
+    assert page.input_value("#puzzle-editor") == "(stake answer (seal (draft draft)))"
+
+    page.click("#lexicon-close-btn")
+    assert page.is_hidden("#lexicon-panel")
+    assert page.input_value("#puzzle-editor") == "(stake answer (seal (draft draft)))"
+
+
+def _reach_decode_buoy(page, base_url, seed=None):
+    goto(page, base_url, seed=seed)
+    advance_until(page, "#puzzle-panel", choose=pick_head_out)
+
+
+def test_reach_first_puzzle_and_pass_with_reference_answer(page, base_url):
+    _reach_decode_buoy(page, base_url, seed=1)
+    assert page.inner_text("#puzzle-title") != ""
+
+    answer = (REPO_ROOT / "puzzles" / "decode-buoy" / "answer.rill").read_text(
+        encoding="utf-8"
+    )
+    page.fill("#puzzle-editor", answer)
+    page.click("#puzzle-check-btn")
+
+    # A passing answer moves straight into the pass branch's scene,
+    # hiding the puzzle panel and showing its first line/narration.
+    page.wait_for_function(
+        "() => document.getElementById('puzzle-panel').hidden === true"
+    )
+    label = page.evaluate("() => window.__linkloaderGame.currentLabel")
+    assert label == "transmission_clear"
+
+
+def test_three_wrong_answers_reach_lockout(page, base_url):
+    _reach_decode_buoy(page, base_url, seed=2)
+
+    for _ in range(3):
+        page.fill("#puzzle-editor", "(stake answer (seal (nope nope nope nope nope)))")
+        page.click("#puzzle-check-btn")
+        page.wait_for_timeout(20)
+
+    page.wait_for_function(
+        "() => document.getElementById('puzzle-panel').hidden === true"
+    )
+    label = page.evaluate("() => window.__linkloaderGame.currentLabel")
+    assert label == "transmission_garbled"
+
+
+def test_save_and_continue_survives_reload(page, base_url):
+    goto(page, base_url)
+    page.wait_for_selector("#dialogue-box", state="visible")
+    # Advance a couple of beats so the saved label isn't just "start".
+    page.click("#dialogue-box")
+    page.wait_for_timeout(20)
+    page.click("#dialogue-box")
+    page.wait_for_timeout(20)
+    label_before = page.evaluate("() => window.__linkloaderGame.currentLabel")
+
+    page.reload()
+    page.wait_for_selector("#dialogue-box, #choices-wrap", state="visible")
+    label_after = page.evaluate("() => window.__linkloaderGame.currentLabel")
+    assert label_after == label_before
+
+
+def test_save_is_a_scene_entry_snapshot(page, base_url):
+    """A reload replays the scene from its start with the flags, Fate and
+    dice state it had on entry, so nothing in the scene applies twice."""
+    goto(page, base_url)
+    page.wait_for_selector("#dialogue-box", state="visible")
+    saved = page.evaluate("() => JSON.parse(localStorage.getItem('linkloader-save-v1'))")
+    assert isinstance(saved["rngState"], int)
+    entry_flags = saved["flags"]
+
+    # Change flags and dice mid-scene; the save must not move.
+    page.evaluate(
+        "() => { const g = window.__linkloaderGame; g.flags.probe = 7; g.rng(); g.rng(); }"
+    )
+    after = page.evaluate("() => JSON.parse(localStorage.getItem('linkloader-save-v1'))")
+    assert after == saved
+    page.reload()
+    page.wait_for_selector("#dialogue-box, #choices-wrap", state="visible")
+    flags = page.evaluate("() => window.__linkloaderGame.flags")
+    assert flags == entry_flags
+
+
+def test_no_horizontal_scroll_at_mobile_width(browser, base_url):
+    ctx = browser.new_context(viewport={"width": 390, "height": 844})
+    page = ctx.new_page()
+    try:
+        goto(page, base_url)
+        page.wait_for_selector("#dialogue-box", state="visible")
+        overflow = page.evaluate(
+            "() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1"
+        )
+        assert not overflow, "page has horizontal scroll at 390x844"
+    finally:
+        ctx.close()
+
+
+def _puzzle_answer_text(puzzle_id: str) -> str:
+    return (REPO_ROOT / "puzzles" / puzzle_id / "answer.rill").read_text(encoding="utf-8")
+
+
+def _room_chooser(options):
+    """Picks the option that carries the player from the start of the
+    story down to and through the room (see docs/plans/wave2.md
+    sections 2 and 4): head out without Clipi, leave the rustler brand
+    alone (the optional read-brand puzzle isn't under test here), talk
+    Clipi down with the base-case phrase, open the chest before the
+    window, and go through the door once it appears."""
+    for i, text in enumerate(options):
+        if "Head out" in text:
+            return i
+    for i, text in enumerate(options):
+        if "Leave it. It isn't cargo." in text:
+            return i
+    for i, text in enumerate(options):
+        if "Say fen" in text:
+            return i
+    for i, text in enumerate(options):
+        if "Open the chest of drawers." in text:
+            return i
+    for i, text in enumerate(options):
+        if "Go through the door." in text:
+            return i
+    return 0
+
+
+def _solve_puzzle_panels_until(page, target_selector, answers_by_puzzle):
+    """Advances the game, filling in `answers_by_puzzle[puzzle_id]`
+    whenever a puzzle panel appears (keyed by the puzzle id in
+    #puzzle-title's "see puzzles/<id>/puzzle.md" text -- see
+    docs/scene-format.md, "`puzzle`"), until `target_selector` is
+    visible. Choices along the way are picked by `_room_chooser`."""
+    for _ in range(400):
+        if page.is_visible(target_selector):
+            return
+        if page.is_visible("#puzzle-panel"):
+            title = page.inner_text("#puzzle-title")
+            puzzle_id = next((pid for pid in answers_by_puzzle if pid in title.lower()), None)
+            assert puzzle_id, f"no known puzzle matches panel title {title!r}"
+            page.fill("#puzzle-editor", answers_by_puzzle[puzzle_id])
+            page.click("#puzzle-check-btn")
+            page.wait_for_function(
+                "() => document.getElementById('puzzle-panel').hidden === true"
+            )
+            continue
+        if page.is_visible("#dialogue-box"):
+            page.click("#dialogue-box")
+            page.wait_for_timeout(15)
+            continue
+        if page.is_visible("#choices-wrap"):
+            buttons = page.query_selector_all("#choices-list button")
+            texts = [b.inner_text() for b in buttons]
+            buttons[_room_chooser(texts)].click()
+            page.wait_for_timeout(15)
+            continue
+        if page.is_visible("#check-panel"):
+            page.click("#check-actions .btn-primary")
+            continue
+        page.wait_for_timeout(20)
+    raise AssertionError(f"gave up waiting for {target_selector!r} after 400 steps")
+
+
+def _walk_to_room_hub(page, base_url, seed, out_lines=None):
+    """Plays from `start` down through the found-document scene to
+    `room_hub` (see story/03-clipi.scene and story/03b-room.scene),
+    passing decode-buoy and count-crew with their reference answers
+    and skipping the optional read-brand puzzle. If `out_lines` is
+    given, every #dialogue-text seen along the way is appended to it,
+    in order (used to check the found document plays in full)."""
+    goto(page, base_url, seed=seed)
+    answers = {
+        "decode-buoy": _puzzle_answer_text("decode-buoy"),
+        "count-crew": _puzzle_answer_text("count-crew"),
+    }
+    for _ in range(400):
+        if page.evaluate("() => window.__linkloaderGame.currentLabel") == "room_hub" and (
+            page.is_visible("#choices-wrap")
+        ):
+            return
+        if page.is_visible("#puzzle-panel"):
+            title = page.inner_text("#puzzle-title")
+            puzzle_id = next((pid for pid in answers if pid in title.lower()), None)
+            assert puzzle_id, f"no known puzzle matches panel title {title!r}"
+            page.fill("#puzzle-editor", answers[puzzle_id])
+            page.click("#puzzle-check-btn")
+            page.wait_for_function(
+                "() => document.getElementById('puzzle-panel').hidden === true"
+            )
+            continue
+        if page.is_visible("#dialogue-box"):
+            if out_lines is not None:
+                out_lines.append(page.inner_text("#dialogue-text"))
+            page.click("#dialogue-box")
+            page.wait_for_timeout(15)
+            continue
+        if page.is_visible("#choices-wrap"):
+            buttons = page.query_selector_all("#choices-list button")
+            texts = [b.inner_text() for b in buttons]
+            buttons[_room_chooser(texts)].click()
+            page.wait_for_timeout(15)
+            continue
+        if page.is_visible("#check-panel"):
+            page.click("#check-actions .btn-primary")
+            continue
+        page.wait_for_timeout(20)
+    raise AssertionError("gave up waiting for room_hub after 400 steps")
+
+
+def test_room_hub_shows_inner_mode_and_clipi_room_background(page, base_url):
+    """docs/plans/wave2.md section 2: the room is Clipi's interior,
+    entered once between found_document and confrontation, and uses
+    the inner stratum (`mode inner`, see docs/scene-format.md)."""
+    _walk_to_room_hub(page, base_url, seed=1)
+    assert page.evaluate("() => window.__linkloaderGame.currentLabel") == "room_hub"
+    assert page.get_attribute("#game", "data-mode") == "inner"
+    bg = page.evaluate("() => document.getElementById('bg-layer').style.backgroundImage")
+    assert "clipi_room" in bg
+
+
+def test_room_chest_and_door_reach_confrontation_in_default_mode(page, base_url):
+    """docs/plans/wave2.md section 2: opening the chest runs
+    count-herd; the door only appears once it's done, and leads to
+    confrontation, which sets its own bg (relay_point) and leaves the
+    inner stratum behind."""
+    _walk_to_room_hub(page, base_url, seed=1)
+
+    # The door isn't offered yet: the chest guards it (`if herd_done`,
+    # see story/03b-room.scene).
+    door_texts = [b.inner_text() for b in page.query_selector_all("#choices-list button")]
+    assert not any("Go through the door." in t for t in door_texts)
+
+    buttons = page.query_selector_all("#choices-list button")
+    chest_idx = next(i for i, b in enumerate(buttons) if "chest of drawers" in b.inner_text())
+    buttons[chest_idx].click()
+    page.wait_for_timeout(15)
+
+    _solve_puzzle_panels_until(
+        page, "#choices-wrap", {"count-herd": _puzzle_answer_text("count-herd")}
+    )
+    assert page.evaluate("() => window.__linkloaderGame.currentLabel") == "room_hub"
+
+    # Now the door has appeared.
+    buttons = page.query_selector_all("#choices-list button")
+    texts = [b.inner_text() for b in buttons]
+    door_idx = next(i for i, t in enumerate(texts) if "Go through the door." in t)
+    buttons[door_idx].click()
+    page.wait_for_timeout(15)
+
+    # Advance through confrontation's opening lines to its own choice,
+    # without picking it: that's as far as this test needs to go.
+    for _ in range(50):
+        if page.is_visible("#choices-wrap"):
+            break
+        if page.is_visible("#dialogue-box"):
+            page.click("#dialogue-box")
+            page.wait_for_timeout(15)
+            continue
+        page.wait_for_timeout(20)
+
+    assert page.evaluate("() => window.__linkloaderGame.currentLabel") in {
+        "confrontation",
+        "rustler_why",
+        "rustler_cut",
+        "confrontation_check",
+    }
+    assert page.get_attribute("#game", "data-mode") == "default"
+    bg = page.evaluate("() => document.getElementById('bg-layer').style.backgroundImage")
+    assert "clipi_room" not in bg
+    assert "Dali" in bg or "relay" in bg.lower()
+
+
+def test_found_document_plays_first_and_last_quoted_lines(page, base_url):
+    """docs/plans/wave2.md section 4 and docs/canon/found-document.md:
+    Clipi reads the log verbatim, in file order, with no lines
+    dropped. Checking the first and last confirms the whole run played
+    rather than stopping partway."""
+    lines: list[str] = []
+    _walk_to_room_hub(page, base_url, seed=1, out_lines=lines)
+    joined = "\n".join(lines)
+    assert "The script of the game goes in this file." in joined
+    assert (
+        "copilot 1 (1-3) are shown inside copilot loops, and copilot 2 (1-3) are shown"
+        " inside pc loops. (OK)" in joined
+    )
+
+
+def test_stage_carries_over_between_scenes_and_survives_reload(page, base_url):
+    """Scenes do not clear the stage; only show, hide and bg change it.
+    The origin choice leads to a scene with no show of its own, and Slim
+    must still be on stage there, and after a reload."""
+    goto(page, base_url, seed=3)
+    page.evaluate("() => localStorage.clear()")
+    goto(page, base_url, seed=3)
+    advance_until(page, "#choices-wrap")
+    page.query_selector_all("#choices-list button")[0].click()
+    page.wait_for_timeout(50)
+    label = page.evaluate("() => window.__linkloaderGame.currentLabel")
+    assert label != "start"
+    assert page.is_visible("#sprite-left")
+    bg = page.evaluate("() => document.getElementById('bg-layer').style.backgroundImage")
+    assert "assets/" in bg
+
+    # Reload without the seed so the save is used.
+    page.goto(base_url + "/")
+    page.wait_for_selector("#dialogue-box, #choices-wrap", state="visible")
+    assert page.is_visible("#sprite-left")
+    assert "assets/" in page.evaluate("() => document.getElementById('bg-layer').style.backgroundImage")

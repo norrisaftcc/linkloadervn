@@ -1,0 +1,10 @@
+;; rebalance-coupling — fill in all three blanks, then save this as
+;; answer.rill.
+
+(stake rebalance
+  (rig (links)
+    (reckon (husk? links)
+            ___
+            (reckon (same? (hesh links) (seal voth))
+                    (rebalance (tull links))
+                    (bind ___ (rebalance ___))))))

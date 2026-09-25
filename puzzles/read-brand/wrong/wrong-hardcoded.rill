@@ -1,0 +1,6 @@
+;; Wrong: ignores chain-in entirely and always returns sil, the third
+;; word of the one brand shown in the puzzle text. Must FAIL: the
+;; tests run on other chains where the third word is not sil.
+(stake read-brand
+  (rig (chain-in)
+    (seal sil)))

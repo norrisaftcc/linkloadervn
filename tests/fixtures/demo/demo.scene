@@ -1,0 +1,53 @@
+# story/demo.scene — a small demo exercising every statement in the
+# format. Dialogue is kept plain; the real story comes later. See
+# docs/scene-format.md.
+
+== start
+bg desert_night
+show slim neutral left
+slim: Satellite should be above us, now.
+> The wind drops. Something out past the ridge isn't moving right.
+set met_clipi = false
+choice
+    "Call Clipi in on the terminal." -> call_clipi
+    "Walk out and look first." -> closer_look [if met_clipi]
+
+== call_clipi
+show terminal idle right
+show clipi talk center
+terminal: Welcome, root. Please enter password.
+clipi: Password's not the problem. The problem's out on the ridge.
+set met_clipi = true
+hide terminal
+-> closer_look
+
+== closer_look
+hide clipi
+check coder vs 2
+    style -> found_clean
+    success -> found_it
+    fail -> jam_worse
+puzzle count-crew
+    pass -> found_it
+    lockout -> jam_worse
+
+== found_clean
+> The chain unspools clean. No jam left behind.
+slim: That's how you fix a loader.
+-> ending
+
+== found_it
+slim: There. That'll hold.
+-> ending
+
+== jam_worse
+if met_clipi
+    clipi: I've got a diagnostic queued. Give me a second.
+else
+    > No one's watching the line but you.
+-> ending
+
+== ending
+show slim laughing left
+slim: Another loader, linked.
+> Somewhere out past delta-7, another one just jammed.
