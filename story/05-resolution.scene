@@ -6,6 +6,24 @@
 show slim neutral left
 slim: Loader's linked. Rustlers are somebody else's problem now - or nobody's.
 choice
+    "Rebalance the coupling before it hauls." -> resolution_rebalance
+    "Skip it. The chain will hold or it won't." -> resolution_choice
+
+== resolution_rebalance
+puzzle rebalance-coupling
+    pass -> resolution_rebalance_pass
+    lockout -> resolution_rebalance_lockout
+
+== resolution_rebalance_pass
+> The wrecks drop clean out of the chain; what's left hauls true.
+-> resolution_choice
+
+== resolution_rebalance_lockout
+> The chain hauls wrecks and all. It'll hold, probably.
+-> resolution_choice
+
+== resolution_choice
+choice
     "Report the relay point to the Company." -> ending_company
     "Let it go. Say the trail went cold." -> ending_mercy
     "Copy what they were reaching for, before the log clears." -> ending_defect [if rustler_sympathy >= 1]

@@ -254,7 +254,9 @@ for the Rill sentence.
 3. **Signs of sabotage** — evidence the jam was deliberate (a
    `git blame`-style trace, or physical tampering, matching the kept
    reveal beat). CDR rustlers are named for the first time. Raises the
-   stakes; no puzzle.
+   stakes. Carries one optional puzzle: **`read-brand`**, reading a
+   rustler's seal branded into the housing. Skipping it costs nothing;
+   the scene moves on to `git_blame` either way.
 4. **The Clipi segment — Rill Puzzle #2** — A trigger phrase (or a
    corrupted sub-routine Clipi is asked to read) sends Clipi into
    recursion collapse: parentheses nesting deeper with every repeated
@@ -267,21 +269,43 @@ for the Rill sentence.
    fragment quoted in `found-document.md`, presented as-is, addressed
    to Clipi's earlier self by its old name. A quiet scene. No puzzle.
    Slim and Clipi react to it; neither fully understands it.
+5a. **The room** — Between the found document and the confrontation,
+   the reboot puts Slim inside a small room that is Clipi's interior:
+   a chest of drawers, a round window that reads as an eye, a door.
+   Opening the chest plays **`count-herd`**, recursion that filters
+   and counts. The window is flavor with no puzzle. The door opens to
+   `confrontation` once the chest is done.
 6. **Confrontation — Rill Puzzle #3 (climax-weight)** — The CDR
    rustlers seize a loader remotely through the Terminal. The player's
    puzzle is to construct a Rill expression that traps their access in
    its own recursive structure and expels them — the "coder approach"
    idea from the old script, now the one approach everyone takes,
    flavored by whichever stat led the player here.
-7. **Resolution** — The loader runs clean. The rustler thread advances
-   (a choice about what to do with what was learned, in the spirit of
-   the old script's three-way ending menu, without needing that exact
+7. **Resolution** — The loader runs clean. Before the ending choice,
+   Slim may take one more optional puzzle, **`rebalance-coupling`**:
+   drop the wrecked links from the chain before it hauls, or leave
+   them in and let it hold or not. The rustler thread then advances (a
+   choice about what to do with what was learned, in the spirit of the
+   old script's three-way ending menu, without needing that exact
    menu). Epilogue: another assignment comes in, and Slim gets the
    feeling something bigger than one jammed loader is happening on
    Syntax-4 — the kept closing beat.
 
-Three Rill puzzles (scenes 2, 4, 6), rising in difficulty and stakes.
-One Clipi segment (scene 4). One found-document scene (scene 5),
-placed immediately after the Clipi segment because the document is
-Clipi's memory, surfaced by that scene's events — not a separate,
-disconnected lore-dump.
+Three core Rill puzzles carry the spine and rise in difficulty and
+stakes: **`decode-buoy`** (scene 2, tutorial-weight), **`count-crew`**
+(scene 4, the Clipi segment's base case), and **`find-signal`**
+(scene 6, climax-weight). The room (scene 5a) adds a fourth required
+puzzle, **`count-herd`**, recursion that filters and counts, at the
+chest of drawers. Two further puzzles are optional texture, not
+spine: **`read-brand`** (scene 3, reading a rustler's seal) and
+**`rebalance-coupling`** (scene 7, dropping wrecked links before the
+final choice). Optional puzzles never block the story — passing and
+failing both lead to the very same next beat, one line apart, and
+skipping one outright costs nothing either. One Clipi segment (scene
+4). One found-document scene (scene 5), placed immediately after the
+Clipi segment because the document is Clipi's memory, surfaced by
+that scene's events — not a separate, disconnected lore-dump. One
+room scene (5a) — a small room that is Clipi's interior, appearing
+once — placed immediately after the found document because the
+reboot it triggers is what puts Slim inside Clipi, and leading on to
+the confrontation once its chest is opened.
