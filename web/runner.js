@@ -19,13 +19,16 @@ const MAX_PUZZLE_ATTEMPTS = 3;
 
 function mulberry32(seed) {
   let a = seed >>> 0;
-  return function next() {
+  function next() {
     a |= 0;
     a = (a + 0x6d2b79f5) | 0;
     let t = Math.imul(a ^ (a >>> 15), 1 | a);
     t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
+  }
+  // mulberry32(next.state()) continues the same sequence.
+  next.state = () => a >>> 0;
+  return next;
 }
 
 function seedFromUrl() {
@@ -115,7 +118,8 @@ class Game {
       this.flags = saved.flags || {};
       this.fate = typeof saved.fate === "number" ? saved.fate : DEFAULT_FATE;
       this.rngSeed = typeof saved.rngSeed === "number" ? saved.rngSeed : (Date.now() >>> 0);
-      this.rng = mulberry32(this.rngSeed);
+      const state = typeof saved.rngState === "number" ? saved.rngState : this.rngSeed;
+      this.rng = mulberry32(state);
       this.gotoScene(saved.label || this.story.start, { fresh: false });
       return;
     }
@@ -124,12 +128,18 @@ class Game {
     this.gotoScene(this.story.start, { fresh: true });
   }
 
-  save() {
+  // The save is a snapshot taken when a scene starts: its label, and the
+  // flags, Fate points and dice state at that moment. A reload replays
+  // the scene from its first statement with exactly that state, so a
+  // `set` earlier in the scene does not apply twice and the dice do not
+  // restart. Progress inside a scene is not saved.
+  saveSceneEntry() {
     safeSave({
       label: this.currentLabel,
-      flags: this.flags,
+      flags: JSON.parse(JSON.stringify(this.flags)),
       fate: this.fate,
       rngSeed: this.rngSeed,
+      rngState: this.rng.state(),
     });
   }
 
@@ -190,7 +200,7 @@ class Game {
       this.setSprite("center", null);
       this.setSprite("right", null);
     }
-    this.save();
+    this.saveSceneEntry();
     this.step();
   }
 
@@ -430,7 +440,6 @@ class Game {
     const shift = total - stmt.difficulty;
     const tier = tierFor(ladder, shift);
     this.lastCheckResult = { dice, total, shift, tier };
-    this.save();
 
     const signedStat = statValue >= 0 ? `+${statValue}` : String(statValue);
     this.els.checkTitle.textContent = `Check: ${stmt.stat} ${signedStat} vs ${stmt.difficulty}`;
@@ -547,7 +556,6 @@ class Game {
     this.els.puzzleHintText.innerHTML = data.hint;
     this.els.puzzleHintText.hidden = false;
     this.els.puzzleHintBtn.disabled = true;
-    this.save();
   }
 
   // -- ending ------------------------------------------------------------
@@ -565,7 +573,6 @@ class Game {
 
   updateFateCounter() {
     this.els.fateCount.textContent = String(this.fate);
-    this.save();
   }
 }
 
