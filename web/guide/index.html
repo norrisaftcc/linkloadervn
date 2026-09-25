@@ -237,6 +237,7 @@
     <li><a href="#shape">Shape</a></li>
     <li><a href="#screens">In the game</a></li>
     <li><a href="#sprites">Sprites</a></li>
+    <li><a href="#inner">Inner stratum</a></li>
     <li><a href="#writing">Writing</a></li>
     <li><a href="#instructions">Project instructions</a></li>
     <li><a href="#tokens">Tokens</a></li>
@@ -465,6 +466,51 @@
   </div>
 </section>
 
+<section id="inner">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Inner stratum</p>
+      <h2>Clipi's memory, and Clipi's room</h2>
+    </div>
+    <div class="prose">
+      <p>Two scenes leave the ordinary game view for a second visual mode, set with a <code>mode inner</code> line at the top of the scene (see <code>docs/scene-format.md</code>). Everywhere else, the game is the default stratum shown above. In these two, three rules change at once: a dot-halftone overlay and low scanlines over the stage, a heavier ink rule on the dialogue box, and choices drawn as flat tiles instead of a plain list.</p>
+    </div>
+
+    <article class="component">
+      <div class="shots">
+        <figure><img src="shots/found-document.jpg" alt="Slim and a corrupted terminal, with a found log line quoted verbatim in the dialogue box below" width="1100" height="760"><figcaption>Desktop</figcaption></figure>
+        <figure><img src="shots/found-document-phone.jpg" alt="The same beat at phone width" width="390" height="844"><figcaption>Phone</figcaption></figure>
+      </div>
+      <div class="text">
+        <h3>Found document</h3>
+        <ul>
+          <li>Clipi reads a corrupted memory log back verbatim, in file order, line by line: no narration, no reaction from Clipi beyond the words themselves.</li>
+          <li>Clipi speaks as itself here, not as a sprite reacting to the log; the log is quoted, not staged.</li>
+          <li>The heavier top rule on the dialogue box shows plainly. The halftone and scanlines sit over the stage's photographic art and read faint there, the way they did over any busy image in Wave A.</li>
+        </ul>
+        <a class="play-link" href="../index.html" data-runner>Open in the game →</a>
+      </div>
+    </article>
+
+    <article class="component">
+      <div class="shots">
+        <figure><img src="shots/room.jpg" alt="A flat ink-line room: a chest of drawers, a round window that reads as an eye, and a door, all under a visible halftone dot grid" width="1100" height="760"><figcaption>Desktop</figcaption></figure>
+        <figure><img src="shots/room-phone.jpg" alt="The same room at phone width, with the same choice tiles" width="390" height="844"><figcaption>Phone</figcaption></figure>
+      </div>
+      <div class="text">
+        <h3>The room</h3>
+        <ul>
+          <li>Clipi's interior during the reboot: a chest of drawers (the <code>count-herd</code> puzzle), a round window that reads as an eye, and a door. No character stands in it — Clipi is the room, and speaks only as a voice.</li>
+          <li>It appears once, between the found document and the confrontation, and its door leads out.</li>
+          <li>Choices render as flat labeled tiles here instead of a plain list, each with a heavier left rule.</li>
+          <li>Over this flat ink-line art, the halftone and scanlines read clearly at both widths, unlike over the photographic stage art above. The dot grid stays legible at 390px; it does not blur into noise on a phone screen.</li>
+        </ul>
+        <a class="play-link" href="../index.html" data-runner>Open in the game →</a>
+      </div>
+    </article>
+  </div>
+</section>
+
 <section id="writing" class="grid-puzzle">
   <div class="wrap">
     <div class="section-head">
@@ -613,7 +659,6 @@ WHEN UNSURE
       <li>Per-speaker colour in the dialogue box: the top rule and name chip should take Slim's orange, the Terminal's teal, Clipi's magenta or Cargo Bot's ochre. The game uses orange for everyone.</li>
       <li>The duotone pass on the four main sprites, and new art or a duotone treatment for Cargo Bot and Syntax-4.</li>
       <li>A finished Rill mark. The one at the top of this page is a first sketch.</li>
-      <li>A test of how much halftone survives on a phone screen before it reads as noise.</li>
     </ul>
   </div>
 </section>
