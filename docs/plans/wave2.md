@@ -6,7 +6,7 @@ Status: approved. The owner accepted every default below.
 
 1. `read-brand` and `rebalance-coupling` are optional puzzles. Neither blocks the story. `docs/canon/bible.md` changes in the same commit as the scenes that add them.
 2. The room ships as described. The owner judges it in the built game before merge. The fallback in section 2 stays available.
-3. The found document plays all 34 lines of `docs/canon/found-document.md`, verbatim, in file order.
+3. The found document plays all 37 quoted lines of `docs/canon/found-document.md`, verbatim, in file order.
 4. The room art ships as an SVG now. A hand-drawn plate is a later art request.
 
 
@@ -217,5 +217,5 @@ Each puzzle folder in A1 to A3 holds `puzzle.md`, `starter.rill`, `answer.rill`,
 
 1. **The bible says scene 3 has no puzzle and that the game has three puzzles.** May `read-brand` and `rebalance-coupling` go in as optional puzzles that do not gate the story, with a one-line bible change? *Default: yes. B4 updates the spine in the same commit.*
 2. **Is the room too close to the 1995 reference?** *Default: ship it as written (three objects, voice only, inner stratum). Look at the built page before merge. If it is too close, use the fallback in section 2.*
-3. **Should the found document play all 34 lines, or a trimmed set?** *Default: all lines in file order. Nothing is trimmed, so there is no decision about which lines to cut.*
+3. **Should the found document play all its lines, or a trimmed set?** *Default: all lines in file order. Nothing is trimmed, so there is no decision about which lines to cut.*
 4. **Should the room SVG ship now, or wait for a hand-drawn plate?** *Default: ship the SVG now and log the plate as art request 1.*
