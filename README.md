@@ -2,24 +2,40 @@
 
 License: https://unlicense.org/
 
-A sci-fi/western hybrid visual novel built with Ren'Py, featuring a space cowboy protagonist who fixes broken link loaders in a LISP-themed universe.
+A sci-fi/western visual novel. A space cowboy fixes broken link loaders in a LISP-themed universe, and the puzzles are written in Rill, a small Lisp that chibi-scheme checks.
 
-- Sample playthrough (v1.2, 10/31/22) - https://youtu.be/DO8mH-KPFnE
+The game is written in Python and plain-text scene files. A Python build makes a one-folder web game; the same scenes also play in a terminal. The original Ren'Py version stays in `renpy/` as source material and a later port target.
+
+- Sample playthrough of the Ren'Py version (v1.2, 10/31/22) - https://youtu.be/DO8mH-KPFnE
 - Updated playthrough (11/2) - https://youtu.be/1PgRyBjnwuk
+- Ren'Py demo download: https://terminalcowboy.itch.io/terminalcowboy
 
-Demo download: https://terminalcowboy.itch.io/terminalcowboy
+## Quick start
 
-## Repository Structure
+```bash
+sudo apt-get install chibi-scheme        # checks puzzle answers
+pip install -e '.[dev]'
+python -m linkloader check story/         # parse and validate the story
+python -m linkloader build story/ -o dist/  # the web game, in dist/
+python -m linkloader play story/          # the same story in a terminal
+```
 
-- `/renpy/` - Ren'Py game files and assets
-  - `/renpy/current/` - Current version of the game
-  - Earlier alphas are in git history at commit `79da7b8` (`git show 79da7b8:renpy/alphas/...`)
-- `/src/` - Source code and development tools
-  - `/src/tools/` - Development and content creation tools
-  - `/src/tests/` - Test files and test runners
-  - `/src/scripts/` - Build and utility scripts
-- `/docs/` - Documentation, planning notes, and specifications
-- `/media/` - Media assets and planning materials
+Serve `dist/` with any static server, for example `python -m http.server -d dist`. The style guide is at `dist/guide/`.
+
+## Repository structure
+
+- `linkloader/` - the Python core: parser, validator, 4dF dice, JSON exporter, terminal player, build
+- `story/` - the scene files, `cast.toml` and `assets.toml`
+- `puzzles/` - Rill (the prelude and lexicon), one folder per puzzle, and the chibi-scheme checker
+- `web/` - the web runner, `web/rill/` (Rill in JavaScript) and `web/guide/` (the style guide page)
+- `tools/assets/` - `despill.py`, which removes the magenta chroma-key halo from sprites
+- `tests/` - the pytest suite, including Playwright end-to-end tests
+- `docs/` - the scene format, the story bible (`docs/canon/`) and the style guides (`docs/style/`)
+- `renpy/current/` - the original Ren'Py game and its art
+- Earlier alphas are in git history at commit `79da7b8` (`git show 79da7b8:renpy/alphas/...`)
+
+Contributors and coding agents: read `AGENTS.md` first. It lists the checks to run before every commit.
+
 ----
 [The Premise and Game mechanics]
 
